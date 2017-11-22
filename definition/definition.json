@@ -1,0 +1,85 @@
+{
+  "projectName": "PO",
+  "description": "",
+  "backend": {
+    "appName": "PO",
+    "dbName": ""
+  },
+  "frontends": [
+    {
+      "appName": "Main",
+      "routes": [
+        "pr",
+        "pr-list"
+      ],
+      "components": [
+        "purchase-request",
+        "pr-line"
+      ]
+    }
+  ],
+  "roles": [],
+  "documents": [
+    {
+      "name": "PurchaseRequest",
+      "fields": {
+        "Purpose or Use": "text",
+        "Requisition Name": "text",
+        "Department": "text",
+        "CreatedAt": "datetime",
+        "Department Manager": "text",
+        "General Manager": "text",
+        "Account No": "text",
+        "Friendly Identifier": "text",
+        "Date Department Manager": "datetime?",
+        "Date General Manager": "datetime?"
+      },
+      "relationships": {
+        "oneToParent": [
+          "PRNumber"
+        ],
+        "oneToMany": [],
+        "manyToMany": [],
+        "manyToOne": []
+      }
+    }
+  ],
+  "entities": [
+    {
+      "name": "PRLine",
+      "fields": {
+        "Item Number": "text",
+        "Description": "textarea",
+        "UM": "text",
+        "Qty": "currency",
+        "Price Each": "currency"
+      },
+      "relationships": {
+        "oneToParent": [
+          "PurchaseRequest"
+        ],
+        "oneToMany": [],
+        "manyToMany": [],
+        "manyToOne": []
+      }
+    },
+    {
+      "name": "PRNumber",
+      "fields": {
+        "Created At": "datetime",
+        "Generated Number": "string",
+        "Revision": "string",
+        "Revision From": "int?",
+        "Duplicated From": "int?",
+        "Sequence": "int",
+        "Task Description Revision Reason": "textarea"
+      },
+      "relationships": {
+        "oneToParent": [],
+        "oneToMany": [],
+        "manyToMany": [],
+        "manyToOne": []
+      }
+    }
+  ]
+}

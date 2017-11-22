@@ -1,0 +1,81 @@
+body,
+span {
+    font-size: 11px;
+}
+
+#main {
+    width: 700px;
+    max-width: 700px;
+}
+
+h3 {
+    font-size: 17px;
+}
+
+.form-control-static {
+    font-size: 11px !important;
+    padding: 0 !important;
+}
+
+.table-bordered>thead>tr>th,
+.table-bordered>tbody>tr>th,
+.table-bordered>tfoot>tr>th,
+.table-bordered>thead>tr>td,
+.table-bordered>tbody>tr>td,
+.table-bordered>tfoot>tr>td {
+    border: 1px solid #ddd;
+    padding: 3px;
+}
+
+@media print {
+    body,
+    span {
+        font-size: 11px;
+    }
+    #main {
+        width: 700px;
+        max-width: 700px;
+    }
+    h3 {
+        font-size: 17px;
+    }
+    .form-control-static {
+        font-size: 11px !important;
+        padding: 0 !important;
+    }
+    .table-bordered>thead>tr>th,
+    .table-bordered>tbody>tr>th,
+    .table-bordered>tfoot>tr>th,
+    .table-bordered>thead>tr>td,
+    .table-bordered>tbody>tr>td,
+    .table-bordered>tfoot>tr>td {
+        border: 1px solid #ddd;
+        padding: 3px;
+    }
+    .breakPage {
+        page-break-before: always;
+    }
+}
+
+ul {
+    padding-left: 25px;
+}
+
+.table>tbody>tr>td {
+
+    border-bottom: 1px solid #ddd;
+    padding: 1px;
+    text-align: right;
+    vertical-align: middle;
+    font-size: 11px;
+    padding: 2px;
+}
+
+table input {
+    border: none !important;
+}
+
+p {
+    min-height: 20px !important;
+    vertical-align: middle;
+}
