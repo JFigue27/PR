@@ -3,6 +3,7 @@ using Reusable;
 using System;
 using System.Data.Entity;
 using System.Linq;
+using Dapper;
 
 namespace BusinessSpecificLogic.Logic
 {
@@ -13,7 +14,7 @@ namespace BusinessSpecificLogic.Logic
     public class PurchaseRequestLogic : BaseLogic<PurchaseRequest>, IPurchaseRequestLogic
     {
         public PurchaseRequestLogic(DbContext context, IRepository<PurchaseRequest> repository) : base(context, repository)
-        {   
+        {
         }
 
         protected override void loadNavigationProperties(params PurchaseRequest[] entities)
@@ -22,6 +23,7 @@ namespace BusinessSpecificLogic.Logic
             foreach (var item in entities)
             {
                 item.PRNumber = ctx.PRNumbers.FirstOrDefault(e => e.PRNumberKey == item.PRNumberKey);
+                item.PRLines = ctx.PRLines.Where(line => line.PurchaseRequestKey == item.id).ToList();
             }
         }
 
@@ -59,6 +61,20 @@ namespace BusinessSpecificLogic.Logic
 
                 entity.PRNumberKey = cqaNumber.PRNumberKey;
                 #endregion
+            }
+        }
+
+        protected override void onAfterSaving(DbContext context, PurchaseRequest entity, BaseEntity parent = null, OPERATION_MODE mode = OPERATION_MODE.NONE)
+        {
+            var ctx = context as POContext;
+
+            ctx.Database.Connection.Execute("DELETE FROM PRLine WHERE PurchaseRequestKey = @PurchaseRequestKey", new { PurchaseRequestKey = entity.id }, ctx.Database.CurrentTransaction.UnderlyingTransaction);
+
+            foreach (var line in entity.PRLines)
+            {
+                line.PurchaseRequestKey = entity.id;
+                ctx.PRLines.Add(line);
+                ctx.SaveChanges();
             }
         }
     }

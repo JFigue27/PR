@@ -129,6 +129,10 @@
             .width(100)
             .css('text-align', 'right');
 
+        mainTable.find('tr th:nth-child(' + 1 + ')')
+            .hide();
+        mainTable.find('tr td:nth-child(' + 1 + ')')
+            .hide();
         mainTable.find('tr td:nth-child(' + 1 + ') div')
             .css('text-align', 'center');
         mainTable.find('tr td:nth-child(' + 2 + ') div')

@@ -39,5 +39,8 @@ namespace BusinessSpecificLogic.EF
         [ForeignKey("PRNumberKey")]
         public PRNumber PRNumber { get; set; }
         ///End:Generated:Properties<<<
+
+        [NotMapped]
+        public List<PRLine> PRLines { get; set; }
     }
 }

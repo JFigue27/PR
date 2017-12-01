@@ -53,6 +53,9 @@
                         <md-icon><i class="fa fa-home" aria-hidden="true" style="font-size: 20px;"></i></md-icon>
                         <p> Home </p>
                     </md-list-item>
+                    <md-list-item ng-href="#!/pr-list" ng-click="toggleMainSideNav()">
+                        <p> PR List </p>
+                    </md-list-item>
                     <md-list-item>
                         <md-icon md-menu-origin><i class="fa fa-book" aria-hidden="true" style="font-size: 20px;top: -6px;position: relative;"></i></md-icon>
                         <p> Catalogs </p>
@@ -100,6 +103,9 @@
                     <md-nav-item md-nav-href="#!/" name="home" aria-label="Home">
                         <i class="fa fa-home" aria-hidden="true" style="font-size: 20px;"></i> Home
                     </md-nav-item>
+                    <md-nav-item md-nav-href="#!/pr-list" name="prList" aria-label="PRList">
+                        PR List
+                    </md-nav-item>
                 </md-nav-bar>
                 <md-menu md-position-mode="target-right target" md-offset="80 40" hide-xs>
                     <md-button aria-label="Open User Menu" ng-click="$mdMenu.open($event)">
@@ -123,14 +129,14 @@
                         <span>{{currentUser.Value}}</span>
                     </md-button>
                     <md-menu-content width="3">
-                        <md-menu-item>
+                        <!-- <md-menu-item>
                             <md-button ng-href="#!/profile">
                                 <div layout="row" flex>
                                     <span flex></span>
                                     <p>Profile</p>
                                 </div>
                             </md-button>
-                        </md-menu-item>
+                        </md-menu-item> -->
                         <md-menu-item>
                             <md-button ng-click="logOut()">
                                 <div layout="row" flex>
@@ -223,26 +229,26 @@
     <script src="components/Responsible/responsible.component.js"></script>
     <script src="components/Responsible/responsible.list.component.js"></script>
     <!-- start:generated:components -->
-		<script src="components/PurchaseRequest/purchase.request.service.js"></script>
-	<script src="components/PurchaseRequest/purchase.request.form.controller.js"></script>
-	<script src="components/PurchaseRequest/purchase.request.list.controller.js"></script>
-	<script src="components/PurchaseRequest/purchase.request.form.component.js"></script>
-	<script src="components/PurchaseRequest/purchase.request.list.component.js"></script>
-	<script src="components/PrLine/pr.line.service.js"></script>
-	<script src="components/PrLine/pr.line.form.controller.js"></script>
-	<script src="components/PrLine/pr.line.list.controller.js"></script>
-	<script src="components/PrLine/pr.line.form.component.js"></script>
-	<script src="components/PrLine/pr.line.list.component.js"></script>
-	<!-- end:generated:components -->
+    <script src="components/PurchaseRequest/purchase.request.service.js"></script>
+    <script src="components/PurchaseRequest/purchase.request.form.controller.js"></script>
+    <script src="components/PurchaseRequest/purchase.request.list.controller.js"></script>
+    <script src="components/PurchaseRequest/purchase.request.form.component.js"></script>
+    <script src="components/PurchaseRequest/purchase.request.list.component.js"></script>
+    <script src="components/PrLine/pr.line.service.js"></script>
+    <script src="components/PrLine/pr.line.form.controller.js"></script>
+    <script src="components/PrLine/pr.line.list.controller.js"></script>
+    <script src="components/PrLine/pr.line.form.component.js"></script>
+    <script src="components/PrLine/pr.line.list.component.js"></script>
+    <!-- end:generated:components -->
     <!-- start:generated:routes -->
-		<script src="routes/Main/main-route.js"></script>
-	<script src="routes/Login/login-route.js"></script>
-	<script src="routes/About/about-route.js"></script>
-	<script src="routes/Profile/profile-route.js"></script>
-	<script src="routes/Users/users-route.js"></script>
-	<script src="routes/Pr/pr-route.js"></script>
-	<script src="routes/PrList/pr-list-route.js"></script>
-	<!-- end:generated:routes -->
+    <script src="routes/Main/main-route.js"></script>
+    <script src="routes/Login/login-route.js"></script>
+    <script src="routes/About/about-route.js"></script>
+    <script src="routes/Profile/profile-route.js"></script>
+    <script src="routes/Users/users-route.js"></script>
+    <script src="routes/Pr/pr-route.js"></script>
+    <script src="routes/PrList/pr-list-route.js"></script>
+    <!-- end:generated:routes -->
 </body>
 
 </html>

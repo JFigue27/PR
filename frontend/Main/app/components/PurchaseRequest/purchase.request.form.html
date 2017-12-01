@@ -13,7 +13,7 @@
             <table class="table table-condensed table-bordered PRLine">
                 <thead>
                     <tr>
-                        <th style="width: 80px">#</th>
+                        <th style="width: 80px"></th>
                         <th style="width: 150px">Item Number</th>
                         <th>Description</th>
                         <th style="width: 100px">U/M</th>
@@ -22,42 +22,11 @@
                         <th style="width: 130px">Total</th>
                     </tr>
                 </thead>
-                <tbody ng-controller="PrLineListController">
-                    <tr ng-repeat="item in baseList">
-                        <td>{{$index + 1}}</td>
-                        <td>
-                            <md-input-container>
-                                <input ng-model="item.ItemNumber" ng-change="on_input_change(item);handleDynamicRows(baseList)">
-                            </md-input-container>
-                        </td>
-                        <td>
-                            <md-input-container>
-                                <textarea ng-model="item.Description" ng-change="on_input_change(item);handleDynamicRows(baseList)"></textarea>
-                            </md-input-container>
-                        </td>
-                        <td>
-                            <md-input-container>
-                                <input ng-model="item.UM" ng-change="on_input_change(item);handleDynamicRows(baseList)">
-                            </md-input-container>
-                        </td>
-                        <td>
-                            <md-input-container>
-                                <input style="text-align: right;" ng-model="item.Qty" ng-change="on_input_change(item);handleDynamicRows(baseList)">
-                            </md-input-container>
-                        </td>
-                        <td>
-                            <md-input-container>
-                                <input style="text-align: right;" ng-model="item.PriceEach" ng-change="on_input_change(item);handleDynamicRows(baseList)">
-                            </md-input-container>
-                        </td>
-                        <td>
-                            <p class="form-control-static text-right">{{item.PriceEach * item.Qty | currency}}</p>
-                        </td>
-                    </tr>
+                <tbody pr-line-list purchase-request-key="baseEntity.id" pr="baseEntity">
                 </tbody>
             </table>
         </div>
-        <div class="row">
+        <div class="row" style="margin-top: 50px;">
             <div class="col-xs-6">
                 <table class="table table-condensed PRLine" style="width: 400px;">
                     <tbody>

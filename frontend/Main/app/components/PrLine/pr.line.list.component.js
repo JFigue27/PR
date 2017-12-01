@@ -9,7 +9,12 @@
 angular.module('Main').directive('prLineList', function() {
     return {
         templateUrl: 'components/PrLine/pr.line.list.html',
-        restrict: 'E',
+        restrict: 'A',
+        replace: true,
+        scope: {
+            purchaseRequestKey: '=',
+            pr: '='
+        },
         controller: function($scope, listController, $mdDialog, $rootScope, PrLineService) {
 
             var listCtrl = new listController({
@@ -17,48 +22,67 @@ angular.module('Main').directive('prLineList', function() {
                 entityName: 'PrLine',
                 baseService: PrLineService,
                 afterCreate: function(oInstance, oEvent) {
-                    $mdDialog.show({
-                        title: 'PrLine',
-                        contentElement: '#modal-PrLine',
-                        parent: angular.element(document.body),
-                        clickOutsideToClose: true,
-                        multiple: true,
-                        fullscreen: true,
-                        targetEvent: oEvent,
-                        onRemoving: function(element, removePromise) {
-                            listCtrl.load();
-                        }
-                    });
 
-                    $rootScope.$broadcast('load-modal-PrLine', oInstance);
                 },
                 afterLoad: function() {
-
+                    if ($scope.baseList) {
+                        $scope.handleDynamicRows($scope.baseList);
+                    }
                 },
                 onOpenItem: function(oEntity, oEvent) {
-                    $mdDialog.show({
-                        title: 'PrLine',
-                        contentElement: '#modal-PrLine',
-                        parent: angular.element(document.body),
-                        clickOutsideToClose: true,
-                        multiple: true,
-                        fullscreen: true,
-                        targetEvent: oEvent,
-                        onRemoving: function(element, removePromise) {
-                            listCtrl.load();
-                        }
-                    });
 
-                    $rootScope.$broadcast('load-modal-PrLine', oEntity);
                 },
                 filters: []
             });
 
-            $scope.$on('load_PrLine', function(scope) {
-                listCtrl.load();
+            $scope.$on('load-PRLines', function() {
+                refresh();
             });
 
-            listCtrl.load();
+            function refresh() {
+                listCtrl.load('PurchaseRequestKey=' + $scope.purchaseRequestKey);
+            }
+
+            $scope.$watch(function() {
+                return $scope.purchaseRequestKey;
+            }, function() {
+                if ($scope.purchaseRequestKey > 0) {
+                    refresh();
+                }
+            });
+
+            $scope.$watchCollection('baseList', function() {
+                if ($scope.pr) {
+                    $scope.pr.arrPRLines = $scope.baseList;
+                }
+            });
+
+            $scope.handleDynamicRows = function(arrRows) {
+                if (arrRows.length > 0) {
+                    var atLeastOneCellFilled = false;
+                    var lastRow = arrRows[arrRows.length - 1]
+                    for (var prop in lastRow) {
+                        if (lastRow.hasOwnProperty(prop)) {
+                            if (prop == '$$hashKey' || prop == 'id') {
+                                continue;
+                            }
+                            if (lastRow[prop] !== null && lastRow[prop] !== undefined && (lastRow[prop] > 0 || lastRow[prop].length > 0)) {
+                                atLeastOneCellFilled = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!atLeastOneCellFilled) {
+                        return;
+                    }
+                }
+
+                arrRows.push({});
+            };
+
+            $scope.removeItemLocally = function(index) {
+                $scope.baseList.splice(index, 1);
+            }
         }
     };
 });

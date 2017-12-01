@@ -47,6 +47,7 @@ angular.module('Main').directive('purchaseRequestForm', function() {
             $scope.save = function() {
                 $scope.baseEntity.editMode = true;
                 ctrl.save().then(function() {
+                    $scope.$broadcast('load-PRLines');
                     alertify.success('Saved Successfully.');
                 });
             };
