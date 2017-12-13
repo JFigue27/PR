@@ -70,11 +70,14 @@ namespace BusinessSpecificLogic.Logic
 
             ctx.Database.Connection.Execute("DELETE FROM PRLine WHERE PurchaseRequestKey = @PurchaseRequestKey", new { PurchaseRequestKey = entity.id }, ctx.Database.CurrentTransaction.UnderlyingTransaction);
 
-            foreach (var line in entity.PRLines)
+            if (entity.PRLines != null)
             {
-                line.PurchaseRequestKey = entity.id;
-                ctx.PRLines.Add(line);
-                ctx.SaveChanges();
+                foreach (var line in entity.PRLines)
+                {
+                    line.PurchaseRequestKey = entity.id;
+                    ctx.PRLines.Add(line);
+                    ctx.SaveChanges();
+                }
             }
         }
     }
