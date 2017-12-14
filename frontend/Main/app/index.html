@@ -57,20 +57,6 @@
                         <p> PR List </p>
                     </md-list-item>
                     <md-list-item>
-                        <md-icon md-menu-origin><i class="fa fa-book" aria-hidden="true" style="font-size: 20px;top: -6px;position: relative;"></i></md-icon>
-                        <p> Catalogs </p>
-                        <md-menu class="md-secondary" md-offset="0 40">
-                            <md-button class="md-icon-button">
-                            </md-button>
-                            <md-menu-content width="3">
-                                <md-menu-item>
-                                    <md-button ng-href="#!/users" ng-click="toggleMainSideNav()"><i class="fa fa-user-circle" aria-hidden="true" style="font-size: 20px;"></i> Users
-                                    </md-button>
-                                </md-menu-item>
-                            </md-menu-content>
-                        </md-menu>
-                    </md-list-item>
-                    <md-list-item>
                         <md-icon md-menu-origin><i class="fa fa-user-circle-o" aria-hidden="true" style="font-size: 20px;top: -6px;position: relative;"></i></md-icon>
                         <p>{{currentUser.Value}}</p>
                         <md-menu class="md-secondary" md-offset="0 40">
@@ -107,22 +93,6 @@
                         PR List
                     </md-nav-item>
                 </md-nav-bar>
-                <md-menu md-position-mode="target-right target" md-offset="80 40" hide-xs>
-                    <md-button aria-label="Open User Menu" ng-click="$mdMenu.open($event)">
-                        <md-icon md-menu-origin><i class="fa fa-book" aria-hidden="true" style="font-size: 20px;top: -6px;position: relative;"></i></md-icon>
-                        <span>Catalogs</span>
-                    </md-button>
-                    <md-menu-content width="3">
-                        <md-menu-item>
-                            <md-button ng-href="#!/users">
-                                <div layout="row" flex>
-                                    <span flex></span>
-                                    <p>Users &nbsp<i class="fa fa-user-circle" aria-hidden="true" style="font-size: 20px;"></i></p>
-                                </div>
-                            </md-button>
-                        </md-menu-item>
-                    </md-menu-content>
-                </md-menu>
                 <md-menu md-position-mode="target-right target" md-offset="300 40">
                     <md-button aria-label="Open User Menu" ng-click="$mdMenu.open($event)">
                         <md-icon md-menu-origin>person</md-icon>

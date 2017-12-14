@@ -11,7 +11,7 @@
         <md-input-container flex>
             <label>Role</label>
             <md-select ng-change="on_input_change(baseEntity);" ng-model="baseEntity.Role" ng-init="baseEntity.Role = 'User'">
-                <md-option ng-repeat="role in ['Administrator', 'User', 'RH', 'Finance', 'Doctor']" value="{{role}}">
+                <md-option ng-repeat="role in ['User']" value="{{role}}">
                     {{role}}
                 </md-option>
             </md-select>

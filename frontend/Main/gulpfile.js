@@ -5,6 +5,7 @@ const browserSync = require('browser-sync').create();
 const del = require('del');
 const wiredep = require('wiredep').stream;
 const runSequence = require('run-sequence');
+const mainBowerFiles = require('main-bower-files');
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
@@ -179,3 +180,9 @@ gulp.task('default', () => {
     runSequence(['clean', 'wiredep'], 'build', resolve);
   });
 });
+
+gulp.task('getBowerFiles', function() {
+    return gulp.src(mainBowerFiles(), { base: 'bower_components' })
+        .pipe(gulp.dest('lib/'));
+});
+
