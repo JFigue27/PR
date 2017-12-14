@@ -61,7 +61,7 @@ angular.module('Main').service('utilsService', function($filter) {
     crudInstance.getByUserName = function(sUserName) {
         var _arrAllRecords = crudInstance.getAll();
         for (var i = 0; i < _arrAllRecords.length; i++) {
-            if (_arrAllRecords[i].UserName == sUserName) {
+            if (_arrAllRecords[i].UserName.toLowerCase() == sUserName.toLowerCase()) {
                 return _arrAllRecords[i];
             }
         }

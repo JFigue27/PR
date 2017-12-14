@@ -35,49 +35,25 @@ namespace BusinessSpecificLogic.Logic
                 throw new KnownError("[User Name] is a required field.");
             }
 
-            //Is a regular User:
-            if (entity.Role == "User")
+            if (string.IsNullOrWhiteSpace(entity.UserName))
             {
-                if (string.IsNullOrWhiteSpace(entity.UserName))
+                throw new KnownError("[User Name] is a required field.");
+            }
+            if (entity.id == 0 || (entity.id > 0 && entity.ChangePassword))
+            {
+                if (string.IsNullOrWhiteSpace(entity.Password) || string.IsNullOrWhiteSpace(entity.ConfirmPassword))
                 {
-                    throw new KnownError("[User Name] is a required field.");
+                    throw new KnownError("[Password] and [Confirm Password] are required fields.");
                 }
 
-                if (entity.UserName.Length < 6)
+                if (entity.Password != entity.ConfirmPassword)
+                {
+                    throw new KnownError("[Password] does not match with its confirmation.");
+                }
+
+                if (entity.Password.Length < 6)
                 {
                     throw new KnownError("[User Name] has to have at least 6 characters.");
-                }
-
-                entity.Password = entity.UserName;
-                entity.ConfirmPassword = entity.UserName;
-
-                entity.Role = "User";
-            }
-            //Is a supervisor or Administrator
-            else
-            {
-                if (string.IsNullOrWhiteSpace(entity.UserName))
-                {
-                    throw new KnownError("[User Name] is a required field.");
-                }
-                if (entity.id == 0 || (entity.id > 0 && entity.ChangePassword))
-                {
-                    if (string.IsNullOrWhiteSpace(entity.Password) || string.IsNullOrWhiteSpace(entity.ConfirmPassword))
-                    {
-                        throw new KnownError("[Password] and [Confirm Password] are required fields.");
-                    }
-
-                    if (entity.Password != entity.ConfirmPassword)
-                    {
-                        throw new KnownError("[Password] does not match with its confirmation.");
-                    }
-
-                    if (entity.Password.Length < 6)
-                    {
-                        throw new KnownError("[User Name] has to have at least 6 characters.");
-                    }
-
-                    entity.AuthorizatorPassword = entity.Password;
                 }
             }
 
@@ -222,7 +198,7 @@ namespace BusinessSpecificLogic.Logic
             using (var authContext = new AuthContext())
             {
                 #region Instead of Delete User, lets just disable it.
-                
+
                 UserManager<IdentityUser> _userManager;
                 _userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(authContext));
 
