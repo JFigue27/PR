@@ -22,6 +22,7 @@ namespace Reusable
         }
 
         protected virtual void loadNavigationProperties(params Entity[] entities) { }
+        protected virtual void loadNavigationPropertiesWhenSingle(Entity entity) { }
         protected virtual void addDbWheresWhenPaging(List<Expression<Func<Entity, bool>>> database_wheres) { }
         protected virtual IQueryable<Entity> applyOrderByWhenPaging(IQueryable<Entity> recordset) { return recordset; }
 
@@ -78,6 +79,7 @@ namespace Reusable
                     repository.byUserId = loggedUser.UserID;
                     entities.Add(entity);
                     loadNavigationProperties(entities.ToArray());
+                    loadNavigationPropertiesWhenSingle(entity);
                     return response.Success(entity);
                 }
                 else
@@ -218,6 +220,7 @@ namespace Reusable
                 if (entity != null)
                 {
                     loadNavigationProperties(entity);
+                    loadNavigationPropertiesWhenSingle(entity);
                 }
 
                 return response.Success(entity);
@@ -283,6 +286,7 @@ namespace Reusable
                 repository.byUserId = loggedUser.UserID;
                 entity = repository.GetSingleByParent<ParentType>(parentID);
                 loadNavigationProperties(entity);
+                loadNavigationPropertiesWhenSingle(entity);
                 //MethodInfo method = repository.GetType().GetMethod("GetListByParent");
                 //MethodInfo genericMethod = method.MakeGenericMethod(new Type[] { typeof(ParentType) });
                 //entities = (IList<Entity>) genericMethod.Invoke(repository, new object[] { parentID });

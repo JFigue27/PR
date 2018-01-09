@@ -68,6 +68,18 @@
         var source = opener.$('.printableZone').clone();
         $('#main').append(source);
 
+        //Attachments
+        $('attachments-box').each(function() {
+            var eAttachments = $(this).find('a').get();
+            $(this).html(eAttachments);
+            $(this).find('a').after('<br />');
+        });
+        //End Attachments
+        
+        //Date Picker
+        $('button.md-datepicker-triangle-button').remove();
+        //End DatePicker
+
         $('.col-sm-1').removeClass('col-sm-1').addClass('col-xs-1');
         $('.col-sm-2').removeClass('col-sm-2').addClass('col-xs-2');
         $('.col-sm-3').removeClass('col-sm-3').addClass('col-xs-3');

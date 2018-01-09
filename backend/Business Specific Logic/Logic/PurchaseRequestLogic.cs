@@ -4,6 +4,8 @@ using System;
 using System.Data.Entity;
 using System.Linq;
 using Dapper;
+using Reusable.Attachments;
+using System.Configuration;
 
 namespace BusinessSpecificLogic.Logic
 {
@@ -23,8 +25,12 @@ namespace BusinessSpecificLogic.Logic
             foreach (var item in entities)
             {
                 item.PRNumber = ctx.PRNumbers.FirstOrDefault(e => e.PRNumberKey == item.PRNumberKey);
-                item.PRLines = ctx.PRLines.Where(line => line.PurchaseRequestKey == item.id).ToList();
+                item.PRLines = ctx.PRLines.Where(line => line.PurchaseRequestKey == item.id).ToList();                
             }
+        }
+        protected override void loadNavigationPropertiesWhenSingle(PurchaseRequest entity)
+        {
+            entity.Attachments = AttachmentsIO.getAttachmentsFromFolder(entity.AttachmentsFolder, "PR_Attachments");
         }
 
         protected override void onBeforeSaving(PurchaseRequest entity, BaseEntity parent = null, OPERATION_MODE mode = OPERATION_MODE.NONE)
@@ -62,6 +68,22 @@ namespace BusinessSpecificLogic.Logic
                 entity.PRNumberKey = cqaNumber.PRNumberKey;
                 #endregion
             }
+
+            #region Attachments
+            string baseAttachmentsPath = ConfigurationManager.AppSettings["PR_Attachments"];
+            if (entity != null && entity.Attachments != null)
+            {
+                foreach (var file in entity.Attachments)
+                {
+                    if (file.ToDelete)
+                    {
+                        string filePath = baseAttachmentsPath + "\\" + file.Directory + "\\" + file.FileName;
+                        AttachmentsIO.DeleteFile(filePath);
+                    }
+                }
+            }
+            #endregion
+
         }
 
         protected override void onAfterSaving(DbContext context, PurchaseRequest entity, BaseEntity parent = null, OPERATION_MODE mode = OPERATION_MODE.NONE)

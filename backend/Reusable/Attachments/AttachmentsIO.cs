@@ -105,5 +105,11 @@ namespace Reusable.Attachments
                 }
             }
         }
+
+        public static void DeleteFile(string filePath)
+        {
+            FileInfo fileInfo = new FileInfo(filePath);
+            fileInfo.Delete();
+        }
     }
 }

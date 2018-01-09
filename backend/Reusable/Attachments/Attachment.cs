@@ -8,5 +8,6 @@ namespace Reusable.Attachments
         public string FileName { get; set; }
         public string Comments { get; set; }
         public string Directory { get; set; }
+        public bool ToDelete { get; set; }
     }
 }

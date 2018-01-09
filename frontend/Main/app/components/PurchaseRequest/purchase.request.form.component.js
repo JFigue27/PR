@@ -32,10 +32,13 @@ angular.module('Main').directive('purchaseRequestForm', function() {
 
             $scope.$on('ok-modal-PurchaseRequest', function() {
                 $scope.baseEntity.editMode = true;
-                return ctrl.save().then(function() {
-                    $mdDialog.hide();
-                    alertify.success('Saved Successfully.');
-                });
+                $scope.baseEntity.api_attachments.uploadFiles()
+                    .then(function() {
+                        ctrl.save().then(function() {
+                            $mdDialog.hide();
+                            alertify.success('Saved Successfully.');
+                        });
+                    });
             });
 
             function refresh(oPurchaseRequest) {
@@ -46,10 +49,14 @@ angular.module('Main').directive('purchaseRequestForm', function() {
 
             $scope.save = function() {
                 $scope.baseEntity.editMode = true;
-                ctrl.save().then(function() {
-                    $scope.$broadcast('load-PRLines');
-                    alertify.success('Saved Successfully.');
-                });
+                $scope.baseEntity.api_attachments.uploadFiles()
+                    .then(function() {
+                        ctrl.save().then(function() {
+                            $scope.$broadcast('load-PRLines');
+                            alertify.success('Saved Successfully.');
+                            ctrl.load($routeParams.id);
+                        });
+                    });
             };
 
             $scope.print = function() {

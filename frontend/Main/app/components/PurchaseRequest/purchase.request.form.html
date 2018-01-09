@@ -3,11 +3,16 @@
         <h3 flex>Purchase Request</h3>
         <!-- <pre>{{baseEntity | json:4}}</pre> -->
         <p flex class="text-right"><span>PR Number: {{baseEntity.PRNumber.GeneratedNumber}}</span></p>
-        <div flex>
+        <div flex layout="column" layout-gt-xs="row">
             <md-input-container style="max-width: 400px;">
                 <label>Friendly Identifier</label>
                 <input type="text" ng-model="baseEntity.FriendlyIdentifier">
             </md-input-container>
+            <div flex></div>
+        </div>
+        <div layout="column" style="width: 400px;">
+            <label>Attachments</label>
+            <attachments-box owner-entity="baseEntity" kind="PR_Attachments" read-only="false" when-change="on_attachments_change(oEntity)" after-delete="afterRemoveFile(oEntity)"></attachments-box>
         </div>
         <div class="table-responsive" style="margin-top:20px;min-height: 250px;">
             <table class="table table-condensed table-bordered PRLine">
@@ -26,7 +31,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="row" style="margin-top: 50px;">
+        <div class="row" style="margin-top: 20px;">
             <div class="col-xs-6">
                 <table class="table table-condensed PRLine" style="width: 400px;">
                     <tbody>
@@ -58,7 +63,7 @@
                             <td style="text-align: right;">Date</td>
                             <td style="width: 200px;">
                                 <md-input-container>
-                                    <md-datepicker ng-model="baseEntity.ConvertedDateDepartmentManager" md-hide-icons="all"></md-datepicker>
+                                    <md-datepicker ng-model="baseEntity.ConvertedDateDepartmentManager" md-hide-icons="calendar"></md-datepicker>
                                 </md-input-container>
                             </td>
                         </tr>
@@ -93,7 +98,7 @@
                             <td style="text-align: right;">Date</td>
                             <td style="width: 200px;">
                                 <md-input-container>
-                                    <md-datepicker ng-model="baseEntity.ConvertedDateGeneralManager" md-hide-icons="all"></md-datepicker>
+                                    <md-datepicker ng-model="baseEntity.ConvertedDateGeneralManager" md-hide-icons="calendar"></md-datepicker>
                                 </md-input-container>
                             </td>
                         </tr>

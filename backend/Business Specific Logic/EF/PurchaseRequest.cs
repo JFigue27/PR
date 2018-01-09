@@ -1,4 +1,5 @@
 using Reusable;
+using Reusable.Attachments;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,16 +8,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BusinessSpecificLogic.EF
 {
     [Table("PurchaseRequest")]
-    public class PurchaseRequest : BaseDocument
+    public class PurchaseRequest : BaseDocument, IAttachment
     {
         public PurchaseRequest()
         {
             ///Start:Generated:Constructor<<<
 			sys_active = true;
-			CreatedAt = DateTime.Now;
-			///End:Generated:Constructor<<<
+            CreatedAt = DateTime.Now;
+            ///End:Generated:Constructor<<<
 
-            
+
         }
 
         [Key]
@@ -42,5 +43,8 @@ namespace BusinessSpecificLogic.EF
 
         [NotMapped]
         public List<PRLine> PRLines { get; set; }
+
+        public string AttachmentsFolder { get; set; }
+        public List<Attachment> Attachments { get; set; }
     }
 }
