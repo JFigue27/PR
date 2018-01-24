@@ -1,0 +1,20 @@
+// http://ionicframework.com/docs/theming/
+@import "./common/prebuilt-themes/indigo-pink";
+
+
+.content{
+    background-color: #ebebeb;
+}
+
+// reusable buttons
+.input-personalized {
+    height: 30px;
+    width: 50%;
+	background-color: rgba(238, 238, 238, 0.02);
+	border: none;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.36);
+	-webkit-appearance: none;
+	-moz-border-radius: 2px;
+	box-shadow:none;
+	border-radius: 2px;
+}

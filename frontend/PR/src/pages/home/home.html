@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar class="nav-bar">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title class="main-bar">
+      <div class="main-div">
+        <div class="title-div">
+          <label class="lbl-main">NG 2 app</label>
+        </div>
+        <div class="buttons-div">
+          <button (click)="openHome()"><ion-icon name="ios-home"></ion-icon> HOME</button>
+          <button (click)="openList()"><ion-icon name="ios-book"></ion-icon> PR LIST</button>
+          <button (click)="openMenu()"><ion-icon name="ios-contact"></ion-icon> {{ LoggedUser | uppercase }}</button>
+        </div>
+      </div>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-menu [content]="content">
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>menu</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content> 
+  <ion-list>
+    <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+      {{p.title}}
+    </button>
+  </ion-list>
+</ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+

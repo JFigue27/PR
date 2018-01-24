@@ -1,0 +1,162 @@
+<div>
+    <ion-card>
+        <ion-card-header> 
+            
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-10 col-sm-10 col-md-10 col-lg-10 col-lg-10>
+                        <h1>Purchase Request</h1>
+                    </ion-col>
+                    <ion-col col-2 col-sm-2 col-md-2 col-lg-2 col-lg-2> 
+                        <b>PR Number:</b> {{ baseEntity.PRNumber?.GeneratedNumber }}
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <br>
+            <div style="margin-left:10px;">
+                <h3><b>Friendly Identifier</b></h3>
+                <input type="text" class="input-personalized" style="width:40%;" [(ngModel)]="baseEntity.FriendlyIdentifier" />
+            </div>
+            </ion-card-header>
+
+        <ion-card-content>
+
+
+            <div class="table-responsive">
+                <table class="table grid">
+                    <tbody>
+                        <tr class="grid-tr">
+                            <td class="grid-thead" style="width: 6%;"></td>
+                            <td class="grid-thead" style="width: 10%">Item number</td>
+                            <td class="grid-thead" style="width: 50%">Description</td>
+                            <td class="grid-thead" style="width: 8%">U/M</td>
+                            <td class="grid-thead" style="width: 10%">Qty.</td>
+                            <td class="grid-thead" style="width: 10%">Price Each</td>
+                            <td class="grid-thead" style="width: 18%">Total</td>
+                        </tr>
+                        
+                        <tr *ngFor="let item of baseEntity.PRLines" class="grid-tr">
+                        
+                            <td style="text-align: center !important;">
+                                <button *ngIf="item.id > 0" class="btn-link no-print" (click)="removeItemLocally($index);">Delete</button>
+                            </td>
+                        
+                            <td>
+                                <input [(ngModel)]="item.ItemNumber" class="input-personalized-no-border"
+                                (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
+                            </td>
+                        
+                            <td>
+                                <textarea matInput class="input-personalized-no-border" 
+                                [(ngModel)]="item.Description" matTextareaAutosize matAutosizeMaxRows="10"
+                                (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)"> </textarea>
+                            </td>
+                        
+                            <td>
+                                <input class="input-personalized-no-border" [(ngModel)]="item.UM"
+                                 (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
+                            </td>
+                        
+                            <td>
+                                <input class="input-personalized-no-border" [(ngModel)]="item.Qty"
+                                 (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
+                            </td>
+                        
+                            <td>
+                                <input class="input-personalized-no-border" [(ngModel)]="item.PriceEach"
+                                (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
+                            </td>
+                        
+                            <td>
+                                <p style="text-align: center;font-weight: bold;">{{item.PriceEach * item.Qty | currency}}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 no-padding style="background-color: rgb(255, 255, 255);">
+                        <ion-grid>
+                            <ion-row col-12 col-md-12 col-lg-12 col-xl-12>
+                                <ion-col col-3 col-sm-3 col-md-3 col-lg-3 col-lg-3>
+                                        Purpose or Use
+                                </ion-col>
+                                <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
+                                        <input type="text" class="input-personalized" [(ngModel)]="baseEntity.PurposeOrUse" />
+                                </ion-col>
+                                <ion-col col-3 col-sm-3 col-md-3 col-lg-3 col-lg-3>
+                                        Requisition name
+                                </ion-col>
+                                <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
+                                        <input type="text" class="input-personalized" [(ngModel)]="baseEntity.RequisitionName" />
+                                </ion-col>
+                                <ion-col col-3 col-sm-3 col-md-3 col-lg-3 col-lg-3>
+                                        Department
+                                </ion-col>
+                                <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
+                                        <input type="text" class="input-personalized" [(ngModel)]="baseEntity.Department" />
+                                </ion-col>
+                                <ion-col col-3 col-sm-3 col-md-3 col-lg-3 col-lg-3>
+                                        Date
+                                </ion-col>
+                                <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
+                                        <input [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" class="date-input input-personalized"
+                                        (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.DateGeneralManager">
+                                        <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #myDatepicker></mat-datepicker>
+                                </ion-col>
+                                <ion-col col-3 col-sm-3 col-md-3 col-lg-3 col-lg-3>
+                                        Department manager
+                                </ion-col>
+                                <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
+                                        <input type="text" class="input-personalized" [(ngModel)]="baseEntity.DepartmentManager" />
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-col>
+
+                    <ion-col col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 no-padding style="background-color: rgb(255, 255, 255);">
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col col-3 col-sm-3 col-md-3 col-lg-3 col-lg-3>
+                                        Manager Signature
+                                </ion-col>
+                                <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
+                                        <input type="text" class="input-personalized" [(ngModel)]="baseEntity.PurposedOrUse" />
+                                </ion-col>
+                                <ion-col col-3 col-sm-3 col-md-3 col-lg-3 col-lg-3>
+                                        General Manager
+                                </ion-col>
+                                <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
+                                        <input type="text" class="input-personalized" [(ngModel)]="baseEntity.GeneralManager" />
+                                </ion-col>
+                                <ion-col col-3 col-sm-3 col-md-3 col-lg-3 col-lg-3>
+                                        Date
+                                </ion-col>
+                                <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
+                                        <input [matDatepicker]="myDatepicker2" (click)="myDatepicker2.open()" class="date-input input-personalized"
+                                        (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.DateGeneralManager">
+                                        <mat-datepicker-toggle [for]="myDatepicker2"></mat-datepicker-toggle>
+                                        <mat-datepicker #myDatepicker2></mat-datepicker>
+                                    </ion-col>
+                                    <ion-col col-3 col-sm-3 col-md-3 col-lg-3 col-lg-3>
+                                        Account No.
+                                    </ion-col>
+                                    <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
+                                        <input type="text" class="input-personalized" [(ngModel)]="baseEntity.AccountNo" />
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+</div>
+
+
+<br><br>
+<pre style="background: rgb(73, 136, 255); min-height: 20px;">{{ baseEntity | json }}</pre>

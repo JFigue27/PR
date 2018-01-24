@@ -1,0 +1,33 @@
+// FOOTER PENDING MOVE
+.footer-nav{
+    position: fixed;
+    height: 7%;
+    width: 100%;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+    background-color: #e6e6e6; 
+    border-top: 1px solid #bebebe;
+}
+
+.input-search{
+    width: 200px;
+    height: 30px;
+    margin-left: 3em;
+    margin-top: 1%;
+    font-size: 18px;
+    text-align: center;
+}
+
+.footer-search{
+    width: 40px;
+    height: 28px;
+    margin-top: 1%;
+    background-color: rgb(144, 144, 144);
+}
+.footer-search:hover{
+    background-color: rgb(68, 68, 68);
+    color: white;
+    transition:all 0.5s ease;
+}
