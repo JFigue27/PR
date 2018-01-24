@@ -1,0 +1,42 @@
+.card-login{
+  height:100%;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.p-login {
+  padding: 5%;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.form-login {
+  margin: auto;
+  width: 100%;
+  max-width: 300px;
+}
+
+.btn-login{
+  width: 100%;
+  background-color: rgb(64, 115, 255);
+}
+
+.error-message{
+  font-size: 14px;
+  font-weight: 700;
+  background-color: #fc3838ce;
+  text-align: center;
+  color: white;
+  padding: 3%;
+  border-radius: 5px;
+  width: 95%;
+  margin: auto;
+  margin-top: 2%;
+}
+
+@media(max-width: 450px){
+  .card-login{
+    margin-top:15%;
+  }
+}

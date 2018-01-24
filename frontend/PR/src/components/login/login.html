@@ -1,0 +1,19 @@
+<div class="card-login">
+  <div class="p-login">
+    <label>Log in</label>
+  </div>
+  <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)" class="form-login" autocomplete="off" novalidate>
+    <ion-item>
+      <ion-input type="text" (ngModel)="userName" id="userName" name="userName" placeholder="Username" required autofocus></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="password" (ngModel)="password" name="password" id="password" placeholder="Password" required></ion-input>
+    </ion-item>
+    <button ion-button type="submit" (Click)="login()" class="btn-login">
+      <b>Login</b>
+    </button>
+    <div class="error-message" *ngIf='errorMessage'>
+      <label >{{ errorMessage }}</label>
+    </div>
+  </form>
+</div>
