@@ -14,7 +14,7 @@ export class ListFormComponent extends FormController implements OnInit {
     super( { service: listService } );
   }
 
-  ngOnInit(){
+  ngOnInit() {
       this.load(this.params.get('oEntityOrId'));
   }
 

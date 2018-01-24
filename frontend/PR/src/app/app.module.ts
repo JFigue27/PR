@@ -10,7 +10,6 @@ import { ListComponent } from '../components/list-component/list-component';
 import { ListFormComponent } from '../components/list-form-component/list-form-component';
 import { FooterComponent } from '../components/footer-component/footer-component';
 import { FooterFormComponent } from '../components/footer-form-component/footer-form-component';
-import { ListGridComponent } from '../components/list-grid-component/list-grid-component';
 
 //PAGES
 import { HomePage } from '../pages/home/home';
@@ -23,7 +22,7 @@ import { CommonModule } from '@angular/common';
 
 //PROVIDERS
 import { PRServiceProvider } from '../providers/pr-service';
-import { PrlineServiceProvider } from '../providers/prline-service/prline-service';
+import { UtilsServiceProvider } from '../providers/utils-service/utils-service';
 
 //Angular Material components
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -39,7 +38,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     ListComponent,
     ListFormComponent,
-    ListGridComponent,
     FooterComponent,
     FooterFormComponent,
     //Pages
@@ -66,7 +64,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ListFormComponent,
     FooterComponent,
     FooterFormComponent,
-    ListGridComponent,
     //Pages
     HomePage,
     ListPage,
@@ -76,7 +73,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginService,
     PRServiceProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    PrlineServiceProvider
+    UtilsServiceProvider
   ]
 })
 export class AppModule {}

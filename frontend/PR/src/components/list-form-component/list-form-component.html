@@ -24,7 +24,53 @@
 
             <div class="table-responsive">
                 <table class="table grid">
-                    <tbody list-grid-component [parent]="baseEntity">
+                    <tbody>
+                        <tr class="grid-tr">
+                            <td class="grid-thead" style="width: 6%;"></td>
+                            <td class="grid-thead" style="width: 10%">Item number</td>
+                            <td class="grid-thead" style="width: 50%">Description</td>
+                            <td class="grid-thead" style="width: 8%">U/M</td>
+                            <td class="grid-thead" style="width: 10%">Qty.</td>
+                            <td class="grid-thead" style="width: 10%">Price Each</td>
+                            <td class="grid-thead" style="width: 18%">Total</td>
+                        </tr>
+                        
+                        <tr *ngFor="let item of baseEntity.PRLines" class="grid-tr">
+                        
+                            <td style="text-align: center !important;">
+                                <button *ngIf="item.id > 0" class="btn-link no-print" (click)="removeItemLocally($index);">Delete</button>
+                            </td>
+                        
+                            <td>
+                                <input [(ngModel)]="item.ItemNumber" class="input-personalized-no-border"
+                                (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
+                            </td>
+                        
+                            <td>
+                                <textarea matInput class="input-personalized-no-border" 
+                                [(ngModel)]="item.Description" matTextareaAutosize matAutosizeMaxRows="10"
+                                (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)"> </textarea>
+                            </td>
+                        
+                            <td>
+                                <input class="input-personalized-no-border" [(ngModel)]="item.UM"
+                                 (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
+                            </td>
+                        
+                            <td>
+                                <input class="input-personalized-no-border" [(ngModel)]="item.Qty"
+                                 (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
+                            </td>
+                        
+                            <td>
+                                <input class="input-personalized-no-border" [(ngModel)]="item.PriceEach"
+                                (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
+                            </td>
+                        
+                            <td>
+                                <p style="text-align: center;font-weight: bold;">{{item.PriceEach * item.Qty | currency}}</p>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
