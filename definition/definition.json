@@ -32,7 +32,10 @@
         "Account No": "text",
         "Friendly Identifier": "text",
         "Date Department Manager": "datetime?",
-        "Date General Manager": "datetime?"
+        "Date General Manager": "datetime?",
+        "Supplier 1": "string",
+        "Supplier 2": "string",
+        "Supplier 3": "string"
       },
       "relationships": {
         "oneToParent": [
@@ -52,7 +55,9 @@
         "Description": "textarea",
         "UM": "text",
         "Qty": "currency",
-        "Price Each": "currency"
+        "Price Each": "currency",
+        "Price Each 2": "currency",
+        "Price Each 3": "currency"
       },
       "relationships": {
         "oneToParent": [

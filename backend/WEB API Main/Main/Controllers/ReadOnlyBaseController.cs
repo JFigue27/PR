@@ -119,7 +119,7 @@ namespace ReusableWebAPI.Controllers
             return _logic.GetCatalogs();
         }
 
-        [HttpPost, Route("Create")]
+        [HttpGet, Route("Create")]
         virtual public CommonResponse Create()
         {
             return _logic.CreateInstance();

@@ -14,8 +14,8 @@ namespace BusinessSpecificLogic.EF
         {
             ///Start:Generated:Constructor<<<
 			sys_active = true;
-            CreatedAt = DateTime.Now;
-            ///End:Generated:Constructor<<<
+			CreatedAt = DateTime.Now;
+			///End:Generated:Constructor<<<
 
 
         }
@@ -36,6 +36,9 @@ namespace BusinessSpecificLogic.EF
         public string FriendlyIdentifier { get; set; }
         public DateTime? DateDepartmentManager { get; set; }
         public DateTime? DateGeneralManager { get; set; }
+        public string Supplier1 { get; set; }
+        public string Supplier2 { get; set; }
+        public string Supplier3 { get; set; }
         public int PRNumberKey { get; set; }
         [ForeignKey("PRNumberKey")]
         public PRNumber PRNumber { get; set; }
