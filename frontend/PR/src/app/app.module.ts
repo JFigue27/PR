@@ -7,14 +7,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { MyApp } from './app.component';
 import { LoginComponent } from '../components/login/login';
 import { ListComponent } from '../components/list-component/list-component';
-import { ListFormComponent } from '../components/list-form-component/list-form-component';
-import { FooterComponent } from '../components/footer-component/footer-component';
-import { FooterFormComponent } from '../components/footer-form-component/footer-form-component';
+import { FormComponent } from '../components/form-component/form-component';
+import { AttachmentsBoxComponent } from '../components/attachments-box-component/attachments-box-component';
+
 
 //PAGES
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list-page/list-page';
-import { ListFormPage } from '../pages/list-form-page/list-form-page';
+import { FormPage } from '../pages/form-page/form-page';
 
 //SERVICES
 import { LoginService } from '../services/login.service';
@@ -37,13 +37,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     //Components
     LoginComponent,
     ListComponent,
-    ListFormComponent,
-    FooterComponent,
-    FooterFormComponent,
+    FormComponent,
+    AttachmentsBoxComponent,
     //Pages
     HomePage,
     ListPage,
-    ListFormPage
+    FormPage
   ],
   imports: [
     BrowserModule,
@@ -61,13 +60,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     MyApp,
     ListComponent,
-    ListFormComponent,
-    FooterComponent,
-    FooterFormComponent,
+    FormComponent,
+    AttachmentsBoxComponent,
     //Pages
     HomePage,
     ListPage,
-    ListFormPage
+    FormPage
   ],
   providers: [
     LoginService,

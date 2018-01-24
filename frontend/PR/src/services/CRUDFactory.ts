@@ -30,8 +30,9 @@ export abstract class CRUDFactory {
         return { headers: headers };
     }
 
-    createEntity(object) {
-        return this.http.post<ICommonResponse>(this.baseUrl + this.config.endPoint, '=' + encodeURIComponent(JSON.stringify(object)), this.addAuthorization())
+    createEntity(oEntity) {
+        this.adapterOut(oEntity);
+        return this.http.post<ICommonResponse>(this.baseUrl + this.config.endPoint, '=' + encodeURIComponent(JSON.stringify(oEntity)), this.addAuthorization())
             .map(response => this.extractData(response), this)
             .map(o => o.Result)
             .catch(this.generalError);
@@ -93,7 +94,7 @@ export abstract class CRUDFactory {
     }
 
     updateEntity(oEntity) {
-        this.adapterOut(oEntity)
+        this.adapterOut(oEntity);
         return this.http.put<ICommonResponse>(this.baseUrl + this.config.endPoint + '/' + oEntity.id, '=' + encodeURIComponent(JSON.stringify(oEntity)), this.addAuthorization())
             .map(response => this.extractData(response), this)
             .map(o => o.Result)

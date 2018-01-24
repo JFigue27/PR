@@ -9,15 +9,16 @@
     font-weight: 900;
 	font-size: 16px;
 }
-.btn-link {
-	background-color: #ececec; 
 
-    width: 70%;
-	height: 70%;
-	border-radius: 4px;
+.btn-link {
+	background-color: white;
+	font-weight: 800;
+	font-size: 16px;
+	height: 100%;
+	width: 100%;
 }
 .input-personalized {
-	width: 60%;
+	width: 100%;
 	background-color: rgba(238, 238, 238, 0.02);
 	border: none;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.36);
@@ -42,4 +43,23 @@
 .grid-tr > td {
     border: 1px solid #acacac;
     height: 10px;
+}
+
+
+.footer-save {
+    float: right;
+    width: 100px;
+    height: 35px;
+    margin-top: 0.5%;
+    margin-right: 0.7%;
+    font-size: 18px;
+    font-weight: 400;
+	background-color: rgba(0, 136, 45, 0.925);
+	color: white;
+    box-shadow: 3px 2px 4px gray;
+    margin-bottom: 2%;
+}
+.footer-save:hover{
+    background-color: rgb(0, 71, 24);
+    transition:all 0.3s ease;
 }

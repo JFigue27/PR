@@ -15,7 +15,8 @@
             <br>
             <div style="margin-left:10px;">
                 <h3><b>Friendly Identifier</b></h3>
-                <input type="text" class="input-personalized" style="width:40%;" [(ngModel)]="baseEntity.FriendlyIdentifier" />
+                <input type="text" class="input-personalized" (ngModelChange)="on_input_change()"
+                 style="width:40%;" [(ngModel)]="baseEntity.FriendlyIdentifier" />
             </div>
             </ion-card-header>
 
@@ -26,19 +27,38 @@
                 <table class="table grid">
                     <tbody>
                         <tr class="grid-tr">
+                            <td class="grid-thead" style="width: 5%" colspan="5"></td>
+                            <td class="grid-thead" style="width: 5%" colspan="2">
+                                <input type="text" placeholder="Supplier 1" style="text-align:center;"
+                                class="input-personalized" [(ngModel)]="baseEntity.Supplier1" (ngModelChange)="on_input_change();">
+                            </td>
+                            <td class="grid-thead" style="width: 5%" colspan="2">
+                                <input type="text" placeholder="Supplier 2"  style="text-align:center;"
+                                class="input-personalized" [(ngModel)]="baseEntity.Supplier2" (ngModelChange)="on_input_change();">
+                            </td>
+                            <td class="grid-thead" style="width: 5%" colspan="2">
+                                <input type="text" placeholder="Supplier 3" style="text-align:center;"
+                                class="input-personalized" [(ngModel)]="baseEntity.Supplier3" (ngModelChange)="on_input_change();">
+                            </td>
+                        </tr>
+                        <tr class="grid-tr">
                             <td class="grid-thead" style="width: 6%;"></td>
-                            <td class="grid-thead" style="width: 10%">Item number</td>
-                            <td class="grid-thead" style="width: 50%">Description</td>
-                            <td class="grid-thead" style="width: 8%">U/M</td>
-                            <td class="grid-thead" style="width: 10%">Qty.</td>
-                            <td class="grid-thead" style="width: 10%">Price Each</td>
-                            <td class="grid-thead" style="width: 18%">Total</td>
+                            <td class="grid-thead" style="width: 6%">Item number</td>
+                            <td class="grid-thead" style="width: 30%">Description</td>
+                            <td class="grid-thead" style="width: 5%">U/M</td>
+                            <td class="grid-thead" style="width: 5%">Qty.</td>
+                            <td class="grid-thead" style="width: 5%">Price Each</td>
+                            <td class="grid-thead" style="width: 5%">Total</td>
+                            <td class="grid-thead" style="width: 5%">Price Each</td>
+                            <td class="grid-thead" style="width: 5%">Total</td>
+                            <td class="grid-thead" style="width: 5%">Price Each</td>
+                            <td class="grid-thead" style="width: 5%">Total</td>
                         </tr>
                         
                         <tr *ngFor="let item of baseEntity.PRLines" class="grid-tr">
                         
                             <td style="text-align: center !important;">
-                                <button *ngIf="item.id > 0" class="btn-link no-print" (click)="removeItemLocally($index);">Delete</button>
+                                <button *ngIf="item.id > 0" class="btn-link" (click)="removeItemLocally($index);">Delete</button>
                             </td>
                         
                             <td>
@@ -70,6 +90,26 @@
                             <td>
                                 <p style="text-align: center;font-weight: bold;">{{item.PriceEach * item.Qty | currency}}</p>
                             </td>
+
+                            <td>
+                                <input class="input-personalized-no-border" 
+                                [(ngModel)]="item.PriceEach2" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
+                            </td>
+                            
+                            <td>
+                                <p style="text-align: center;font-weight: bold;">{{item.PriceEach2 * item.Qty | currency}}</p>
+                            </td>
+
+                            <td>
+                                <input class="input-personalized-no-border"
+                                [(ngModel)]="item.PriceEach3" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
+                            </td>
+                            
+                            <td>
+                                <p style="text-align: center;font-weight: bold;">{{item.PriceEach3 * item.Qty | currency}}</p>
+                            </td>
+
+
                         </tr>
                     </tbody>
                 </table>
@@ -104,7 +144,7 @@
                                 </ion-col>
                                 <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
                                         <input [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" class="date-input input-personalized"
-                                        (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.DateGeneralManager">
+                                        (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.ConvertedDateDepartmentManager">
                                         <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
                                         <mat-datepicker #myDatepicker></mat-datepicker>
                                 </ion-col>
@@ -138,7 +178,7 @@
                                 </ion-col>
                                 <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
                                         <input [matDatepicker]="myDatepicker2" (click)="myDatepicker2.open()" class="date-input input-personalized"
-                                        (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.DateGeneralManager">
+                                        (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.ConvertedDateGeneralManager">
                                         <mat-datepicker-toggle [for]="myDatepicker2"></mat-datepicker-toggle>
                                         <mat-datepicker #myDatepicker2></mat-datepicker>
                                     </ion-col>
@@ -155,8 +195,12 @@
             </ion-grid>
         </ion-card-content>
     </ion-card>
+    <div class="footer-nav">
+        <button type="submit" (click)="save()" class="footer-save">
+            <ion-icon name="ios-save"></ion-icon>SAVE</button>
+    </div><br>
 </div>
 
 
 <br><br>
-<pre style="background: rgb(73, 136, 255); min-height: 20px;">{{ baseEntity | json }}</pre>
+<!-- <pre style="background: rgb(73, 136, 255); min-height: 20px;">{{ baseEntity | json }}</pre> -->

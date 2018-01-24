@@ -1,6 +1,7 @@
 import { CRUDFactory } from './CRUDFactory';
 import { IEntity } from './IEntity';
 import { Observable } from 'rxjs/RX';
+import alertify from 'alertifyjs';
 
 interface IConfigFormController {
 	service: CRUDFactory;
@@ -56,6 +57,7 @@ export abstract class FormController {
 			return this.config.service.save(this.baseEntity).subscribe(oEntity => {
 				this.baseEntity = oEntity;
 				this.afterSave();
+				alertify.success('Saved successfully');
 			});
 		} 
 		return Observable.empty();
