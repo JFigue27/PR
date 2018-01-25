@@ -2,11 +2,12 @@
   ☐ Dlls or Mxn
   ☐ Remove "Remove button".
   ☐ Upload signed document.
-
-  ☐ What about IP Trunks between Transtelco and Spectrm.
-
   ☐ Attachments.
   ☐ Account Dropdown.
+    ☐ Departments Catalog.
+      ☐ Field: Budget per department.
+    ☐ Accounts Per Deparment.
+      ☐ Associate somehow deparments with Accounts.
   ☐ Pre-Quote column.
   ☐ Two additional quote columns.
   Approval Process:
@@ -18,3 +19,23 @@
   ☐ Supplier catalog.
   ☐ Select suppliers in PR columns.
   ☐ Filter PR List by department, rejected, approved
+  ☐ PO Field.
+
+
+Requisotor -> Department Manager -> MRO (Paty) -> Return to Deparment Manager to accept price -> Purchasing -> Ricardo Wong or Dennis Breen if exceeds -> Send to MRO to start the purchasing.
+
+Reporte:
+  -Gastos por departamento.
+  -Gastos por cuenta de departamento.
+
+
+Roles:
+  ☐ Administrator
+  ☐ User
+    -Requisitor
+  ☐ Department Manager
+    -Make Approvals
+  ☐ General Manager
+  ☐ MRO (Buyer)
+    -Make quotations.
+    -Purchase
