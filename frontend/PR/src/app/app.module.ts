@@ -8,8 +8,9 @@ import { MyApp } from './app.component';
 import { LoginComponent } from '../components/login/login';
 import { ListComponent } from '../components/list-component/list-component';
 import { FormComponent } from '../components/form-component/form-component';
-import { AttachmentsBoxComponent } from '../components/attachments-box-component/attachments-box-component';
 
+//MODULES
+import { AttachmentsModule } from '../components/attachments.module';
 
 //PAGES
 import { HomePage } from '../pages/home/home';
@@ -38,13 +39,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     ListComponent,
     FormComponent,
-    AttachmentsBoxComponent,
     //Pages
     HomePage,
     ListPage,
     FormPage
   ],
   imports: [
+    AttachmentsModule,
     BrowserModule,
     HttpClientModule,
     MatDatepickerModule,
@@ -61,7 +62,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MyApp,
     ListComponent,
     FormComponent,
-    AttachmentsBoxComponent,
     //Pages
     HomePage,
     ListPage,

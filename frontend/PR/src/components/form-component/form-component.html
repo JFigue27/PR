@@ -18,10 +18,12 @@
                 <input type="text" class="input-personalized" (ngModelChange)="on_input_change()"
                  style="width:40%;" [(ngModel)]="baseEntity.FriendlyIdentifier" />
             </div>
+            <attachments-box-component [ownerEntity]="baseEntity"></attachments-box-component>
+
+
             </ion-card-header>
 
         <ion-card-content>
-
 
             <div class="table-responsive">
                 <table class="table grid">
@@ -55,10 +57,10 @@
                             <td class="grid-thead" style="width: 5%">Total</td>
                         </tr>
                         
-                        <tr *ngFor="let item of baseEntity.PRLines" class="grid-tr">
+                        <tr *ngFor="let item of baseEntity.PRLines; let i = index;" class="grid-tr">
                         
                             <td style="text-align: center !important;">
-                                <button *ngIf="item.id > 0" class="btn-link" (click)="removeItemLocally($index);">Delete</button>
+                                <button  class="btn-link" (click)="removeItemLocally(i);">Delete</button>
                             </td>
                         
                             <td>

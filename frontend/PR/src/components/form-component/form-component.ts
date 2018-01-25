@@ -61,6 +61,6 @@ export class FormComponent extends FormController implements OnInit {
   };
 
   removeItemLocally = function(index) {
-    this.baseEntity.splice(index, 1);
+    this.baseEntity.PRLines.splice(index, 1);
   }
 }
