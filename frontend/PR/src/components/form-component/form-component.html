@@ -29,39 +29,42 @@
                 <table class="table grid">
                     <tbody>
                         <tr class="grid-tr">
-                            <td class="grid-thead" style="width: 5%" colspan="5"></td>
-                            <td class="grid-thead" style="width: 5%" colspan="2">
+                            <td class="grid-thead" style="width: 5%" colspan="4"></td>
+                            <td class="grid-thead" style="width: 5%" colspan="3">
                                 <input type="text" placeholder="Supplier 1" style="text-align:center;"
                                 class="input-personalized" [(ngModel)]="baseEntity.Supplier1" (ngModelChange)="on_input_change();">
                             </td>
-                            <td class="grid-thead" style="width: 5%" colspan="2">
+                            <td class="grid-thead" style="width: 5%" colspan="3">
                                 <input type="text" placeholder="Supplier 2"  style="text-align:center;"
                                 class="input-personalized" [(ngModel)]="baseEntity.Supplier2" (ngModelChange)="on_input_change();">
                             </td>
-                            <td class="grid-thead" style="width: 5%" colspan="2">
+                            <td class="grid-thead" style="width: 5%" colspan="3">
                                 <input type="text" placeholder="Supplier 3" style="text-align:center;"
                                 class="input-personalized" [(ngModel)]="baseEntity.Supplier3" (ngModelChange)="on_input_change();">
                             </td>
                         </tr>
                         <tr class="grid-tr">
-                            <td class="grid-thead" style="width: 6%;"></td>
+                            <!-- <td class="grid-thead" style="width: 6%;"></td> -->
                             <td class="grid-thead" style="width: 6%">Item number</td>
                             <td class="grid-thead" style="width: 30%">Description</td>
                             <td class="grid-thead" style="width: 5%">U/M</td>
-                            <td class="grid-thead" style="width: 5%">Qty.</td>
+                            <td class="grid-thead" style="width: 5%">Quantity.</td>
+                            <td class="grid-thead" style="width: 3%">Currency</td>
                             <td class="grid-thead" style="width: 5%">Price Each</td>
                             <td class="grid-thead" style="width: 5%">Total</td>
+                            <td class="grid-thead" style="width: 3%">Currency</td>
                             <td class="grid-thead" style="width: 5%">Price Each</td>
                             <td class="grid-thead" style="width: 5%">Total</td>
+                            <td class="grid-thead" style="width: 3%">Currency</td>
                             <td class="grid-thead" style="width: 5%">Price Each</td>
                             <td class="grid-thead" style="width: 5%">Total</td>
                         </tr>
                         
                         <tr *ngFor="let item of baseEntity.PRLines; let i = index;" class="grid-tr">
                         
-                            <td style="text-align: center !important;">
+                            <!-- <td style="text-align: center !important;">
                                 <button  class="btn-link" (click)="removeItemLocally(i);">Delete</button>
-                            </td>
+                            </td> -->
                         
                             <td>
                                 <input [(ngModel)]="item.ItemNumber" class="input-personalized-no-border"
@@ -83,6 +86,15 @@
                                 <input class="input-personalized-no-border" [(ngModel)]="item.Qty"
                                  (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
                             </td>
+
+                            <td>
+                                <mat-select placeholder="Select.." [(ngModel)]="item.Currency" 
+                                (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
+                                    <mat-option *ngFor="let currency of currencies" [value]="currency.value">
+                                        {{ currency.value }}
+                                    </mat-option>
+                                </mat-select>
+                            </td>
                         
                             <td>
                                 <input class="input-personalized-no-border" [(ngModel)]="item.PriceEach"
@@ -91,6 +103,14 @@
                         
                             <td>
                                 <p style="text-align: center;font-weight: bold;">{{item.PriceEach * item.Qty | currency}}</p>
+                            </td>
+
+                            <td>
+                                <mat-select placeholder="Select.." [(ngModel)]="item.Currency" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
+                                    <mat-option *ngFor="let currency of currencies" [value]="currency.value">
+                                        {{ currency.value }}
+                                    </mat-option>
+                                </mat-select>
                             </td>
 
                             <td>
@@ -103,6 +123,14 @@
                             </td>
 
                             <td>
+                                <mat-select placeholder="Select.." [(ngModel)]="item.Currency" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
+                                    <mat-option *ngFor="let currency of currencies" [value]="currency.value">
+                                        {{ currency.value }}
+                                    </mat-option>
+                                </mat-select>
+                            </td>
+
+                            <td>
                                 <input class="input-personalized-no-border"
                                 [(ngModel)]="item.PriceEach3" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
                             </td>
@@ -110,14 +138,17 @@
                             <td>
                                 <p style="text-align: center;font-weight: bold;">{{item.PriceEach3 * item.Qty | currency}}</p>
                             </td>
-
-
                         </tr>
                     </tbody>
                 </table>
             </div>
 
-
+            <div col-12 class="notes">
+                <p>Notes</p>
+                <textarea matInput [(ngModel)]="baseEntity.Notes" matAutosizeMinRows="2"
+                (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)"
+                    matTextareaAutosize matAutosizeMaxRows="10" class="input-personalized"> </textarea>
+            </div>
             <ion-grid>
                 <ion-row>
                     <ion-col col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 no-padding style="background-color: rgb(255, 255, 255);">
@@ -154,7 +185,13 @@
                                         Department manager
                                 </ion-col>
                                 <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
-                                        <input type="text" class="input-personalized" [(ngModel)]="baseEntity.DepartmentManager" />
+                                        <mat-select [(ngModel)]="baseEntity.DepartmentManager" placeholder="Select.."
+                                        class="input-personalized" style="width:90%;" (ngModelChange)="on_input_change(item);">
+                                            <mat-option *ngFor="let manager of managers" [value]="manager.value">
+                                                {{ manager.value }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <!-- <input type="text" class="input-personalized" [(ngModel)]="baseEntity.DepartmentManager" /> -->
                                 </ion-col>
                             </ion-row>
                         </ion-grid>
@@ -205,4 +242,4 @@
 
 
 <br><br>
-<!-- <pre style="background: rgb(73, 136, 255); min-height: 20px;">{{ baseEntity | json }}</pre> -->
+<pre style="background: rgb(255, 255, 255);min-height: 20px;">{{ baseEntity | json }}</pre>

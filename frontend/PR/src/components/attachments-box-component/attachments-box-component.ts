@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { Config } from '../../services/config';
-import { Observable } from 'rxjs/Observable';
+// import { Observable } from 'rxjs/Observable';
 
 export interface IAttachment {
   FileName: string;
@@ -25,9 +25,9 @@ export class AttachmentsBoxComponent implements OnChanges {
   @Input() customFolderBind:string;
   
   public uploader:FileUploader = new FileUploader({url:this.API_URL});
-  private attachmentsList: Array<IAttachment>;
-  private attachmentsFolder:string;
-  private api_name:string='api_attachments';
+  // private attachmentsList: Array<IAttachment>;
+  // private attachmentsFolder:string;
+  // private api_name:string='api_attachments';
   
   constructor() {
     
@@ -35,20 +35,20 @@ export class AttachmentsBoxComponent implements OnChanges {
    
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('On changes');
-    console.log(changes);
-    if(changes.ownerEntity.firstChange == false){
-      console.log(this.ownerEntity);
-      this.ownerEntity[this.api_name]={};
-      this.ownerEntity[this.api_name].uploadFiles = function():Observable<any> {
-        if (this.uploader.getNotUploadedItems().length > 0) {
-          this.uploader.uploadAll();
-          return Observable
-        } else {
-          return Observable.empty();
-        }
-      }
-    }
+    // console.log('On changes');
+    // console.log(changes);
+    // if(changes.ownerEntity.firstChange == false){
+    //   console.log(this.ownerEntity);
+    //   this.ownerEntity[this.api_name]={};
+    //   this.ownerEntity[this.api_name].uploadFiles = function():Observable<any> {
+    //     if (this.uploader.getNotUploadedItems().length > 0) {
+    //       this.uploader.uploadAll();
+    //       // return Observable
+    //     } else {
+    //       return Observable.empty();
+    //     }
+    //   }
+    // }
   }
 
 }

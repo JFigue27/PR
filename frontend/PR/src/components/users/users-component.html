@@ -1,0 +1,19 @@
+<section class="section-users">
+  <h1>
+    <ion-icon name="ios-contact"></ion-icon> Users
+  </h1>
+
+  <div class="div-users">
+
+    <div class="single-user" *ngFor="let user of baseList">
+      <div (click)="openItem(user)">{{ user.Value}}</div>
+      <button (click)="removeItem(user)" (ngModel)="user">
+        <ion-icon name="trash" large></ion-icon>
+      </button>
+    </div>
+
+  </div>
+
+  <button ion-button (click)="addUser()" class="btn-add-item">+</button>
+
+</section>

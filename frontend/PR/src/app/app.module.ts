@@ -8,6 +8,10 @@ import { MyApp } from './app.component';
 import { LoginComponent } from '../components/login/login';
 import { ListComponent } from '../components/list-component/list-component';
 import { FormComponent } from '../components/form-component/form-component';
+import { UsersComponent } from '../components/users/users-component';
+import { UserFormComponent } from '../components/user-form/user-form-component';
+import { SuppliersComponent } from '../components/suppliers-component/suppliers-component';
+import { SupplierFormComponent } from '../components/supplier-form-component/supplier-form-component';
 
 //MODULES
 import { AttachmentsModule } from '../components/attachments.module';
@@ -16,6 +20,8 @@ import { AttachmentsModule } from '../components/attachments.module';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list-page/list-page';
 import { FormPage } from '../pages/form-page/form-page';
+import { UsersPage } from '../pages/users/users-page';
+import { SuppliersPage } from '../pages/suppliers/suppliers-page';
 
 //SERVICES
 import { LoginService } from '../services/login.service';
@@ -24,11 +30,14 @@ import { CommonModule } from '@angular/common';
 //PROVIDERS
 import { PRServiceProvider } from '../providers/pr-service';
 import { UtilsServiceProvider } from '../providers/utils-service/utils-service';
+import { UserServiceProvider } from '../providers/user-service';
+import { SupplierServiceProvider } from '../providers/supplier-service';
 
 //Angular Material components
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -39,10 +48,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     ListComponent,
     FormComponent,
+    UsersComponent,
+    UserFormComponent,
+    SuppliersComponent,
+    SupplierFormComponent,
     //Pages
     HomePage,
     ListPage,
-    FormPage
+    FormPage,
+    UsersPage,
+    SuppliersPage
   ],
   imports: [
     AttachmentsModule,
@@ -51,6 +66,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
+    MatSelectModule,
     CommonModule,
     BrowserAnimationsModule,
     IonicModule.forRoot(MyApp)
@@ -62,16 +78,24 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MyApp,
     ListComponent,
     FormComponent,
+    UserFormComponent,
+    UsersComponent,
+    SuppliersComponent,
+    SupplierFormComponent,
     //Pages
     HomePage,
     ListPage,
-    FormPage
+    FormPage,
+    UsersPage,
+    SuppliersPage
   ],
   providers: [
     LoginService,
     PRServiceProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    UtilsServiceProvider
+    UtilsServiceProvider,
+    UserServiceProvider,
+    SupplierServiceProvider
   ]
 })
 export class AppModule {}

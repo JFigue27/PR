@@ -5,9 +5,9 @@
 .grid-thead {
 	background-color: hsl(0, 0%, 88%);
     text-align: center;
-    padding: 2px;
-    font-weight: 900;
-	font-size: 16px;
+    padding: 1px;
+    font-weight: 700;
+	font-size: 14px;
 }
 
 .btn-link {
@@ -17,6 +17,7 @@
 	height: 100%;
 	width: 100%;
 }
+
 .input-personalized {
 	width: 90%;
 	background-color: rgba(238, 238, 238, 0.02);
@@ -43,6 +44,15 @@
 .grid-tr > td {
     border: 1px solid #acacac;
     height: 10px;
+}
+
+.notes {
+	margin-top: 2em;
+	margin-left: 5px;
+}
+.notes > p {
+	font-weight: bold;
+	font-size: 18px;
 }
 
 

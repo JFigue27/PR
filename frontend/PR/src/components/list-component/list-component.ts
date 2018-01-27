@@ -20,7 +20,6 @@ export class ListComponent extends ListController implements OnInit {
 
     this.app.viewWillEnter.subscribe(viewCtrl => {
       if (viewCtrl.name == "ListPage") {
-        console.log('Entering component view 2');
         this.load();
       }
       console.log(viewCtrl);

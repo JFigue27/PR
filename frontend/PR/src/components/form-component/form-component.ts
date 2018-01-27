@@ -9,6 +9,15 @@ import { PRServiceProvider } from '../../providers/pr-service';
   templateUrl: 'form-component.html'
 })
 export class FormComponent extends FormController implements OnInit {
+  currencies = [
+    { value: 'Dlls', viewValue: 'Dlls' },
+    { value: 'Mxn', viewValue: 'Mxn' }
+  ];
+
+  managers = [
+    { value: 'Verito Chico', viewValue: 'Verito Chico' },
+    { value: 'Dennis Breen', viewValue: 'Dennis Breen' }
+  ];
 
   constructor( public listService:PRServiceProvider, private params: NavParams) {
     super( { service: listService } );
