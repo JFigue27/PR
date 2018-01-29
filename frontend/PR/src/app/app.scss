@@ -7,14 +7,19 @@
 }
 
 // reusable buttons
-.input-personalized {
-    height: 30px;
-    width: 50%;
+.input-personalized { 
 	background-color: rgba(238, 238, 238, 0.02);
 	border: none;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.36);
-	-webkit-appearance: none;
-	-moz-border-radius: 2px;
-	box-shadow:none;
-	border-radius: 2px;
+	-webkit-appearance: none; 
+	box-shadow:none; 
+}
+
+.nav-button {
+	padding: 7px;
+    border-radius: 3px;
+    background-color: #c7c7c7;
+    width: 100px;
+    font-size: 16px;
+    font-weight: 700;
 }

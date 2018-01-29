@@ -14,16 +14,72 @@
     overflow-y: auto;
 }
 
-.title-listForm {
-    padding: 1%;
+.custom-card-header {
+    width: 100%;
+    color: #4c88ff;
     text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    background-color: rgb(167, 167, 167);
+    font-size: 22px;
+    font-weight: 600;
+    border-bottom: 1px solid #777777;
 }
 
-.form-listForm {
-    margin: auto;
-    width: 100%;
-    max-width: 400px;
+.custom-card-body {
+    height: 75%;
+    border-bottom: 1px solid #d1d1d1;
+}
+
+.input-lg {
+    font-size: 18px;
+    width: 90%;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+.div-select-role {
+    width: 90%;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+.div-select-role > p {
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.card-password {
+    border: 1px solid #e8e8e8;
+    width: 89%;
+    padding: 10px;
+    margin-left: 5%;
+    margin-top: 5%;
+    box-shadow: 5px 6px 5px #ececec;
+}
+
+.card-password > label {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 10px;
+}
+.div-footer {
+    float: right;
+}
+.btn-close {
+    background-color: #6060f2;
+    color: white;
+    font-size: 18px;
+    border-radius: 3px;
+    padding: 7px;
+    box-shadow: 1px 2px 5px #bebebe;
+    margin-top: 10px;
+    margin-right: 5px;
+}
+.btn-save {
+    background-color: #006e1c;
+    color: white;
+    font-size: 18px;
+    border-radius: 3px;
+    padding: 7px;
+    box-shadow: 1px 2px 5px #bebebe;
+    margin-top: 10px;
+    margin-right: 5px;
 }

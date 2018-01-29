@@ -10,6 +10,13 @@ import { NavParams, NavController } from 'ionic-angular';
 
 export class UserFormComponent extends FormController implements OnInit { 
   errorMessage: string;
+  roles = [
+    { value: 'User', viewValue: 'User' },
+    { value: 'Department Manager', viewValue: 'Department Manager' },
+    { value: 'General Manager', viewValue: 'General Manager'},
+    { value: 'MRO', viewValue: 'MRO' }
+  ];
+ 
 
   constructor(public userSerivceProvider: UserServiceProvider, private params: NavParams, private nav: NavController) {
     super({ service: userSerivceProvider });

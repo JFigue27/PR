@@ -4,11 +4,11 @@
   ☐ Upload signed document.
   ☐ Attachments.
   ☐ Account Dropdown.
-    ☐ Departments Catalog.
+  ☐ Departments Catalog.
       ☐ Field: Budget per department.
-    ☐ Accounts Per Deparment.
-      ☐ Associate somehow deparments with Accounts.
-  ☐ Pre-Quote column.
+☐ Accounts Per Deparment.
+  ☐ Associate somehow deparments with Accounts.
+☐ Pre-Quote column.
   ☐ Two additional quote columns.
   Approval Process:
     ☐ Department Manager once final quote is accepted.
@@ -21,14 +21,22 @@
   ☐ Filter PR List by department, rejected, approved
   ☐ PO Field.
 
+----------------------------------------------------------------------------------------------------------------
+WORKFLOW
+- Requisitor
+- Department Manager
+- MRO (Paty)
+- Return to Deparment Manager to accept price
+- Purchasing
+- Ricardo Wong or Dennis Breen if exceeds
+- Send to MRO to start the purchasing.
 
-Requisotor -> Department Manager -> MRO (Paty) -> Return to Deparment Manager to accept price -> Purchasing -> Ricardo Wong or Dennis Breen if exceeds -> Send to MRO to start the purchasing.
-
+------------------------------------------------------------------------------------------------------------------
 Reporte:
   -Gastos por departamento.
   -Gastos por cuenta de departamento.
 
-
+------------------------------------------------------------------------------------------------------------------
 Roles:
   ☐ Administrator
   ☐ User
@@ -39,3 +47,18 @@ Roles:
   ☐ MRO (Buyer)
     -Make quotations.
     -Purchase
+
+
+-User
+-Supplier
+-PurchaseRequest
+-Department
+-GLAccount
+
+
+
+Department structure
+-Department name (input text)
+-Budget (input text)
+-Deparment manager (select from users entity)
+-Account list (select multiple from GLAccount entity)
