@@ -12,6 +12,8 @@ import { UsersComponent } from '../components/users/users-component';
 import { UserFormComponent } from '../components/user-form/user-form-component';
 import { SuppliersComponent } from '../components/suppliers-component/suppliers-component';
 import { SupplierFormComponent } from '../components/supplier-form-component/supplier-form-component';
+import { DepartmentComponent } from '../components/department-component/department-component';
+import { AccountComponent } from '../components/account-component/account-component';
 
 //MODULES
 import { AttachmentsModule } from '../components/attachments.module';
@@ -22,6 +24,8 @@ import { ListPage } from '../pages/list-page/list-page';
 import { FormPage } from '../pages/form-page/form-page';
 import { UsersPage } from '../pages/users/users-page';
 import { SuppliersPage } from '../pages/suppliers/suppliers-page';
+import { AccountPage } from '../pages/account-page/account-page';
+import { DepartmentPage } from '../pages/department-page/department-page';
 
 //SERVICES
 import { LoginService } from '../services/login.service';
@@ -52,11 +56,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UserFormComponent,
     SuppliersComponent,
     SupplierFormComponent,
+    DepartmentComponent,
+    AccountComponent,
     //Pages
     HomePage,
     ListPage,
     FormPage,
     UsersPage,
+    DepartmentPage,
+    AccountPage,
     SuppliersPage
   ],
   imports: [
@@ -82,12 +90,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UsersComponent,
     SuppliersComponent,
     SupplierFormComponent,
+    DepartmentComponent,
+    AccountComponent,
     //Pages
     HomePage,
     ListPage,
     FormPage,
     UsersPage,
-    SuppliersPage
+    SuppliersPage,
+    DepartmentPage,
+    AccountPage
   ],
   providers: [
     LoginService,
