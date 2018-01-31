@@ -6,14 +6,14 @@ using System.Linq;
 
 namespace BusinessSpecificLogic.Logic
 {
-    public interface ITrackLogic : IBaseLogic<Track>
+    public interface ITrackLogic : ILogic<Track>
     {
         CommonResponse AssignResponsible(int iTrackKey, int iUserKey);
     }
 
-    public class TrackLogic : BaseLogic<Track>, ITrackLogic
+    public class TrackLogic : Logic<Track>, ITrackLogic
     {
-        public TrackLogic(DbContext context, IRepository<Track> repository) : base(context, repository)
+        public TrackLogic(DbContext context, IRepository<Track> repository, LoggedUser LoggedUser) : base(context, repository, LoggedUser)
         {
         }
 

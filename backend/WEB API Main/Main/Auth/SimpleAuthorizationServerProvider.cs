@@ -6,6 +6,8 @@ using BusinessSpecificLogic;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Reusable.Auth;
 using BusinessSpecificLogic.Logic;
+using Ninject;
+using ReusableWebAPI.App_Start;
 
 namespace ReusableWebAPI.Auth
 {
@@ -37,27 +39,23 @@ namespace ReusableWebAPI.Auth
             }
 
 
-            using (var mainContext = new MainContext())
+            userLogic = NinjectWebCommon.CreateKernel().Get<UserLogic>();
+
+            CommonResponse response = userLogic.GetByName(context.UserName);
+            if (response.ErrorThrown)
             {
-                IRepository<User> userRepo = new Repository<User>(mainContext);
-                userLogic = new UserLogic(mainContext, userRepo);
-
-                CommonResponse response = userLogic.GetByName(context.UserName);
-                if (response.ErrorThrown)
-                {
-                    context.SetError(response.ResponseDescription);
-                    return;
-                }
-
-                User theUser = (User)response.Result;
-
-                var identity = new ClaimsIdentity(context.Options.AuthenticationType);
-                identity.AddClaim(new Claim("role", theUser.Role));
-                identity.AddClaim(new Claim("userID", theUser.id.ToString()));
-                identity.AddClaim(new Claim("userName", theUser.UserName.ToString()));
-
-                context.Validated(identity);
+                context.SetError(response.ResponseDescription);
+                return;
             }
+
+            User theUser = (User)response.Result;
+
+            var identity = new ClaimsIdentity(context.Options.AuthenticationType);
+            identity.AddClaim(new Claim("role", theUser.Role));
+            identity.AddClaim(new Claim("userID", theUser.id.ToString()));
+            identity.AddClaim(new Claim("userName", theUser.UserName.ToString()));
+
+            context.Validated(identity);
         }
     }
 }

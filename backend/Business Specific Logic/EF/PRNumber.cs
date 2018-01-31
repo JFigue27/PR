@@ -12,7 +12,6 @@ namespace BusinessSpecificLogic.EF
         public PRNumber()
         {
             ///Start:Generated:Constructor<<<
-			CreatedAt = DateTime.Now;
 			///End:Generated:Constructor<<<
             
         }
@@ -23,7 +22,7 @@ namespace BusinessSpecificLogic.EF
         public override int id { get { return PRNumberKey; } }
 
         ///Start:Generated:Properties<<<
-        public DateTime CreatedAt { get; set; }
+        public DateTimeOffset CreatedAt { get; set; }
         public string GeneratedNumber { get; set; }
         public string Revision { get; set; }
         public int? RevisionFrom { get; set; }

@@ -15,6 +15,7 @@ namespace ReusableWebAPI.App_Start
     using ReusableWebAPI.Controllers;
     using Reusable;
     using BusinessSpecificLogic.Logic;
+    using System.Security.Claims;
 
     public static class NinjectWebCommon
     {
@@ -69,8 +70,13 @@ namespace ReusableWebAPI.App_Start
             kernel.Bind(typeof(DbContext)).To(typeof(MainContext)).InRequestScope();
             kernel.Bind(typeof(IRepository<>)).To(typeof(Repository<>)).InRequestScope();
             kernel.Bind(typeof(IReadOnlyRepository<>)).To(typeof(ReadOnlyRepository<>)).InRequestScope();
-            kernel.Bind(typeof(ReadOnlyBaseLogic<>)).ToSelf().InRequestScope();
-            kernel.Bind(typeof(BaseLogic<>)).ToSelf().InRequestScope();
+            kernel.Bind(typeof(IDocumentRepository<>)).To(typeof(DocumentRepository<>)).InRequestScope();
+            kernel.Bind<LoggedUser>().ToMethod(ctx => {
+                return new LoggedUser((ClaimsIdentity)HttpContext.Current.User?.Identity);
+                }).InRequestScope();
+            kernel.Bind(typeof(ReadOnlyLogic<>)).ToSelf().InRequestScope();
+            kernel.Bind(typeof(Logic<>)).ToSelf().InRequestScope();
+            kernel.Bind(typeof(DocumentLogic<>)).ToSelf().InRequestScope();
 
             #region Specific App Bindings
 
@@ -83,9 +89,14 @@ namespace ReusableWebAPI.App_Start
             #endregion
 
             kernel.Bind<IUserLogic>().To<UserLogic>();
+            kernel.Bind<IWorkflowLogic>().To<WorkflowLogic>();
+            kernel.Bind<IStepLogic>().To<StepLogic>();
+            kernel.Bind<IStepOperationLogic>().To<StepOperationLogic>();
             kernel.Bind<ITrackLogic>().To<TrackLogic>();
+            kernel.Bind<ITokenLogic>().To<TokenLogic>();
             kernel.Bind(typeof(BaseController<>)).ToSelf().InRequestScope();
             kernel.Bind(typeof(ReadOnlyBaseController<>)).ToSelf().InRequestScope();
+            kernel.Bind(typeof(DocumentController<>)).ToSelf().InRequestScope();
         }
     }
 }

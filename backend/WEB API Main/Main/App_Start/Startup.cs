@@ -20,7 +20,7 @@ namespace ReusableWebAPI
 
             HttpConfiguration config = new HttpConfiguration();
 
-            config.EnableSystemDiagnosticsTracing().MinimumLevel = System.Web.Http.Tracing.TraceLevel.Info;
+            //config.EnableSystemDiagnosticsTracing().MinimumLevel = System.Web.Http.Tracing.TraceLevel.Info;
 
             ConfigureOAuth(app);
 

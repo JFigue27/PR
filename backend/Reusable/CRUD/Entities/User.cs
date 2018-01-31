@@ -12,7 +12,6 @@ namespace Reusable
         public User()
         {
             Sorts = new HashSet<Sort>();
-            Gridsters = new HashSet<Gridster>();
             Tracks = new HashSet<Track>();
             Tracks1 = new HashSet<Track>();
             Tracks2 = new HashSet<Track>();
@@ -54,9 +53,6 @@ namespace Reusable
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sort> Sorts { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Gridster> Gridsters { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Track> Tracks { get; set; }

@@ -18,13 +18,13 @@ namespace Reusable
 
         public int? User_CreatedByKey { get; set; }
 
-        public DateTime Date_CreatedOn { get; set; }
+        public DateTimeOffset Date_CreatedOn { get; set; }
 
-        public DateTime? Date_EditedOn { get; set; }
+        public DateTimeOffset? Date_EditedOn { get; set; }
 
-        public DateTime? Date_RemovedOn { get; set; }
+        public DateTimeOffset? Date_RemovedOn { get; set; }
 
-        public DateTime? Date_LastTimeUsed { get; set; }
+        public DateTimeOffset? Date_LastTimeUsed { get; set; }
 
         public int? User_LastEditedByKey { get; set; }
 

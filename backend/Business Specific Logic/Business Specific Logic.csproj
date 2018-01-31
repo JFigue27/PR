@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -34,14 +34,16 @@
       <HintPath>..\WEB API Main\packages\Dapper.1.50.4\lib\net451\Dapper.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\WEB API Main\packages\EntityFramework.6.2.0-beta1\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\WEB API Main\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\WEB API Main\packages\EntityFramework.6.2.0-beta1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\WEB API Main\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="LinqKit, Version=1.1.9.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
-      <HintPath>..\WEB API Main\packages\LinqKit.1.1.9.0\lib\net45\LinqKit.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="EPPlus, Version=4.1.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\WEB API Main\packages\EPPlus.4.1.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="LinqKit, Version=1.1.12.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
+      <HintPath>..\WEB API Main\packages\LinqKit.1.1.12\lib\net45\LinqKit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\WEB API Main\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -62,6 +64,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -82,18 +85,18 @@
     <Compile Include="EF\PRNumber.cs" />
     <Compile Include="EF\PurchaseRequest.cs" />
     <!-- End:Generated:EF -->
+    <Compile Include="Logic\TokenLogic.cs" />
     <Compile Include="Logic\UserLogic.cs" />
     <Compile Include="Logic\TrackLogic.cs" />
+    <Compile Include="Logic\StepLogic.cs" />
+    <Compile Include="Logic\StepOperationLogic .cs" />
+    <Compile Include="Logic\WorkflowLogic.cs" />
     <!-- Start:Generated:Logic -->
     <Compile Include="Logic\PRLineLogic.cs" />
     <Compile Include="Logic\PRNumberLogic.cs" />
     <Compile Include="Logic\PurchaseRequestLogic.cs" />
     <!-- End:Generated:Logic -->
     <Compile Include="MainContext.cs" />
-    <Compile Include="Migrations\201707032255596_Initial.cs" />
-    <Compile Include="Migrations\201707032255596_Initial.Designer.cs">
-      <DependentUpon>201707032255596_Initial.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\AuthConfiguration\201703272102025_InitialCreate.cs" />
     <Compile Include="Migrations\AuthConfiguration\201703272102025_InitialCreate.Designer.cs">
       <DependentUpon>201703272102025_InitialCreate.cs</DependentUpon>
@@ -103,9 +106,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201707032255596_Initial.resx">
-      <DependentUpon>201707032255596_Initial.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AuthConfiguration\201703272102025_InitialCreate.resx">
       <DependentUpon>201703272102025_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>

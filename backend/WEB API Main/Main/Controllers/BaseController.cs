@@ -10,10 +10,10 @@ namespace ReusableWebAPI.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public abstract class BaseController<Entity> : ReadOnlyBaseController<Entity> where Entity : BaseEntity
     {
-        protected new IBaseLogic<Entity> _logic;
-        public BaseController(IBaseLogic<Entity> logic) : base(logic)
+        protected new ILogic<Entity> logic;
+        public BaseController(ILogic<Entity> logic) : base(logic)
         {
-            _logic = logic;
+            this.logic = logic;
         }
 
         // POST: api/Base
@@ -27,7 +27,7 @@ namespace ReusableWebAPI.Controllers
             {
                 entity = JsonConvert.DeserializeObject<Entity>(value);
 
-                return _logic.Add(entity);
+                return logic.AddTransaction(entity);
             }
             catch (Exception e)
             {
@@ -47,9 +47,9 @@ namespace ReusableWebAPI.Controllers
                 Type parentType = Type.GetType("BusinessSpecificLogic.EF." + type + ", BusinessSpecificLogic", true);
                 entity = JsonConvert.DeserializeObject<Entity>(value);
 
-                MethodInfo method = _logic.GetType().GetMethod("AddToParent");
+                MethodInfo method = logic.GetType().GetMethod("AddToParent");
                 MethodInfo generic = method.MakeGenericMethod(parentType);
-                response = (CommonResponse)generic.Invoke(_logic, new object[] { parentId, entity });
+                response = (CommonResponse)generic.Invoke(logic, new object[] { parentId, entity });
                 return response;
             }
             catch (Exception e)
@@ -68,7 +68,7 @@ namespace ReusableWebAPI.Controllers
             try
             {
                 entity = JsonConvert.DeserializeObject<Entity>(value);
-                return _logic.SetPropertyValue(entity, sProperty, newValue);
+                return logic.SetPropertyValue(entity, sProperty, newValue);
             }
             catch (Exception e)
             {
@@ -89,7 +89,7 @@ namespace ReusableWebAPI.Controllers
                 //entity = jsonSerializer.Deserialize<Entity>(value);
                 entity = JsonConvert.DeserializeObject<Entity>(value);
 
-                return _logic.Update(entity);
+                return logic.Update(entity);
             }
             catch (Exception e)
             {
@@ -101,7 +101,7 @@ namespace ReusableWebAPI.Controllers
         [HttpDelete, Route("")]
         virtual public CommonResponse Delete(int id)
         {
-            return _logic.Remove(id);
+            return logic.Remove(id);
         }
 
         [HttpPost, Route("RemoveEntity")]
@@ -113,7 +113,7 @@ namespace ReusableWebAPI.Controllers
             try
             {
                 entity = JsonConvert.DeserializeObject<Entity>(value);
-                return _logic.Remove(entity);
+                return logic.Remove(entity);
             }
             catch (Exception e)
             {
@@ -130,9 +130,9 @@ namespace ReusableWebAPI.Controllers
             {
                 Type forEntityType = Type.GetType("BusinessSpecificLogic.EF." + sEntityType + ", BusinessSpecificLogic", true);
 
-                MethodInfo method = _logic.GetType().GetMethod("GetAvailableFor");
+                MethodInfo method = logic.GetType().GetMethod("GetAvailableFor");
                 MethodInfo generic = method.MakeGenericMethod(forEntityType);
-                response = (CommonResponse)generic.Invoke(_logic, new object[] { id });
+                response = (CommonResponse)generic.Invoke(logic, new object[] { id });
                 return response;
             }
             catch (Exception e)
@@ -152,48 +152,14 @@ namespace ReusableWebAPI.Controllers
                 Type parentType = Type.GetType("BusinessSpecificLogic.EF." + type + ", BusinessSpecificLogic", true);
                 entity = JsonConvert.DeserializeObject<Entity>(value);
 
-                MethodInfo method = _logic.GetType().GetMethod("RemoveFromParent");
+                MethodInfo method = logic.GetType().GetMethod("RemoveFromParent");
                 MethodInfo generic = method.MakeGenericMethod(parentType);
-                response = (CommonResponse)generic.Invoke(_logic, new object[] { parentId, entity });
+                response = (CommonResponse)generic.Invoke(logic, new object[] { parentId, entity });
                 return response;
             }
             catch (Exception e)
             {
                 return response.Error("ERROR: " + e.Message, e);
-            }
-        }
-
-        [HttpPost, Route("Finalize")]
-        virtual public CommonResponse Finalize([FromBody]string value)
-        {
-            CommonResponse response = new CommonResponse();
-            Entity entity;
-
-            try
-            {
-                entity = JsonConvert.DeserializeObject<Entity>(value);
-                return _logic.Finalize(entity);
-            }
-            catch (Exception e)
-            {
-                return response.Error("ERROR: " + e.ToString());
-            }
-        }
-
-        [HttpPost, Route("Unfinalize")]
-        virtual public CommonResponse Unfinalize([FromBody]string value)
-        {
-            CommonResponse response = new CommonResponse();
-            Entity entity;
-
-            try
-            {
-                entity = JsonConvert.DeserializeObject<Entity>(value);
-                return _logic.Unfinalize(entity);
-            }
-            catch (Exception e)
-            {
-                return response.Error("ERROR: " + e.ToString());
             }
         }
     }

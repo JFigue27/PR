@@ -5,6 +5,7 @@ namespace BusinessSpecificLogic.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
     using Reusable;
+    using Reusable.Workflows;
 
     public partial class POContext : DbContext
     {
@@ -26,6 +27,10 @@ namespace BusinessSpecificLogic.EF
         #region From Reusable Modules
         public virtual DbSet<Track> Tracks { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Workflow> Workflows { get; set; }
+        public virtual DbSet<Step> Steps { get; set; }
+        public virtual DbSet<StepOperation> StepOperations { get; set; }
+        public virtual DbSet<Token> Tokens { get; set; }
         #endregion
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -40,11 +45,6 @@ namespace BusinessSpecificLogic.EF
                 .HasMany(e => e.Sorts)
                 .WithOptional(e => e.User)
                 .HasForeignKey(e => e.Sort_User_ID);
-
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.Gridsters)
-                .WithOptional(e => e.User)
-                .HasForeignKey(e => e.Gridster_User_ID);
 
             modelBuilder.Entity<User>()
                 .HasMany(e => e.Tracks)

@@ -1,23 +1,17 @@
 using BusinessSpecificLogic.EF;
 using Reusable;
 using System.Data.Entity;
-using System.Linq;
 
 namespace BusinessSpecificLogic.Logic
 {
-    public interface IPRLineLogic : IBaseLogic<PRLine>
+    public interface IPRLineLogic : ILogic<PRLine>
     {
     }
 
-    public class PRLineLogic : BaseLogic<PRLine>, IPRLineLogic
+    public class PRLineLogic : Logic<PRLine>, IPRLineLogic
     {
-        public PRLineLogic(DbContext context, IRepository<PRLine> repository) : base(context, repository)
+        public PRLineLogic(DbContext context, IRepository<PRLine> repository, LoggedUser LoggedUser) : base(context, repository, LoggedUser)
         {
-        }
-
-        protected override IQueryable<PRLine> applyOrderByWhenPaging(IQueryable<PRLine> recordset)
-        {
-            return recordset.OrderBy(e => e.PRLineKey);
         }
     }
 }

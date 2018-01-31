@@ -7,7 +7,7 @@ namespace Reusable
     {
         public BaseDocument()
         {
-            CreatedAt = DateTime.Now;
+            CreatedAt = DateTimeOffset.Now;
         }
 
         [NotMapped]
@@ -19,6 +19,6 @@ namespace Reusable
 
         virtual public string document_status { get; set; }
 
-        virtual public DateTime CreatedAt { get; set; }
+        virtual public DateTimeOffset CreatedAt { get; set; }
     }
 }

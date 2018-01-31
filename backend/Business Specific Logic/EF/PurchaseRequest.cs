@@ -14,7 +14,6 @@ namespace BusinessSpecificLogic.EF
         {
             ///Start:Generated:Constructor<<<
 			sys_active = true;
-			CreatedAt = DateTime.Now;
 			///End:Generated:Constructor<<<
 
 
@@ -29,13 +28,13 @@ namespace BusinessSpecificLogic.EF
         public string PurposeOrUse { get; set; }
         public string RequisitionName { get; set; }
         public string Department { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public DateTimeOffset CreatedAt { get; set; }
         public string DepartmentManager { get; set; }
         public string GeneralManager { get; set; }
         public string AccountNo { get; set; }
         public string FriendlyIdentifier { get; set; }
-        public DateTime? DateDepartmentManager { get; set; }
-        public DateTime? DateGeneralManager { get; set; }
+        public DateTimeOffset? DateDepartmentManager { get; set; }
+        public DateTimeOffset? DateGeneralManager { get; set; }
         public string Supplier1 { get; set; }
         public string Supplier2 { get; set; }
         public string Supplier3 { get; set; }

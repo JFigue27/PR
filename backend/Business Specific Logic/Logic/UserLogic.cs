@@ -13,17 +13,17 @@ using System.Linq;
 
 namespace BusinessSpecificLogic.Logic
 {
-    public interface IUserLogic : IBaseLogic<User>
+    public interface IUserLogic : ILogic<User>
     {
     }
 
-    public class UserLogic : BaseLogic<User>, IUserLogic
+    public class UserLogic : Logic<User>, IUserLogic
     {
-        public UserLogic(DbContext context, IRepository<User> repository) : base(context, repository)
+        public UserLogic(DbContext context, IRepository<User> repository, LoggedUser LoggedUser) : base(context, repository, LoggedUser)
         {
         }
 
-        protected override void onCreate(User entity)
+        protected override void OnCreateInstance(User entity)
         {
             entity.Role = "User";
         }
@@ -175,15 +175,9 @@ namespace BusinessSpecificLogic.Logic
         public CommonResponse GetByName(string sName)
         {
             CommonResponse response = new CommonResponse();
-            List<User> entities = new List<User>();
             try
             {
-                User entity = repository.GetSingle(e => e.UserName == sName);
-                if (entity != null)
-                {
-                    entities.Add(entity);
-                    loadNavigationProperties(entities.ToArray());
-                }
+                User entity = repository.GetSingle(null, e => e.UserName == sName);
                 return response.Success(entity);
 
             }

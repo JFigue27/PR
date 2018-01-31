@@ -18,7 +18,7 @@ namespace Reusable
 
         public int? Sort_User_ID { get; set; }
 
-        public DateTime? Sort_Edited_On { get; set; }
+        public DateTimeOffset? Sort_Edited_On { get; set; }
 
         public int? Sort_Sequence { get; set; }
 

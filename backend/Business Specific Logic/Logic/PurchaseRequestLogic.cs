@@ -1,51 +1,57 @@
 using BusinessSpecificLogic.EF;
+using Dapper;
 using Reusable;
+using Reusable.Attachments;
 using System;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
-using Dapper;
-using Reusable.Attachments;
-using System.Configuration;
 
 namespace BusinessSpecificLogic.Logic
 {
-    public interface IPurchaseRequestLogic : IBaseLogic<PurchaseRequest>
+    public interface IPurchaseRequestLogic : IDocumentLogic<PurchaseRequest>
     {
     }
 
-    public class PurchaseRequestLogic : BaseLogic<PurchaseRequest>, IPurchaseRequestLogic
+    public class PurchaseRequestLogic : DocumentLogic<PurchaseRequest>, IPurchaseRequestLogic
     {
-        public PurchaseRequestLogic(DbContext context, IRepository<PurchaseRequest> repository) : base(context, repository)
+        public PurchaseRequestLogic(DbContext context, IDocumentRepository<PurchaseRequest> repository, LoggedUser LoggedUser) : base(context, repository, LoggedUser)
         {
         }
 
-        protected override void loadNavigationProperties(params PurchaseRequest[] entities)
+        protected override IQueryable<PurchaseRequest> StaticDbQueryForList(IQueryable<PurchaseRequest> dbQuery)
+        {
+            return dbQuery.Include(e => e.PRLines);
+        }
+
+        protected override void AdapterOut(params PurchaseRequest[] entities)
         {
             var ctx = context as POContext;
+
             foreach (var item in entities)
             {
                 item.PRNumber = ctx.PRNumbers.FirstOrDefault(e => e.PRNumberKey == item.PRNumberKey);
-                item.PRLines = ctx.PRLines.Where(line => line.PurchaseRequestKey == item.id).ToList();                
+
+                item.PRLines = item.PRLines?.OrderBy(e => e.PRLineKey).ToList();
+
+                item.Attachments = AttachmentsIO.getAttachmentsFromFolder(item.AttachmentsFolder, "PR_Attachments");
             }
-        }
-        protected override void loadNavigationPropertiesWhenSingle(PurchaseRequest entity)
-        {
-            entity.Attachments = AttachmentsIO.getAttachmentsFromFolder(entity.AttachmentsFolder, "PR_Attachments");
         }
 
         protected override void onBeforeSaving(PurchaseRequest entity, BaseEntity parent = null, OPERATION_MODE mode = OPERATION_MODE.NONE)
         {
             if (mode == OPERATION_MODE.ADD)
             {
+
                 #region PR Number Generation
                 var ctx = context as POContext;
 
-                DateTime date = DateTime.Now;
+                DateTimeOffset date = DateTimeOffset.Now;
 
                 int sequence = 0;
                 var last = ctx.PRNumbers.Where(n => n.CreatedAt.Year == date.Year
-                        && n.CreatedAt.Month == date.Month && n.CreatedAt.Day == date.Day).OrderByDescending(n => n.Sequence)
-                        .FirstOrDefault();
+                                        && n.CreatedAt.Month == date.Month && n.CreatedAt.Day == date.Day).OrderByDescending(n => n.Sequence)
+                                        .FirstOrDefault();
 
                 if (last != null)
                 {
@@ -66,8 +72,10 @@ namespace BusinessSpecificLogic.Logic
                 ctx.SaveChanges();
 
                 entity.PRNumberKey = cqaNumber.PRNumberKey;
+
                 #endregion
             }
+
 
             #region Attachments
             string baseAttachmentsPath = ConfigurationManager.AppSettings["PR_Attachments"];
@@ -82,8 +90,8 @@ namespace BusinessSpecificLogic.Logic
                     }
                 }
             }
-            #endregion
 
+            #endregion
         }
 
         protected override void onAfterSaving(DbContext context, PurchaseRequest entity, BaseEntity parent = null, OPERATION_MODE mode = OPERATION_MODE.NONE)

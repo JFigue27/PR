@@ -15,12 +15,12 @@ namespace ReusableWebAPI.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public abstract class ReadOnlyBaseController<Entity> : ApiController where Entity : BaseEntity
     {
-        protected IReadOnlyBaseLogic<Entity> _logic;
+        protected IReadOnlyLogic<Entity> logic;
 
-        public ReadOnlyBaseController(IReadOnlyBaseLogic<Entity> logic)
+        public ReadOnlyBaseController(IReadOnlyLogic<Entity> logic)
         {
-            _logic = logic;
-            _logic.loggedUser = new LoggedUser((ClaimsIdentity)User.Identity);
+            this.logic = logic;
+            this.logic.LoggedUser = new LoggedUser((ClaimsIdentity)User.Identity);
         }
 
         protected bool isValidJSValue(string value)
@@ -56,14 +56,14 @@ namespace ReusableWebAPI.Controllers
         [HttpGet, Route("")]
         virtual public CommonResponse Get()
         {
-            return _logic.GetAll();
+            return logic.GetAll();
         }
 
         // GET: api/Base/5
         [HttpGet, Route("")]
         virtual public CommonResponse Get(int id)
         {
-            return _logic.GetByID(id);
+            return logic.GetByID(id);
         }
 
         // GET: api/Base/5
@@ -109,20 +109,13 @@ namespace ReusableWebAPI.Controllers
             {
                 return response.Error(ex.ToString());
             }
-            return _logic.GetSingleWhere(wheres.ToArray());
-        }
-
-        // GET: api/Base
-        [HttpGet, Route("getCatalogs")]
-        virtual public CommonResponse getCatalogs()
-        {
-            return _logic.GetCatalogs();
+            return logic.GetSingleWhere(wheres.ToArray());
         }
 
         [HttpGet, Route("Create")]
         virtual public CommonResponse Create()
         {
-            return _logic.CreateInstance();
+            return logic.CreateInstance();
         }
 
         // POST: api/Base
@@ -134,9 +127,9 @@ namespace ReusableWebAPI.Controllers
             try
             {
                 Type parentClassName = Type.GetType("BusinessSpecificLogic.EF." + parentType + ", BusinessSpecificLogic", true);
-                MethodInfo method = _logic.GetType().GetMethod("GetSingleByParent");
+                MethodInfo method = logic.GetType().GetMethod("GetSingleByParent");
                 MethodInfo generic = method.MakeGenericMethod(parentClassName);
-                response = (CommonResponse)generic.Invoke(_logic, new object[] { parentId });
+                response = (CommonResponse)generic.Invoke(logic, new object[] { parentId });
                 return response;
             }
             catch (Exception e)
@@ -250,7 +243,7 @@ namespace ReusableWebAPI.Controllers
                 return response.Error(ex.ToString());
             }
 
-            return _logic.GetPage(perPage, page, filterGeneral, wheres.ToArray(), orderBy, db_wheres.ToArray());
+            return logic.GetPage(perPage, page, filterGeneral, wheres.ToArray(), orderBy, db_wheres.ToArray());
         }
 
         protected Expression<Func<Entity, object>> orderBy = null;

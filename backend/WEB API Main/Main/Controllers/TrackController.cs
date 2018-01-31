@@ -16,7 +16,7 @@ namespace ReusableWebAPI.Controllers
         [HttpPost, Route("assignResponsible/{iTrackKey}/{iUserKey}")]
         public CommonResponse AssignResponsible(int iTrackKey, int iUserKey)
         {
-            return (_logic as ITrackLogic).AssignResponsible(iTrackKey, iUserKey);
+            return (logic as ITrackLogic).AssignResponsible(iTrackKey, iUserKey);
         }
     }
 }

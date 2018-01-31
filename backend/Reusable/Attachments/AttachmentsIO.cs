@@ -106,6 +106,41 @@ namespace Reusable.Attachments
             }
         }
 
+        public static void DirectoryCopyStreams(string sourceDirName, string destDirName, bool copySubDirs)
+        {
+            DirectoryInfo SourceDirectory = new DirectoryInfo(sourceDirName);
+            DirectoryInfo TargetDirectory = new DirectoryInfo(destDirName);
+
+            // Copy Files
+            foreach (FileInfo file in SourceDirectory.EnumerateFiles())
+            {
+                using (FileStream SourceStream = file.OpenRead())
+                {
+                    string dirPath = SourceDirectory.FullName;
+                    string outputPath = dirPath.Replace(SourceDirectory.FullName, TargetDirectory.FullName);
+                    using (FileStream DestinationStream = File.Create(outputPath + "\\" + file.Name))
+                    {
+                        SourceStream.CopyToAsync(DestinationStream);
+                    }
+                }
+            }
+
+            if (copySubDirs)
+            {
+                // Copy subfolders
+                var folders = SourceDirectory.EnumerateDirectories();
+                foreach (var folder in folders)
+                {
+                    // Create subfolder target path by concatenating folder name to original target UNC
+                    string target = Path.Combine(destDirName, folder.Name);
+                    Directory.CreateDirectory(target);
+
+                    // Recurse into the subfolder
+                    DirectoryCopyStreams(folder.FullName, target, true);
+                }
+            }
+        }
+
         public static void DeleteFile(string filePath)
         {
             FileInfo fileInfo = new FileInfo(filePath);

@@ -105,4 +105,14 @@ namespace Reusable
 
     }
 
+    public class CannotCreateBecauseAlreadyExists : Exception
+    {
+        public object ExistingEntity { get; set; }
+
+        public CannotCreateBecauseAlreadyExists(object ExistingEntity)
+        {
+            this.ExistingEntity = ExistingEntity;
+        }
+    }
+
 }
