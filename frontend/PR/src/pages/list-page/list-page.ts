@@ -3,6 +3,7 @@ import {  NavController } from 'ionic-angular';
 import { UsersPage } from '../users/users-page';
 import { SuppliersPage } from '../suppliers/suppliers-page';
 import { DepartmentPage } from '../department-page/department-page';
+import { AccountPage } from '../account-page/account-page';
 
 @Component({
   selector: 'list-page',
@@ -26,6 +27,6 @@ export class ListPage {
   }
 
   OpenAccount() {
-    this.nav.push(SuppliersPage);
+    this.nav.push(AccountPage);
   }
 }

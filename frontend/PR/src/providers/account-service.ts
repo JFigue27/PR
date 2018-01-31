@@ -3,17 +3,17 @@ import { CRUDFactory } from '../services/CRUDFactory';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
-export class SupplierServiceProvider extends CRUDFactory {
-    
+export class AccountServiceProvider extends CRUDFactory {
+
     constructor(public http: HttpClient) {
-        super({ endPoint: 'User'});   
+        super({ endPoint: 'User' });
         this.http = http;
     }
-    
+
     adapterIn(oEntity: any) {
         console.log('customer provider adapter in', oEntity);
     }
-      
+
     adapterOut(oEntity: any) {
         oEntity.WasAnsweredByCustomer = true;
     }

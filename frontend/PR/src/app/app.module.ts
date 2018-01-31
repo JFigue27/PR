@@ -7,13 +7,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { MyApp } from './app.component';
 import { LoginComponent } from '../components/login/login';
 import { ListComponent } from '../components/list-component/list-component';
-import { FormComponent } from '../components/form-component/form-component';
 import { UsersComponent } from '../components/users/users-component';
-import { UserFormComponent } from '../components/user-form/user-form-component';
 import { SuppliersComponent } from '../components/suppliers-component/suppliers-component';
-import { SupplierFormComponent } from '../components/supplier-form-component/supplier-form-component';
-import { DepartmentComponent } from '../components/department-component/department-component';
 import { AccountComponent } from '../components/account-component/account-component';
+import { DepartmentComponent } from '../components/department-component/department-component';
+import { FormComponent } from '../components/form-component/form-component';
+import { UserFormComponent } from '../components/user-form/user-form-component';
+import { SupplierFormComponent } from '../components/supplier-form-component/supplier-form-component';
+import { DepartmentFormComponent } from '../components/department-form-component/department-form-component';
+import { AccountFormComponent } from '../components/account-form-component/account-form-component';
 
 //MODULES
 import { AttachmentsModule } from '../components/attachments.module';
@@ -36,6 +38,8 @@ import { PRServiceProvider } from '../providers/pr-service';
 import { UtilsServiceProvider } from '../providers/utils-service/utils-service';
 import { UserServiceProvider } from '../providers/user-service';
 import { SupplierServiceProvider } from '../providers/supplier-service';
+import { DepartmentServiceProvider } from '../providers/department-service';
+import { AccountServiceProvider } from '../providers/account-service';
 
 //Angular Material components
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -58,6 +62,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SupplierFormComponent,
     DepartmentComponent,
     AccountComponent,
+    DepartmentFormComponent,
+    AccountFormComponent,
     //Pages
     HomePage,
     ListPage,
@@ -92,6 +98,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SupplierFormComponent,
     DepartmentComponent,
     AccountComponent,
+    DepartmentFormComponent,
+    AccountFormComponent,
     //Pages
     HomePage,
     ListPage,
@@ -107,7 +115,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     UtilsServiceProvider,
     UserServiceProvider,
-    SupplierServiceProvider
+    SupplierServiceProvider,
+    DepartmentServiceProvider,
+    AccountServiceProvider
   ]
 })
 export class AppModule {}
