@@ -24,6 +24,13 @@ namespace BusinessSpecificLogic.Logic
             return dbQuery.Include(e => e.PRLines);
         }
 
+        protected override void OnGetSingle(PurchaseRequest entity)
+        {
+            var ctx = context as POContext;
+
+            StaticDbQueryForList(ctx.PurchaseRequests).FirstOrDefault(e => e.PurchaseRequestKey == entity.PurchaseRequestKey);
+        }
+
         protected override void AdapterOut(params PurchaseRequest[] entities)
         {
             var ctx = context as POContext;
