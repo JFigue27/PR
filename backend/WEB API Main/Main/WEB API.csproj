@@ -208,6 +208,9 @@
     <!-- Start:Generated:Controller -->
     <Compile Include="Controllers\PRLineController.cs" />
     <Compile Include="Controllers\PRNumberController.cs" />
+    <Compile Include="Controllers\SupplierController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\GLAccountController.cs" />
     <Compile Include="Controllers\PurchaseRequestController.cs" />
     <!-- End:Generated:Controller -->
     <Compile Include="Properties\AssemblyInfo.cs" />

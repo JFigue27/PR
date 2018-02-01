@@ -85,6 +85,50 @@
         "manyToMany": [],
         "manyToOne": []
       }
+    },
+    {
+      "name": "Supplier",
+      "fields": {
+        "Value": "string"
+      },
+      "relationships": {
+        "oneToParent": [],
+        "oneToMany": [],
+        "manyToMany": [],
+        "manyToOne": []
+      }
+    },
+    {
+      "name": "Department",
+      "fields": {
+        "Value": "string",
+        "Budget": "currency"
+      },
+      "relationships": {
+        "oneToParent": [
+          "User"
+        ],
+        "oneToMany": [
+          "GLAccount"
+        ],
+        "manyToMany": [],
+        "manyToOne": []
+      }
+    },
+    {
+      "name": "GLAccount",
+      "fields": {
+        "Value": "string",
+        "Description": "textarea"
+      },
+      "relationships": {
+        "oneToParent": [
+          "Department"
+        ],
+        "oneToMany": [],
+        "manyToMany": [],
+        "manyToOne": []
+      }
     }
   ]
 }

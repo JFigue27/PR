@@ -21,6 +21,9 @@ namespace BusinessSpecificLogic.EF
         ///Start:Generated:DbSet<<<
 		public virtual DbSet<PRLine> PRLines { get; set; }
 		public virtual DbSet<PRNumber> PRNumbers { get; set; }
+		public virtual DbSet<Supplier> Suppliers { get; set; }
+		public virtual DbSet<Department> Departments { get; set; }
+		public virtual DbSet<GLAccount> GLAccounts { get; set; }
 		public virtual DbSet<PurchaseRequest> PurchaseRequests { get; set; }
 		///End:Generated:DbSet<<<
 
