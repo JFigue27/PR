@@ -1,20 +1,24 @@
 <div class="card-userForm">
-  <div class="custom-card-header">
+  <div class="account-custom-card-header">
     Accounts
   </div>
 
-  <div class="custom-card-body">
-    <input type="text" placeholder="Value" class="input-personalized input-lg" 
+  <div class="account-custom-card-body">
+    <p class="p-body">Number</p>
+    <input type="text" class="input-personalized account-input-lg" 
     [(ngModel)]="baseEntity.Number" (ngModelChange)="on_input_change();">
-    <input type="text" placeholder="Description" class="input-personalized input-lg" 
-    [(ngModel)]="baseEntity.Description" (ngModelChange)="on_input_change();">
+    
+    <p class="p-body">Description</p>
+    <textarea matInput [(ngModel)]="baseEntity.Description" matAutosizeMinRows="3" 
+    (ngModelChange)="on_input_change();"  matTextareaAutosize matAutosizeMaxRows="10" 
+    class="input-personalized account-input-lg"> </textarea>
   </div>
 
-  <div class="custom-card-footer">
-    <div class="div-footer">
+  <div>
+    <div class="account-custom-card-footer">
       <button ion-button class="btn-close" (click)="close()">CLOSE</button>
       <button ion-button type="submit" class="btn-save" (click)="save()">SAVE</button>
-      <pre style="background: gray; min-height: 20px;">{{ baseEntity | json }}</pre>
+      <!-- <pre style="background: gray; min-height: 20px;">{{ baseEntity | json }}</pre> -->
     </div>
   </div>
 </div>

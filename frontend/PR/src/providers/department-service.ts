@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 export class DepartmentServiceProvider extends CRUDFactory {
 
     constructor(public http: HttpClient) {
-        super({ endPoint: 'User' });
+        super({ endPoint: 'Department' });
         this.http = http;
     }
 

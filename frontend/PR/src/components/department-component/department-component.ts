@@ -3,6 +3,7 @@ import { DepartmentServiceProvider } from '../../providers/department-service';
 import { ModalController } from 'ionic-angular';
 import { UserFormComponent } from '../user-form/user-form-component';
 import { ListController } from '../../services/ListController';
+import { DepartmentFormComponent } from '../department-form-component/department-form-component';
 
 @Component({
   selector: 'department-component',
@@ -18,7 +19,7 @@ export class DepartmentComponent extends ListController implements OnInit  {
   }
 
   addItem() {
-    let profileModal = this.modal.create(UserFormComponent, { oEntityOrId: null });
+    let profileModal = this.modal.create(DepartmentFormComponent, { oEntityOrId: null });
     profileModal.dismiss(false);
     profileModal.present();
     profileModal.onDidDismiss(data => {
@@ -30,7 +31,7 @@ export class DepartmentComponent extends ListController implements OnInit  {
   }
 
   onOpenItem(oEntity) {
-    let profileModal = this.modal.create(UserFormComponent, { oEntityOrId: oEntity.id });
+    let profileModal = this.modal.create(DepartmentFormComponent, { oEntityOrId: oEntity.id });
     profileModal.dismiss(false);
     profileModal.present();
     profileModal.onDidDismiss(data => {

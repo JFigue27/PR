@@ -1,3 +1,15 @@
+------------------------------------------------------------------------------------------------------------------
+WORKFLOW
+- Requisitor creates a new purchase request
+- Department Manager whether approves or denies send a response (at this time a approval is created)
+- MRO updates quotations by completing the purchase request form and send it to the deparment manager
+- Return to Deparment Manager to accept price
+- Purchase
+  - Ricardo Wong or Dennis Breen if exceeds
+  - Send to MRO to start the purchasing.
+
+------------------------------------------------------------------------------------------------------------------
+TODO
   ☐ Notes field
   ☐ Dlls or Mxn
   ☐ Remove "Remove button".
@@ -20,23 +32,6 @@
   ☐ Select suppliers in PR columns.
   ☐ Filter PR List by department, rejected, approved
   ☐ PO Field.
-
-----------------------------------------------------------------------------------------------------------------
-WORKFLOW
-- Requisitor
-- Department Manager
-- MRO (Paty)
-- Return to Deparment Manager to accept price
-- Purchasing
-- Ricardo Wong or Dennis Breen if exceeds
-- Send to MRO to start the purchasing.
-
-------------------------------------------------------------------------------------------------------------------
-Reporte:
-  -Gastos por departamento.
-  -Gastos por cuenta de departamento.
-
-------------------------------------------------------------------------------------------------------------------
 Roles:
   ☐ Administrator
   ☐ User
@@ -48,17 +43,29 @@ Roles:
     -Make quotations.
     -Purchase
 
+------------------------------------------------------------------------------------------------------------------
+Entities 
+  -User
+  -Supplier
+  -PurchaseRequest
+  -Department
+  -GLAccount
+  -Approvals
 
--User
--Supplier
--PurchaseRequest
--Department
--GLAccount
+------------------------------------------------------------------------------------------------------------------
+PurchaseRequest pending
+  -Notes
+  -Supplier currency 1
+  -Supplier currency 2
+  -Supplier currency 3
+  -Supplier selected
 
-
-
-Department structure
--Department name (input text)
--Budget (input text)
--Deparment manager (select from users entity)
--Account list (select multiple from GLAccount entity)
+------------------------------------------------------------------------------------------------------------------
+Approvals
+  -PurchaseRequestKey
+  -UserRequisitor
+  -DateRequested
+  -UserResponse
+  -Status
+  -DateResponse
+  -ResponseDescription

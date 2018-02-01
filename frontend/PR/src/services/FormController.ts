@@ -27,20 +27,20 @@ export abstract class FormController {
 		this.refresh(oEntityOrID);
 	}
 
-	refresh(oEntityOrId: any) {
+	refresh(oEntityOrID: any) {
 		switch (true) {
-			case !oEntityOrId:
+			case !oEntityOrID:
 				this.createInstance();
 				break;
-			case oEntityOrId > 0:
-				this.config.service.loadEntity(oEntityOrId)
+			case oEntityOrID > 0:
+				this.config.service.loadEntity(oEntityOrID)
 					.subscribe(oResult => {
 						this.baseEntity = oResult.Result
 						this.afterLoad();
 					});
 				break;
-			case oEntityOrId instanceof Object || typeof (oEntityOrId) == 'object':
-				this.baseEntity = oEntityOrId;
+			case oEntityOrID instanceof Object || typeof (oEntityOrID) == 'object':
+				this.baseEntity = oEntityOrID;
 				this.afterLoad();
 				break;
 			default:

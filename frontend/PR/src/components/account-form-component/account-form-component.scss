@@ -1,0 +1,65 @@
+.card-listForm {
+    height:100%;
+    border-radius: 5px;
+    background-color: white;
+    overflow-y: auto;
+}
+
+.card-userForm {
+    height: 100%;
+    margin: auto;
+    padding: 2em;
+    border-radius: 5px;
+    background-color: white;
+    overflow-y: auto;
+}
+
+.account-custom-card-header {
+    width: 100%;
+    color: #4c88ff;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    border-bottom: 1px solid #777777;
+}
+
+.account-custom-card-body {
+    height: 75%;
+    border-bottom: 1px solid #d1d1d1;
+}
+.p-body {
+    font-size: 18px;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+.account-input-lg {
+    font-size: 18px;
+    width: 90%;
+    margin-left: 5%;
+}
+
+.account-custom-card-footer {
+    float: right;
+}
+
+.btn-close {
+    background-color: #6060f2;
+    color: white;
+    font-size: 18px;
+    border-radius: 3px;
+    padding: 7px;
+    box-shadow: 1px 2px 5px #bebebe;
+    margin-top: 10px;
+    margin-right: 5px;
+}
+
+.btn-save {
+    background-color: #006e1c;
+    color: white;
+    font-size: 18px;
+    border-radius: 3px;
+    padding: 7px;
+    box-shadow: 1px 2px 5px #bebebe;
+    margin-top: 10px;
+    margin-right: 5px;
+}
