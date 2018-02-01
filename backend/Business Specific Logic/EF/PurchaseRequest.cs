@@ -38,6 +38,11 @@ namespace BusinessSpecificLogic.EF
         public string Supplier1 { get; set; }
         public string Supplier2 { get; set; }
         public string Supplier3 { get; set; }
+        public string SupplierCurrency1 { get; set; }
+        public string SupplierCurrency2 { get; set; }
+        public string SupplierCurrency3 { get; set; }
+        public string Notes { get; set; }
+        public string SupplierSelected { get; set; }
         public int PRNumberKey { get; set; }
         [ForeignKey("PRNumberKey")]
         public PRNumber PRNumber { get; set; }

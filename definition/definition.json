@@ -35,7 +35,12 @@
         "Date General Manager": "datetime?",
         "Supplier 1": "string",
         "Supplier 2": "string",
-        "Supplier 3": "string"
+        "Supplier 3": "string",
+        "Supplier Currency 1": "string",
+        "Supplier Currency 2": "string",
+        "Supplier Currency 3": "string",
+        "Notes": "textarea",
+        "Supplier Selected": "string"
       },
       "relationships": {
         "oneToParent": [
@@ -128,6 +133,26 @@
         "oneToMany": [],
         "manyToMany": [],
         "manyToOne": []
+      }
+    },
+    {
+      "name": "Approval",
+      "fields": {
+        "Date Requested": "datetime",
+        "Status": "string",
+        "Date Response": "datetime",
+        "Response Description": "textarea"
+      },
+      "relationships": {
+        "oneToParent": [
+          "User",
+          "PurchaseRequest"
+        ],
+        "oneToMany": [],
+        "manyToMany": [],
+        "manyToOne": [
+          "User"
+        ]
       }
     }
   ]

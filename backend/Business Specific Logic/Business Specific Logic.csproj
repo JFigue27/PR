@@ -86,6 +86,7 @@
     <Compile Include="EF\Supplier.cs" />
     <Compile Include="EF\Department.cs" />
     <Compile Include="EF\GLAccount.cs" />
+    <Compile Include="EF\Approval.cs" />
     <Compile Include="EF\PurchaseRequest.cs" />
     <!-- End:Generated:EF -->
     <Compile Include="Logic\TokenLogic.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Logic\SupplierLogic.cs" />
     <Compile Include="Logic\DepartmentLogic.cs" />
     <Compile Include="Logic\GLAccountLogic.cs" />
+    <Compile Include="Logic\ApprovalLogic.cs" />
     <Compile Include="Logic\PurchaseRequestLogic.cs" />
     <!-- End:Generated:Logic -->
     <Compile Include="MainContext.cs" />

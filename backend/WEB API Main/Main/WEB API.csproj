@@ -211,6 +211,7 @@
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\GLAccountController.cs" />
+    <Compile Include="Controllers\ApprovalController.cs" />
     <Compile Include="Controllers\PurchaseRequestController.cs" />
     <!-- End:Generated:Controller -->
     <Compile Include="Properties\AssemblyInfo.cs" />

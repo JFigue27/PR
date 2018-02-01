@@ -87,6 +87,7 @@ namespace ReusableWebAPI.App_Start
             kernel.Bind<ISupplierLogic>().To<SupplierLogic>();
             kernel.Bind<IDepartmentLogic>().To<DepartmentLogic>();
             kernel.Bind<IGLAccountLogic>().To<GLAccountLogic>();
+            kernel.Bind<IApprovalLogic>().To<ApprovalLogic>();
             kernel.Bind<IPurchaseRequestLogic>().To<PurchaseRequestLogic>();
             ///End:Generated:DI<<<
             #endregion

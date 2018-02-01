@@ -65,7 +65,7 @@ Approvals
   -PurchaseRequestKey
   -UserRequisitor
   -DateRequested
-  -UserResponse
+  -UserApprover
   -Status
   -DateResponse
   -ResponseDescription
