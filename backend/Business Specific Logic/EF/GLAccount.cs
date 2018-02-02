@@ -24,7 +24,7 @@ namespace BusinessSpecificLogic.EF
         ///Start:Generated:Properties<<<
         public string Value { get; set; }
         public string Description { get; set; }
-        public int DepartmentKey { get; set; }
+        public int? DepartmentKey { get; set; }
         [ForeignKey("DepartmentKey")]
         public Department Department { get; set; }
         ///End:Generated:Properties<<<
