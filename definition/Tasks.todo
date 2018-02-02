@@ -54,11 +54,14 @@ Entities
 
 ------------------------------------------------------------------------------------------------------------------
 PurchaseRequest pending
-  -Notes
-  -Supplier currency 1
-  -Supplier currency 2
-  -Supplier currency 3
-  -Supplier selected
+  -Supplier selected (to know what supplier was chosen)
+
+------------------------------------------------------------------------------------------------------------------
+Supplier
+  -phone?
+  -address?
+  -webpage?
+  -description? (what this suppliers sales)
 
 ------------------------------------------------------------------------------------------------------------------
 Approvals

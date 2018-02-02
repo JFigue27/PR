@@ -2,59 +2,39 @@
 	display: none;
 }
 
-.grid-thead {
-	background-color: hsl(0, 0%, 88%);
-    text-align: center;
-    padding: 1px;
-    font-weight: 700;
-	font-size: 14px;
-}
-
-.btn-link {
-	background-color: white;
-	font-weight: 800;
-	font-size: 16px;
-	height: 100%;
-	width: 100%;
-}
-
-.input-personalized {
-	width: 90%;
+.form-input {
 	background-color: rgba(238, 238, 238, 0.02);
 	border: none;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.36);
 	-webkit-appearance: none;
 	box-shadow:none;
 }
 
-.input-personalized-no-border {
-	width: 100%;
-	border: none;
-	-webkit-appearance: none;
-	-moz-border-radius: 2px;
-	box-shadow:none;
-	border-radius: 2px;
-	text-align: center;
+.border-bottom {
+	width: 80%;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.36);
 }
  
-.grid-tr {
-	border: 1px solid #acacac;
+.form-grid > table {
+	width: 100%;
 }
 
-.grid-tr > td {
-    border: 1px solid #acacac;
-    height: 10px;
+th {
+	background-color: rgb(201, 201, 201); 
+	border: 1px solid rgba(70, 70, 70, 0.45);
+}
+
+td {
+	border: 1px solid rgba(70, 70, 70, 0.45);
 }
 
 .notes {
-	margin-top: 2em;
+	margin-top: 1em;
 	margin-left: 5px;
 }
 .notes > p {
 	font-weight: bold;
 	font-size: 18px;
 }
-
 
 .footer-save {
     float: right;

@@ -6,19 +6,28 @@
   <div class="account-custom-card-body">
     <p class="p-body">Number</p>
     <input type="text" class="input-personalized account-input-lg" 
-    [(ngModel)]="baseEntity.Number" (ngModelChange)="on_input_change();">
+    [(ngModel)]="baseEntity.Value" (ngModelChange)="on_input_change();">
     
     <p class="p-body">Description</p>
-    <textarea matInput [(ngModel)]="baseEntity.Description" matAutosizeMinRows="3" 
+    <textarea matInput [(ngModel)]="baseEntity.Description" matAutosizeMinRows="1" 
     (ngModelChange)="on_input_change();"  matTextareaAutosize matAutosizeMaxRows="10" 
     class="input-personalized account-input-lg"> </textarea>
+
+    <p class="p-body">Description</p>
+    <mat-select [(ngModel)]="baseEntity.DepartmentKey" placeholder="Select.." class="form-input input-md border-bottom"
+     (ngModelChange)="on_input_change(item);">
+      <mat-option *ngFor="let department of departments" [value]="department.value">
+        {{ department.value }}
+      </mat-option>
+    </mat-select>
+
   </div>
 
   <div>
     <div class="account-custom-card-footer">
       <button ion-button class="btn-close" (click)="close()">CLOSE</button>
       <button ion-button type="submit" class="btn-save" (click)="save()">SAVE</button>
-      <!-- <pre style="background: gray; min-height: 20px;">{{ baseEntity | json }}</pre> -->
+      <pre style="background: gray; min-height: 20px;">{{ baseEntity | json }}</pre>
     </div>
   </div>
 </div>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DepartmentServiceProvider } from '../../providers/department-service';
 import { ModalController } from 'ionic-angular';
-import { UserFormComponent } from '../user-form/user-form-component';
 import { ListController } from '../../services/ListController';
 import { DepartmentFormComponent } from '../department-form-component/department-form-component';
 

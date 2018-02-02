@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 export class AccountServiceProvider extends CRUDFactory {
 
     constructor(public http: HttpClient) {
-        super({ endPoint: 'User' });
+        super({ endPoint: 'GLAccount' });
         this.http = http;
     }
 
