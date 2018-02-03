@@ -11,7 +11,6 @@
       <ion-input type="text" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.UserName" id="UserName" placeholder="Username"
         required autofocus></ion-input> 
     </ion-item>
-
     <p class="p-role">Role</p>
     <select (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.Role" class="select-role">
       <option>Administrator</option>
@@ -20,24 +19,7 @@
       <option>RH</option>
       <option>Finance</option>
     </select>
-
-    <div class="card-password">
-      <!-- in case of existing entity -->
-      <ion-label *ngIf="baseEntity.UserKey > 0">Update password &nbsp;&nbsp;
-        <ion-checkbox [(ngModel)]="baseEntity.ChangePassword"></ion-checkbox>
-      </ion-label>
-
-      <div *ngIf="baseEntity.UserKey == 0 || baseEntity.ChangePassword">
-        <ion-item class="item">
-          <ion-input type="password" placeholder="Password" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.Password" id="password"
-            required></ion-input>
-        </ion-item>
-        <ion-item class="item">
-          <ion-input type="password" placeholder="Confirm password" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.ConfirmPassword"
-            required></ion-input>
-        </ion-item>
-      </div>
-    </div>
+ 
     <div class="error-message" *ngIf="errorMessage == ''">
       <label>hola {{ errorMessage }}</label>
     </div>

@@ -18,14 +18,16 @@ export class SuppliersComponent extends ListController implements OnInit {
     this.load();
  }
 
-  addsupplier() {
-    let profileModal = this.modal.create(SupplierFormComponent, {oEntityOrId: null});
+  addItem() {
+    let profileModal = this.modal.create(SupplierFormComponent, { oEntityOrId: null });
     profileModal.dismiss(false);
     profileModal.present();
     profileModal.onDidDismiss(data => {
       this.load();
     });
   }
+
+
 
   afterLoad() {
   }

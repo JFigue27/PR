@@ -3,17 +3,21 @@
     <ion-icon name="ios-contact"></ion-icon> Suppliers
   </h1>
 
-  <div class="div-users">
+  <ion-card class="card-items">
+    <ion-list>
+      <div ion-row class="item" *ngFor="let item of baseList">
+        <div (click)="openItem(item)" col-11 col-md-11 class="item-info">
+          <ion-label>{{ item.Value }}</ion-label>
+        </div>
+        <div (click)="removeItem(item)" col-1 col-md-1 class="item-delete">
+          <div>
+            <ion-icon class="icon-delete" name="trash"></ion-icon>
+          </div>
+        </div>
+      </div>
+    </ion-list>
+  </ion-card>
 
-    <div class="single-user" *ngFor="let user of baseList">
-      <div (click)="openItem(user)">{{ user.Value}}</div>
-      <button (click)="removeItem(user)" (ngModel)="user">
-        <ion-icon name="trash" large></ion-icon>
-      </button>
-    </div>
-
-  </div>
-
-  <button ion-button (click)="addUser()" class="btn-add-item">+</button>
+  <button ion-button (click)="addItem()" class="btn-add-item">+</button>
 
 </section>
