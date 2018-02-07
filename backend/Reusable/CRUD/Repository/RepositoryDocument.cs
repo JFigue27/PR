@@ -206,10 +206,10 @@ namespace Reusable
         public override void Add(params T[] items)
         {
             DbSet<T> dbSet = context.Set<T>();
-            foreach (T item in items)
-            {
-                dbSet.Attach(item);
-            }
+            //foreach (T item in items)
+            //{
+            //    dbSet.Attach(item);
+            //}
 
             //foreach (DbEntityEntry<BaseDocument> entry in context.ChangeTracker.Entries<BaseDocument>())
             //{
