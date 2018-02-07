@@ -22,7 +22,6 @@ export class ListComponent extends ListController implements OnInit {
       if (viewCtrl.name == "ListPage") {
         this.load();
       }
-      console.log(viewCtrl);
     });
   }
 

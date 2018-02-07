@@ -151,7 +151,12 @@
                                         Department
                                 </ion-col>
                                 <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
-                                        <input type="text" class="form-input input-md border-bottom" [(ngModel)]="baseEntity.Department" />
+                                    <mat-select [(ngModel)]="baseEntity.Department" placeholder="Select.." 
+                                        (ngModelChange)="on_input_change(item);" class="border-bottom" style="width:80%;">
+                                        <mat-option *ngFor="let department of departments" [value]="department.id">
+                                            {{ department.Value }}
+                                        </mat-option>
+                                    </mat-select>
                                 </ion-col>
                                 <ion-col col-3 col-sm-3 col-md-3 col-lg-3 col-lg-3>
                                         Date
@@ -166,13 +171,12 @@
                                         Department manager
                                 </ion-col>
                                 <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
-                                        <mat-select [(ngModel)]="baseEntity.DepartmentManager" placeholder="Select.."
-                                        class="form-input input-md border-bottom" style="width:90%;" (ngModelChange)="on_input_change(item);">
-                                            <mat-option *ngFor="let manager of managers" [value]="manager.value">
-                                                {{ manager.value }}
-                                            </mat-option>
-                                        </mat-select>
-                                        <!-- <input type="text" class="form-input input-md border-bottom" [(ngModel)]="baseEntity.DepartmentManager" /> -->
+                                    <mat-select [(ngModel)]="baseEntity.DepartmentManager" placeholder="Select.." 
+                                    (ngModelChange)="on_input_change(item);" class="border-bottom" style="width:80%;">
+                                        <mat-option *ngFor="let user of users" [value]="user.id">
+                                            {{ user.Value }}
+                                        </mat-option>
+                                    </mat-select>
                                 </ion-col>
                             </ion-row>
                         </ion-grid>
@@ -206,7 +210,12 @@
                                         Account No.
                                     </ion-col>
                                     <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
-                                        <input type="text" class="form-input input-md border-bottom" [(ngModel)]="baseEntity.AccountNo" />
+                                        <mat-select [(ngModel)]="baseEntity.AccountNo" placeholder="Select.." 
+                                        (ngModelChange)="on_input_change(item);" class="border-bottom" style="width:80%;">
+                                            <mat-option *ngFor="let account of accounts" [value]="account.id">
+                                                {{ account.Value }}
+                                            </mat-option>
+                                        </mat-select>
                                 </ion-col>
                             </ion-row>
                         </ion-grid>

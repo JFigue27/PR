@@ -5,21 +5,12 @@
 
   <div class="department-custom-card-body">
     <p class="p-body">Name</p>
-    <input type="text" class="input-personalized department-input-lg"
+    <input type="text" class="input-personalized department-input-lg" [(ngModel)]="baseEntity.Value"
      (ngModelChange)="on_input_change();">
 
     <p class="p-body">Budget</p>
-    <input type="text" class="input-personalized department-input-lg"
+    <input type="text" class="input-personalized department-input-lg" [(ngModel)]="baseEntity.Budget"
      (ngModelChange)="on_input_change();">
-
-    <div class="div-select-role">
-      <p>Users allowed</p>
-      <mat-select placeholder="Select.."  (ngModelChange)="on_input_change(item);">
-        <mat-option *ngFor="let user of users" [value]="user.value">
-          {{ user.value }}
-        </mat-option>
-      </mat-select>
-    </div>
 
   </div>
 
@@ -27,7 +18,6 @@
     <div class="department-custom-card-footer">
       <button ion-button class="btn-close" (click)="close()">CLOSE</button>
       <button ion-button type="submit" class="btn-save" (click)="save()">SAVE</button>
-      <pre style="background: gray; min-height: 20px;">{{ baseEntity | json }}</pre>
     </div>
   </div>
 </div>

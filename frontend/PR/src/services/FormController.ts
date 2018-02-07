@@ -53,7 +53,6 @@ export abstract class FormController {
 	}
 
 	save() {
-		console.log('ENTRE');
 		if (this.baseEntity.editMode) {
 			return this.config.service.save(this.baseEntity).subscribe(oEntity => {
 				this.baseEntity = oEntity;

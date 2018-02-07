@@ -13,11 +13,11 @@
     (ngModelChange)="on_input_change();"  matTextareaAutosize matAutosizeMaxRows="10" 
     class="input-personalized account-input-lg"> </textarea>
 
-    <p class="p-body">Description</p>
-    <mat-select [(ngModel)]="baseEntity.DepartmentKey" placeholder="Select.." class="form-input input-md border-bottom"
-     (ngModelChange)="on_input_change(item);">
-      <mat-option *ngFor="let department of departments" [value]="department.value">
-        {{ department.value }}
+    <p class="p-body">Departments</p>
+    <mat-select [(ngModel)]="baseEntity.DepartmentKey" placeholder="Select.." style="width:90%;margin-left:2em;"
+     (ngModelChange)="on_input_change(item);" class="border-bottom">
+      <mat-option *ngFor="let department of departments" [value]="department.id">
+        {{ department.Value }}
       </mat-option>
     </mat-select>
 
@@ -27,7 +27,7 @@
     <div class="account-custom-card-footer">
       <button ion-button class="btn-close" (click)="close()">CLOSE</button>
       <button ion-button type="submit" class="btn-save" (click)="save()">SAVE</button>
-      <pre style="background: gray; min-height: 20px;">{{ baseEntity | json }}</pre>
+      <!-- <pre style="background: gray; min-height: 20px;">{{ baseEntity | json }}</pre> -->
     </div>
   </div>
 </div>

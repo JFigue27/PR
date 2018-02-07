@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavParams } from 'ionic-angular';
 import { FormController } from '../../services/FormController';
 import { PRServiceProvider } from '../../providers/pr-service';
+import { DepartmentServiceProvider } from '../../providers/department-service';
+import { AccountServiceProvider } from '../../providers/account-service';
 
 
 @Component({
@@ -9,23 +11,31 @@ import { PRServiceProvider } from '../../providers/pr-service';
   templateUrl: 'form-component.html'
 })
 export class FormComponent extends FormController implements OnInit {
-  currencies = [
-    { value: 'Dlls', viewValue: 'Dlls' },
-    { value: 'Mxn', viewValue: 'Mxn' }
-  ];
+  accounts = [];
+  departments = [];
+  currencies = [ 
+                  { value: 'Dlls', viewValue: 'Dlls' },
+                  { value: 'Mxn', viewValue: 'Mxn' }
+              ];
 
-  managers = [
-    { value: 'Verito Chico', viewValue: 'Verito Chico' },
-    { value: 'Dennis Breen', viewValue: 'Dennis Breen' }
-  ];
-
-  constructor( public listService:PRServiceProvider, private params: NavParams) {
+  constructor(
+              public listService:PRServiceProvider,
+              private params: NavParams,
+              private department: DepartmentServiceProvider,
+              private account: AccountServiceProvider
+            ) {
     super( { service: listService } );
   }
 
-  ngOnInit() {
-    
+  ngOnInit() {    
     this.load(this.params.get('oEntityOrId'));
+
+    this.department.loadEntities().subscribe(oResult => {
+      this.departments = oResult.Result;
+    });
+    this.account.loadEntities().subscribe(oResult => {
+      this.accounts = oResult.Result;
+    });
   }
 
   afterLoad() {

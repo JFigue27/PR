@@ -87,7 +87,6 @@ export abstract class ListController {
     }
 
     setFilterOptions() {
-        console.log('ListController > setFilterOptions');
         // this.load();
     }
 

@@ -56,14 +56,14 @@ export abstract class CRUDFactory {
         return null;
     }
 
-    getPage(limit, pageNumber, filters='?') {
+    getPage(limit, pageNumber, params='?') {
         return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/getPage/' + limit +
-         '/' + pageNumber + filters + '&noCache='+Number(new Date()), this.addAuthorization())
+            '/' + pageNumber + params + '&noCache='+Number(new Date()), this.addAuthorization())
         .map(response => this.extractData(response), this)
         .catch(this.generalError);
     }
 
-    loadEntities(params?) {
+    loadEntities(params?) { 
         return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint, this.addAuthorization())
         .map(response => this.extractData(response), this)
         .catch(this.generalError);

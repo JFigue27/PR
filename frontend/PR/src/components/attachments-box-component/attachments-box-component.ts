@@ -35,10 +35,7 @@ export class AttachmentsBoxComponent implements OnChanges {
    
 
   ngOnChanges(changes: SimpleChanges): void {
-    // console.log('On changes');
-    // console.log(changes);
     // if(changes.ownerEntity.firstChange == false){
-    //   console.log(this.ownerEntity);
     //   this.ownerEntity[this.api_name]={};
     //   this.ownerEntity[this.api_name].uploadFiles = function():Observable<any> {
     //     if (this.uploader.getNotUploadedItems().length > 0) {

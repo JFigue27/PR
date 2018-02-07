@@ -20,7 +20,7 @@ export class LoginService {
 
     private extractData(res: Response) {
         const body = res;
-        console.log(body);
+        // console.log(body);
         return body;
     }
 

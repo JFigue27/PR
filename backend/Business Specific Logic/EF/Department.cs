@@ -24,7 +24,7 @@ namespace BusinessSpecificLogic.EF
         ///Start:Generated:Properties<<<
         public string Value { get; set; }
         public decimal Budget { get; set; }
-        public int ManagerKey { get; set; }
+        public int? ManagerKey { get; set; }
         [ForeignKey("ManagerKey")]
         public User Manager { get; set; }
         public ICollection<GLAccount> GLAccounts { get; set; }

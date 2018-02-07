@@ -6,7 +6,6 @@ import * as moment from 'moment';
 export class UtilsServiceProvider {
 
   constructor(public http: HttpClient) {
-    console.log('Hello UtilsServiceProvider Provider');
   }
 
   toJsDate(sISO_8601: string) {

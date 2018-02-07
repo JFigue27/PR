@@ -11,7 +11,6 @@ export class DepartmentServiceProvider extends CRUDFactory {
     }
 
     adapterIn(oEntity: any) {
-        console.log('customer provider adapter in', oEntity);
     }
 
     adapterOut(oEntity: any) {
