@@ -145,7 +145,7 @@ namespace Reusable
                 }
             }
 
-            list = dbQuery.ToList();
+            list = dbQuery.AsNoTracking().ToList();
 
             //Removing Recurivity
             string navigationPropertyName = typeof(P).Name;

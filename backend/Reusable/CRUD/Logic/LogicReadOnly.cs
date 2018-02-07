@@ -59,7 +59,7 @@ namespace Reusable
             try
             {
                 //repository.ByUserId = LoggedUser.UserID;
-                entities = StaticDbQueryForList(repository.GetAll().AsQueryable());
+                entities = StaticDbQueryForList(repository.GetAll().AsQueryable()).AsNoTracking();
 
                 AdapterOut(entities.ToArray());
                 return response.Success(entities);
@@ -114,11 +114,12 @@ namespace Reusable
                 //repository.ByUserId = LoggedUser.UserID;
 
                 //Apply Database Filtering and Fetch
-                entities = StaticDbQueryForList(repository.GetList(orderby, null, database_wheres).AsQueryable());
-                
+                entities = StaticDbQueryForList(repository.GetList(orderby, null, database_wheres).AsQueryable()).AsNoTracking().ToList();
+
                 //Apply Roles Filtering
 
                 //Applying Non-Database Wheres
+
                 resultset = entities.AsQueryable();
                 foreach (var where in wheres)
                 {
@@ -131,12 +132,11 @@ namespace Reusable
                 #region Apply General Search Filter
 
                 bool PopulateForSearchEqualsAdapterOut = false;
+                PopulateForSearchEqualsAdapterOut = PopulateForSearch(resultset.ToArray());
 
                 HashSet<Entity> filteredResultSet = new HashSet<Entity>();
                 if (!string.IsNullOrWhiteSpace(filterGeneral))
                 {
-                    PopulateForSearchEqualsAdapterOut = PopulateForSearch(resultset.ToArray());
-
                     string[] arrFilterGeneral = filterGeneral.ToLower().Split(' ');
 
                     var searchableProps = typeof(Entity).GetProperties().Where(prop => new[] { "String" }.Contains(prop.PropertyType.Name));
@@ -184,14 +184,14 @@ namespace Reusable
                 filterResponse.total_filtered_items = filteredResultSet.Count();
 
                 #region Pagination
-                IQueryable<Entity> afterPaginate;
+                IEnumerable<Entity> afterPaginate;
                 if (perPage != 0)
                 {
-                    afterPaginate = filteredResultSet.Skip((page - 1) * perPage).Take(perPage).AsQueryable();
+                    afterPaginate = filteredResultSet.Skip((page - 1) * perPage).Take(perPage);
                 }
                 else
                 {
-                    afterPaginate = filteredResultSet.AsQueryable();
+                    afterPaginate = filteredResultSet;
                 }
                 #endregion
 
@@ -238,7 +238,7 @@ namespace Reusable
             try
             {
                 //repository.ByUserId = LoggedUser.UserID;
-                entities = StaticDbQueryForList(repository.GetList(orderby, null, wheres).AsQueryable());
+                entities = StaticDbQueryForList(repository.GetList(orderby, null, wheres).AsQueryable()).AsNoTracking();
 
                 AdapterOut(entities.ToArray());
                 return response.Success(entities);

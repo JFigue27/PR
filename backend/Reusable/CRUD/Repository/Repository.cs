@@ -70,10 +70,10 @@ namespace Reusable
         {
             if (entity != null)
             {
-                foreach (var item in context.ChangeTracker.Entries())
-                {
-                    context.Entry(item.Entity).State = EntityState.Detached;
-                }
+                //foreach (var item in context.ChangeTracker.Entries())
+                //{
+                //    context.Entry(item.Entity).State = EntityState.Detached;
+                //}
 
                 context.Entry(entity).State = EntityState.Deleted;
                 context.SaveChanges();

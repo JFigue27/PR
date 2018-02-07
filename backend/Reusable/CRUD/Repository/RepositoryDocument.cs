@@ -211,10 +211,10 @@ namespace Reusable
                 dbSet.Attach(item);
             }
 
-            foreach (DbEntityEntry<BaseDocument> entry in context.ChangeTracker.Entries<BaseDocument>())
-            {
-                context.Entry(entry.Entity).State = EntityState.Unchanged;
-            }
+            //foreach (DbEntityEntry<BaseDocument> entry in context.ChangeTracker.Entries<BaseDocument>())
+            //{
+            //    context.Entry(entry.Entity).State = EntityState.Unchanged;
+            //}
 
             foreach (T item in items)
             {
@@ -225,14 +225,14 @@ namespace Reusable
 
             foreach (T document in items)
             {
-                document.InfoTrack = new Track();
-                //(entity as Trackable).InfoTrack = trackRepository.GetSingle(context, t => t.Entity_ID == entity.ID && t.Entity_Kind == entity.AAA_EntityName);
-                document.InfoTrack.Date_CreatedOn = DateTimeOffset.Now;
-                document.InfoTrack.Entity_ID = document.id;
-                document.InfoTrack.Entity_Kind = document.AAA_EntityName;
-                document.InfoTrack.User_CreatedByKey = ByUserId;
-                document.InfoTrack.User_AssignedToKey = ByUserId;
-
+                document.InfoTrack = new Track()
+                {
+                    Date_CreatedOn = DateTimeOffset.Now,
+                    Entity_ID = document.id,
+                    Entity_Kind = document.AAA_EntityName,
+                    User_CreatedByKey = ByUserId,
+                    User_AssignedToKey = ByUserId
+                };
                 context.Entry(document.InfoTrack).State = EntityState.Added;
             }
             context.SaveChanges();
@@ -240,36 +240,12 @@ namespace Reusable
 
         public override void Delete(int id)
         {
-            DbSet<T> tSet = context.Set<T>();
-            T document = tSet.Find(id);
-
-            if (document != null)
-            {
-                Deactivate(id);
-                context.SaveChanges();
-            }
-            else
-            {
-                throw new Exception("Entity not found.");
-            }
+            Deactivate(id);
         }
 
         public override void Delete(T document)
         {
-            if (document != null)
-            {
-                foreach (var item in context.ChangeTracker.Entries())
-                {
-                    context.Entry(item.Entity).State = EntityState.Detached;
-                }
-
-                Deactivate(document);
-                context.SaveChanges();
-            }
-            else
-            {
-                throw new Exception("Entity not found.");
-            }
+            Deactivate(document);
         }
 
         public override void Update(T document) //Update only parent Entity, not children
@@ -372,14 +348,14 @@ namespace Reusable
                     {
                         context.Entry(document).State = EntityState.Added;
 
-                        document.InfoTrack = new Track();
-                        //(entity as Trackable).InfoTrack = trackRepository.GetSingle(context, t => t.Entity_ID == entity.ID && t.Entity_Kind == entity.AAA_EntityName);
-                        document.InfoTrack.Date_CreatedOn = DateTimeOffset.Now;
-                        document.InfoTrack.Entity_ID = document.id;
-                        document.InfoTrack.Entity_Kind = document.AAA_EntityName;
-                        document.InfoTrack.User_CreatedByKey = ByUserId;
-                        document.InfoTrack.User_AssignedToKey = ByUserId;
-
+                        document.InfoTrack = new Track()
+                        {
+                            Date_CreatedOn = DateTimeOffset.Now,
+                            Entity_ID = document.id,
+                            Entity_Kind = document.AAA_EntityName,
+                            User_CreatedByKey = ByUserId,
+                            User_AssignedToKey = ByUserId
+                        };
                         context.Entry(document.InfoTrack).State = EntityState.Added;
                     }
 
@@ -414,14 +390,14 @@ namespace Reusable
                     {
                         context.Entry(document).State = EntityState.Added;
 
-                        document.InfoTrack = new Track();
-                        //(entity as Trackable).InfoTrack = trackRepository.GetSingle(context, t => t.Entity_ID == entity.ID && t.Entity_Kind == entity.AAA_EntityName);
-                        document.InfoTrack.Date_CreatedOn = DateTimeOffset.Now;
-                        document.InfoTrack.Entity_ID = document.id;
-                        document.InfoTrack.Entity_Kind = document.AAA_EntityName;
-                        document.InfoTrack.User_CreatedByKey = ByUserId;
-                        document.InfoTrack.User_AssignedToKey = ByUserId;
-
+                        document.InfoTrack = new Track()
+                        {
+                            Date_CreatedOn = DateTimeOffset.Now,
+                            Entity_ID = document.id,
+                            Entity_Kind = document.AAA_EntityName,
+                            User_CreatedByKey = ByUserId,
+                            User_AssignedToKey = ByUserId
+                        };
                         context.Entry(document.InfoTrack).State = EntityState.Added;
                     }
 
@@ -768,10 +744,10 @@ namespace Reusable
                     throw new KnownError("Record was already Finalized.");
                 }
 
-                foreach (DbEntityEntry<BaseEntity> entry in context.ChangeTracker.Entries<BaseEntity>())
-                {
-                    context.Entry(entry.Entity).State = EntityState.Detached;
-                }
+                //foreach (DbEntityEntry<BaseEntity> entry in context.ChangeTracker.Entries<BaseEntity>())
+                //{
+                //    context.Entry(entry.Entity).State = EntityState.Detached;
+                //}
 
                 document.document_status = "FINALIZED";
                 document.is_locked = true;

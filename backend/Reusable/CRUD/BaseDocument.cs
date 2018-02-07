@@ -10,7 +10,7 @@ namespace Reusable
             CreatedAt = DateTimeOffset.Now;
         }
 
-        [NotMapped]
+        //[NotMapped]
         public Track InfoTrack { get; set; }
 
         virtual public bool sys_active { get; set; }

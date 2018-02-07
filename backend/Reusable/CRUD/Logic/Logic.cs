@@ -203,6 +203,8 @@ namespace Reusable
                         onAfterSaving(context, entity, null, OPERATION_MODE.UPDATE);
 
                         transaction.Commit();
+
+                        AdapterOut(entity);
                     }
                     catch (KnownError error)
                     {
