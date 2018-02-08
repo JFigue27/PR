@@ -1070,7 +1070,7 @@ angular.module('Main').service('validatorService', function() {
         var _createEntity = function() {
             var deferred = $q.defer();
 
-            $http.post(appConfig.API_URL + mainEntity.entityName + '/Create')
+            $http.get(appConfig.API_URL + mainEntity.entityName + '/Create')
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         var backendResponse = response.data;
