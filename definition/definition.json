@@ -50,6 +50,27 @@
         "manyToMany": [],
         "manyToOne": []
       }
+    },
+    {
+      "name": "Approval",
+      "fields": {
+        "Date Requested": "datetime",
+        "Status": "string",
+        "Date Response": "datetime",
+        "Response Description": "textarea",
+        "Request Description": "textarea"
+      },
+      "relationships": {
+        "oneToParent": [
+          "User",
+          "PurchaseRequest"
+        ],
+        "oneToMany": [],
+        "manyToMany": [],
+        "manyToOne": [
+          "User"
+        ]
+      }
     }
   ],
   "entities": [
@@ -133,26 +154,6 @@
         "oneToMany": [],
         "manyToMany": [],
         "manyToOne": []
-      }
-    },
-    {
-      "name": "Approval",
-      "fields": {
-        "Date Requested": "datetime",
-        "Status": "string",
-        "Date Response": "datetime",
-        "Response Description": "textarea"
-      },
-      "relationships": {
-        "oneToParent": [
-          "User",
-          "PurchaseRequest"
-        ],
-        "oneToMany": [],
-        "manyToMany": [],
-        "manyToOne": [
-          "User"
-        ]
       }
     }
   ]

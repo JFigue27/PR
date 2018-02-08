@@ -6,11 +6,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BusinessSpecificLogic.EF
 {
     [Table("Approval")]
-    public class Approval : BaseEntity
+    public class Approval : BaseDocument
     {
         public Approval()
         {
             ///Start:Generated:Constructor<<<
+            sys_active = true;
 			///End:Generated:Constructor<<<
 
         }
@@ -25,6 +26,7 @@ namespace BusinessSpecificLogic.EF
         public string Status { get; set; }
         public DateTimeOffset DateResponse { get; set; }
         public string ResponseDescription { get; set; }
+        public string RequestDescription { get; set; }
         public int PurchaseRequestKey { get; set; }
         [ForeignKey("PurchaseRequestKey")]
         public PurchaseRequest PurchaseRequest { get; set; }
