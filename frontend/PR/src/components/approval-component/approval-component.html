@@ -1,0 +1,17 @@
+<section class="section-users">
+  <h1>
+    <ion-icon name="ios-contact"></ion-icon> Approvals
+  </h1>
+
+    <ion-card class="card-items">
+      <ion-list>
+        <div ion-row class="item" *ngFor="let item of baseList">
+          <div (click)="openItem(item)" col-11 col-md-11 class="item-info">
+            <ion-label>{{ item.Value }}</ion-label>
+          </div>
+        </div>
+      </ion-list>
+    </ion-card>
+  <button ion-button (click)="addItem()" class="btn-add-item">+</button>
+
+</section>

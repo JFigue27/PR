@@ -1,0 +1,54 @@
+<div class="div-approval">
+  <div class="custom-card-header">
+    Approval requisition
+  </div>
+
+  <p>User requisitor</p> 
+  <mat-select [(ngModel)]="baseEntity.UserRequisitorKey"
+  (ngModelChange)="on_input_change(item);" class="border-bottom" style="width:80%;">
+    <mat-option *ngFor="let user of users" [value]="user.id">
+      {{ user.Value }}
+    </mat-option>
+  </mat-select>
+
+  <p>Date requested</p>
+  <input [matDatepicker]="myDatepicker" (click)="myDatepicker.open()"
+    (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.ConvertedDateRequested" style="width:80%;">
+  <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
+  <mat-datepicker #myDatepicker></mat-datepicker>
+
+  <p>User approver</p>
+  <mat-select [(ngModel)]="baseEntity.UserApproverKey" (ngModelChange)="on_input_change(item);" 
+  class="border-bottom" style="width:80%;">
+    <mat-option *ngFor="let user of users" [value]="user.id">
+      {{ user.Value }}
+    </mat-option>
+  </mat-select>
+
+  <p>Status</p>
+  <input type="text" (ngModelChange)="on_input_change(item);" [(ngModel)]="baseEntity.Status" style="width:80%;">
+
+  <!-- <p>Annotations</p>
+  <input type="text" (ngModelChange)="on_input_change(item);" [(ngModel)]="baseEntity.ResponseDescription"> -->
+  <pre style="background: gray; min-height: 20px;">{{ baseEntity | json }}</pre>
+
+  <button type="submit" (click)="save()" class="btn-save">send</button>
+</div>
+
+<!-- 
+  -PurchaseRequestKey
+  -UserRequisitor
+  -DateRequested
+  -UserApprover
+  -Status
+  -DateResponse 
+  -ResponseDescription 
+
+
+   DateRequested": "datetime",
+   "Status": "string",
+   "DateResponse": "datetime",
+   "ResponseDescription": "textarea" },
+  "relationships": { "oneToParent": [ "User", "PurchaseRequest" ], "oneToMany": [], "manyToMany":
+  [], "manyToOne": [ "User" ]
+-->

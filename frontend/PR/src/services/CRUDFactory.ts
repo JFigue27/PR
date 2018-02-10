@@ -133,6 +133,13 @@ export abstract class CRUDFactory {
         return Observable.throw(error.statusText);
     }
 
+    getSingleWhere(property, value ){
+        return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/GetSingleWhere/' + property + '/' + value
+            + '?noCache=' + Number(new Date()) , this.addAuthorization())
+            .map(response => this.extractData(response), this)
+            .catch(this.generalError);
+    }
+
     abstract adapterIn(oEntity:any);
 
     abstract adapterOut(oEntity:any);
