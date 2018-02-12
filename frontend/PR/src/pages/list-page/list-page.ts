@@ -4,6 +4,7 @@ import { UsersPage } from '../users/users-page';
 import { SuppliersPage } from '../suppliers/suppliers-page';
 import { DepartmentPage } from '../department-page/department-page';
 import { AccountPage } from '../account-page/account-page';
+import { ApprovalPage } from '../approval-page/approval-page';
 
 @Component({
   selector: 'list-page',
@@ -28,5 +29,9 @@ export class ListPage {
 
   OpenAccount() {
     this.nav.push(AccountPage);
+  }
+
+  OpenApproval() {
+    this.nav.push(ApprovalPage);
   }
 }

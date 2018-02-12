@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { LoginComponent } from '../components/login/login';
 import { ListComponent } from '../components/list-component/list-component';
 import { UsersComponent } from '../components/users/users-component';
+import { ApprovalComponent } from '../components/approval-component/approval-component';
 import { SuppliersComponent } from '../components/suppliers-component/suppliers-component';
 import { AccountComponent } from '../components/account-component/account-component';
 import { DepartmentComponent } from '../components/department-component/department-component';
@@ -16,6 +17,7 @@ import { UserFormComponent } from '../components/user-form/user-form-component';
 import { SupplierFormComponent } from '../components/supplier-form-component/supplier-form-component';
 import { DepartmentFormComponent } from '../components/department-form-component/department-form-component';
 import { AccountFormComponent } from '../components/account-form-component/account-form-component';
+import { ApprovalFormComponent } from '../components/approval-form-component/approval-form-component';
 
 //MODULES
 import { AttachmentsModule } from '../components/attachments.module';
@@ -28,6 +30,7 @@ import { UsersPage } from '../pages/users/users-page';
 import { SuppliersPage } from '../pages/suppliers/suppliers-page';
 import { AccountPage } from '../pages/account-page/account-page';
 import { DepartmentPage } from '../pages/department-page/department-page';
+import { ApprovalPage } from '../pages/approval-page/approval-page';
 
 //SERVICES
 import { LoginService } from '../services/login.service';
@@ -40,13 +43,13 @@ import { UserServiceProvider } from '../providers/user-service';
 import { SupplierServiceProvider } from '../providers/supplier-service';
 import { DepartmentServiceProvider } from '../providers/department-service';
 import { AccountServiceProvider } from '../providers/account-service';
+import { ApprovalServiceProvider } from '../providers/approval-service';
 
 //Angular Material components
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material';
+import { MatNativeDateModule, MatDatepickerModule } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
 
 @NgModule({
@@ -64,6 +67,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AccountComponent,
     DepartmentFormComponent,
     AccountFormComponent,
+    ApprovalComponent,
+    ApprovalFormComponent,
     //Pages
     HomePage,
     ListPage,
@@ -71,7 +76,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UsersPage,
     DepartmentPage,
     AccountPage,
-    SuppliersPage
+    SuppliersPage,
+    ApprovalPage
   ],
   imports: [
     AttachmentsModule,
@@ -100,6 +106,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AccountComponent,
     DepartmentFormComponent,
     AccountFormComponent,
+    ApprovalComponent,
+    ApprovalFormComponent,
     //Pages
     HomePage,
     ListPage,
@@ -107,7 +115,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UsersPage,
     SuppliersPage,
     DepartmentPage,
-    AccountPage
+    AccountPage,
+    ApprovalPage
   ],
   providers: [
     LoginService,
@@ -117,7 +126,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UserServiceProvider,
     SupplierServiceProvider,
     DepartmentServiceProvider,
-    AccountServiceProvider
+    AccountServiceProvider,
+    ApprovalServiceProvider
   ]
 })
 export class AppModule {}
