@@ -3,18 +3,22 @@ import { Nav, Platform, ModalController } from 'ionic-angular';
 import { HomePage } from '../pages/home/home';
 import { LoginComponent } from '../components/login/login';
 import { ListPage } from '../pages/list-page/list-page';
+import { UserServiceProvider } from '../providers/user-service';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
 
-  LoggedUser: string;
+  CurrentUser: string;
   @ViewChild(Nav) nav: Nav;
   rootPage: any = ListPage;
   pages: Array<{ title: string, component: any }>;
 
-  constructor( public platform: Platform, public modal: ModalController) {
+  constructor( public platform: Platform,
+              public modal: ModalController,
+              public userService: UserServiceProvider
+  ) {
 
     this.initializeApp();
     this.pages = [
@@ -24,13 +28,14 @@ export class MyApp {
   }
 
   initializeApp() {
-    if (!localStorage.getItem('access_token')) {
+    let user = JSON.parse(localStorage.getItem('user')) || {};
+    this.userService.LoggedUser = user;
+    if (!user.access_token) {
       let profileModal = this.modal.create(LoginComponent, null, { enableBackdropDismiss: true });
       profileModal.dismiss(false);
       profileModal.present();
-      this.LoggedUser = localStorage.getItem('userName');
+      this.CurrentUser = user.DisplayName;
     }
-    this.LoggedUser = localStorage.getItem('userName');
   }
  
 }

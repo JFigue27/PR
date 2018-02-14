@@ -12,7 +12,7 @@ import { ApprovalComponent } from '../components/approval-component/approval-com
 import { SuppliersComponent } from '../components/suppliers-component/suppliers-component';
 import { AccountComponent } from '../components/account-component/account-component';
 import { DepartmentComponent } from '../components/department-component/department-component';
-import { FormComponent } from '../components/form-component/form-component';
+import { PRComponent } from '../components/pr-component/pr-component';
 import { UserFormComponent } from '../components/user-form/user-form-component';
 import { SupplierFormComponent } from '../components/supplier-form-component/supplier-form-component';
 import { DepartmentFormComponent } from '../components/department-form-component/department-form-component';
@@ -58,7 +58,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     //Components
     LoginComponent,
     ListComponent,
-    FormComponent,
+    PRComponent,
     UsersComponent,
     UserFormComponent,
     SuppliersComponent,
@@ -97,7 +97,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     MyApp,
     ListComponent,
-    FormComponent,
+    PRComponent,
     UserFormComponent,
     UsersComponent,
     SuppliersComponent,

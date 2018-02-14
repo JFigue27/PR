@@ -8,23 +8,26 @@ import { ApprovalServiceProvider } from '../../providers/approval-service';
 import { MatDialog } from '@angular/material';
 import { ApprovalFormComponent } from '../approval-form-component/approval-form-component';
 import { ModalController } from 'ionic-angular/components/modal/modal-controller';
+import { SupplierServiceProvider } from '../../providers/supplier-service';
 
 @Component({
-  selector: 'form-component',
-  templateUrl: 'form-component.html'
+  selector: 'pr-component',
+  templateUrl: 'pr-component.html'
 })
-export class FormComponent extends FormController implements OnInit {
-  accounts = [];
-  departments = [];
+export class PRComponent extends FormController implements OnInit {
+  accounts=[];
+  departments=[];
+  suppliers=[];
   approval:any;
   currencies = [ { value: 'Dlls', viewValue: 'Dlls' } , { value: 'Mxn', viewValue: 'Mxn' }];
 
   constructor(
               public listService:PRServiceProvider,
               private params: NavParams,
-              private department: DepartmentServiceProvider,
-              private account: AccountServiceProvider,
+              private departmentService:DepartmentServiceProvider,
+              private accountService:AccountServiceProvider,
               private approvalService:ApprovalServiceProvider,
+              private supplierService:SupplierServiceProvider,
               public modal: ModalController
             ) {
     super( { service: listService } );
@@ -33,14 +36,18 @@ export class FormComponent extends FormController implements OnInit {
   ngOnInit() {
     this.load(this.params.get('oEntityOrId'));
 
-    this.department.loadEntities().subscribe(oResult => {
+    this.departmentService.loadEntities().subscribe(oResult => {
       this.departments = oResult.Result;
-    });
-
-    this.account.loadEntities().subscribe(oResult => {
+    }); 
+    this.accountService.loadEntities().subscribe(oResult => {
        this.accounts = oResult.Result;
     });
-    
+
+    this.supplierService.loadEntities().subscribe(oResult => {
+      this.suppliers = oResult.Result;
+    });
+
+
     this.approvalService.getSingleWhere('PurchaseRequestKey', this.params.get('oEntityOrId'))
     .subscribe(oResponse => {
       this.approval = oResponse.Result;
@@ -48,7 +55,7 @@ export class FormComponent extends FormController implements OnInit {
   }
 
   openModal(){
-    let profileModal = this.modal.create(ApprovalFormComponent, { oEntityOrId: null, PurchaseRequestKey: this.baseEntity.id });
+    let profileModal = this.modal.create(ApprovalFormComponent, { oEntityOrId: this.approval ? this.approval.id: null , PurchaseRequestKey: this.baseEntity.id });
     profileModal.dismiss(false);
     profileModal.present();
     profileModal.onDidDismiss(data => {
