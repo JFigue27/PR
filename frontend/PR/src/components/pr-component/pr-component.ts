@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material';
 import { ApprovalFormComponent } from '../approval-form-component/approval-form-component';
 import { ModalController } from 'ionic-angular/components/modal/modal-controller';
 import { SupplierServiceProvider } from '../../providers/supplier-service';
+import { UserServiceProvider } from '../../providers/user-service';
 
 @Component({
   selector: 'pr-component',
@@ -19,11 +20,13 @@ export class PRComponent extends FormController implements OnInit {
   departments=[];
   suppliers=[];
   approval:any;
+  userRole:string;
   currencies = [ { value: 'Dlls', viewValue: 'Dlls' } , { value: 'Mxn', viewValue: 'Mxn' }];
 
   constructor(
               public listService:PRServiceProvider,
               private params: NavParams,
+              public userService: UserServiceProvider,
               private departmentService:DepartmentServiceProvider,
               private accountService:AccountServiceProvider,
               private approvalService:ApprovalServiceProvider,
@@ -47,7 +50,6 @@ export class PRComponent extends FormController implements OnInit {
       this.suppliers = oResult.Result;
     });
 
-
     this.approvalService.getSingleWhere('PurchaseRequestKey', this.params.get('oEntityOrId'))
     .subscribe(oResponse => {
       this.approval = oResponse.Result;
@@ -63,11 +65,61 @@ export class PRComponent extends FormController implements OnInit {
     });
   }
 
+  getSupplier1Sum() {
+    if (this.baseEntity && this.baseEntity.PRLines){
+      return this.baseEntity.PRLines.reduce(function (currentValue, item) {
+        if(item.PriceEach && item.Qty){
+          return currentValue + (item.PriceEach * item.Qty);
+        } else {
+          return currentValue;
+        }
+      }, 0);
+    } else {
+      return 0;
+    }
+  }
+
+  getSupplier2Sum() {
+    if (this.baseEntity && this.baseEntity.PRLines) {
+      return this.baseEntity.PRLines.reduce(function (currentValue, item) {
+        if (item.PriceEach2 && item.Qty) {
+          return currentValue + (item.PriceEach2 * item.Qty);
+        } else {
+          return currentValue;
+        }
+      }, 0);
+    } else {
+      return 0;
+    }
+  }
+  getSupplier3Sum() {
+    if (this.baseEntity && this.baseEntity.PRLines) {
+      return this.baseEntity.PRLines.reduce(function (currentValue, item) {
+        if (item.PriceEach3 && item.Qty) {
+          return currentValue + (item.PriceEach3 * item.Qty);
+        } else {
+          return currentValue;
+        }
+      }, 0);
+    } else {
+      return 0;
+    }
+  }
+
+
+
+  getApprover() {
+     if ( this.getSupllier1Sum() > 3) {
+
+     }
+  }
+
 
   afterLoad() {
     if (this.baseEntity) {
       this.handleDynamicRows(this.baseEntity.PRLines);
     }
+    this.userRole = this.userService.LoggedUser.Roles;
   }
   
   afterCreate() {

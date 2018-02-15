@@ -1,25 +1,17 @@
 <ion-header>
   <ion-navbar>
-    <ion-row col-12 col-md-12 col-lg-12 col-xl-12>
-      <ion-col col-lg-7 col-xs-7>
-        Purchase list
-      </ion-col>
-      <ion-col col-lg-1 col-xs-1>
-        <button (click)="OpenUser()" class="nav-button">Users</button>
-      </ion-col>
-      <ion-col col-lg-1 col-xs-1>
-          <button (click)="OpenSupplier()" class="nav-button">Suppliers</button>
-      </ion-col>
-      <ion-col col-lg-1 col-xs-1>
-        <button (click)="OpenDepartment()" class="nav-button">Departments</button>
-      </ion-col>
-      <ion-col col-lg-1 col-xs-1>
-        <button (click)="OpenAccount()" class="nav-button">Accounts</button>
-      </ion-col>
-      <ion-col col-lg-1 col-xs-1>
-        <button (click)="OpenApproval()" class="nav-button">Approval</button>
-      </ion-col>
-    </ion-row>
+    <div class="div-main">
+      <div class="div-logo">
+        <label>PR System</label>
+      </div>
+      <div class="div-menu">
+        <div (click)="OpenAccount()">Accounts</div>
+        <div (click)="OpenDepartment()">Departments</div>
+        <div (click)="OpenUser()">Users</div>
+        <div (click)="OpenSupplier()">Suppliers</div>
+        <div (click)="logout()"><ion-icon name="ios-contact"></ion-icon> {{ getUserName() | uppercase }}</div>
+      </div>
+    </div>
   </ion-navbar>
 </ion-header>
 

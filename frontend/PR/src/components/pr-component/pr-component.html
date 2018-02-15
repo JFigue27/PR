@@ -7,7 +7,8 @@
                         <h1>Purchase Request</h1>
                     </ion-col>
                     <ion-col col-2 col-sm-2 col-md-2 col-lg-2 col-lg-2> 
-                        <b>PR Number:</b> {{ baseEntity.PRNumber?.GeneratedNumber }}
+                        <b>PR Number:</b>&nbsp;&nbsp; {{ baseEntity.PRNumber?.GeneratedNumber }} <br>
+                        <b>PO Number:</b>&nbsp;&nbsp;<input type="text" class="form-input border-bottom" style="width:50%;">
                     </ion-col>
                 </ion-row>
             </ion-grid>
@@ -129,42 +130,17 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="4"></td>
-                                <td colspan="2">
-                                    <mat-select placeholder="$" style="width:29%;" [(ngModel)]="baseEntity.SupplierCurrency1" (ngModelChange)="on_input_change(item);">
-                                        <mat-option *ngFor="let currency of currencies" [value]="currency.value">
-                                            {{ currency.value }}
-                                        </mat-option>
-                                    </mat-select>
-                                    <mat-select style="width:59%;" [(ngModel)]="baseEntity.Supplier1" (ngModelChange)="on_input_change(item);">
-                                        <mat-option *ngFor="let supplier of suppliers" [value]="supplier.Value">
-                                            {{ supplier.Value }}
-                                        </mat-option>
-                                    </mat-select>
+                                <td colspan="5" style="border-bottom: 1px solid white; border-left: 1px solid white;"></td>
+                                <td colspan="1">
+                                    <span><b>{{ getSupplier1Sum() | currency }}</b></span>
                                 </td>
-                                <td colspan="2">
-                                    <mat-select placeholder="$" style="width:29%;" [(ngModel)]="baseEntity.SupplierCurrency2" (ngModelChange)="on_input_change(item);">
-                                        <mat-option *ngFor="let currency of currencies" [value]="currency.value">
-                                            {{ currency.value }}
-                                        </mat-option>
-                                    </mat-select>
-                                    <mat-select style="width:59%;" [(ngModel)]="baseEntity.Supplier2" (ngModelChange)="on_input_change(item);">
-                                        <mat-option *ngFor="let supplier of suppliers" [value]="supplier.Value">
-                                            {{ supplier.Value }}
-                                        </mat-option>
-                                    </mat-select>
+                                <td style="border-bottom:none;"></td>
+                                <td>
+                                    <span><b>{{ getSupplier2Sum() | currency }}</b></span>
                                 </td>
-                                <td colspan="2">
-                                    <mat-select placeholder="$" style="width:29%;" [(ngModel)]="baseEntity.SupplierCurrency3" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
-                                        <mat-option *ngFor="let currency of currencies" [value]="currency.value">
-                                            {{ currency.value }}
-                                        </mat-option>
-                                    </mat-select>
-                                    <mat-select style="width:59%;" [(ngModel)]="baseEntity.Supplier3" (ngModelChange)="on_input_change(item);">
-                                        <mat-option *ngFor="let supplier of suppliers" [value]="supplier.Value">
-                                            {{ supplier.Value }}
-                                        </mat-option>
-                                    </mat-select>
+                                <td style="border-bottom:none;"></td>
+                                <td>
+                                    <span><b>{{ getSupplier3Sum() | currency }}</b></span>
                                 </td>
                             </tr>
                     </tbody>
@@ -172,7 +148,9 @@
             </div>
 
             <div col-12 class="notes">
-                <p>Notes</p>
+                <div>
+                    <p>Notes</p>
+                </div> 
                 <textarea matInput [(ngModel)]="baseEntity.Notes" matAutosizeMinRows="2"
                 (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)"
                     matTextareaAutosize matAutosizeMaxRows="10" class="form-input border-bottom" style="width:98%;"> </textarea>
@@ -274,13 +252,17 @@
         </ion-card-content>
     </ion-card>
     <div class="footer-nav">
-        <button type="submit" (click)="save()" class="footer-save">
+        <div>
+            <button type="submit" (click)="save()" class="footer-save">
             <ion-icon name="ios-save"></ion-icon>SAVE</button>
-        <button type="button" (click)="openModal()" class="footer-save">
+        </div>
+        <div *ngIf=" userRole === 'User'">
+            <button type="button" (click)="openModal()" class="footer-save">
             <ion-icon name="ios-save"></ion-icon>Request</button>
+        </div>
     </div><br>
 </div>
 
 <br><br>
-<!-- <pre style="background: rgb(255, 255, 255);min-height: 20px;">{{ baseEntity | json }}</pre>
-<pre style="background: rgb(255, 255, 255);min-height: 20px;">{{ approval | json }}</pre> -->
+<pre style="background: rgb(255, 255, 255);min-height: 20px;">{{ baseEntity | json }}</pre>
+<!--<pre style="background: rgb(255, 255, 255);min-height: 20px;">{{ approval | json }}</pre> -->

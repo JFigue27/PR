@@ -29,7 +29,7 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   close() { 
   }
   
-  afterCreate() {
+  afterCreate() { 
     this.baseEntity.ConvertedDateRequested = new Date();
     this.baseEntity.UserRequisitorKey = this.userService.LoggedUser.UserKey;
     this.baseEntity.PurchaseRequestKey = this.params.get('PurchaseRequestKey');

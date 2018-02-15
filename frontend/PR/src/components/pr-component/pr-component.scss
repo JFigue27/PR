@@ -30,12 +30,21 @@ td {
 }
 
 .notes {
-	margin-top: 1em;
+	margin-top: 2em;
+	margin-bottom: 2em;
 	margin-left: 5px;
+	border: 1px solid #c4c4c4;
+    box-shadow: 1px 2px 3px #c2c2c2;
+    background-color: #f2f2f2;
+    width: 99.5%;
 }
-.notes > p {
-	font-weight: bold;
+.notes > div {
+	background-color:#f0c345;
+}
+.notes > div > p {
+	text-align: center;
 	font-size: 18px;
+	font-weight: 800;
 }
 
 .footer-save {
