@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApprovalServiceProvider } from '../../providers/approval-service';
 import { ModalController } from 'ionic-angular'; 
 import { ListController } from '../../services/ListController';
-import { FormComponent } from '../form-component/form-component';
+import { PRComponent } from '../pr-component/pr-component';
 
 @Component({
   selector: 'approval-component',
@@ -22,7 +22,7 @@ export class ApprovalComponent extends ListController implements OnInit {
   }
 
   onOpenItem(oEntity) {
-    let profileModal = this.modal.create(FormComponent, { oEntityOrId: oEntity.id });
+    let profileModal = this.modal.create(PRComponent, { oEntityOrId: oEntity.id });
     profileModal.dismiss(false);
     profileModal.present();
     profileModal.onDidDismiss(data => {

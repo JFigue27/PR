@@ -8,7 +8,7 @@ export interface IConfig {
     endPoint: string;
 }
 
-export interface ICommonResponse{
+export interface ICommonResponse {
     ErrorThrown: boolean;
     ResponseDescription: string;
     Result: any;
@@ -25,8 +25,10 @@ export abstract class CRUDFactory {
 
     addAuthorization() {
         let headers: HttpHeaders = new HttpHeaders();
+        let user = JSON.parse(localStorage.getItem('user')) || {};
+
         headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        headers = headers.append('Authorization', 'bearer ' + localStorage.getItem('access_token'));
+        headers = headers.append('Authorization', 'bearer ' + user.access_token);
         return { headers: headers };
     }
 
@@ -133,10 +135,10 @@ export abstract class CRUDFactory {
         return Observable.throw(error.statusText);
     }
 
-    getSingleWhere(property, value ){
+    getSingleWhere(property, value ): Observable<any> {
         return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/GetSingleWhere/' + property + '/' + value
             + '?noCache=' + Number(new Date()) , this.addAuthorization())
-            .map(response => this.extractData(response), this)
+            .map(response => this.extractData(response ), this)
             .catch(this.generalError);
     }
 

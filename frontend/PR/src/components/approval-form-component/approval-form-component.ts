@@ -22,13 +22,16 @@ export class ApprovalFormComponent extends FormController implements OnInit {
     this.userService.loadEntities().subscribe(oResult => {
       this.users = oResult.Result;
     });
+
     this.load(this.params.get('oEntityOrId'));
   }
-
+  
   close() { 
   }
-
+  
   afterCreate() {
+    this.baseEntity.ConvertedDateRequested = new Date();
+    this.baseEntity.UserRequisitorKey = this.userService.LoggedUser.UserKey;
     this.baseEntity.PurchaseRequestKey = this.params.get('PurchaseRequestKey');
   }
 
