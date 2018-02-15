@@ -10,36 +10,36 @@ WORKFLOW
 
 ------------------------------------------------------------------------------------------------------------------
 TODO
-  ☐ Notes field
-  ☐ Dlls or Mxn
-  ☐ Remove "Remove button".
+  ✔ Notes field @done(18-02-13 11:37)
+  ✔ Dlls or Mxn @done(18-02-13 11:37)
+  ✔ Remove "Remove button". @done(18-02-13 11:37)
   ☐ Upload signed document.
   ☐ Attachments.
-  ☐ Account Dropdown.
-  ☐ Departments Catalog.
-      ☐ Field: Budget per department.
-☐ Accounts Per Deparment.
-  ☐ Associate somehow deparments with Accounts.
-☐ Pre-Quote column.
-  ☐ Two additional quote columns.
+  ✔ Account Dropdown. @done(18-02-13 11:38)
+  ✔ Departments Catalog. @done(18-02-13 11:38)
+      ✔ Field: Budget per department. @done(18-02-13 11:38)
+✔ Accounts Per Deparment. @done(18-02-13 11:38)
+  ✔ Associate somehow deparments with Accounts. @done(18-02-13 11:38)
+✔ Pre-Quote column. @done(18-02-13 11:38)
+  ✔ Two additional quote columns. @done(18-02-13 11:38)
   Approval Process:
     ☐ Department Manager once final quote is accepted.
     ☐ If quote exceeds manager’s authorization level, redirect to VIP.
     ☐ Once accepted, redirect Purchasing Manager for final approval.
     ☐ Send to Buyer.
   ☐ Handle approval/rejection responses.
-  ☐ Supplier catalog.
-  ☐ Select suppliers in PR columns.
+  ✔ Supplier catalog. @done(18-02-13 11:38)
+  ✔ Select suppliers in PR columns. @done(18-02-13 13:40)
   ☐ Filter PR List by department, rejected, approved
-  ☐ PO Field.
+  ✔ PO Field. @done(18-02-14 12:30)
 Roles:
-  ☐ Administrator
-  ☐ User
+  ✔ Administrator @done(18-02-13 11:38)
+  ✔ User @done(18-02-13 11:38)
     -Requisitor
-  ☐ Department Manager
+  ✔ Department Manager @done(18-02-13 11:38)
     -Make Approvals
-  ☐ General Manager
-  ☐ MRO (Buyer)
+  ✔ General Manager @done(18-02-13 11:38)
+  ✔ MRO (Buyer) @done(18-02-13 11:38)
     -Make quotations.
     -Purchase
 
