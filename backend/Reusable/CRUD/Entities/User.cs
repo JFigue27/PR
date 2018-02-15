@@ -86,5 +86,8 @@ namespace Reusable
         public string EmailServer { get; set; }
 
         public string EmailPort { get; set; }
+
+
+        public int? DepartmentKey { get; set; }
     }
 }

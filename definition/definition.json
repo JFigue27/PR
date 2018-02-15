@@ -40,7 +40,8 @@
         "Supplier Currency 2": "string",
         "Supplier Currency 3": "string",
         "Notes": "textarea",
-        "Supplier Selected": "string"
+        "Supplier Selected": "string",
+        "PO Number": "string"
       },
       "relationships": {
         "oneToParent": [
@@ -48,7 +49,9 @@
         ],
         "oneToMany": [],
         "manyToMany": [],
-        "manyToOne": []
+        "manyToOne": [
+          "Department"
+        ]
       }
     },
     {

@@ -43,9 +43,13 @@ namespace BusinessSpecificLogic.EF
         public string SupplierCurrency3 { get; set; }
         public string Notes { get; set; }
         public string SupplierSelected { get; set; }
+        public string PONumber { get; set; }
         public int PRNumberKey { get; set; }
         [ForeignKey("PRNumberKey")]
         public PRNumber PRNumber { get; set; }
+        public int? DepartmentKey { get; set; }
+        [ForeignKey("DepartmentKey")]
+        public Department DepartmentAssigned { get; set; }
         ///End:Generated:Properties<<<
 
         public List<PRLine> PRLines { get; set; }
