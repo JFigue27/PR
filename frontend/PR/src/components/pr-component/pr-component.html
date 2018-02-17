@@ -8,7 +8,8 @@
                     </ion-col>
                     <ion-col col-2 col-sm-2 col-md-2 col-lg-2 col-lg-2> 
                         <b>PR Number:</b>&nbsp;&nbsp; {{ baseEntity.PRNumber?.GeneratedNumber }} <br>
-                        <b>PO Number:</b>&nbsp;&nbsp;<input type="text" class="form-input border-bottom" style="width:50%;">
+                        <b>PO Number:</b>&nbsp;&nbsp;<input type="text" class="form-input border-bottom"
+                         (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.PONumber" style="width:50%;">
                     </ion-col>
                 </ion-row>
             </ion-grid>
@@ -147,17 +148,8 @@
                 </table>
             </div>
 
-            <div col-12 class="notes">
-                <div>
-                    <p>Notes</p>
-                </div> 
-                <textarea matInput [(ngModel)]="baseEntity.Notes" matAutosizeMinRows="2"
-                (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)"
-                    matTextareaAutosize matAutosizeMaxRows="10" class="form-input border-bottom" style="width:98%;"> </textarea>
-            </div>
-
             <ion-grid>
-                <ion-row>
+                <ion-row class="custom-box" style="margin-top:1.5%;">
                     <ion-col col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 no-padding style="background-color: rgb(255, 255, 255);">
                         <ion-grid>
                             <ion-row col-12 col-md-12 col-lg-12 col-xl-12>
@@ -177,7 +169,7 @@
                                         Department
                                 </ion-col>
                                 <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
-                                    <mat-select [(ngModel)]="baseEntity.Department" placeholder="Select.." 
+                                    <mat-select [(ngModel)]="baseEntity.DepartmentKey" placeholder="Select.." 
                                         (ngModelChange)="on_input_change(item);" class="border-bottom" style="width:80%;">
                                         <mat-option *ngFor="let department of departments" [value]="department.id">
                                             {{ department.Value }}
@@ -249,6 +241,15 @@
                 </ion-row>
             </ion-grid>
 
+            <div class="custom-box notes">
+                <div>
+                    <p>Notes</p>
+                </div>
+                <textarea matInput [(ngModel)]="baseEntity.Notes" matAutosizeMinRows="4"
+                (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)"
+                matTextareaAutosize matAutosizeMaxRows="10" class="form-input border-bottom" style="width:98%;"> </textarea>
+            </div>
+
         </ion-card-content>
     </ion-card>
     <div class="footer-nav">
@@ -264,5 +265,4 @@
 </div>
 
 <br><br>
-<pre style="background: rgb(255, 255, 255);min-height: 20px;">{{ baseEntity | json }}</pre>
-<!--<pre style="background: rgb(255, 255, 255);min-height: 20px;">{{ approval | json }}</pre> -->
+<!-- <pre style="background: rgb(255, 255, 255);min-height: 20px;">{{ baseEntity | json }}</pre> -->

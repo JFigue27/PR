@@ -57,7 +57,8 @@ export class PRComponent extends FormController implements OnInit {
   }
 
   openModal(){
-    let profileModal = this.modal.create(ApprovalFormComponent, { oEntityOrId: this.approval ? this.approval.id: null , PurchaseRequestKey: this.baseEntity.id });
+    let profileModal = this.modal.create(ApprovalFormComponent,
+      { oEntityOrId: this.approval ? this.approval.id: null , PurchaseRequestKey: this.baseEntity.id });
     profileModal.dismiss(false);
     profileModal.present();
     profileModal.onDidDismiss(data => {
@@ -92,6 +93,7 @@ export class PRComponent extends FormController implements OnInit {
       return 0;
     }
   }
+
   getSupplier3Sum() {
     if (this.baseEntity && this.baseEntity.PRLines) {
       return this.baseEntity.PRLines.reduce(function (currentValue, item) {
@@ -109,7 +111,7 @@ export class PRComponent extends FormController implements OnInit {
 
 
   getApprover() {
-     if ( this.getSupllier1Sum() > 3) {
+     if ( this.getSupplier1Sum() > 3) {
 
      }
   }

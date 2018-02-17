@@ -2,7 +2,7 @@
 @import "./common/prebuilt-themes/indigo-pink";
 
 
-.content{
+.content {
     background-color: #ebebeb;
 }
 
@@ -15,14 +15,7 @@
 	box-shadow:none; 
 }
 
-.nav-button {
-	padding: 7px;
-    border-radius: 3px;
-    background-color: #c7c7c7;
-    width: 110px;
-    font-size: 16px;
-    font-weight: 700;
-}
-.nav-button:hover {
-    background-color: #979797;
+.custom-box {
+	border: 1px solid #e4e4e4;
+    box-shadow: 1px 2px 5px #b7b7b7;
 }

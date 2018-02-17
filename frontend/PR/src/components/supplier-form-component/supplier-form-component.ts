@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SupplierServiceProvider } from '../../providers/supplier-service';
 import { FormController } from '../../services/FormController';
-import { NavParams, NavController } from 'ionic-angular';
+import { NavParams } from 'ionic-angular';
 
 @Component({
   selector: 'supplier-form-component',
@@ -11,16 +11,18 @@ import { NavParams, NavController } from 'ionic-angular';
 export class SupplierFormComponent extends FormController implements OnInit { 
   errorMessage: string;
 
-  constructor(public supplierSerivceProvider: SupplierServiceProvider, private params: NavParams, private nav: NavController) {
-    super({ service: supplierSerivceProvider });
-  }
+  constructor (
+                public supplierService: SupplierServiceProvider,
+                private params: NavParams
+              ) {
+                super({ service: supplierService });
+              }
 
   ngOnInit() {
      this.load(this.params.get('oEntityOrId'));
   }
 
-  close(){
-    this.nav.pop();
+  close() {
   }
 
   afterCreate() {
@@ -29,8 +31,7 @@ export class SupplierFormComponent extends FormController implements OnInit {
   afterLoad() {
   }
 
-  afterSave(){
-    this.nav.pop();
+  afterSave() {
   }
 
   afterRemove() {

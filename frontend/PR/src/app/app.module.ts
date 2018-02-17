@@ -49,7 +49,8 @@ import { ApprovalServiceProvider } from '../providers/approval-service';
 import { MatNativeDateModule, MatDatepickerModule } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -88,6 +89,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatInputModule,
     MatSelectModule,
     CommonModule,
+    MatDialogModule,
     BrowserAnimationsModule,
     IonicModule.forRoot(MyApp)
   ],

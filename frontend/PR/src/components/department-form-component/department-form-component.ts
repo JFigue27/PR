@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { DepartmentServiceProvider } from '../../providers/department-service';
 import { FormController } from '../../services/FormController';
-import { NavParams, NavController } from 'ionic-angular';
+// import { NavController } from 'ionic-angular';
+import { MAT_DIALOG_DATA } from '@angular/material';
+
 
 @Component({
   selector: 'department-form-component',
@@ -18,16 +20,18 @@ export class DepartmentFormComponent extends FormController implements OnInit {
     { value: 'MRO', viewValue: 'MRO' }
   ];
 
-  constructor(public departmentSerivceProvider: DepartmentServiceProvider, private params: NavParams, private nav: NavController) {
-    super({ service: departmentSerivceProvider });
-  }
+  constructor (
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public departmentSerivceProvider: DepartmentServiceProvider
+            ) {
+                super({ service: departmentSerivceProvider });
+            }
 
   ngOnInit() {
-    this.load(this.params.get('oEntityOrId'));
+      this.load(this.data.oEntityOrId);
   }
 
   close() {
-    this.nav.pop();
   }
 
   afterCreate() {
@@ -37,7 +41,6 @@ export class DepartmentFormComponent extends FormController implements OnInit {
   }
 
   afterSave() {
-    this.nav.pop();
   }
 
   afterRemove() {
