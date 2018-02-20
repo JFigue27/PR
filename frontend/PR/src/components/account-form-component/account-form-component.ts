@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { AccountServiceProvider } from '../../providers/account-service';
 import { FormController } from '../../services/FormController';
-import { NavParams, NavController } from 'ionic-angular';
 import { DepartmentServiceProvider } from '../../providers/department-service';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'account-form-component',
@@ -12,27 +12,22 @@ import { DepartmentServiceProvider } from '../../providers/department-service';
 export class AccountFormComponent extends FormController implements OnInit {
   errorMessage: string;
   departments = [];
-  constructor(
-            public accountSerivceProvider: AccountServiceProvider,
-            private params: NavParams, private nav: NavController,
+  constructor (
+            @Inject(MAT_DIALOG_DATA)public data:any,
+            public accountService: AccountServiceProvider,
             private department: DepartmentServiceProvider
           ) {
-    super({ service: accountSerivceProvider });
-
-    
-  }
+              super({ service: accountService });
+          }
 
   ngOnInit() {
-    this.load(this.params.get('oEntityOrId'));
-
+    this.load(this.data.oEntityOrId);
     this.department.loadEntities().subscribe( oResult => {
       this.departments = oResult.Result;
     })
   }
 
-
   close() {
-    this.nav.pop();
   }
 
   afterCreate() {
@@ -42,7 +37,6 @@ export class AccountFormComponent extends FormController implements OnInit {
   }
 
   afterSave() {
-    this.nav.pop();
   }
 
   afterRemove() {

@@ -1,15 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { DepartmentServiceProvider } from '../../providers/department-service';
 import { FormController } from '../../services/FormController';
-// import { NavController } from 'ionic-angular';
 import { MAT_DIALOG_DATA } from '@angular/material';
-
 
 @Component({
   selector: 'department-form-component',
   templateUrl: 'department-form-component.html'
 })
-
 export class DepartmentFormComponent extends FormController implements OnInit {
   errorMessage: string;
 
@@ -21,11 +18,11 @@ export class DepartmentFormComponent extends FormController implements OnInit {
   ];
 
   constructor (
-              @Inject(MAT_DIALOG_DATA) public data: any,
-              public departmentSerivceProvider: DepartmentServiceProvider
-            ) {
-                super({ service: departmentSerivceProvider });
-            }
+                @Inject(MAT_DIALOG_DATA) public data: any,
+                public departmentService: DepartmentServiceProvider
+              ) {
+                super({ service: departmentService });
+              }
 
   ngOnInit() {
       this.load(this.data.oEntityOrId);

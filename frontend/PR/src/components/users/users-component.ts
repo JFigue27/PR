@@ -3,6 +3,7 @@ import { UserServiceProvider } from '../../providers/user-service';
 import { ModalController } from 'ionic-angular';
 import { UserFormComponent } from '../user-form/user-form-component';
 import { ListController } from '../../services/ListController';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'users-component',
@@ -10,20 +11,20 @@ import { ListController } from '../../services/ListController';
 })
 export class UsersComponent extends ListController implements OnInit {
 
-  constructor(public userSerivceProvider: UserServiceProvider, public modal: ModalController) {
-    super({ service: userSerivceProvider });
-  }
+  constructor (
+          public dialog:MatDialog,
+          public userService: UserServiceProvider
+          ){
+            super({ service: userService });
+          }
 
   ngOnInit() {
     this.load();
- }
-
-  addUser() {
-    let profileModal = this.modal.create(UserFormComponent, {oEntityOrId: null});
-    profileModal.dismiss(false);
-    profileModal.present();
-    profileModal.onDidDismiss(data => {
-      this.load();
+  }
+  
+  addItem() {
+    this.dialog.open(UserFormComponent, {
+      data: { oEntityOrId: null }
     });
   }
 
@@ -31,11 +32,8 @@ export class UsersComponent extends ListController implements OnInit {
   }
 
   onOpenItem(oEntity) {
-    let profileModal = this.modal.create(UserFormComponent, { oEntityOrId: oEntity.id });
-    profileModal.dismiss(false);
-    profileModal.present();
-    profileModal.onDidDismiss(data => {
-      this.load();
+    this.dialog.open(UserFormComponent, {
+      data: { oEntityOrId: oEntity.id }
     });
   }
   

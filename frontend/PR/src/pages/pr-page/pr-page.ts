@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import {  NavController, NavParams } from 'ionic-angular';
 
 @Component({
-  selector: 'form-page',
-  templateUrl: 'form-page.html',
+  selector: 'pr-page',
+  templateUrl: 'pr-page.html',
 })
 export class FormPage {
 

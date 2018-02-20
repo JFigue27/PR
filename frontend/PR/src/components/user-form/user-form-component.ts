@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { UserServiceProvider } from '../../providers/user-service';
 import { FormController } from '../../services/FormController';
-import { NavParams, NavController } from 'ionic-angular';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'user-form-component',
   templateUrl: 'user-form-component.html'
 })
-
 export class UserFormComponent extends FormController implements OnInit { 
   errorMessage: string;
   roles = [
@@ -17,17 +16,18 @@ export class UserFormComponent extends FormController implements OnInit {
     { value: 'MRO', viewValue: 'MRO' }
   ];
  
-
-  constructor(public userSerivceProvider: UserServiceProvider, private params: NavParams, private nav: NavController) {
-    super({ service: userSerivceProvider });
-  }
+  constructor (
+                @Inject(MAT_DIALOG_DATA) public data: any,
+                public userService: UserServiceProvider
+              ) {
+                  super({ service: userService });
+              }
 
   ngOnInit() {
-     this.load(this.params.get('oEntityOrId'));
+    this.load(this.data.oEntityOrId);
   }
 
-  close(){
-    this.nav.pop();
+  close() {
   }
 
   afterCreate() {
@@ -37,7 +37,6 @@ export class UserFormComponent extends FormController implements OnInit {
   }
 
   afterSave(){
-    this.nav.pop();
   }
 
   afterRemove() {

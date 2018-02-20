@@ -22,9 +22,9 @@ namespace BusinessSpecificLogic.EF
         public override int id { get { return ApprovalKey; } }
 
         ///Start:Generated:Properties<<<
-        public DateTimeOffset DateRequested { get; set; }
+        public DateTimeOffset? DateRequested { get; set; }
         public string Status { get; set; }
-        public DateTimeOffset DateResponse { get; set; }
+        public DateTimeOffset? DateResponse { get; set; }
         public string ResponseDescription { get; set; }
         public string RequestDescription { get; set; }
         public int PurchaseRequestKey { get; set; }

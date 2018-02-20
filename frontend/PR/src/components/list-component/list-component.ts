@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListController } from '../../services/ListController';
 import { NavController } from 'ionic-angular';
-import { FormPage } from '../../pages/form-page/form-page';
+import { FormPage } from '../../pages/pr-page/pr-page';
 import { PRServiceProvider } from '../../providers/pr-service';
 import { App } from 'ionic-angular/components/app/app';
 

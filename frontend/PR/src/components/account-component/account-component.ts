@@ -1,28 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountServiceProvider } from '../../providers/account-service';
-import { ModalController } from 'ionic-angular';
 import { AccountFormComponent } from '../account-form-component/account-form-component';
 import { ListController } from '../../services/ListController';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'account-component',
   templateUrl: 'account-component.html'
 })
 export class AccountComponent extends ListController implements OnInit {
-  constructor(public accountSerivceProvider: AccountServiceProvider, public modal: ModalController) {
-    super({ service: accountSerivceProvider });
-  }
+  constructor (
+                public dialog:MatDialog,
+                public accountService: AccountServiceProvider
+              ) {
+                  super({ service: accountService });
+              }
 
   ngOnInit() {
     this.load();
   }
 
   addItem() {
-    let profileModal = this.modal.create(AccountFormComponent, { oEntityOrId: null });
-    profileModal.dismiss(false);
-    profileModal.present();
-    profileModal.onDidDismiss(data => {
-      this.load();
+    this.dialog.open(AccountFormComponent, {
+      data: { oEntityOrId: null }
     });
   }
 
@@ -30,11 +30,8 @@ export class AccountComponent extends ListController implements OnInit {
   }
 
   onOpenItem(oEntity) {
-    let profileModal = this.modal.create(AccountFormComponent, { oEntityOrId: oEntity.id });
-    profileModal.dismiss(false);
-    profileModal.present();
-    profileModal.onDidDismiss(data => {
-      this.load();
+    this.dialog.open(AccountFormComponent, {
+      data: { oEntityOrId: oEntity.id }
     });
   }
 

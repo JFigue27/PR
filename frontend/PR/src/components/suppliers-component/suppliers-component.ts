@@ -1,43 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { SupplierServiceProvider } from '../../providers/supplier-service';
-import { ModalController } from 'ionic-angular';
 import { ListController } from '../../services/ListController';
 import { SupplierFormComponent } from '../supplier-form-component/supplier-form-component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'suppliers-component',
   templateUrl: 'suppliers-component.html'
 })
 export class SuppliersComponent extends ListController implements OnInit {
-
-  constructor(public supplierSerivceProvider: SupplierServiceProvider, public modal: ModalController) {
-    super({ service: supplierSerivceProvider });
-  }
+  constructor (
+              public dialog:MatDialog,
+              public supplierService: SupplierServiceProvider,
+            ) {
+                super({ service: supplierService });
+            }
 
   ngOnInit() {
     this.load();
  }
 
   addItem() {
-    let profileModal = this.modal.create(SupplierFormComponent, { oEntityOrId: null });
-    profileModal.dismiss(false);
-    profileModal.present();
-    profileModal.onDidDismiss(data => {
-      this.load();
+    this.dialog.open(SupplierFormComponent, {
+      data: { oEntityOrId: null }
     });
   }
-
-
 
   afterLoad() {
   }
 
   onOpenItem(oEntity) {
-    let profileModal = this.modal.create(SupplierFormComponent, { oEntityOrId: oEntity.id });
-    profileModal.dismiss(false);
-    profileModal.present();
-    profileModal.onDidDismiss(data => {
-      this.load();
+    this.dialog.open(SupplierFormComponent, {
+      data: { oEntityOrId: oEntity.id }
     });
   }
   
