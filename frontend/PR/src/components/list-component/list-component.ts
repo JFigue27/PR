@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListController } from '../../services/ListController';
 import { NavController } from 'ionic-angular';
-import { FormPage } from '../../pages/pr-page/pr-page';
+import { PRPage } from '../../pages/pr-page/pr-page';
 import { PRServiceProvider } from '../../providers/pr-service';
 import { App } from 'ionic-angular/components/app/app';
 
@@ -11,10 +11,13 @@ import { App } from 'ionic-angular/components/app/app';
 })
 export class ListComponent extends ListController implements OnInit {
 
-  constructor(public listService: PRServiceProvider, public nav: NavController, private app: App) {
-    super({ service: listService, paginate: true, limit: 10 });
-
-  }
+  constructor (
+              public listService: PRServiceProvider,
+              public nav: NavController,
+              private app: App
+            ) {
+                super({ service: listService, paginate: true, limit: 10 });
+        }
 
   ngOnInit() {
 
@@ -26,14 +29,14 @@ export class ListComponent extends ListController implements OnInit {
   }
 
   addItem() {
-    this.nav.push(FormPage, { oEntityOrId: null });
+    this.nav.push(PRPage, { oEntityOrId: null });
   }
 
   afterLoad() {
   }
 
   onOpenItem(oEntity: any) {
-    this.nav.push(FormPage, { oEntityOrId: oEntity.id });
+    this.nav.push(PRPage, { oEntityOrId: oEntity.id });
   }
 
   afterRemove() {

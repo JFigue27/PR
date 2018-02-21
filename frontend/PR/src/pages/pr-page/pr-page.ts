@@ -5,7 +5,7 @@ import {  NavController, NavParams } from 'ionic-angular';
   selector: 'pr-page',
   templateUrl: 'pr-page.html',
 })
-export class FormPage {
+export class PRPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }

@@ -261,6 +261,10 @@
             <button type="button" (click)="openModal()" class="footer-save">
             <ion-icon name="ios-save"></ion-icon>Request</button>
         </div>
+        <div *ngIf=" userRole === 'DepartmentManager'">
+            <button type="button" (click)="openModal()" class="footer-save">
+                <ion-icon name="ios-save"></ion-icon>Verify</button>
+        </div>
     </div><br>
 </div>
 

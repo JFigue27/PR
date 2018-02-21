@@ -1,29 +1,55 @@
-.card-listForm {
-    height:100%;
+.supplier-card {
     border-radius: 5px;
     background-color: white;
-    overflow-y: auto;
+    height: 300px;
+    width: 400px;
 }
 
-.card-userForm {
-    height: 100%;
-    margin: auto;
-    padding: 2em;
-    border-radius: 5px;
-    background-color: white;
-    overflow-y: auto;
+.supplier-card-header {
+    color: #4c88ff;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    border-bottom: 1px solid #777777;
 }
 
-.title-listForm {
-    padding: 1%;
+.supplier-card-body {
+    height: 75%;
+    padding: 1em;
+}
+
+.supplier-card-body > p {
     text-align: center;
     font-size: 18px;
-    font-weight: bold;
-    background-color: rgb(167, 167, 167);
+    font-weight: 500;
 }
 
-.form-listForm {
-    margin: auto;
+.supplier-card-body > input {
     width: 100%;
-    max-width: 400px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.supplier-card-footer {
+    float: right;
+}
+
+.btn-close {
+    background-color: #6060f2;
+    color: white;
+    font-size: 18px;
+    border-radius: 3px;
+    padding: 7px;
+    margin-top: 10px;
+    margin-right: 5px;
+}
+
+.btn-save {
+    background-color: #006e1c;
+    color: white;
+    font-size: 18px;
+    border-radius: 3px;
+    padding: 7px;
+    margin-top: 10px;
+    margin-right: 5px;
 }

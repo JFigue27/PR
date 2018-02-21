@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ApprovalServiceProvider } from '../../providers/approval-service';
 import { ListController } from '../../services/ListController';
-import { ApprovalFormComponent } from '../approval-form-component/approval-form-component';
+import { PRComponent } from '../pr-component/pr-component';
 import { MatDialog } from '@angular/material';
+import { NavController } from 'ionic-angular';
+import { PRPage } from '../../pages/pr-page/pr-page';
 
 @Component({
   selector: 'approval-component',
@@ -11,6 +13,7 @@ import { MatDialog } from '@angular/material';
 export class ApprovalComponent extends ListController implements OnInit {
   constructor (
                 public dialog:MatDialog,
+                public nav: NavController,
                 public approvalService: ApprovalServiceProvider
               ) {
                   super({ service: approvalService });
@@ -19,20 +22,13 @@ export class ApprovalComponent extends ListController implements OnInit {
   ngOnInit() {
     this.load();
   }
- 
-  addItem() {
-    this.dialog.open(ApprovalFormComponent, { data: { oEntityOrId: null}
-    });
-  }
 
   afterLoad() {
   }
 
-  onOpenItem(oEntity) {
-    this.dialog.open(ApprovalFormComponent, {
-      data: { oEntityOrId: oEntity.id }
-    });
-  }
+  onOpenItem(oEntity: any) {
+    this.nav.push(PRPage, { oEntityOrId: oEntity.PurchaseRequestKey });
+  } 
 
   afterRemove() {
     this.load();

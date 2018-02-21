@@ -5,7 +5,7 @@ using BusinessSpecificLogic.Logic;
 namespace ReusableWebAPI.Controllers
 {
     [RoutePrefix("api/Approval")]
-    public class ApprovalController : BaseController<Approval>
+    public class ApprovalController : DocumentController<Approval>
     {
         public ApprovalController(IApprovalLogic logic) : base(logic)
         {

@@ -72,3 +72,12 @@ Approvals
   -Status
   -DateResponse
   -ResponseDescription
+
+
+  Si el seleccionado excede el limite de 250dlls se enviara correo al superior del departamento (RicardoWong)
+
+
+  approvals page
+  pr number
+  DateRequestedAt
+  RequestBy

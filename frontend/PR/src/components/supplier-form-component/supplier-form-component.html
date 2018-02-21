@@ -1,33 +1,24 @@
-<div class="card-userForm">
-  <div class="title-userForm">
-    <label>User</label>
+<div class="supplier-card">
+  <div class="supplier-card-header">
+    <h3>Add Supplier</h3>
   </div>
-  <div>
-    <ion-item class="item">
-      <ion-input type="text" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.Value" placeholder="Value" required autofocus></ion-input>
-    </ion-item>
 
-    <ion-item class="item">
-      <ion-input type="text" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.UserName" id="UserName" placeholder="Username"
-        required autofocus></ion-input> 
-    </ion-item>
-    <p class="p-role">Role</p>
-    <select (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.Role" class="select-role">
-      <option>Administrator</option>
-      <option>User</option>
-      <option>Doctor</option>
-      <option>RH</option>
-      <option>Finance</option>
-    </select>
- 
-    <div class="error-message" *ngIf="errorMessage == ''">
-      <label>hola {{ errorMessage }}</label>
-    </div>
-    <!-- <hr class="hr-form"> -->
-    <div class="div-buttons">
-      <button ion-button type="submit" (click)="save()" class="btn-submit">submit</button>
-      <button ion-button (click)="close()" class="btn-close">Close</button>
-    </div>
+  <div class="supplier-card-body">
+
+    <p>Name</p>
+    <input type="text" class="input-personalized" [(ngModel)]="baseEntity.Value"
+     (ngModelChange)="on_input_change();">
+    
+     <p>UserName</p>
+    <input type="text"class="input-personalized" [(ngModel)]="baseEntity.UserName"
+     (ngModelChange)="on_input_change()" required>
+
+  </div>
+
+  <div class="supplier-card-footer">
+    <button mat-dialog-close class="btn-close">Close</button>
+    <button mat-dialog-close type="submit" (click)="save()" class="btn-save">SAVE</button>
   </div>
 </div>
+
 <!-- <pre style="background: gray; min-height: 20px;">{{ baseEntity | json }}</pre> -->

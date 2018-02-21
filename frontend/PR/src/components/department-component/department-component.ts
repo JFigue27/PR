@@ -22,16 +22,20 @@ export class DepartmentComponent extends ListController implements OnInit  {
   }
 
   addItem() {
-    this.dialog.open(DepartmentFormComponent, {
+   const dialog = this.dialog.open(DepartmentFormComponent, {
       data: { oEntityOrId: null }
     });
+
+    dialog.afterClosed().subscribe(result => {
+      console.log('2018');
+    })
   }
 
   afterLoad() {
   }
 
 
- onOpenItem(oEntity){
+ onOpenItem(oEntity) {
   this.dialog.open(DepartmentFormComponent, {
       data: { oEntityOrId: oEntity.id }
   });

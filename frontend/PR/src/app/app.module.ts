@@ -25,7 +25,7 @@ import { AttachmentsModule } from '../components/attachments.module';
 //PAGES
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list-page/list-page';
-import { FormPage } from '../pages/pr-page/pr-page';
+import { PRPage } from '../pages/pr-page/pr-page';
 import { UsersPage } from '../pages/users/users-page';
 import { SuppliersPage } from '../pages/suppliers/suppliers-page';
 import { AccountPage } from '../pages/account-page/account-page';
@@ -73,7 +73,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     //Pages
     HomePage,
     ListPage,
-    FormPage,
+    PRPage,
     UsersPage,
     DepartmentPage,
     AccountPage,
@@ -113,7 +113,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     //Pages
     HomePage,
     ListPage,
-    FormPage,
+    PRPage,
     UsersPage,
     SuppliersPage,
     DepartmentPage,

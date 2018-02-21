@@ -1,21 +1,11 @@
-.card-listForm {
-    height:100%;
+.department-card {
     border-radius: 5px;
     background-color: white;
-    overflow-y: auto;
+    height: 300px;
+    width: 400px;
 }
 
-.card-userForm {
-    height: 100%;
-    margin: auto;
-    padding: 2em;
-    border-radius: 5px;
-    background-color: white;
-    overflow-y: auto;
-}
-
-.department-custom-card-header {
-    width: 100%;
+.department-card-header {
     color: #4c88ff;
     text-align: center;
     font-size: 22px;
@@ -23,63 +13,43 @@
     border-bottom: 1px solid #777777;
 }
 
-.department-custom-card-body {
+.department-card-body {
     height: 75%;
-    border-bottom: 1px solid #d1d1d1;
+    padding: 1em;
 }
 
-.department-input-lg {
+.department-card-body > p {
+    text-align: center;
     font-size: 18px;
-    width: 90%;
-    margin-left: 5%;
+    font-weight: 500;
 }
 
-.div-select-role {
-    width: 90%;
-    margin-top: 5%;
-    margin-left: 5%;
-}
-
-.div-select-role > p {
+.department-card-body > input {
+    width: 100%;
     font-size: 16px;
-    font-weight: 800;
+    font-weight: 500;
 }
 
-.card-password {
-    border: 1px solid #e8e8e8;
-    width: 89%;
-    padding: 10px;
-    margin-left: 5%;
-    margin-top: 5%;
-    box-shadow: 5px 6px 5px #ececec;
-}
-
-.card-password > label {
-    font-size: 16px;
-    font-weight: 400;
-    margin: 10px;
-}
-
-.department-custom-card-footer {
+.department-card-footer {
     float: right;
 }
+
 .btn-close {
     background-color: #6060f2;
     color: white;
     font-size: 18px;
     border-radius: 3px;
     padding: 7px;
-    box-shadow: 1px 2px 5px #bebebe;
     margin-top: 10px;
     margin-right: 5px;
 }
+
 .btn-save {
     background-color: #006e1c;
     color: white;
     font-size: 18px;
     border-radius: 3px;
     padding: 7px;
-    box-shadow: 1px 2px 5px #bebebe;
     margin-top: 10px;
     margin-right: 5px;
 }

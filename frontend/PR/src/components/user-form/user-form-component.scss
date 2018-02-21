@@ -1,21 +1,11 @@
-.card-listForm {
-    height:100%;
+.user-card {
     border-radius: 5px;
     background-color: white;
-    overflow-y: auto;
+    height: 500px;
+    width: 400px;
 }
 
-.card-userForm {
-    height: 100%;
-    margin: auto;
-    padding: 2em;
-    border-radius: 5px;
-    background-color: white;
-    overflow-y: auto;
-}
-
-.custom-card-header {
-    width: 100%;
+.user-card-header {
     color: #4c88ff;
     text-align: center;
     font-size: 22px;
@@ -23,57 +13,55 @@
     border-bottom: 1px solid #777777;
 }
 
-.custom-card-body {
-    height: 85%;
-    border-bottom: 1px solid #d1d1d1;
+.user-card-body {
+    height: 80%;
 }
 
-
-.div-select-role {
-    width: 90%;
-    margin-top: 5%;
-    margin-left: 5%;
+.user-card-body > p {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
 }
 
-.div-select-role > p {
+.user-card-body > input {
+    width: 100%;
     font-size: 16px;
-    font-weight: 800;
+    font-weight: 500;
 }
 
-.card-password {
-    border: 1px solid #e8e8e8;
-    width: 89%;
+.input-password {
+    width: 95%;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 13px;
+}
+
+.box-password {
+    box-shadow: 1px 4px 5px #b4b4b4;
+    margin-top: 30px;
     padding: 10px;
-    margin-left: 5%;
-    margin-top: 5%;
-    box-shadow: 5px 6px 5px #ececec;
 }
 
-.card-password > label {
-    font-size: 16px;
-    font-weight: 400;
-    margin: 10px;
-}
-.div-footer {
+.user-card-footer {
     float: right;
 }
+
 .btn-close {
     background-color: #6060f2;
     color: white;
     font-size: 18px;
     border-radius: 3px;
     padding: 7px;
-    box-shadow: 1px 2px 5px #bebebe;
     margin-top: 10px;
     margin-right: 5px;
 }
+
 .btn-save {
     background-color: #006e1c;
     color: white;
     font-size: 18px;
     border-radius: 3px;
     padding: 7px;
-    box-shadow: 1px 2px 5px #bebebe;
     margin-top: 10px;
     margin-right: 5px;
 }

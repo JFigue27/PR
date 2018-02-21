@@ -1,23 +1,20 @@
-<div class="card-userForm">
-  <div class="department-custom-card-header">
-    Department
+<div class="department-card">
+  <div class="department-card-header">
+   <h3>Department</h3>
   </div>
 
-  <div class="department-custom-card-body">
-    <p class="p-body">Name</p>
-    <input type="text" class="input-personalized department-input-lg" [(ngModel)]="baseEntity.Value"
+  <div class="department-card-body">
+    <p>Name</p>
+    <input type="text" class="input-personalized" [(ngModel)]="baseEntity.Value"
      (ngModelChange)="on_input_change();">
 
-    <p class="p-body">Budget</p>
-    <input type="text" class="input-personalized department-input-lg" [(ngModel)]="baseEntity.Budget"
+    <p>Budget</p>
+    <input type="text" class="input-personalized" [(ngModel)]="baseEntity.Budget"
      (ngModelChange)="on_input_change();">
-
   </div>
 
-  <div>
-    <div class="department-custom-card-footer">
-      <button ion-button class="btn-close" (click)="close()">CLOSE</button>
-      <button ion-button type="submit" class="btn-save" (click)="save()">SAVE</button>
-    </div>
+  <div class="department-card-footer">
+    <button mat-button mat-dialog-close type="button" class="btn-close" (click)="close()">CLOSE</button>
+    <button mat-button mat-dialog-close type="submit" class="btn-save" (click)="save()">SAVE</button>
   </div>
 </div>

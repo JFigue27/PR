@@ -1,21 +1,11 @@
-.card-listForm {
-    height:100%;
+.account-card {
     border-radius: 5px;
     background-color: white;
-    overflow-y: auto;
+    height: 300px;
+    width: 400px;
 }
 
-.card-userForm {
-    height: 100%;
-    margin: auto;
-    padding: 2em;
-    border-radius: 5px;
-    background-color: white;
-    overflow-y: auto;
-}
-
-.account-custom-card-header {
-    width: 100%;
+.account-card-header {
     color: #4c88ff;
     text-align: center;
     font-size: 22px;
@@ -23,29 +13,31 @@
     border-bottom: 1px solid #777777;
 }
 
-.account-custom-card-body {
+.account-card-body {
     height: 75%;
-    border-bottom: 1px solid #d1d1d1;
+    padding: 1em;
 }
 
-.p-body {
+.account-card-body > p {
+    text-align: center;
     font-size: 18px;
-    margin-top: 5%;
-    margin-left: 5%;
+    font-weight: 500;
 }
 
-.account-input-lg {
-    font-size: 18px;
-    width: 90%;
-    margin-left: 5%;
+.account-card-body > input {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
 }
 
-.account-select {
-    width: 90%;
-    margin-left: 2em;
+.account-card-body > textarea {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    border: 1px solid #e3e3e3;
 }
 
-.account-custom-card-footer {
+.account-card-footer {
     float: right;
 }
 
@@ -55,7 +47,6 @@
     font-size: 18px;
     border-radius: 3px;
     padding: 7px;
-    box-shadow: 1px 2px 5px #bebebe;
     margin-top: 10px;
     margin-right: 5px;
 }
@@ -66,7 +57,6 @@
     font-size: 18px;
     border-radius: 3px;
     padding: 7px;
-    box-shadow: 1px 2px 5px #bebebe;
     margin-top: 10px;
     margin-right: 5px;
 }
