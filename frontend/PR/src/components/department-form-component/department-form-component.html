@@ -11,6 +11,14 @@
     <p>Budget</p>
     <input type="text" class="input-personalized" [(ngModel)]="baseEntity.Budget"
      (ngModelChange)="on_input_change();">
+
+    <p>Department Manager</p>
+    <mat-select [(ngModel)]="baseEntity.ManagerKey" class="input-personalized" (ngModelChange)="on_input_change(item);">
+      <mat-option *ngFor="let user of users" [value]="user.UserKey">
+        {{ user.Value }}
+      </mat-option>
+    </mat-select>
+
   </div>
 
   <div class="department-card-footer">

@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { DepartmentServiceProvider } from '../../providers/department-service';
 import { FormController } from '../../services/FormController';
 import { MAT_DIALOG_DATA } from '@angular/material';
+import { UserServiceProvider } from '../../providers/user-service';
 
 @Component({
   selector: 'department-form-component',
@@ -9,23 +10,25 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 })
 export class DepartmentFormComponent extends FormController implements OnInit {
   errorMessage: string;
-
-  users = [
-    { value: 'User', viewValue: 'User' },
-    { value: 'Department Manager', viewValue: 'Department Manager' },
-    { value: 'General Manager', viewValue: 'General Manager' },
-    { value: 'MRO', viewValue: 'MRO' }
-  ];
+  users=[];
 
   constructor (
                 @Inject(MAT_DIALOG_DATA) public data: any,
+                public userService: UserServiceProvider,
                 public departmentService: DepartmentServiceProvider
               ) {
                 super({ service: departmentService });
               }
 
   ngOnInit() {
-      this.load(this.data.oEntityOrId);
+    this.load(this.data.oEntityOrId);
+
+    this.userService.loadEntities().subscribe(oResult => {
+      this.users = oResult.Result;
+    });
+
+
+
   }
 
   close() {

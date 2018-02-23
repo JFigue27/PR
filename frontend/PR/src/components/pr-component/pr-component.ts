@@ -10,6 +10,7 @@ import { ApprovalFormComponent } from '../approval-form-component/approval-form-
 import { ModalController } from 'ionic-angular/components/modal/modal-controller';
 import { SupplierServiceProvider } from '../../providers/supplier-service';
 import { UserServiceProvider } from '../../providers/user-service';
+import { AccountFormComponent } from '../account-form-component/account-form-component';
 
 @Component({
   selector: 'pr-component',
@@ -24,6 +25,7 @@ export class PRComponent extends FormController implements OnInit {
   currencies = [ { value: 'Dlls', viewValue: 'Dlls' } , { value: 'Mxn', viewValue: 'Mxn' }];
 
   constructor(
+              public dialog:MatDialog,
               public listService:PRServiceProvider,
               private params: NavParams,
               public userService: UserServiceProvider,
@@ -54,17 +56,28 @@ export class PRComponent extends FormController implements OnInit {
     .subscribe(oResponse => {
       this.approval = oResponse.Result;
     }) ;
+
   }
 
-  openModal(){
-    let profileModal = this.modal.create(ApprovalFormComponent,
-      { oEntityOrId: this.approval ? this.approval.id: null , PurchaseRequestKey: this.baseEntity.id });
-    profileModal.dismiss(false);
-    profileModal.present();
-    profileModal.onDidDismiss(data => {
-      this.load(this.params.get('oEntityOrId'));
+  openModal() {
+    let currentDepartment = this.departments.find(d => d.id == this.baseEntity.DepartmentKey);
+    let price = 0;
+    if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier1Key) {
+      price = this.getSupplier1Sum();
+    } else if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier2Key) {
+      price = this.getSupplier2Sum();
+    } else if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier3Key) {
+      price = this.getSupplier3Sum();
+    }
+
+    if ( currentDepartment && currentDepartment.Budget  && currentDepartment.Budget >= price) {
+      console.log('price ' + price);
+    }
+    this.dialog.open(ApprovalFormComponent, {
+      data: { oEntityOrId: this.approval ? this.approval.id : null, PurchaseRequestKey: this.baseEntity.id }
     });
   }
+
 
   getSupplier1Sum() {
     if (this.baseEntity && this.baseEntity.PRLines){
@@ -108,20 +121,19 @@ export class PRComponent extends FormController implements OnInit {
     }
   }
 
-
-
   getApprover() {
      if ( this.getSupplier1Sum() > 3) {
-
      }
   }
 
+  getCurrentRole() {
+    return this.userService.LoggedUser.Roles;
+  }
 
   afterLoad() {
     if (this.baseEntity) {
       this.handleDynamicRows(this.baseEntity.PRLines);
     }
-    this.userRole = this.userService.LoggedUser.Roles;
   }
   
   afterCreate() {
@@ -162,5 +174,45 @@ export class PRComponent extends FormController implements OnInit {
   removeItemLocally = function(index) {
     this.baseEntity.PRLines.splice(index, 1);
   }
+
+
+  on_supplier_select() {
+    this.baseEntity.editMode = true;
+    this.baseEntity.SupplierSelectedKey = null;
+  }
+
+  selectSupplier1() {
+    this.baseEntity.editMode = true;
+    this.baseEntity.SupplierSelectedKey = this.baseEntity.Supplier1Key;
+  }
+
+  selectSupplier2() {
+    this.baseEntity.editMode = true;
+    this.baseEntity.SupplierSelectedKey = this.baseEntity.Supplier2Key;
+  }
+
+  selectSupplier3() {
+    this.baseEntity.editMode = true;
+    this.baseEntity.SupplierSelectedKey = this.baseEntity.Supplier3Key;
+  }
+
+  getSupplier1Style() {
+    if ( this.baseEntity.SupplierSelectedKey && this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier1Key) {
+      return 'SupplierSelected';
+    }
+  }
+
+  getSupplier2Style() {
+    if (this.baseEntity.SupplierSelectedKey && this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier2Key) {
+      return 'SupplierSelected';
+    }
+  }
+
+  getSupplier3Style() {
+    if (this.baseEntity.SupplierSelectedKey && this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier3Key) {
+      return 'SupplierSelected';
+    }
+  }
+
 }
 

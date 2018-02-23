@@ -1,71 +1,88 @@
-.print {
-	display: none;
-}
+pr-component {
+	
+	.form-input {
+		background-color: rgba(238, 238, 238, 0.02);
+		border: none;
+		-webkit-appearance: none;
+		box-shadow:none;
+	}
 
-.form-input {
-	background-color: rgba(238, 238, 238, 0.02);
-	border: none;
-	-webkit-appearance: none;
-	box-shadow:none;
-}
+	.border-bottom {
+		width: 80%;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.36);
+	}
+	
+	.form-grid > table {
+		width: 100%;
+		text-align: center;
+	}
 
-.border-bottom {
-	width: 80%;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.36);
-}
- 
-.form-grid > table {
-	width: 100%;
-	text-align: center;
-}
+	th {
+		background-color: rgb(201, 201, 201); 
+		border: 1px solid rgba(70, 70, 70, 0.45);
+	}
 
-th {
-	background-color: rgb(201, 201, 201); 
-	border: 1px solid rgba(70, 70, 70, 0.45);
-}
+	td {
+		border: 1px solid rgba(70, 70, 70, 0.45);
+		text-align: center;
+	}
+	td > input {
+		text-align: center;
+	}
+	.td-select {
+		border-left: 1px solid white;
+		border-bottom: 1px solid white;
+	}
+	.td-select > button {
+		background-color: white;
+		border-radius: 3px;
+		font-size: 16px;
+		font-weight: 900;
+	}
 
-td {
-	border: 1px solid rgba(70, 70, 70, 0.45);
-	text-align: center;
-}
+	.SupplierSelected {
+		background-color: rgba(22, 150, 0, 0.596);
+		color: white;
+	}
 
+	.notes {
+		margin-top: 2em;
+		margin-bottom: 2em;
+		margin-left: 5px;
+		background-color: #f2f2f2;
+		width: 40%;
+	}
 
-.notes {
-	margin-top: 2em;
-	margin-bottom: 2em;
-	margin-left: 5px;
-    background-color: #f2f2f2;
-    width: 40%;
-}
+	.notes > div {
+		background-color:#f0c345;
+	}
 
-.notes > div {
-	background-color:#f0c345;
-}
+	.notes > div > p {
+		text-align: center;
+		font-size: 18px;
+		font-weight: 800;
+	}
 
-.notes > div > p {
-	text-align: center;
-	font-size: 18px;
-	font-weight: 800;
-}
+	.notes > textarea {
+		margin-left: 10px;
+	}
 
-.notes > textarea {
-	margin-left: 10px;
-}
-
-.footer-save {
-    float: right;
-    width: 100px;
-    height: 35px;
-    margin-top: 0.5%;
-    margin-right: 0.7%;
-    font-size: 18px;
-    font-weight: 400;
-	background-color: rgba(0, 136, 45, 0.925);
-	color: white;
-    box-shadow: 3px 2px 4px gray;
-    margin-bottom: 2%;
-}
-.footer-save:hover{
-    background-color: rgb(0, 71, 24);
-    transition:all 0.3s ease;
+	.footer-save {
+		float: right;
+		width: 100px;
+		height: 35px;
+		margin-top: 0.5%;
+		margin-right: 0.7%;
+		font-size: 18px;
+		font-weight: 400;
+		background-color: rgba(0, 136, 45, 0.925);
+		color: white;
+		box-shadow: 3px 2px 4px gray;
+		margin-bottom: 2%;
+	}
+	.footer-save:hover{
+		background-color: rgb(0, 71, 24);
+		transition:all 0.3s ease;
+	}
+	
 }

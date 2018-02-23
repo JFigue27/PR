@@ -17,9 +17,23 @@ namespace BusinessSpecificLogic.Logic
 
         protected override IQueryable<Approval> StaticDbQueryForList(IQueryable<Approval> dbQuery)
         {
+            if (LoggedUser.Role == "DepartmentManager" || LoggedUser.Role == "GeneralManager")
+            {
+                dbQuery = dbQuery.Where(e => e.UserApproverKey == LoggedUser.UserID || e.UserRequisitorKey == LoggedUser.UserID);
+            }
+            else
+            {
+                dbQuery = dbQuery.Where(e => e.UserRequisitorKey == LoggedUser.UserID);
+            }
+
             return dbQuery
                 .Include(e => e.InfoTrack)
                 .Include(e => e.InfoTrack.User_CreatedBy);
+        }
+
+        protected override void OnCreateInstance(Approval entity)
+        {
+            entity.Status = "Pending";
         }
     }
 }

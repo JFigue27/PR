@@ -35,14 +35,22 @@ namespace BusinessSpecificLogic.EF
         public string FriendlyIdentifier { get; set; }
         public DateTimeOffset? DateDepartmentManager { get; set; }
         public DateTimeOffset? DateGeneralManager { get; set; }
-        public string Supplier1 { get; set; }
-        public string Supplier2 { get; set; }
-        public string Supplier3 { get; set; }
+        public int? Supplier1Key { get; set; }
+        [ForeignKey("Supplier1Key")]
+        public Supplier Supplier1 { get; set; }
+        public int? Supplier2Key { get; set; }
+        [ForeignKey("Supplier2Key")]
+        public Supplier Supplier2 { get; set; }
+        public int? Supplier3Key { get; set; }
+        [ForeignKey("Supplier3Key")]
+        public Supplier Supplier3 { get; set; }
         public string SupplierCurrency1 { get; set; }
         public string SupplierCurrency2 { get; set; }
         public string SupplierCurrency3 { get; set; }
         public string Notes { get; set; }
-        public string SupplierSelected { get; set; }
+        public int? SupplierSelectedKey { get; set; }
+        [ForeignKey("SupplierSelectedKey")]
+        public Supplier SupplierSelected { get; set; }
         public string PONumber { get; set; }
         public int PRNumberKey { get; set; }
         [ForeignKey("PRNumberKey")]

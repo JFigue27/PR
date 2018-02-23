@@ -81,6 +81,7 @@ export abstract class CRUDFactory {
         return Observable.empty();
     }
 
+    
     save(oEntity): Observable<any> {
         if (oEntity.id > 0) {
             return this.updateEntity(oEntity);
@@ -136,10 +137,14 @@ export abstract class CRUDFactory {
     }
 
     getSingleWhere(property, value ): Observable<any> {
-        return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/GetSingleWhere/' + property + '/' + value
+        if(property && value ) {
+            return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/GetSingleWhere/' + property + '/' + value
             + '?noCache=' + Number(new Date()) , this.addAuthorization())
             .map(response => this.extractData(response ), this)
             .catch(this.generalError);
+        } else {
+            return Observable.empty();
+        }
     }
 
     abstract adapterIn(oEntity:any);

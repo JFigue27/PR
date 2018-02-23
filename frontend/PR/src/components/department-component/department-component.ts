@@ -22,13 +22,9 @@ export class DepartmentComponent extends ListController implements OnInit  {
   }
 
   addItem() {
-   const dialog = this.dialog.open(DepartmentFormComponent, {
-      data: { oEntityOrId: null }
+   this.dialog.open(DepartmentFormComponent, { 
+        data: { oEntityOrId: null }
     });
-
-    dialog.afterClosed().subscribe(result => {
-      console.log('2018');
-    })
   }
 
   afterLoad() {

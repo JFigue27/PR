@@ -1,17 +1,22 @@
-<section class="section-users">
-  <h1>
-    <ion-icon name="ios-contact"></ion-icon> Departments
-  </h1>
-
-  <div class="div-users">
-
-    <div class="single-user" *ngFor="let item of baseList">
-      <div (click)="openItem(item)">{{ item.ResponseDescription}} </div>
-      <div>{{ item.InfoTrack?.User_CreatedBy.Value }}</div>
-      <button (click)="removeItem(item)" (ngModel)="item">
-        <ion-icon name="trash" large></ion-icon>
-      </button>
-    </div>
-  </div>
-
-</section>
+<div class="approval-table table-responsive-vertical shadow-z-1" ng-hide="!baseList || baseList.length == 0">
+  <table class="table table-condensed" style="table-layout: fixed;">
+    <thead>
+      <tr>
+        <th style="width: 150px;">PR Number</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Date Requested</th>
+        <th style="width: 110px;">Requested By</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of baseList" (click)="openItem(item)">
+        <td data-title="PR Number">{{ item.PurchaseRequestKey}}</td>
+        <td data-title="Description">{{ item.RequestDescription }}</td>
+        <td data-title="Status">{{ item.Status }}</td>
+        <td data-title="Date Requested">{{ item.DateRequested }}</td>
+        <td data-title="Requested By">{{ item.InfoTrack?.User_CreatedBy.Value }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

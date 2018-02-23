@@ -15,17 +15,17 @@ export class MyApp {
   rootPage: any = ListPage;
   pages: Array<{ title: string, component: any }>;
 
-  constructor( public platform: Platform,
+  constructor (
+              public platform: Platform,
               public modal: ModalController,
               public userService: UserServiceProvider
-  ) {
-
-    this.initializeApp();
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
-    ];
-  }
+        ) {
+          this.initializeApp();
+          this.pages = [
+            { title: 'Home', component: HomePage },
+            { title: 'List', component: ListPage }
+          ];
+      }
 
   initializeApp() {
     let user = JSON.parse(localStorage.getItem('user')) || {};

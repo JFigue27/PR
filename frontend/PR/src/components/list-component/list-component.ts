@@ -12,9 +12,9 @@ import { App } from 'ionic-angular/components/app/app';
 export class ListComponent extends ListController implements OnInit {
 
   constructor (
-              public listService: PRServiceProvider,
-              public nav: NavController,
-              private app: App
+                public listService: PRServiceProvider,
+                public nav: NavController,
+                private app: App
             ) {
                 super({ service: listService, paginate: true, limit: 10 });
         }

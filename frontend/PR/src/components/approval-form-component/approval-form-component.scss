@@ -1,26 +1,57 @@
-.div-approval {
-    height:100%;
-    border-radius: 5px;
-    background-color: white;
-    overflow-y: auto;
-    padding: 1em;
-}
-
-.div-approval > p{
-    font-size: 14px;
-    text-decoration: none; 
-}
-
-
-.div-approval > input{
-    width: 100%;
-    font-size: 18px;
-    text-decoration: none;
-    border: none;
-    border-bottom: 1px solid rgb(133, 133, 133);
-}
-
 approval-form-component {
-    width: 600px !important;
-    margin: auto;
+    .card {
+        border-radius: 5px;
+        background-color: white;
+        height: 300px;
+        width: 400px;
+    }
+
+    .card-header {
+        color: #4c88ff;
+        text-align: center;
+        font-size: 22px;
+        font-weight: 600;
+        border-bottom: 1px solid #777777;
+    }
+
+    .card-body {
+        height: 75%;
+        padding: 1em;
+    }
+
+    .card-body > p {
+        text-align: center;
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    .card-body > input {
+        width: 100%;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .card-footer {
+        float: right;
+    }
+
+    .btn-close {
+        background-color: #6060f2;
+        color: white;
+        font-size: 18px;
+        border-radius: 3px;
+        padding: 7px;
+        margin-top: 10px;
+        margin-right: 5px;
+    }
+
+    .btn-save {
+        background-color: #006e1c;
+        color: white;
+        font-size: 18px;
+        border-radius: 3px;
+        padding: 7px;
+        margin-top: 10px;
+        margin-right: 5px;
+    }
 }
