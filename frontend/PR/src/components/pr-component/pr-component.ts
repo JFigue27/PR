@@ -20,11 +20,12 @@ export class PRComponent extends FormController implements OnInit {
   accounts=[];
   departments=[];
   suppliers=[];
+  users=[];
   approval:any;
   userRole:string;
   currencies = [ { value: 'Dlls', viewValue: 'Dlls' } , { value: 'Mxn', viewValue: 'Mxn' }];
 
-  constructor(
+  constructor (
               public dialog:MatDialog,
               public listService:PRServiceProvider,
               private params: NavParams,
@@ -35,8 +36,8 @@ export class PRComponent extends FormController implements OnInit {
               private supplierService:SupplierServiceProvider,
               public modal: ModalController
             ) {
-    super( { service: listService } );
-  }
+                super( { service: listService } );
+        }
 
   ngOnInit() {
     this.load(this.params.get('oEntityOrId'));
@@ -46,6 +47,10 @@ export class PRComponent extends FormController implements OnInit {
     }); 
     this.accountService.loadEntities().subscribe(oResult => {
        this.accounts = oResult.Result;
+    });
+
+    this.userService.loadEntities().subscribe(oResult => {
+      this.users = oResult.Result;
     });
 
     this.supplierService.loadEntities().subscribe(oResult => {
@@ -174,12 +179,16 @@ export class PRComponent extends FormController implements OnInit {
   removeItemLocally = function(index) {
     this.baseEntity.PRLines.splice(index, 1);
   }
-
-
+  
   on_supplier_select() {
     this.baseEntity.editMode = true;
     this.baseEntity.SupplierSelectedKey = null;
   }
+
+  on_department_change(department) {
+    this.baseEntity.DepartmentManagerKey = department.ManagerKey;
+  }
+
 
   selectSupplier1() {
     this.baseEntity.editMode = true;

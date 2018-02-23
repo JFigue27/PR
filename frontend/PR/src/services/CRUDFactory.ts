@@ -58,11 +58,23 @@ export abstract class CRUDFactory {
         return null;
     }
 
+    
     getPage(limit, pageNumber, params='?') {
         return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/getPage/' + limit +
             '/' + pageNumber + params + '&noCache='+Number(new Date()), this.addAuthorization())
         .map(response => this.extractData(response), this)
         .catch(this.generalError);
+    }
+
+    getSingleWhere(property, value): Observable<any> {
+        if (property && value) {
+            return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/GetSingleWhere/' + property + '/' + value
+                + '?noCache=' + Number(new Date()), this.addAuthorization())
+                .map(response => this.extractData(response), this)
+                .catch(this.generalError);
+        } else {
+            return Observable.empty();
+        }
     }
 
     loadEntities(params?) { 
@@ -134,17 +146,6 @@ export abstract class CRUDFactory {
             }
         }
         return Observable.throw(error.statusText);
-    }
-
-    getSingleWhere(property, value ): Observable<any> {
-        if(property && value ) {
-            return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/GetSingleWhere/' + property + '/' + value
-            + '?noCache=' + Number(new Date()) , this.addAuthorization())
-            .map(response => this.extractData(response ), this)
-            .catch(this.generalError);
-        } else {
-            return Observable.empty();
-        }
     }
 
     abstract adapterIn(oEntity:any);

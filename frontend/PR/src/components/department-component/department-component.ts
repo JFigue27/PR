@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material';
 })
 export class DepartmentComponent extends ListController implements OnInit  {
 
-  constructor(
+  constructor (
               public departmentSerivceProvider: DepartmentServiceProvider,
               public dialog:MatDialog
             ) {
@@ -29,19 +29,18 @@ export class DepartmentComponent extends ListController implements OnInit  {
 
   afterLoad() {
   }
-
-
- onOpenItem(oEntity) {
-  this.dialog.open(DepartmentFormComponent, {
-      data: { oEntityOrId: oEntity.id }
-  });
+  
+  onOpenItem(oEntity) {
+    this.dialog.open(DepartmentFormComponent, {
+        data: { oEntityOrId: oEntity.id }
+    });
   } 
 
-afterRemove() {
-  this.load();
-}
+  afterRemove() {
+    this.load();
+  }
 
-afterCreate() {
-}
+  afterCreate() {
+  }
 
 }

@@ -30,39 +30,45 @@
                     <thead>
                         <tr>
                             <th colspan="4"></th>
-                            <th colspan="2">
-                                <mat-select placeholder="$" style="width:29%;" [(ngModel)]="baseEntity.SupplierCurrency1" (ngModelChange)="on_input_change(item);">
+                            <th colspan="2" [ngClass]="getSupplier1Style()">
+                                <mat-select placeholder="$" style="width:29%;" [(ngModel)]="baseEntity.SupplierCurrency1" 
+                                (ngModelChange)="on_input_change(item);"  >
                                     <mat-option *ngFor="let currency of currencies" [value]="currency.value">
                                         {{ currency.value }}
                                     </mat-option>
                                 </mat-select>
-                                <mat-select style="width:59%;" [(ngModel)]="baseEntity.Supplier1Key" (ngModelChange)="on_input_change(item);on_supplier_select();">
+                                <mat-select style="width:59%;" [(ngModel)]="baseEntity.Supplier1Key"
+                                (ngModelChange)="on_input_change(item);on_supplier_select();">
                                     <mat-option *ngFor="let supplier of suppliers" [value]="supplier.SupplierKey">
                                         {{ supplier.Value }}
                                     </mat-option>
                                 </mat-select>
                             </th>
-                            <th  colspan="2">
-                                    <mat-select placeholder="$" style="width:29%;" [(ngModel)]="baseEntity.SupplierCurrency2" 
-                                    (ngModelChange)="on_input_change(item);">
-                                        <mat-option *ngFor="let currency of currencies" [value]="currency.Value">
-                                            {{ currency.value }}
-                                        </mat-option>
-                                    </mat-select> 
-                                    <mat-select style="width:59%;" [(ngModel)]="baseEntity.Supplier2Key" (ngModelChange)="on_input_change(item);on_supplier_select();">
-                                        <mat-option *ngFor="let supplier of suppliers" [value]="supplier.SupplierKey">
-                                            {{ supplier.Value }}
-                                        </mat-option>
-                                    </mat-select>
+                            
+                            <th  colspan="2" [ngClass]="getSupplier2Style()">
+                                <mat-select placeholder="$" style="width:29%;" [(ngModel)]="baseEntity.SupplierCurrency2" 
+                                (ngModelChange)="on_input_change(item);" >
+                                    <mat-option *ngFor="let currency of currencies" [value]="currency.Value">
+                                        {{ currency.value }}
+                                    </mat-option>
+                                </mat-select> 
+                                <mat-select style="width:59%;" [(ngModel)]="baseEntity.Supplier2Key"
+                                (ngModelChange)="on_input_change(item);on_supplier_select();">
+                                    <mat-option *ngFor="let supplier of suppliers" [value]="supplier.SupplierKey">
+                                        {{ supplier.Value }}
+                                    </mat-option>
+                                </mat-select>
                             </th>
-                            <th colspan="2">
+
+                            <th colspan="2" [ngClass]="getSupplier3Style()">
                                 <mat-select placeholder="$" style="width:29%;" [(ngModel)]="baseEntity.SupplierCurrency3"
-                                 (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
+                                 (ngModelChange)="on_input_change(item);" >
                                     <mat-option *ngFor="let currency of currencies" [value]="currency.value">
                                         {{ currency.value }}
                                     </mat-option>
                                 </mat-select>
-                                <mat-select style="width:59%;" [(ngModel)]="baseEntity.Supplier3Key" (ngModelChange)="on_input_change(item);on_supplier_select();">
+                                <mat-select style="width:59%;" [(ngModel)]="baseEntity.Supplier3Key" 
+                                (ngModelChange)="on_input_change(item);on_supplier_select();">
                                     <mat-option *ngFor="let supplier of suppliers" [value]="supplier.SupplierKey">
                                         {{ supplier.Value }}
                                     </mat-option>
@@ -74,12 +80,12 @@
                             <th width="35%">Description</th>
                             <th width="5%">U/M</th>
                             <th width="4%">Quantity.</th>
-                            <th width="7%">Price Each</th>
-                            <th width="7%">Total</th>
-                            <th width="7%">Price Each</th>
-                            <th width="7%">Total</th>
-                            <th width="7%">Price Each</th>
-                            <th width="7%">Total</th>
+                            <th width="7%" [ngClass]="getSupplier1Style()">Price Each</th>
+                            <th width="7%" [ngClass]="getSupplier1Style()" >Total</th>
+                            <th width="7%" [ngClass]="getSupplier2Style()" >Price Each</th>
+                            <th width="7%" [ngClass]="getSupplier2Style()" >Total</th>
+                            <th width="7%" [ngClass]="getSupplier3Style()" >Price Each</th>
+                            <th width="7%" [ngClass]="getSupplier3Style()" >Total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -110,7 +116,7 @@
                                     (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
                                 </td>
                             
-                                <td width="7%">
+                                <td width="7%" [ngClass]="getSupplier1Style()">
                                     <p style="text-align: center;font-weight: bold;">{{item.PriceEach * item.Qty | currency}}</p>
                                 </td>
 
@@ -119,7 +125,7 @@
                                     [(ngModel)]="item.PriceEach2" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
                                 </td>
                                 
-                                <td width="5%">
+                                <td width="5%" [ngClass]="getSupplier2Style()">
                                     <p style="text-align: center;font-weight: bold;">{{item.PriceEach2 * item.Qty | currency}}</p>
                                 </td>
                                 <td width="7%" [ngClass]="getSupplier3Style()">
@@ -127,7 +133,7 @@
                                     [(ngModel)]="item.PriceEach3" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
                                 </td>
                                 
-                                <td width="7%">
+                                <td width="7%" [ngClass]="getSupplier3Style()">
                                     <p style="text-align: center;font-weight: bold;">{{item.PriceEach3 * item.Qty | currency}}</p>
                                 </td>
                             </tr>
@@ -177,9 +183,10 @@
                                         Department
                                 </ion-col>
                                 <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
-                                    <mat-select [(ngModel)]="baseEntity.DepartmentKey" placeholder="Select.." 
-                                        (ngModelChange)="on_input_change(item);" class="border-bottom" style="width:80%;">
-                                        <mat-option *ngFor="let department of departments" [value]="department.id">
+                                    <mat-select [(ngModel)]="baseEntity.Department" placeholder="Select.." 
+                                        (ngModelChange)="on_input_change(item);on_department_change(baseEntity.Department);"
+                                        class="border-bottom" style="width:80%;">
+                                        <mat-option *ngFor="let department of departments" [value]="department">
                                             {{ department.Value }}
                                         </mat-option> 
                                     </mat-select>
@@ -197,7 +204,7 @@
                                         Department manager
                                 </ion-col>
                                 <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
-                                    <mat-select [(ngModel)]="baseEntity.DepartmentManager" placeholder="Select.." 
+                                    <mat-select [(ngModel)]="baseEntity.DepartmentManagerKey" placeholder="Select.." 
                                     (ngModelChange)="on_input_change(item);" class="border-bottom" style="width:80%;">
                                         <mat-option *ngFor="let user of users" [value]="user.id">
                                             {{ user.Value }}

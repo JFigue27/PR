@@ -29,8 +29,12 @@ namespace BusinessSpecificLogic.EF
         public string RequisitionName { get; set; }
         public string Department { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
-        public string DepartmentManager { get; set; }
-        public string GeneralManager { get; set; }
+        public int? DepartmentManagerKey { get; set; }
+        [ForeignKey("DepartmentManagerKey")]
+        public User DepartmentManager { get; set; }
+        public int? GeneralManagerKey { get; set; }
+        [ForeignKey("GeneralManagerKey")]
+        public User GeneralManager { get; set; }
         public string AccountNo { get; set; }
         public string FriendlyIdentifier { get; set; }
         public DateTimeOffset? DateDepartmentManager { get; set; }

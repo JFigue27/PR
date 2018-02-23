@@ -17,7 +17,7 @@ namespace BusinessSpecificLogic.Logic
 
         protected override IQueryable<Department> StaticDbQueryForList(IQueryable<Department> dbQuery)
         {
-            return dbQuery.Include(e => e.GLAccounts);
+            return dbQuery.Include(e => e.GLAccounts).Include(e => e.Manager);
         }
     }
 }

@@ -23,12 +23,11 @@ export class DepartmentFormComponent extends FormController implements OnInit {
   ngOnInit() {
     this.load(this.data.oEntityOrId);
 
-    this.userService.loadEntities().subscribe(oResult => {
+    this.userService.getPage(0,1,'?Role=DepartmentManager').subscribe(oResult => {
+      console.log('2018');
+      console.log(oResult.Result);
       this.users = oResult.Result;
     });
-
-
-
   }
 
   close() {

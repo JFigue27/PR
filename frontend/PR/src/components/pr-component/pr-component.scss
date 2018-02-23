@@ -44,6 +44,9 @@ pr-component {
 		background-color: rgba(22, 150, 0, 0.596);
 		color: white;
 	}
+	.SupplierSelected > p, .SupplierSelected > mat-select {
+		color:white;
+	}
 
 	.notes {
 		margin-top: 2em;

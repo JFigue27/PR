@@ -18,7 +18,7 @@ export class SuppliersComponent extends ListController implements OnInit {
 
   ngOnInit() {
     this.load();
- }
+  }
 
   addItem() {
     this.dialog.open(SupplierFormComponent, {
