@@ -145,11 +145,13 @@ namespace ReusableWebAPI.Controllers
             List<Expression<Func<Entity, bool>>> db_wheres = new List<Expression<Func<Entity, bool>>>();
             List<Expression<Func<Entity, bool>>> wheres = new List<Expression<Func<Entity, bool>>>();
 
+
             string filterGeneral = HttpContext.Current.Request["filterGeneral"];
             if (!isValidJSValue(filterGeneral))
             {
                 filterGeneral = "";
             }
+
 
             string filterParentField = HttpContext.Current.Request["parentField"];
             if (!isValidJSValue(filterParentField))
@@ -157,11 +159,13 @@ namespace ReusableWebAPI.Controllers
                 filterParentField = "";
             }
 
+
             string filterParentKey = HttpContext.Current.Request["parentKey"];
             if (!isValidJSValue(filterParentKey))
             {
                 filterParentKey = "";
             }
+
 
             string filterUser = HttpContext.Current.Request["filterUser"];
             if (!isValidJSValue(filterUser))
@@ -176,17 +180,22 @@ namespace ReusableWebAPI.Controllers
                 }
             }
 
+
             try
             {
                 if (filterParentKey.Length > 0 && filterParentField.Length > 0)
                 {
 
+
                     ParameterExpression entityParameter = Expression.Parameter(typeof(Entity), "entityParameter");
                     Expression childProperty = Expression.PropertyOrField(entityParameter, filterParentField);
 
+
                     Expression comparison = Expression.Equal(childProperty, Expression.Constant(int.Parse(filterParentKey)));
 
+
                     Expression<Func<Entity, bool>> lambda = Expression.Lambda<Func<Entity, bool>>(comparison, entityParameter);
+
 
                     //ConstantExpression idExpression = Expression.Constant(int.Parse(filterParentKey), typeof(int));
                     //BinaryExpression parentFieldEqualsIdExpression = Expression.Equal(parentField, idExpression);
@@ -195,11 +204,14 @@ namespace ReusableWebAPI.Controllers
                     //        parentFieldEqualsIdExpression,
                     //        new ParameterExpression[] { parentField });
 
+
                     //Expression<Func<Entity, bool>> where = entityFiltered =>
                     //        typeof(Entity).GetProperty(filterParentField).GetValue(entityFiltered, null).ToString() == filterParentKey;
 
+
                     db_wheres.Add(lambda);
                 }
+
 
                 foreach (var queryParam in HttpContext.Current.Request.QueryString.AllKeys)
                 {
@@ -207,6 +219,7 @@ namespace ReusableWebAPI.Controllers
                     if (isValidParam(queryParam) && isValidJSValue(queryParamValue))
                     {
                         string sPropertyName = queryParam;//.Substring(6);
+
 
                         PropertyInfo oProp = typeof(Entity).GetProperty(sPropertyName);
                         Type tProp = oProp.PropertyType;
@@ -219,20 +232,34 @@ namespace ReusableWebAPI.Controllers
                             tProp = new NullableConverter(oProp.PropertyType).UnderlyingType;
                         }
 
+
                         ParameterExpression entityParameter = Expression.Parameter(typeof(Entity), "entityParameter");
                         Expression childProperty = Expression.PropertyOrField(entityParameter, sPropertyName);
 
 
+
+
                         var value = Expression.Constant(Convert.ChangeType(queryParamValue, tProp));
+
 
                         // let's perform the conversion only if we really need it
                         var converted = value.Type != childProperty.Type
                             ? Expression.Convert(value, childProperty.Type)
                             : (Expression)value;
 
-                        Expression comparison = Expression.Equal(childProperty, converted);
 
-                        Expression<Func<Entity, bool>> lambda = Expression.Lambda<Func<Entity, bool>>(comparison, entityParameter);
+                        Expression<Func<Entity, bool>> lambda;
+                        if (tProp == typeof(String))
+                        {
+                            MethodInfo method = typeof(string).GetMethod("Contains", new[] { typeof(string) });
+                            lambda = Expression.Lambda<Func<Entity, bool>>(Expression.Call(converted, method, childProperty), entityParameter);
+                        }
+                        else
+                        {
+                            Expression comparison = Expression.Equal(childProperty, converted);
+                            lambda = Expression.Lambda<Func<Entity, bool>>(comparison, entityParameter);
+                        }
+
 
                         db_wheres.Add(lambda);
                     }
@@ -242,6 +269,7 @@ namespace ReusableWebAPI.Controllers
             {
                 return response.Error(ex.ToString());
             }
+
 
             return logic.GetPage(perPage, page, filterGeneral, wheres.ToArray(), orderBy, db_wheres.ToArray());
         }
