@@ -183,10 +183,10 @@
                                         Department
                                 </ion-col>
                                 <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
-                                    <mat-select [(ngModel)]="baseEntity.Department" placeholder="Select.." 
-                                        (ngModelChange)="on_input_change(item);on_department_change(baseEntity.Department);"
+                                    <mat-select [(ngModel)]="baseEntity.DepartmentKey" placeholder="Select.." 
+                                        (ngModelChange)="on_input_change(item);on_department_change(baseEntity.DepartmentKey);"
                                         class="border-bottom" style="width:80%;">
-                                        <mat-option *ngFor="let department of departments" [value]="department">
+                                        <mat-option *ngFor="let department of departments" [value]="department.id">
                                             {{ department.Value }}
                                         </mat-option> 
                                     </mat-select>

@@ -185,8 +185,10 @@ export class PRComponent extends FormController implements OnInit {
     this.baseEntity.SupplierSelectedKey = null;
   }
 
-  on_department_change(department) {
+  on_department_change(departmentKey) {
+    let department = this.departments.find(d => d.id == this.baseEntity.DepartmentKey);
     this.baseEntity.DepartmentManagerKey = department.ManagerKey;
+    this.baseEntity.DepartmentKey = department.id;
   }
 
 

@@ -27,7 +27,6 @@ namespace BusinessSpecificLogic.EF
         ///Start:Generated:Properties<<<
         public string PurposeOrUse { get; set; }
         public string RequisitionName { get; set; }
-        public string Department { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
         public int? DepartmentManagerKey { get; set; }
         [ForeignKey("DepartmentManagerKey")]
