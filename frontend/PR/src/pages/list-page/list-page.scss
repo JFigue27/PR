@@ -34,6 +34,17 @@
     border-radius: 3px;
 }
 
+.main-menu {
+    background-color: #f8f8f8;
+    border: none;
+    font-weight: 700;
+}
+
+.main-menu:hover{
+    background-color: #e6e6e6;
+    transition: 0.5s;
+}
+
 @media screen and (max-width: 1300px) {
     .div-logo {
         width: 40%;

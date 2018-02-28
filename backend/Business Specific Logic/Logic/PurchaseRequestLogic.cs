@@ -50,9 +50,12 @@ namespace BusinessSpecificLogic.Logic
         {
             if (mode == OPERATION_MODE.ADD)
             {
-
-                #region PR Number Generation
                 var ctx = context as POContext;
+                if (entity.GeneralManager != null)
+                {
+                    ctx.Entry(entity.GeneralManager).State = EntityState.Unchanged;
+                }
+                #region PR Number Generation
 
                 DateTimeOffset date = DateTimeOffset.Now;
 
@@ -117,6 +120,18 @@ namespace BusinessSpecificLogic.Logic
                     ctx.SaveChanges();
                 }
             }
+        }
+
+        protected override void OnCreateInstance(PurchaseRequest entity)
+        {
+            var ctx = context as POContext;
+            var user = ctx.Users.FirstOrDefault(u => u.Role == "GeneralManager");
+            if (user == null)
+            {
+                throw new KnownError("You have not configured a General Manager yet");
+            }
+            entity.GeneralManagerKey = user.id;
+            entity.GeneralManager = user;
         }
     }
 }

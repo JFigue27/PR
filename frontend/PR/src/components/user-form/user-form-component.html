@@ -1,44 +1,42 @@
-<div class="user-card">
-  <div class="user-card-header">
-    <h3>User</h3>
+<div class="card">
+  <div class="card-header">
+    USERS
   </div>
 
-  <div class="user-card-body">
+  <div class="card-body">
+    <div class="example-form">
+      <mat-form-field class="example-full-width">
+        <input matInput [(ngModel)]="baseEntity.Value" placeholder="Value" (ngModelChange)="on_input_change();">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="User name" [(ngModel)]="baseEntity.UserName" (ngModelChange)="on_input_change();">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-select placeholder="Role" [(ngModel)]="baseEntity.Role" (ngModelChange)="on_input_change(item);">
+          <mat-option *ngFor="let role of roles" [value]="role.value">
+            {{ role.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <p>Value</p>
-    <input type="text" placeholder="Username" class="input-personalized input-lg"
-    [(ngModel)]="baseEntity.Value" (ngModelChange)="on_input_change();">
-    
-    <p>UserName</p>
-    <input type="text" placeholder="Username" class="input-personalized input-lg"
-    [(ngModel)]="baseEntity.UserName" (ngModelChange)="on_input_change();">
-    
-    <p>Role</p>
-    <mat-select placeholder="Select.." [(ngModel)]="baseEntity.Role"  style="font-size:16px;"
-    class="input-personalized" (ngModelChange)="on_input_change(item);">
-      <mat-option *ngFor="let role of roles" [value]="role.value">
-        {{ role.viewValue }}
-      </mat-option>
-    </mat-select>
+      <div class="box-password">
+        <!-- in case of existing entity -->
+        <label style="font-size:16px; font-weight: 600;" *ngIf="baseEntity.UserKey > 0">Update password &nbsp;
+          <ion-checkbox [(ngModel)]="baseEntity.ChangePassword"></ion-checkbox>
+        </label>
+      
+        <div *ngIf="baseEntity.UserKey == 0 || baseEntity.ChangePassword">
+          <input type="password" placeholder="Password" class="input-personalized input-password" [(ngModel)]="baseEntity.Password"
+            (ngModelChange)="on_input_change();">
+      
+          <input type="password" placeholder="Confirm Password" class="input-personalized input-password" [(ngModel)]="baseEntity.ConfirmPassword"
+            (ngModelChange)="on_input_change();">
+        </div>
+      </div> 
 
-    <div class="box-password">
-      <!-- in case of existing entity -->
-      <label style="font-size:16px; font-weight: 600;" *ngIf="baseEntity.UserKey > 0">Update password &nbsp;
-        <ion-checkbox [(ngModel)]="baseEntity.ChangePassword"></ion-checkbox>
-      </label>
-    
-      <div *ngIf="baseEntity.UserKey == 0 || baseEntity.ChangePassword">
-        <input type="password" placeholder="Password" class="input-personalized input-password"
-        [(ngModel)]="baseEntity.Password" (ngModelChange)="on_input_change();">
-    
-        <input type="password" placeholder="Confirm Password" class="input-personalized input-password"
-        [(ngModel)]="baseEntity.ConfirmPassword" (ngModelChange)="on_input_change();">
-      </div>
+
+      <button mat-dialog-close style="background-color: #2690fd;" (click)="save()">Save</button>
+      <button mat-dialog-close style="background-color: #838a91;">Close</button>
     </div>
-  </div>
-
-  <div class="user-card-footer">
-    <button mat-dialog-close class="btn-close">Close</button>
-    <button mat-dialog-close type="submit" (click)="save()" class="btn-save">SAVE</button>
   </div>
 </div>

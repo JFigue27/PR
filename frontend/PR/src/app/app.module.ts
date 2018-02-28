@@ -18,6 +18,7 @@ import { SupplierFormComponent } from '../components/supplier-form-component/sup
 import { DepartmentFormComponent } from '../components/department-form-component/department-form-component';
 import { AccountFormComponent } from '../components/account-form-component/account-form-component';
 import { ApprovalFormComponent } from '../components/approval-form-component/approval-form-component';
+import { EmailFormComponent } from '../components/email-form-component/email-form-component';
 
 //MODULES
 import { AttachmentsModule } from '../components/attachments.module';
@@ -31,6 +32,7 @@ import { SuppliersPage } from '../pages/suppliers/suppliers-page';
 import { AccountPage } from '../pages/account-page/account-page';
 import { DepartmentPage } from '../pages/department-page/department-page';
 import { ApprovalPage } from '../pages/approval-page/approval-page';
+import { EmailPage } from '../pages/email-page/email-page';
 
 //SERVICES
 import { LoginService } from '../services/login.service';
@@ -52,7 +54,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
-
+import { MatMenuModule } from '@angular/material/menu';
 
 
 @NgModule({
@@ -72,6 +74,7 @@ import { MatTableModule } from '@angular/material/table';
     AccountFormComponent,
     ApprovalComponent,
     ApprovalFormComponent,
+    EmailFormComponent,
     //Pages
     HomePage,
     ListPage,
@@ -80,7 +83,8 @@ import { MatTableModule } from '@angular/material/table';
     DepartmentPage,
     AccountPage,
     SuppliersPage,
-    ApprovalPage
+    ApprovalPage,
+    EmailPage,
   ],
   imports: [
     AttachmentsModule,
@@ -93,6 +97,7 @@ import { MatTableModule } from '@angular/material/table';
     CommonModule,
     MatDialogModule,
     MatTableModule,
+    MatMenuModule,
     BrowserAnimationsModule,
     IonicModule.forRoot(MyApp)
   ],
@@ -113,6 +118,7 @@ import { MatTableModule } from '@angular/material/table';
     AccountFormComponent,
     ApprovalComponent,
     ApprovalFormComponent,
+    EmailFormComponent,
     //Pages
     HomePage,
     ListPage,
@@ -121,7 +127,8 @@ import { MatTableModule } from '@angular/material/table';
     SuppliersPage,
     DepartmentPage,
     AccountPage,
-    ApprovalPage
+    ApprovalPage,
+    EmailPage
   ],
   providers: [
     LoginService,

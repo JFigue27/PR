@@ -6,6 +6,12 @@
     background-color: #ebebeb;
 }
 
+mat-dialog-container {
+    padding: 0px !important;
+    width: 80% !important;
+    margin: auto;
+}
+
 // reusable buttons
 .input-personalized { 
 	background-color: rgba(238, 238, 238, 0.02);

@@ -33,6 +33,7 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   afterCreate() { 
     this.baseEntity.ConvertedDateRequested = new Date();
     this.baseEntity.UserRequisitorKey = this.userService.LoggedUser.UserKey;
+    this.baseEntity.UserApproverKey = this.data.ManagerAssigned;
     this.baseEntity.PurchaseRequestKey = this.data.PurchaseRequestKey;
   }
 
@@ -55,6 +56,7 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   }
 
   afterLoad() {
+    this.baseEntity.UserApproverKey = this.data.ManagerAssigned;
   }
 
   afterSave() { 

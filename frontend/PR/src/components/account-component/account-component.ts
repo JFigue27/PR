@@ -21,8 +21,12 @@ export class AccountComponent extends ListController implements OnInit {
   }
 
   addItem() {
-    this.dialog.open(AccountFormComponent, {
+    let dialog = this.dialog.open(AccountFormComponent, {
       data: { oEntityOrId: null }
+    });
+
+    dialog.afterClosed().subscribe(result => {
+      this.load();
     });
   }
 
@@ -30,9 +34,14 @@ export class AccountComponent extends ListController implements OnInit {
   }
 
   onOpenItem(oEntity) {
-    this.dialog.open(AccountFormComponent, {
+    let dialog = this.dialog.open(AccountFormComponent, {
       data: { oEntityOrId: oEntity.id }
     });
+
+    dialog.afterClosed().subscribe(result => {
+      this.load();
+    });
+
   }
 
   afterRemove() {

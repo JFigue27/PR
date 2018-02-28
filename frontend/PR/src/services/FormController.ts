@@ -57,7 +57,7 @@ export abstract class FormController {
 			return this.config.service.save(this.baseEntity).subscribe(oEntity => {
 				this.baseEntity = oEntity;
 				this.afterSave();
-				alertify.success('Saved successfully');
+				alertify.success('SUCCESFULLY SAVED');
 			});
 		}
 		return Observable.empty();

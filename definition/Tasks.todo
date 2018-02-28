@@ -24,7 +24,7 @@ TODO
   ✔ Two additional quote columns. @done(18-02-13 11:38)
   Approval Process:
     ☐ Department Manager once final quote is accepted.
-    ☐ If quote exceeds manager’s authorization level, redirect to VIP.
+    ✔ If quote exceeds manager’s authorization level, redirect to VIP. @done(18-02-27 12:03)
     ☐ Once accepted, redirect Purchasing Manager for final approval.
     ☐ Send to Buyer.
   ☐ Handle approval/rejection responses.
@@ -79,3 +79,5 @@ Approvals
     pr number
     DateRequestedAt
     RequestBy
+
+    budget por cuentas

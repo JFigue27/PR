@@ -5,12 +5,20 @@
         <label>PR System</label>
       </div>
       <div class="div-menu">
-        <div (click)="OpenApproval()">Approvals</div>
-        <div (click)="OpenAccount()">Accounts</div>
-        <div (click)="OpenDepartment()">Departments</div>
-        <div (click)="OpenUser()">Users</div>
-        <div (click)="OpenSupplier()">Suppliers</div>
-        <div (click)="logout()"><ion-icon name="ios-contact"></ion-icon> {{ getUserName() | uppercase }}</div>
+        <div (click)="openApproval()">Approvals</div>
+        <div (click)="openAccount()">Accounts</div>
+        <div (click)="openDepartment()">Departments</div>
+        <div (click)="openUser()">Users</div>
+        <div (click)="openSupplier()">Suppliers</div>
+        <div>
+        <button mat-button [matMenuTriggerFor]="menu" class="main-menu">
+          <ion-icon name="ios-contact"></ion-icon> {{ getUserName() | uppercase }}
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="openProfile()">Profile</button>
+          <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+        </div>
       </div>
     </div>
   </ion-navbar>

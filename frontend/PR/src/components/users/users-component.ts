@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServiceProvider } from '../../providers/user-service';
-import { ModalController } from 'ionic-angular';
 import { UserFormComponent } from '../user-form/user-form-component';
 import { ListController } from '../../services/ListController';
 import { MatDialog } from '@angular/material';
@@ -12,8 +11,8 @@ import { MatDialog } from '@angular/material';
 export class UsersComponent extends ListController implements OnInit {
 
   constructor (
-          public dialog:MatDialog,
-          public userService: UserServiceProvider
+                public dialog:MatDialog,
+                public userService: UserServiceProvider
           ){
             super({ service: userService });
           }
@@ -23,8 +22,12 @@ export class UsersComponent extends ListController implements OnInit {
   }
   
   addItem() {
-    this.dialog.open(UserFormComponent, {
+    let dialog = this.dialog.open(UserFormComponent, {
       data: { oEntityOrId: null }
+    });
+    
+    dialog.afterClosed().subscribe(result => {
+      this.load();
     });
   }
 
@@ -32,8 +35,12 @@ export class UsersComponent extends ListController implements OnInit {
   }
 
   onOpenItem(oEntity) {
-    this.dialog.open(UserFormComponent, {
+    let dialog = this.dialog.open(UserFormComponent, {
       data: { oEntityOrId: oEntity.id }
+    });
+
+    dialog.afterClosed().subscribe(result => {
+      this.load();
     });
   }
   

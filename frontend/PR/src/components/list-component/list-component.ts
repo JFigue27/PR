@@ -16,7 +16,7 @@ export class ListComponent extends ListController implements OnInit {
                 public nav: NavController,
                 private app: App
             ) {
-                super({ service: listService, paginate: true, limit: 10 });
+                super({ service: listService, paginate: true, limit: 0 });
         }
 
   ngOnInit() {

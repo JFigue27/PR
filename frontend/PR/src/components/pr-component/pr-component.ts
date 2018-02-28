@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { NavParams } from 'ionic-angular';
 import { FormController } from '../../services/FormController';
 import { PRServiceProvider } from '../../providers/pr-service';
+import { UserServiceProvider } from '../../providers/user-service';
+import { SupplierServiceProvider } from '../../providers/supplier-service';
 import { DepartmentServiceProvider } from '../../providers/department-service';
 import { AccountServiceProvider } from '../../providers/account-service';
 import { ApprovalServiceProvider } from '../../providers/approval-service';
 import { MatDialog } from '@angular/material';
 import { ApprovalFormComponent } from '../approval-form-component/approval-form-component';
-import { ModalController } from 'ionic-angular/components/modal/modal-controller';
-import { SupplierServiceProvider } from '../../providers/supplier-service';
-import { UserServiceProvider } from '../../providers/user-service';
 import { AccountFormComponent } from '../account-form-component/account-form-component';
+import { ModalController } from 'ionic-angular/components/modal/modal-controller';
 
 @Component({
   selector: 'pr-component',
@@ -26,15 +26,15 @@ export class PRComponent extends FormController implements OnInit {
   currencies = [ { value: 'Dlls', viewValue: 'Dlls' } , { value: 'Mxn', viewValue: 'Mxn' }];
 
   constructor (
-              public dialog:MatDialog,
-              public listService:PRServiceProvider,
-              private params: NavParams,
-              public userService: UserServiceProvider,
-              private departmentService:DepartmentServiceProvider,
-              private accountService:AccountServiceProvider,
-              private approvalService:ApprovalServiceProvider,
-              private supplierService:SupplierServiceProvider,
-              public modal: ModalController
+                public dialog:MatDialog,
+                public listService:PRServiceProvider,
+                private params: NavParams,
+                public userService: UserServiceProvider,
+                private departmentService:DepartmentServiceProvider,
+                private accountService:AccountServiceProvider,
+                private approvalService:ApprovalServiceProvider,
+                private supplierService:SupplierServiceProvider,
+                public modal: ModalController
             ) {
                 super( { service: listService } );
         }
@@ -44,7 +44,8 @@ export class PRComponent extends FormController implements OnInit {
 
     this.departmentService.loadEntities().subscribe(oResult => {
       this.departments = oResult.Result;
-    }); 
+    });
+    
     this.accountService.loadEntities().subscribe(oResult => {
        this.accounts = oResult.Result;
     });
@@ -63,26 +64,6 @@ export class PRComponent extends FormController implements OnInit {
     }) ;
 
   }
-
-  openModal() {
-    let currentDepartment = this.departments.find(d => d.id == this.baseEntity.DepartmentKey);
-    let price = 0;
-    if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier1Key) {
-      price = this.getSupplier1Sum();
-    } else if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier2Key) {
-      price = this.getSupplier2Sum();
-    } else if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier3Key) {
-      price = this.getSupplier3Sum();
-    }
-
-    if ( currentDepartment && currentDepartment.Budget  && currentDepartment.Budget >= price) {
-      console.log('price ' + price);
-    }
-    this.dialog.open(ApprovalFormComponent, {
-      data: { oEntityOrId: this.approval ? this.approval.id : null, PurchaseRequestKey: this.baseEntity.id }
-    });
-  }
-
 
   getSupplier1Sum() {
     if (this.baseEntity && this.baseEntity.PRLines){
@@ -135,27 +116,26 @@ export class PRComponent extends FormController implements OnInit {
     return this.userService.LoggedUser.Roles;
   }
 
-  afterLoad() {
-    if (this.baseEntity) {
-      this.handleDynamicRows(this.baseEntity.PRLines);
+  getSupplier1Style() {
+    if ( this.baseEntity.SupplierSelectedKey && this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier1Key) {
+      return 'SupplierSelected';
     }
   }
-  
-  afterCreate() {
-    if (this.baseEntity) {
-      this.handleDynamicRows(this.baseEntity.PRLines);
+
+  getSupplier2Style() {
+    if (this.baseEntity.SupplierSelectedKey && this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier2Key) {
+      return 'SupplierSelected';
     }
   }
-  
-  afterSave() {
-    this.handleDynamicRows(this.baseEntity.PRLines);
-  }
-  
-  afterRemove() {
+
+  getSupplier3Style() {
+    if (this.baseEntity.SupplierSelectedKey && this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier3Key) {
+      return 'SupplierSelected';
+    }
   }
 
   handleDynamicRows(arrRows: Array<any>) {
-    if ( arrRows.length > 0) {
+    if (arrRows.length > 0) {
       let atLeastOneCellFilled = false;
       let lastRow = arrRows[arrRows.length - 1];
       for (let prop in lastRow) {
@@ -176,10 +156,6 @@ export class PRComponent extends FormController implements OnInit {
     arrRows.push({});
   };
 
-  removeItemLocally = function(index) {
-    this.baseEntity.PRLines.splice(index, 1);
-  }
-  
   on_supplier_select() {
     this.baseEntity.editMode = true;
     this.baseEntity.SupplierSelectedKey = null;
@@ -191,6 +167,41 @@ export class PRComponent extends FormController implements OnInit {
     this.baseEntity.DepartmentKey = department.id;
   }
 
+  openModal() {
+    let currentDepartment = this.departments.find(d => d.id == this.baseEntity.DepartmentKey);
+    let price = 0;
+    if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier1Key) {
+      price = this.getSupplier1Sum();
+    } else if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier2Key) {
+      price = this.getSupplier2Sum();
+    } else if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier3Key) {
+      price = this.getSupplier3Sum();
+    }
+
+    if ( currentDepartment && currentDepartment.Budget  && currentDepartment.Budget >= price) {
+      console.log('PRECIO: ' + price + ' El precio esta dentro del presupuesto');
+      this.dialog.open(ApprovalFormComponent, {
+        data: { 
+          oEntityOrId: this.approval ? this.approval.id : null,
+          PurchaseRequestKey: this.baseEntity.id,
+          ManagerAssigned: this.baseEntity.DepartmentManagerKey 
+        }
+      });
+    } else {
+      console.log('PRECIO: ' + price + ' El precio excede el presupuesto');
+      this.dialog.open(ApprovalFormComponent, {
+        data: {
+          oEntityOrId: this.approval ? this.approval.id : null,
+          PurchaseRequestKey: this.baseEntity.id,
+          ManagerAssigned: this.baseEntity.GeneralManagerKey 
+         }
+      });
+    }
+  }
+
+  removeItemLocally = function (index) {
+    this.baseEntity.PRLines.splice(index, 1);
+  }
 
   selectSupplier1() {
     this.baseEntity.editMode = true;
@@ -207,23 +218,27 @@ export class PRComponent extends FormController implements OnInit {
     this.baseEntity.SupplierSelectedKey = this.baseEntity.Supplier3Key;
   }
 
-  getSupplier1Style() {
-    if ( this.baseEntity.SupplierSelectedKey && this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier1Key) {
-      return 'SupplierSelected';
+  afterLoad() {
+    if (this.baseEntity) {
+      this.handleDynamicRows(this.baseEntity.PRLines);
     }
+  }
+  
+  afterCreate() {
+    if (this.baseEntity) {
+      this.handleDynamicRows(this.baseEntity.PRLines);
+    }
+    this.baseEntity.RequisitionName = this.userService.LoggedUser.UserName;
+    this.baseEntity.ConvertedDateDepartmentManager = new Date();
   }
 
-  getSupplier2Style() {
-    if (this.baseEntity.SupplierSelectedKey && this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier2Key) {
-      return 'SupplierSelected';
-    }
+  afterRemove() {
   }
 
-  getSupplier3Style() {
-    if (this.baseEntity.SupplierSelectedKey && this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier3Key) {
-      return 'SupplierSelected';
-    }
+  afterSave() {
+    this.handleDynamicRows(this.baseEntity.PRLines);
   }
+
 
 }
 

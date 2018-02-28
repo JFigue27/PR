@@ -8,6 +8,7 @@ import { ApprovalPage } from '../approval-page/approval-page';
 import { LoginComponent } from '../../components/login/login';
 import { UserServiceProvider } from '../../providers/user-service';
 import { ListController } from '../../services/ListController';
+import { EmailPage } from '../email-page/email-page';
 
 @Component({
   selector: 'list-page',
@@ -26,24 +27,28 @@ export class ListPage extends ListController {
     this.user = this.userService.LoggedUser.UserName;
   }
 
-  OpenUser(){
+  openUser(){
     this.nav.push(UsersPage);
   }
 
-  OpenSupplier() {
+  openSupplier() {
     this.nav.push(SuppliersPage);
   }
   
-  OpenDepartment() {
+  openDepartment() {
     this.nav.push(DepartmentPage);
   }
 
-  OpenAccount() {
+  openAccount() {
     this.nav.push(AccountPage);
   }
 
-  OpenApproval() {
+  openApproval() {
     this.nav.push(ApprovalPage);
+  }
+  
+  openProfile() {
+    this.nav.push(EmailPage);
   }
 
   logout(){

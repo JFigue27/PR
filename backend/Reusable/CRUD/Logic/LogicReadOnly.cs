@@ -292,7 +292,19 @@ namespace Reusable
         {
             CommonResponse response = new CommonResponse();
             Entity entity = new Entity();
-            OnCreateInstance(entity);
+            try
+            {
+                OnCreateInstance(entity);
+            }
+            catch (KnownError ke)
+            {
+                return response.Error(ke);
+            }
+            catch (Exception e)
+            {
+                return response.Error("ERROR: " + e.ToString());
+            }
+
             return response.Success(entity);
         }
 

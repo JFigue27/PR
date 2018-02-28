@@ -1,67 +1,49 @@
-.user-card {
-    border-radius: 5px;
-    background-color: white;
-    height: 500px;
-    width: 400px;
-}
+user-form-component {
+    .card-header {
+        font-size: 22px;
+        font-weight: 300;
+        text-align: center;
+        padding:10px;
+        background-color: rgb(129, 129, 129);
+        color:white;
+    }
+    
+    .card-body {
+        padding: 3em;
+    }
 
-.user-card-header {
-    color: #4c88ff;
-    text-align: center;
-    font-size: 22px;
-    font-weight: 600;
-    border-bottom: 1px solid #777777;
-}
+    .example-form {
+        min-width: 150px;
+        width: 100%;
+        font-size: 20px;
+    }
 
-.user-card-body {
-    height: 80%;
-}
-
-.user-card-body > p {
-    text-align: center;
-    font-size: 18px;
-    font-weight: 500;
-}
-
-.user-card-body > input {
-    width: 100%;
-    font-size: 16px;
-    font-weight: 500;
-}
-
-.input-password {
-    width: 95%;
-    font-size: 16px;
-    font-weight: 500;
-    margin: 13px;
-}
-
-.box-password {
-    box-shadow: 1px 4px 5px #b4b4b4;
-    margin-top: 30px;
-    padding: 10px;
-}
-
-.user-card-footer {
-    float: right;
-}
-
-.btn-close {
-    background-color: #6060f2;
-    color: white;
-    font-size: 18px;
-    border-radius: 3px;
-    padding: 7px;
-    margin-top: 10px;
-    margin-right: 5px;
-}
-
-.btn-save {
-    background-color: #006e1c;
-    color: white;
-    font-size: 18px;
-    border-radius: 3px;
-    padding: 7px;
-    margin-top: 10px;
-    margin-right: 5px;
+    .example-full-width {
+        width: 100%;
+    }
+    
+    .box-password {
+        box-shadow: 1px 4px 5px #b4b4b4;
+        margin-top: 15px;
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+    
+    .input-password {
+        width: 95%;
+        font-size: 16px;
+        font-weight: 500;
+        margin: 13px;
+    }
+    
+    .example-form > button {
+        width: 150px;
+        color: white;
+        font-size: 20px;
+        padding: 8px;
+        border-radius: 2px;
+        margin-right: 10px;
+        margin-top: 10px;
+        box-shadow: 1px 1px 4px #9d9d9d;
+    }
 }

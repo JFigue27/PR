@@ -1,31 +1,31 @@
-<div class="department-card">
-  <div class="department-card-header">
-   <h3>Department</h3>
+<div class="card">
+  <div class="card-header">
+    Department
   </div>
 
-  <div class="department-card-body">
-    <p>Name</p>
-    <input type="text" class="input-personalized" [(ngModel)]="baseEntity.Value"
-     (ngModelChange)="on_input_change();">
+  <div class="card-body">
+    <div class="example-form">
+      <mat-form-field class="example-full-width">
+        <input matInput [(ngModel)]="baseEntity.Value" placeholder="Value" (ngModelChange)="on_input_change();">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Budget" [(ngModel)]="baseEntity.Budget" (ngModelChange)="on_input_change();">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-select [(ngModel)]="baseEntity.ManagerKey" (ngModelChange)="on_input_change(item);">
+          <mat-option *ngFor="let user of users" [value]="user.UserKey">
+            {{ user.Value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <p>Budget</p>
-    <input type="text" class="input-personalized" [(ngModel)]="baseEntity.Budget"
-     (ngModelChange)="on_input_change();">
-
-    <p>Department Manager</p>
-    <mat-select [(ngModel)]="baseEntity.ManagerKey" class="input-personalized" (ngModelChange)="on_input_change(item);">
-      <mat-option *ngFor="let user of users" [value]="user.UserKey">
-        {{ user.Value }}
-      </mat-option>
-    </mat-select>
-
-  </div>
-
-  <div class="department-card-footer">
-    <button mat-button mat-dialog-close type="button" class="btn-close" (click)="close()">CLOSE</button>
-    <button mat-button mat-dialog-close type="submit" class="btn-save" (click)="save()">SAVE</button>
+      <button mat-dialog-close style="background-color: #2690fd;" (click)="save()">Save</button>
+      <button mat-dialog-close style="background-color: #838a91;">Close</button>
+    </div>
   </div>
 </div>
+
+
 
 
 <!-- <pre style="background: rgb(255, 255, 255);min-height: 20px;">{{ users | json }}</pre> -->

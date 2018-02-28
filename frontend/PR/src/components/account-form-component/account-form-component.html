@@ -1,20 +1,20 @@
-<div class="account-card">
-  <div class="account-card-header">
-    <h3>Account</h3>
+<div class="card">
+  <div class="card-header">
+    Accounts
   </div>
 
-  <div class="account-card-body">
-
-    <p>Name</p>
-    <input type="text" class="input-personalized" [(ngModel)]="baseEntity.Value" (ngModelChange)="on_input_change();">
-
-    <p>Description</p>
-    <textarea matInput [(ngModel)]="baseEntity.Description" matAutosizeMinRows="3" (ngModelChange)="on_input_change();" matTextareaAutosize
-      matAutosizeMaxRows="10" class="input-personalized account-textarea-description"> </textarea>
-  </div>
-
-  <div class="account-card-footer">
-    <button mat-dialog-close class="btn-close">Close</button>
-    <button mat-dialog-close type="submit" (click)="save()" class="btn-save">SAVE</button>
+  <div class="card-body">
+    <div class="example-form">
+      <mat-form-field class="example-full-width">
+        <input matInput [(ngModel)]="baseEntity.Value" placeholder="Value" (ngModelChange)="on_input_change();">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <textarea matInput [(ngModel)]="baseEntity.Description" placeholder="Comments"
+         matAutosizeMinRows="3" (ngModelChange)="on_input_change();" matTextareaAutosize
+          matAutosizeMaxRows="10" class="input-personalized textarea-description"> </textarea>
+      </mat-form-field>
+      <button mat-dialog-close style="background-color: #2690fd;" (click)="save()">Save</button>
+      <button mat-dialog-close style="background-color: #838a91;">Close</button>
+    </div>
   </div>
 </div>

@@ -1,23 +1,19 @@
-<div class="supplier-card">
-  <div class="supplier-card-header">
-    <h3>Add Supplier</h3>
+<div class="card">
+  <div class="card-header">
+    Supplier
   </div>
 
-  <div class="supplier-card-body">
-
-    <p>Name</p>
-    <input type="text" class="input-personalized" [(ngModel)]="baseEntity.Value"
-     (ngModelChange)="on_input_change();">
-    
-     <p>UserName</p>
-    <input type="text"class="input-personalized" [(ngModel)]="baseEntity.UserName"
-     (ngModelChange)="on_input_change()" required>
-
-  </div>
-
-  <div class="supplier-card-footer">
-    <button mat-dialog-close class="btn-close">Close</button>
-    <button mat-dialog-close type="submit" (click)="save()" class="btn-save">SAVE</button>
+  <div class="card-body">
+    <div class="example-form">
+      <mat-form-field class="example-full-width">
+        <input matInput [(ngModel)]="baseEntity.Value" placeholder="Value" (ngModelChange)="on_input_change();">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="User name" [(ngModel)]="baseEntity.UserName" (ngModelChange)="on_input_change();">
+      </mat-form-field>
+      <button mat-dialog-close style="background-color: #2690fd;" (click)="save()">Save</button>
+      <button mat-dialog-close style="background-color: #838a91;">Close</button>
+    </div>
   </div>
 </div>
 

@@ -21,17 +21,26 @@ export class SuppliersComponent extends ListController implements OnInit {
   }
 
   addItem() {
-    this.dialog.open(SupplierFormComponent, {
+    let dialog = this.dialog.open(SupplierFormComponent, {
       data: { oEntityOrId: null }
     });
+
+    dialog.afterClosed().subscribe(result => {
+      this.load();
+    });
+
   }
 
   afterLoad() {
   }
 
   onOpenItem(oEntity) {
-    this.dialog.open(SupplierFormComponent, {
+    let dialog = this.dialog.open(SupplierFormComponent, {
       data: { oEntityOrId: oEntity.id }
+    });
+
+    dialog.afterClosed().subscribe(result => {
+      this.load();
     });
   }
   

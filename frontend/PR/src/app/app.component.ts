@@ -12,6 +12,7 @@ export class MyApp {
 
   CurrentUser: string;
   @ViewChild(Nav) nav: Nav;
+  // rootPage: any = EmailPage;
   rootPage: any = ListPage;
   pages: Array<{ title: string, component: any }>;
 

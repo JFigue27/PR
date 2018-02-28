@@ -1,32 +1,44 @@
 <div class="card">
   <div class="card-header">
-    <h3>Approval Requisition</h3>
+    Approval requisition
   </div>
-  
+
   <div class="card-body">
-    
-    <div *ngIf=" getCurrentRole() === 'User'">
-      <p>User approver</p>
-      <mat-select [(ngModel)]="baseEntity.UserApproverKey" class="border-bottom input-personalized" (ngModelChange)="on_input_change(item);" 
-      class="border-bottom" style="width: 99%; font-size: 16px;border-bottom: 1px solid #adadad;">
-      <mat-option *ngFor="let user of users" [value]="user.id">
-        {{ user.Value }}
-      </mat-option>
-    </mat-select>
-  </div>
-    
-    <p>Annotations</p>
-    <input type="text" class="input-personalized" (ngModelChange)="on_input_change(item);" [(ngModel)]="baseEntity.RequestDescription">
-  </div>
-
-  <div class="card-footer">
-    <div *ngIf=" getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' ">
-      <button mat-dialog-close type="submit" (click)="approvePr()" class="btn-save">Approve</button>
-      <button mat-dialog-close type="submit" (click)="rejectPr()" class="btn-save">Reject</button>
-    </div>
+    <div class="example-form">
       
-    <button mat-dialog-close type="submit" (click)="save()" class="btn-save">Request</button>
-  </div>
-</div>
+      <mat-form-field class="example-full-width" *ngIf=" getCurrentRole() === 'User'">
+        <mat-select [(ngModel)]="baseEntity.UserApproverKey" (ngModelChange)="on_input_change(item);">
+          <mat-option *ngFor="let user of users" [value]="user.id">
+            {{ user.Value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-<!-- <pre style="background: gray; min-height: 20px; font-size:18px;">{{ baseEntity | json }}</pre> -->
+      <div *ngIf=" getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' ">
+        <p class="input-personalized">{{ baseEntity.UserApprover }}</p>
+      </div>
+
+
+      <mat-form-field class="example-full-width">
+        <label>comments</label><br>
+        <textarea matInput [(ngModel)]="baseEntity.RequestDescription" matAutosizeMinRows="3" (ngModelChange)="on_input_change();"
+          matTextareaAutosize matAutosizeMaxRows="10" class="annotations"> </textarea>
+      </mat-form-field>
+      
+      
+    </div>
+    <div style="display:inline;" *ngIf=" getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' ">
+      <button mat-dialog-close type="submit" style="background-color:#088608bf;width: 50px;" (click)="approvePr()" class="approve">
+          <ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle"></ion-icon>
+      </button>
+      <button mat-dialog-close type="submit" style="background-color:#e12121e0;width: 50px;" (click)="rejectPr()" class="reject">
+          <ion-icon ios="ios-close-outline" md="md-close"></ion-icon>
+      </button>
+    </div>
+    <button mat-dialog-close type="submit" style="background-color: #2690fd;width:130px;" (click)="save()" class="request">
+      <ion-icon ios="ios-send" md="md-send"></ion-icon> Request</button>
+  </div>
+  </div>
+
+
+<pre style="background: gray; min-height: 20px; font-size:18px;">{{ baseEntity | json }}</pre>
