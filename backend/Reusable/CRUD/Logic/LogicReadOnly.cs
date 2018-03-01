@@ -15,7 +15,7 @@ namespace Reusable
         CommonResponse GetSingleWhere(params Expression<Func<Entity, bool>>[] wheres);
         CommonResponse GetListWhere(Expression<Func<Entity, object>> orderby, params Expression<Func<Entity, bool>>[] wheres);
         CommonResponse GetAllByParent<ParentType>(int parentID) where ParentType : BaseEntity;
-        CommonResponse CreateInstance();
+        CommonResponse CreateInstance(Entity entity = null);
         void FillRecursively<Parent>(IRecursiveEntity entity) where Parent : BaseEntity;
     }
 
@@ -288,12 +288,15 @@ namespace Reusable
             }
         }
 
-        public CommonResponse CreateInstance()
+        public CommonResponse CreateInstance(Entity entity = null)
         {
             CommonResponse response = new CommonResponse();
-            Entity entity = new Entity();
             try
             {
+                if (entity == null)
+                {
+                    entity = new Entity();
+                }
                 OnCreateInstance(entity);
             }
             catch (KnownError ke)

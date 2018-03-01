@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using Reusable;
 using System;
 using System.Collections.Generic;
@@ -112,10 +113,20 @@ namespace ReusableWebAPI.Controllers
             return logic.GetSingleWhere(wheres.ToArray());
         }
 
-        [HttpGet, Route("Create")]
-        virtual public CommonResponse Create()
+        [HttpPost, Route("Create")]
+        virtual public CommonResponse Create([FromBody]string value)
         {
-            return logic.CreateInstance();
+            Entity entity;
+
+            try
+            {
+                entity = JsonConvert.DeserializeObject<Entity>(value);
+                return logic.CreateInstance(entity);
+            }
+            catch (Exception e)
+            {
+                return logic.CreateInstance();
+            }
         }
 
         // POST: api/Base

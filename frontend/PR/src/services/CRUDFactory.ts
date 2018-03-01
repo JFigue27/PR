@@ -40,8 +40,8 @@ export abstract class CRUDFactory {
             .catch(this.generalError);
     }
 
-    createInstance(): Observable<any> {
-        return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/Create', this.addAuthorization())
+    createInstance(oEntity = null): Observable<any> {
+        return this.http.post<ICommonResponse>(this.baseUrl + this.config.endPoint + '/Create', '=' + encodeURIComponent(JSON.stringify(oEntity)), this.addAuthorization())
             .map(response => this.extractData(response), this)
             .map(d => d.Result)
             .catch(this.generalError);

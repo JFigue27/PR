@@ -1,8 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { ApprovalServiceProvider } from '../../providers/approval-service';
 import { FormController } from '../../services/FormController';
 import { UserServiceProvider } from '../../providers/user-service';
-import { MAT_DIALOG_DATA } from '@angular/material';
+// import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'approval-form-component',
@@ -11,8 +11,9 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 
 export class ApprovalFormComponent extends FormController implements OnInit {
   users = [];
+  @Input() pr: any;
+  @Input() approverKey: number;
   constructor (
-          @Inject(MAT_DIALOG_DATA) public data: any,
           public approvalService: ApprovalServiceProvider,
           public userService: UserServiceProvider
       ) { 
@@ -23,21 +24,32 @@ export class ApprovalFormComponent extends FormController implements OnInit {
     this.userService.loadEntities().subscribe(oResult => {
       this.users = oResult.Result;
     });
-    this.load(this.data.oEntityOrId);
-
+    
   }
   
+  ngOnChanges(changes: SimpleChanges): void {
+
+    if (changes.pr && changes.pr.firstChange == false){
+
+      this.approvalService.getSingleWhere('PurchaseRequestKey', this.pr.PurchaseRequestKey)
+      .subscribe(oResponse => {
+        this.load(oResponse.Result);
+      });  
+    }
+  }
+
+
   close() { 
   }
   
   afterCreate() { 
     this.baseEntity.ConvertedDateRequested = new Date();
     this.baseEntity.UserRequisitorKey = this.userService.LoggedUser.UserKey;
-    this.baseEntity.UserApproverKey = this.data.ManagerAssigned;
-    this.baseEntity.PurchaseRequestKey = this.data.PurchaseRequestKey;
+    this.baseEntity.UserApproverKey = this.pr.DepartmentManagerKey;
+    this.baseEntity.PurchaseRequestKey = this.pr.PurchaseRequestKey;
   }
 
-  approvePr(){
+  approvePr() {
     this.baseEntity.Status = 'Approved';
     this.baseEntity.editMode = true;
     this.baseEntity.ConvertedDateResponse = new Date();
@@ -56,7 +68,6 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   }
 
   afterLoad() {
-    this.baseEntity.UserApproverKey = this.data.ManagerAssigned;
   }
 
   afterSave() { 

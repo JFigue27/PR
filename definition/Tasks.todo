@@ -42,6 +42,13 @@ Roles:
   ✔ MRO (Buyer) @done(18-02-13 11:38)
     -Make quotations.
     -Purchase
+    ☐ Filter by current user in PR LIST
+    ☐ Filter by managers department in approval form
+    ☐ Add status in PR list
+    ☐ Replace appproval modal instead embed it in PRForm
+
+
+
 
 ------------------------------------------------------------------------------------------------------------------
 Entities 
@@ -81,3 +88,5 @@ Approvals
     RequestBy
 
     budget por cuentas
+
+

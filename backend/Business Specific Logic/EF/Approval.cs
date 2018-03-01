@@ -36,6 +36,8 @@ namespace BusinessSpecificLogic.EF
         public int? UserApproverKey { get; set; }
         [ForeignKey("UserApproverKey")]
         public User UserApprover { get; set; }
+        public string Hyperlink { get; set; }
+        public string Title { get; set; }
         ///End:Generated:Properties<<<
     }
 }

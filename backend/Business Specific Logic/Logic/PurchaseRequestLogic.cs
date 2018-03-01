@@ -22,7 +22,8 @@ namespace BusinessSpecificLogic.Logic
         protected override IQueryable<PurchaseRequest> StaticDbQueryForList(IQueryable<PurchaseRequest> dbQuery)
         {
             return dbQuery.Include(e => e.PRLines)
-                .Include(e => e.DepartmentAssigned);
+                .Include(e => e.DepartmentAssigned)
+                .Include(e => e.GeneralManager);
         }
 
         protected override void OnGetSingle(PurchaseRequest entity)

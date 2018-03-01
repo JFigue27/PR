@@ -48,44 +48,51 @@ pr-component {
 		color:white;
 	}
 
-	.notes {
-		margin-top: 2em;
-		margin-bottom: 2em;
-		margin-left: 5px;
+	.notes, .approval-comments {
 		background-color: #f2f2f2;
-		width: 40%;
 	}
 
 	.notes > div {
 		background-color:#f0c345;
 	}
 
-	.notes > div > p {
+	.approval-comments > div {
+		background-color:#aaaaaa;
+	}
+
+	.notes > div > p, .approval-comments > div > p {
 		text-align: center;
 		font-size: 18px;
 		font-weight: 800;
 	}
 
-	.notes > textarea {
+	.notes > textarea, .approval-comments > textarea {
 		margin-left: 10px;
 	}
 
-	.footer-save {
+	.div-buttons > div {
+		display: inline;
+		margin-top: 10px;
 		float: right;
-		width: 100px;
-		height: 35px;
-		margin-top: 0.5%;
-		margin-right: 0.7%;
-		font-size: 18px;
-		font-weight: 400;
-		background-color: rgba(0, 136, 45, 0.925);
-		color: white;
-		box-shadow: 3px 2px 4px gray;
-		margin-bottom: 2%;
 	}
-	.footer-save:hover{
-		background-color: rgb(0, 71, 24);
-		transition:all 0.3s ease;
-	}
-	
+
+	.pr-button {
+        border-radius: 5px;
+        color: white;
+        font-size: 20px;
+        padding: 8px;
+        margin-left: 10px;
+        box-shadow: 1px 1px 4px #9d9d9d;
+    }
+
+	.request , .verify {
+		background-color: #2690fd;
+	 }
+	 
+	.approve, .save {
+		background-color:#088608;
+	 }
+	 .reject {
+		background-color:#e12121e0;
+ 	}
 }

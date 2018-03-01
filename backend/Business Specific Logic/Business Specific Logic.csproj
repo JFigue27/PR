@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="Auth\AuthRepository.cs" />
     <Compile Include="Auth\AuthContext.cs" />
+    <Compile Include="EF\Email.cs" />
     <Compile Include="EF\POContext.cs" />
     <!-- Start:Generated:EF -->
     <Compile Include="EF\PRLine.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="EF\GLAccount.cs" />
     <Compile Include="EF\Approval.cs" />
     <Compile Include="EF\PurchaseRequest.cs" />
+    <Compile Include="JSON Entities\Contact.cs" />
     <!-- End:Generated:EF -->
     <Compile Include="Logic\TokenLogic.cs" />
     <Compile Include="Logic\UserLogic.cs" />

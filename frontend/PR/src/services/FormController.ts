@@ -15,8 +15,8 @@ export abstract class FormController {
 	}
  
 	//Start Form Methods
-	createInstance() {
-		return this.config.service.createInstance().subscribe(oInstance => {
+	createInstance(oEntity?) {
+		return this.config.service.createInstance(oEntity).subscribe(oInstance => {
 			this.baseEntity = oInstance;
 			this.afterCreate();
 			return this.baseEntity;
@@ -29,9 +29,8 @@ export abstract class FormController {
 
 	refresh(oEntityOrID: any) {
 		switch (true) {
-			case !oEntityOrID:
-				this.createInstance();
-				break;
+
+			//Open by ID
 			case oEntityOrID > 0:
 				this.config.service.loadEntity(oEntityOrID)
 					.subscribe(oResult => {
@@ -39,6 +38,14 @@ export abstract class FormController {
 						this.afterLoad();
 					});
 				break;
+			
+			//Create instance
+			case (!oEntityOrID || (oEntityOrID && (oEntityOrID instanceof Object || typeof (oEntityOrID) == 'object')
+					&& !oEntityOrID.hasOwnProperty('id'))):
+				this.createInstance(oEntityOrID);
+				break;
+			
+			//Open by Object
 			case oEntityOrID instanceof Object || typeof (oEntityOrID) == 'object':
 				this.baseEntity = oEntityOrID;
 				this.afterLoad();
@@ -54,10 +61,11 @@ export abstract class FormController {
 
 	save() {
 		if (this.baseEntity.editMode) {
-			return this.config.service.save(this.baseEntity).subscribe(oEntity => {
+				this.config.service.save(this.baseEntity).subscribe(oEntity => {
 				this.baseEntity = oEntity;
 				this.afterSave();
 				alertify.success('SUCCESFULLY SAVED');
+				return Observable.empty();
 			});
 		}
 		return Observable.empty();

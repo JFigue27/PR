@@ -17,27 +17,27 @@ import { ModalController } from 'ionic-angular/components/modal/modal-controller
   templateUrl: 'pr-component.html'
 })
 export class PRComponent extends FormController implements OnInit {
-  accounts=[];
-  departments=[];
-  suppliers=[];
-  users=[];
-  approval:any;
-  userRole:string;
-  currencies = [ { value: 'Dlls', viewValue: 'Dlls' } , { value: 'Mxn', viewValue: 'Mxn' }];
+  accounts = [];
+  departments = [];
+  suppliers = [];
+  users = [];
+  approval: any;
+  userRole: string;
+  currencies = [{ value: 'Dlls', viewValue: 'Dlls' }, { value: 'Mxn', viewValue: 'Mxn' }];
 
-  constructor (
-                public dialog:MatDialog,
-                public listService:PRServiceProvider,
-                private params: NavParams,
-                public userService: UserServiceProvider,
-                private departmentService:DepartmentServiceProvider,
-                private accountService:AccountServiceProvider,
-                private approvalService:ApprovalServiceProvider,
-                private supplierService:SupplierServiceProvider,
-                public modal: ModalController
-            ) {
-                super( { service: listService } );
-        }
+  constructor(
+    public dialog: MatDialog,
+    public listService: PRServiceProvider,
+    private params: NavParams,
+    public userService: UserServiceProvider,
+    private departmentService: DepartmentServiceProvider,
+    private accountService: AccountServiceProvider,
+    private approvalService: ApprovalServiceProvider,
+    private supplierService: SupplierServiceProvider,
+    public modal: ModalController
+  ) {
+    super({ service: listService });
+  }
 
   ngOnInit() {
     this.load(this.params.get('oEntityOrId'));
@@ -45,9 +45,9 @@ export class PRComponent extends FormController implements OnInit {
     this.departmentService.loadEntities().subscribe(oResult => {
       this.departments = oResult.Result;
     });
-    
+
     this.accountService.loadEntities().subscribe(oResult => {
-       this.accounts = oResult.Result;
+      this.accounts = oResult.Result;
     });
 
     this.userService.loadEntities().subscribe(oResult => {
@@ -59,16 +59,16 @@ export class PRComponent extends FormController implements OnInit {
     });
 
     this.approvalService.getSingleWhere('PurchaseRequestKey', this.params.get('oEntityOrId'))
-    .subscribe(oResponse => {
-      this.approval = oResponse.Result;
-    }) ;
+      .subscribe(oResponse => {
+        this.approval = oResponse.Result;
+      });
 
   }
 
   getSupplier1Sum() {
-    if (this.baseEntity && this.baseEntity.PRLines){
+    if (this.baseEntity && this.baseEntity.PRLines) {
       return this.baseEntity.PRLines.reduce(function (currentValue, item) {
-        if(item.PriceEach && item.Qty){
+        if (item.PriceEach && item.Qty) {
           return currentValue + (item.PriceEach * item.Qty);
         } else {
           return currentValue;
@@ -107,17 +107,13 @@ export class PRComponent extends FormController implements OnInit {
     }
   }
 
-  getApprover() {
-     if ( this.getSupplier1Sum() > 3) {
-     }
-  }
 
   getCurrentRole() {
     return this.userService.LoggedUser.Roles;
   }
 
   getSupplier1Style() {
-    if ( this.baseEntity.SupplierSelectedKey && this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier1Key) {
+    if (this.baseEntity.SupplierSelectedKey && this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier1Key) {
       return 'SupplierSelected';
     }
   }
@@ -168,6 +164,39 @@ export class PRComponent extends FormController implements OnInit {
   }
 
   openModal() {
+    this.save().subscribe(function () {
+
+      let currentDepartment = this.departments.find(d => d.id == this.baseEntity.DepartmentKey);
+      let price = 0;
+      if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier1Key) {
+        price = this.getSupplier1Sum();
+      } else if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier2Key) {
+        price = this.getSupplier2Sum();
+      } else if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier3Key) {
+        price = this.getSupplier3Sum();
+      }
+
+      if (currentDepartment && currentDepartment.Budget && currentDepartment.Budget >= price) {
+        this.dialog.open(ApprovalFormComponent, {
+          data: {
+            oEntityOrId: this.approval ? this.approval.id : { PurchaseRequestKey: this.baseEntity.id },
+            PurchaseRequestKey: this.baseEntity.id,
+            ManagerAssigned: this.baseEntity.DepartmentManagerKey
+          }, width: '700px'
+        });
+      } else {
+        this.dialog.open(ApprovalFormComponent, {
+          data: {
+            oEntityOrId: this.approval ? this.approval.id : { PurchaseRequestKey: this.baseEntity.id },
+            PurchaseRequestKey: this.baseEntity.id,
+            ManagerAssigned: this.baseEntity.GeneralManagerKey
+          }
+        });
+      }
+    });
+  }
+
+  getApprover() {
     let currentDepartment = this.departments.find(d => d.id == this.baseEntity.DepartmentKey);
     let price = 0;
     if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier1Key) {
@@ -178,26 +207,14 @@ export class PRComponent extends FormController implements OnInit {
       price = this.getSupplier3Sum();
     }
 
-    if ( currentDepartment && currentDepartment.Budget  && currentDepartment.Budget >= price) {
-      console.log('PRECIO: ' + price + ' El precio esta dentro del presupuesto');
-      this.dialog.open(ApprovalFormComponent, {
-        data: { 
-          oEntityOrId: this.approval ? this.approval.id : null,
-          PurchaseRequestKey: this.baseEntity.id,
-          ManagerAssigned: this.baseEntity.DepartmentManagerKey 
-        }
-      });
+    if (currentDepartment && currentDepartment.Budget && currentDepartment.Budget >= price) {      
+      return this.baseEntity.DepartmentManagerKey;
+      
     } else {
-      console.log('PRECIO: ' + price + ' El precio excede el presupuesto');
-      this.dialog.open(ApprovalFormComponent, {
-        data: {
-          oEntityOrId: this.approval ? this.approval.id : null,
-          PurchaseRequestKey: this.baseEntity.id,
-          ManagerAssigned: this.baseEntity.GeneralManagerKey 
-         }
-      });
+        return  this.baseEntity.GeneralManagerKey
     }
   }
+
 
   removeItemLocally = function (index) {
     this.baseEntity.PRLines.splice(index, 1);
@@ -223,7 +240,7 @@ export class PRComponent extends FormController implements OnInit {
       this.handleDynamicRows(this.baseEntity.PRLines);
     }
   }
-  
+
   afterCreate() {
     if (this.baseEntity) {
       this.handleDynamicRows(this.baseEntity.PRLines);

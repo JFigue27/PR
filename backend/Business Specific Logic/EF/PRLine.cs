@@ -26,9 +26,9 @@ namespace BusinessSpecificLogic.EF
         public string Description { get; set; }
         public string UM { get; set; }
         public decimal Qty { get; set; }
-        public decimal PriceEach { get; set; }
-        public decimal PriceEach2 { get; set; }
-        public decimal PriceEach3 { get; set; }
+        public decimal? PriceEach { get; set; }
+        public decimal? PriceEach2 { get; set; }
+        public decimal? PriceEach3 { get; set; }
         public int PurchaseRequestKey { get; set; }
         [ForeignKey("PurchaseRequestKey")]
         public PurchaseRequest PurchaseRequest { get; set; }
