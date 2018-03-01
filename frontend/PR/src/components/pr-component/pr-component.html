@@ -36,8 +36,8 @@
                             <th colspan="4"></th>
                             <th colspan="2" [ngClass]="getSupplier1Style()">
                                 <mat-select placeholder="$" style="width:29%;" [(ngModel)]="baseEntity.SupplierCurrency1" (ngModelChange)="on_input_change(item);">
-                                    <mat-option *ngFor="let currency of currencies" [value]="currency.value">
-                                        {{ currency.value }}
+                                    <mat-option *ngFor="let currency of currencies" [value]="currency">
+                                        {{ currency }}
                                     </mat-option>
                                 </mat-select>
                                 <mat-select style="width:59%;" [(ngModel)]="baseEntity.Supplier1Key" (ngModelChange)="on_input_change(item);on_supplier_select();">
@@ -49,8 +49,8 @@
 
                             <th colspan="2" [ngClass]="getSupplier2Style()">
                                 <mat-select placeholder="$" style="width:29%;" [(ngModel)]="baseEntity.SupplierCurrency2" (ngModelChange)="on_input_change(item);">
-                                    <mat-option *ngFor="let currency of currencies" [value]="currency.Value">
-                                        {{ currency.value }}
+                                    <mat-option *ngFor="let currency of currencies" [value]="currency">
+                                        {{ currency }}
                                     </mat-option>
                                 </mat-select>
                                 <mat-select style="width:59%;" [(ngModel)]="baseEntity.Supplier2Key" (ngModelChange)="on_input_change(item);on_supplier_select();">
@@ -62,8 +62,8 @@
 
                             <th colspan="2" [ngClass]="getSupplier3Style()">
                                 <mat-select placeholder="$" style="width:29%;" [(ngModel)]="baseEntity.SupplierCurrency3" (ngModelChange)="on_input_change(item);">
-                                    <mat-option *ngFor="let currency of currencies" [value]="currency.value">
-                                        {{ currency.value }}
+                                    <mat-option *ngFor="let currency of currencies" [value]="currency">
+                                        {{ currency }}
                                     </mat-option>
                                 </mat-select>
                                 <mat-select style="width:59%;" [(ngModel)]="baseEntity.Supplier3Key" (ngModelChange)="on_input_change(item);on_supplier_select();">

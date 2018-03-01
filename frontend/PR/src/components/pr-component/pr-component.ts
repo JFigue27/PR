@@ -23,7 +23,7 @@ export class PRComponent extends FormController implements OnInit {
   users = [];
   approval: any;
   userRole: string;
-  currencies = [{ value: 'Dlls', viewValue: 'Dlls' }, { value: 'Mxn', viewValue: 'Mxn' }];
+  currencies = ['Dlls', 'Mxn'];
 
   constructor(
     public dialog: MatDialog,

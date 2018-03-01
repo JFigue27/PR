@@ -47,6 +47,20 @@ Roles:
     ☐ Add status in PR list
     ☐ Replace appproval modal instead embed it in PRForm
 
+    ☐ Supplier only has Value field.
+    ☐ To be able to add Supplier from PR screen.
+    ☐ Requisition Name autopopulated.
+    ☐ Send Test Email => Post to api/User/SendTestEmail
+    ☐ Main Menu always visible.
+      ☐ Add PR List menu.
+    ☐ Email Address field in User form.
+    ☐ Approval Request button, disable when click it.
+    ☐ PR Number column in Approvals list.
+    ☐ Approve and Reject buttons: Confirm dialgo with optional Response Description.
+      ☐ Display Response Description as read only below Request Description.
+      ☐ Display Approval Status.
+      ☐ Lock PR when it is Approved.
+      ☐ "Approve to MRO" functionality.
 
 
 
