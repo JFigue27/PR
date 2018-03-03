@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServiceProvider } from '../../providers/user-service';
 import { FormController } from '../../services/FormController';
+import alertify from 'alertifyjs';
 
 @Component({
   selector: 'email-form-component',
@@ -21,6 +22,13 @@ export class EmailFormComponent extends FormController implements OnInit {
 
   close() {
   }
+
+  testEmail() {
+    this.userService.SendTestEmail(this.baseEntity).subscribe( r => 
+      alertify.success('EMAIL SENT')
+    );
+  }
+
 
   afterCreate() {
   }

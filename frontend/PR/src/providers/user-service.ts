@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CRUDFactory } from '../services/CRUDFactory';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class UserServiceProvider extends CRUDFactory {
@@ -16,6 +17,10 @@ export class UserServiceProvider extends CRUDFactory {
       
     adapterOut(oEntity: any) {
         oEntity.WasAnsweredByCustomer = true;
+    }
+
+    SendTestEmail(oEntity: any): Observable<any> {
+        return this.customPost('SendTestEmail', oEntity);
     }
 
 }

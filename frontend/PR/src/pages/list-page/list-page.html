@@ -1,10 +1,11 @@
 <ion-header>
-  <ion-navbar>
-    <div class="div-main">
+  <ion-navbar color="basic">
+    <!-- <div class="div-main">
       <div class="div-logo">
         <label>PR System</label>
       </div>
       <div class="div-menu">
+        <div (click)="openPR()">Purchase Requests</div>
         <div (click)="openApproval()">Approvals</div>
         <div (click)="openAccount()">Accounts</div>
         <div (click)="openDepartment()">Departments</div>
@@ -20,11 +21,41 @@
         </mat-menu>
         </div>
       </div>
+    </div> -->
+    <div ion-row no-padding>
+      <div col-12 col-md-2>PR System</div>
+      <div col-12 col-md-10 ion-row no-padding>
+        <div col-5 col-md-4></div> 
+        <button col-5 col-md-2 col-lg-1 mat-raised-button color="primary">Basic</button>
+        <button col-5 col-md-2 col-lg-1 mat-raised-button color="primary">Basic</button>
+        <button col-5 col-md-2 col-lg-1 mat-raised-button color="primary">Basic</button>
+        <button col-5 col-md-2 col-lg-1 mat-raised-button color="primary">Basic</button>
+        <button col-5 col-md-2 col-lg-1 mat-raised-button color="primary">Basic</button>
+        <button col-5 col-md-2 col-lg-1 mat-raised-button color="primary">Basic</button>
+        <!-- <div col-5 col-md-2 col-lg-1 class="div-menu" (click)="openPR()">Purchase request</div> -->
+        <!-- <div col-5 col-md-2 col-lg-1 class="div-menu" (click)="openApproval()">Approvals</div>
+        <div col-5 col-md-2 col-lg-1 class="div-menu" (click)="openAccount()">Accounts</div>
+        <div col-5 col-md-2 col-lg-1 class="div-menu" (click)="openDepartment()">Departments</div>
+        <div col-5 col-md-2 col-lg-1 class="div-menu" (click)="openUser()">Users</div>
+        <div col-5 col-md-2 col-lg-1 class="div-menu" (click)="openSupplier()">Suppliers</div>
+        <div col-5 col-md-2 col-lg-1 class="div-menu" (click)="openSupplier()">RaulRamirez</div> -->
+      </div>
     </div>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <br>
+
+  <h3>Raised Buttons</h3>
+  <div class="button-row">
+    <button mat-raised-button>Basic</button>
+    <button mat-raised-button color="primary">Primary</button>
+    <button mat-raised-button color="accent">Accent</button>
+    <button mat-raised-button color="warn">Warn</button>
+    <button mat-raised-button disabled>Disabled</button>
+    <a mat-raised-button routerLink=".">Link</a>
+  </div>
+
   <list-component></list-component>
 </ion-content>

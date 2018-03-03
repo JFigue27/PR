@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material';
 import { ApprovalFormComponent } from '../approval-form-component/approval-form-component';
 import { AccountFormComponent } from '../account-form-component/account-form-component';
 import { ModalController } from 'ionic-angular/components/modal/modal-controller';
+import { SupplierFormComponent } from '../supplier-form-component/supplier-form-component';
 
 @Component({
   selector: 'pr-component',
@@ -215,7 +216,17 @@ export class PRComponent extends FormController implements OnInit {
     }
   }
 
+  newSupplier() {
+    let dialog = this.dialog.open(SupplierFormComponent, {
+      data: { oEntityOrId: null}
+    });
 
+    dialog.afterClosed().subscribe(result => {
+      this.supplierService.loadEntities().subscribe(oResult => {
+        this.suppliers = oResult.Result;
+      });
+    });
+  }
   removeItemLocally = function (index) {
     this.baseEntity.PRLines.splice(index, 1);
   }

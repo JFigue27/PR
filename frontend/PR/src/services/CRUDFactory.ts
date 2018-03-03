@@ -54,6 +54,13 @@ export abstract class CRUDFactory {
             .catch(this.generalError);
     }
 
+    customPost(customMethod: string, oEntity: any = null): Observable<any> {
+        return this.http.post<ICommonResponse>(this.baseUrl + this.config.endPoint + '/' + customMethod,  '=' + encodeURIComponent(JSON.stringify(oEntity)), this.addAuthorization())
+            .map(response => this.extractData(response), this)
+            .map(d => d.Result)
+            .catch(this.generalError);
+    }
+
     getById(id: number): IEntity {
         return null;
     }
@@ -93,7 +100,12 @@ export abstract class CRUDFactory {
         return Observable.empty();
     }
 
-    
+    removeEntity(userId) {
+        return this.http.delete<ICommonResponse>(this.baseUrl + this.config.endPoint + "/" + userId, this.addAuthorization())
+            .map(response => this.extractData(response), this)
+            .catch(this.generalError);
+    }
+
     save(oEntity): Observable<any> {
         if (oEntity.id > 0) {
             return this.updateEntity(oEntity);
@@ -102,11 +114,15 @@ export abstract class CRUDFactory {
         }
     }
 
-    removeEntity(userId) {
-        return this.http.delete<ICommonResponse>(this.baseUrl + this.config.endPoint + "/" + userId, this.addAuthorization())
+    SendTestEmail(oEntity): Observable<any> {
+        console.log('2018 send test email');
+        console.log(this.baseUrl + this.config.endPoint + 'SendTestEmail');
+        return this.http.post<ICommonResponse>(this.baseUrl + this.config.endPoint + '/SendTestEmail', '=' + encodeURIComponent(JSON.stringify(oEntity)), this.addAuthorization())
             .map(response => this.extractData(response), this)
+            .map(d => d.Result)
             .catch(this.generalError);
     }
+
 
     updateEntity(oEntity) {
         this.adapterOut(oEntity);

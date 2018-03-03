@@ -55,6 +55,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -98,6 +99,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatDialogModule,
     MatTableModule,
     MatMenuModule,
+    MatButtonModule,
     BrowserAnimationsModule,
     IonicModule.forRoot(MyApp)
   ],

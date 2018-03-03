@@ -127,11 +127,11 @@ body {
 }
 
 .table>thead>tr>th {
-    font-weight: 400;
-    background-color: rgb(202, 202, 202);
+    background-color: rgb(251, 251, 251);
     color: black;
     vertical-align: bottom;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    font-weight: 500;
+    border-bottom: 1px solid rgb(179, 179, 179);
 }
 
 .table>caption+thead>tr:first-child>th,

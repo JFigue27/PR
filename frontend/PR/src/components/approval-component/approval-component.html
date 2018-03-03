@@ -4,6 +4,7 @@
       <tr>
         <th style="width: 150px;">PR Number</th>
         <th>Description</th>
+        <th>Manager Response</th>
         <th>Status</th>
         <th>Date Requested</th>
         <th style="width: 110px;">Requested By</th>
@@ -13,6 +14,7 @@
       <tr *ngFor="let item of baseList" (click)="openItem(item)">
         <td data-title="PR Number">{{ item.PurchaseRequestKey}}</td>
         <td data-title="Description">{{ item.RequestDescription }}</td>
+        <td data-title="Date Requested">{{ item.ResponseDescription }}</td>
         <td data-title="Status">{{ item.Status }}</td>
         <td data-title="Date Requested">{{ item.DateRequested }}</td>
         <td data-title="Requested By">{{ item.InfoTrack?.User_CreatedBy.Value }}</td>

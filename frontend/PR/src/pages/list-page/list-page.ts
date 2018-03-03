@@ -47,6 +47,10 @@ export class ListPage extends ListController {
     this.nav.push(ApprovalPage);
   }
   
+  openPR() {
+    this.nav.push(ListPage);
+  }
+  
   openProfile() {
     this.nav.push(EmailPage);
   }

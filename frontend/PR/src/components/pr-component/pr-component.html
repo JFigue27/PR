@@ -30,47 +30,50 @@
 
 
             <div class="table-responsive form-grid">
-                <table class="table">
+                <table class="table table-pr">
                     <thead>
                         <tr>
                             <th colspan="4"></th>
                             <th colspan="2" [ngClass]="getSupplier1Style()">
-                                <mat-select placeholder="$" style="width:29%;" [(ngModel)]="baseEntity.SupplierCurrency1" (ngModelChange)="on_input_change(item);">
+                                <mat-select placeholder="$" class="currencies" [(ngModel)]="baseEntity.SupplierCurrency1" (ngModelChange)="on_input_change(item);">
                                     <mat-option *ngFor="let currency of currencies" [value]="currency">
                                         {{ currency }}
                                     </mat-option>
                                 </mat-select>
-                                <mat-select style="width:59%;" [(ngModel)]="baseEntity.Supplier1Key" (ngModelChange)="on_input_change(item);on_supplier_select();">
+                                <mat-select class="select-suppliers" [(ngModel)]="baseEntity.Supplier1Key" (ngModelChange)="on_input_change(item);on_supplier_select();">
                                     <mat-option *ngFor="let supplier of suppliers" [value]="supplier.SupplierKey">
                                         {{ supplier.Value }}
                                     </mat-option>
                                 </mat-select>
+                                <button (click)="newSupplier()" class="add-supplier" [ngClass]="getSupplier1Style()">+</button>
                             </th>
 
                             <th colspan="2" [ngClass]="getSupplier2Style()">
-                                <mat-select placeholder="$" style="width:29%;" [(ngModel)]="baseEntity.SupplierCurrency2" (ngModelChange)="on_input_change(item);">
+                                <mat-select placeholder="$" class="currencies" [(ngModel)]="baseEntity.SupplierCurrency2" (ngModelChange)="on_input_change(item);">
                                     <mat-option *ngFor="let currency of currencies" [value]="currency">
                                         {{ currency }}
                                     </mat-option>
                                 </mat-select>
-                                <mat-select style="width:59%;" [(ngModel)]="baseEntity.Supplier2Key" (ngModelChange)="on_input_change(item);on_supplier_select();">
+                                <mat-select class="select-suppliers" [(ngModel)]="baseEntity.Supplier2Key" (ngModelChange)="on_input_change(item);on_supplier_select();">
                                     <mat-option *ngFor="let supplier of suppliers" [value]="supplier.SupplierKey">
                                         {{ supplier.Value }}
                                     </mat-option>
                                 </mat-select>
+                                <button (click)="newSupplier()" class="add-supplier" [ngClass]="getSupplier2Style()">+</button>
                             </th>
 
                             <th colspan="2" [ngClass]="getSupplier3Style()">
-                                <mat-select placeholder="$" style="width:29%;" [(ngModel)]="baseEntity.SupplierCurrency3" (ngModelChange)="on_input_change(item);">
+                                <mat-select placeholder="$" class="currencies" [(ngModel)]="baseEntity.SupplierCurrency3" (ngModelChange)="on_input_change(item);">
                                     <mat-option *ngFor="let currency of currencies" [value]="currency">
                                         {{ currency }}
                                     </mat-option>
                                 </mat-select>
-                                <mat-select style="width:59%;" [(ngModel)]="baseEntity.Supplier3Key" (ngModelChange)="on_input_change(item);on_supplier_select();">
+                                <mat-select class="select-suppliers" [(ngModel)]="baseEntity.Supplier3Key" (ngModelChange)="on_input_change(item);on_supplier_select();">
                                     <mat-option *ngFor="let supplier of suppliers" [value]="supplier.SupplierKey">
                                         {{ supplier.Value }}
                                     </mat-option>
                                 </mat-select>
+                                <button (click)="newSupplier()" class="add-supplier" [ngClass]="getSupplier3Style()">+</button>
                             </th>
                         </tr>
                         <tr>
@@ -78,12 +81,12 @@
                             <th width="35%">Description</th>
                             <th width="5%">U/M</th>
                             <th width="4%">Quantity.</th>
-                            <th width="7%" [ngClass]="getSupplier1Style()">Price Each</th>
-                            <th width="7%" [ngClass]="getSupplier1Style()">Total</th>
-                            <th width="7%" [ngClass]="getSupplier2Style()">Price Each</th>
-                            <th width="7%" [ngClass]="getSupplier2Style()">Total</th>
-                            <th width="7%" [ngClass]="getSupplier3Style()">Price Each</th>
-                            <th width="7%" [ngClass]="getSupplier3Style()">Total</th>
+                            <th width="7%">Price Each</th>
+                            <th width="7%">Total</th>
+                            <th width="7%">Price Each</th>
+                            <th width="7%">Total</th>
+                            <th width="7%">Price Each</th>
+                            <th width="7%">Total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -105,26 +108,26 @@
                                 <input class="form-input" [(ngModel)]="item.Qty" style="width:99%;" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
                             </td>
 
-                            <td width="7%" [ngClass]="getSupplier1Style()">
+                            <td width="7%">
                                 <input class="form-input" [(ngModel)]="item.PriceEach" style="width:99%;" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
                             </td>
 
-                            <td width="7%" [ngClass]="getSupplier1Style()">
+                            <td width="7%">
                                 <p style="text-align: center;font-weight: bold;">{{item.PriceEach * item.Qty | currency}}</p>
                             </td>
 
-                            <td width="5%" [ngClass]="getSupplier2Style()">
+                            <td width="5%">
                                 <input class="form-input" style="width:99%;" [(ngModel)]="item.PriceEach2" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
                             </td>
 
-                            <td width="5%" [ngClass]="getSupplier2Style()">
+                            <td width="5%">
                                 <p style="text-align: center;font-weight: bold;">{{item.PriceEach2 * item.Qty | currency}}</p>
                             </td>
-                            <td width="7%" [ngClass]="getSupplier3Style()">
+                            <td width="7%">
                                 <input class="form-input" style="width:99%;" [(ngModel)]="item.PriceEach3" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
                             </td>
 
-                            <td width="7%" [ngClass]="getSupplier3Style()">
+                            <td width="7%">
                                 <p style="text-align: center;font-weight: bold;">{{item.PriceEach3 * item.Qty | currency}}</p>
                             </td>
                         </tr>
@@ -158,28 +161,29 @@
                     </tbody>
                 </table>
             </div>
+ 
 
-            <ion-grid>
-                <ion-row class="custom-box" style="margin-top:1.5%;">
-                    <ion-col col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 no-padding style="background-color: rgb(255, 255, 255);">
+            <ion-grid class="box-pr-form" style="margin-top: 2em;margin-bottom: 2em;">                
+                <ion-row>
+                    <ion-col col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 no-padding>
                         <ion-grid>
-                            <ion-row col-12 col-md-12 col-lg-12 col-xl-12>
-                                <ion-col col-3 col-sm-3 col-md-3 col-lg-3 col-lg-3>
+                            <ion-row>
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 class="col-input">
                                     Purpose or Use
                                 </ion-col>
-                                <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
-                                    <input type="text" class="form-input input-md border-bottom" [(ngModel)]="baseEntity.PurposeOrUse" />
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10>
+                                    <input type="text" class="form-input border-bottom" [(ngModel)]="baseEntity.PurposeOrUse" />
                                 </ion-col>
-                                <ion-col col-3 col-sm-3 col-md-3 col-lg-3 col-lg-3>
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 class="col-input">
                                     Requisition name
                                 </ion-col>
-                                <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
-                                    <input type="text" class="form-input input-md border-bottom" [(ngModel)]="baseEntity.RequisitionName" />
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10>
+                                    <input type="text" class="form-input border-bottom" [(ngModel)]="baseEntity.RequisitionName" />
                                 </ion-col>
-                                <ion-col col-3 col-sm-3 col-md-3 col-lg-3 col-lg-3>
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 class="col-input">
                                     Department
                                 </ion-col>
-                                <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10>
                                     <mat-select [(ngModel)]="baseEntity.DepartmentKey" placeholder="Select.." (ngModelChange)="on_input_change(item);on_department_change(baseEntity.DepartmentKey);"
                                         class="border-bottom" style="width:80%;">
                                         <mat-option *ngFor="let department of departments" [value]="department.id">
@@ -187,19 +191,26 @@
                                         </mat-option>
                                     </mat-select>
                                 </ion-col>
-                                <ion-col col-3 col-sm-3 col-md-3 col-lg-3 col-lg-3>
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 class="col-input">
                                     Date
                                 </ion-col>
-                                <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
-                                    <input [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" class="date-input form-input input-md border-bottom"
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10>
+                                    <input [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" class="form-input border-bottom"
                                         (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.ConvertedDateDepartmentManager">
                                     <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
                                     <mat-datepicker #myDatepicker></mat-datepicker>
                                 </ion-col>
-                                <ion-col col-3 col-sm-3 col-md-3 col-lg-3 col-lg-3>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-col>
+            
+                    <ion-col col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 no-padding>
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 class="col-input">
                                     Department manager
                                 </ion-col>
-                                <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10>
                                     <mat-select [(ngModel)]="baseEntity.DepartmentManagerKey" placeholder="Select.." (ngModelChange)="on_input_change(item);"
                                         class="border-bottom" style="width:80%;">
                                         <mat-option *ngFor="let user of users" [value]="user.id">
@@ -207,38 +218,22 @@
                                         </mat-option>
                                     </mat-select>
                                 </ion-col>
-                            </ion-row>
-                        </ion-grid>
-                    </ion-col>
-
-                    <ion-col col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 no-padding style="background-color: rgb(255, 255, 255);">
-                        <ion-grid>
-                            <ion-row>
-                                <ion-col col-3 col-sm-3 col-md-3 col-lg-3 col-lg-3>
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 class="col-input">
                                     Manager Signature
                                 </ion-col>
-                                <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
-                                    <input type="text" class="form-input input-md border-bottom" [(ngModel)]="baseEntity.PurposedOrUse" />
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10>
+                                    <input type="text" class="form-input border-bottom" [(ngModel)]="baseEntity.PurposedOrUse" />
                                 </ion-col>
-                                <ion-col col-3 col-sm-3 col-md-3 col-lg-3 col-lg-3>
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 class="col-input">
                                     General Manager
                                 </ion-col>
-                                <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
-                                    <p class="form-input input-md border-bottom">{{ baseEntity.GeneralManager?.Value }}</p>
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10>
+                                    <p class="form-input border-bottom">{{ baseEntity.GeneralManager?.Value }}</p>
                                 </ion-col>
-                                <ion-col col-3 col-sm-3 col-md-3 col-lg-3 col-lg-3>
-                                    Date
-                                </ion-col>
-                                <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
-                                    <input [matDatepicker]="myDatepicker2" (click)="myDatepicker2.open()" class="date-input form-input input-md border-bottom"
-                                        (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.ConvertedDateGeneralManager">
-                                    <mat-datepicker-toggle [for]="myDatepicker2"></mat-datepicker-toggle>
-                                    <mat-datepicker #myDatepicker2></mat-datepicker>
-                                </ion-col>
-                                <ion-col col-3 col-sm-3 col-md-3 col-lg-3 col-lg-3>
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 class="col-input">
                                     Account No.
                                 </ion-col>
-                                <ion-col col-9 col-sm-9 col-md-9 col-lg-9 col-lg-9>
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10>
                                     <mat-select [(ngModel)]="baseEntity.AccountNo" placeholder="Select.." (ngModelChange)="on_input_change(item);" class="border-bottom"
                                         style="width:80%;">
                                         <mat-option *ngFor="let account of accounts" [value]="account.id">
@@ -253,13 +248,10 @@
             </ion-grid>
 
 
-
-
-
             <ion-grid>
                 <ion-row>
                     <ion-col col-5>
-                        <div class="custom-box notes">
+                        <div class="box-pr-form notes">
                             <div>
                                 <p>Notes</p>
                             </div>
@@ -273,27 +265,17 @@
                     </ion-col>
                 </ion-row>
             </ion-grid>
-
         </ion-card-content>
     </ion-card>
 
     <div class="div-buttons">
-
         <div>
             <button type="submit" (click)="save()" class="pr-button save">
                 <ion-icon name="ios-archive"></ion-icon> Save</button>
         </div>
-        <!-- <div *ngIf="getCurrentRole() === 'User'">
-            <button type="button" (click)="openModal()" class="pr-button save">
-                <ion-icon name="ios-save"></ion-icon>Request</button>
-        </div> -->
-        <!-- <div *ngIf=" getCurrentRole() === 'DepartmentManager'">
-            <button type="button" (click)="openModal()" class="pr-button verify">
-                <ion-icon name="ios-search"></ion-icon> Verify</button>
-        </div> -->
     </div>
 </div>
-<!-- 
+
 <br>
 <br>
-<pre style="background: rgb(255, 255, 255);min-height: 20px;">{{ baseEntity | json }}</pre> -->
+<pre>{{ baseEntity | json }}</pre>

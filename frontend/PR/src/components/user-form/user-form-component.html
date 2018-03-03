@@ -18,6 +18,12 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Email" [(ngModel)]="baseEntity.Email" (ngModelChange)="on_input_change();">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput type="password" placeholder="Email Password" [(ngModel)]="baseEntity.EmailPassword" (ngModelChange)="on_input_change();">
+      </mat-form-field>
 
       <div class="box-password">
         <!-- in case of existing entity -->

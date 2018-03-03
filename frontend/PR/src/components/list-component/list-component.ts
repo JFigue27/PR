@@ -4,6 +4,7 @@ import { NavController } from 'ionic-angular';
 import { PRPage } from '../../pages/pr-page/pr-page';
 import { PRServiceProvider } from '../../providers/pr-service';
 import { App } from 'ionic-angular/components/app/app';
+import { UserServiceProvider } from '../../providers/user-service';
 
 @Component({
   selector: 'list-component',
@@ -12,6 +13,7 @@ import { App } from 'ionic-angular/components/app/app';
 export class ListComponent extends ListController implements OnInit {
 
   constructor (
+                public userService:UserServiceProvider,
                 public listService: PRServiceProvider,
                 public nav: NavController,
                 private app: App
@@ -23,7 +25,7 @@ export class ListComponent extends ListController implements OnInit {
 
     this.app.viewWillEnter.subscribe(viewCtrl => {
       if (viewCtrl.name == "ListPage") {
-        this.load();
+        this.load('filterUser='+this.userService.LoggedUser.UserKey);
       }
     });
   }
