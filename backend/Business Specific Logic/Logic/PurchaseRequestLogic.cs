@@ -23,6 +23,7 @@ namespace BusinessSpecificLogic.Logic
         {
             return dbQuery.Include(e => e.PRLines)
                 .Include(e => e.DepartmentAssigned)
+                .Include(e => e.InfoTrack)
                 .Include(e => e.GeneralManager);
         }
 
