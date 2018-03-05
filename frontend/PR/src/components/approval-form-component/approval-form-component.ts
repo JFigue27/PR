@@ -2,7 +2,7 @@ import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { ApprovalServiceProvider } from '../../providers/approval-service';
 import { FormController } from '../../services/FormController';
 import { UserServiceProvider } from '../../providers/user-service';
-// import { MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'approval-form-component',
@@ -15,7 +15,8 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   @Input() approverKey: number;
   constructor (
           public approvalService: ApprovalServiceProvider,
-          public userService: UserServiceProvider
+          public userService: UserServiceProvider,
+          public dialog: MatDialog
       ) { 
         super({ service: approvalService }); 
       }
@@ -50,7 +51,7 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   }
 
   approvePr() {
-    this.baseEntity.Status = 'Approved';
+    this.baseEntity.Status = 'Quote';
     this.baseEntity.editMode = true;
     this.baseEntity.ConvertedDateResponse = new Date();
     this.save();

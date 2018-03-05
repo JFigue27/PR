@@ -2,22 +2,21 @@
   <div>
     <p>Approval</p>
   </div>
-  <textarea matInput [(ngModel)]="baseEntity.RequestDescription" matAutosizeMinRows="4" (ngModelChange)="on_input_change(item);"
-    matTextareaAutosize matAutosizeMaxRows="10" class="form-input border-bottom" style="width:98%;"> </textarea>
+  <textarea  *ngIf=" getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' " 
+  matInput [(ngModel)]="baseEntity.ResponseDescription" matAutosizeMinRows="4" (ngModelChange)="on_input_change(item);"
+  matTextareaAutosize matAutosizeMaxRows="10" class="form-input border-bottom"> </textarea>
+
+  <textarea *ngIf=" getCurrentRole() === 'User' " matInput [(ngModel)]="baseEntity.RequestDescription" matAutosizeMinRows="4"
+  (ngModelChange)="on_input_change(item);" matTextareaAutosize matAutosizeMaxRows="10" class="form-input border-bottom"> </textarea>
 </div>
 
 
-<div *ngIf=" getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' ">
-  <button type="submit" (click)="approvePr()" class="pr-button approve">
-    <ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle"></ion-icon> Approve
-  </button>
-  <button type="submit" (click)="rejectPr()" class="pr-button reject">
-    <ion-icon ios="ios-close-outline" md="md-close"></ion-icon> Reject
-  </button>
-</div>
-<div *ngIf="baseEntity.PurchaseRequestKey > 0">
-  <button type="submit" style="background-color: #2690fd;" (click)="save()" class="pr-button request">
-    <ion-icon ios="ios-send" md="md-send"></ion-icon> Request</button>
+<div class="div-buttons">
+  <button *ngIf=" getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' "
+  type="submit" mat-raised-button color="basic" (click)="approvePr()">Approve</button>
+  <button *ngIf=" getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' "
+  type="submit" mat-raised-button color="warn" (click)="rejectPR()">Reject</button>
+  <button *ngIf="baseEntity.PurchaseRequestKey == 0 && getCurrentRole() === 'User' " type="submit" mat-raised-button color="basic" (click)="rejectPR()">Request</button>
 </div>
 
-<pre style="background: rgb(255, 255, 255);min-height: 20px;">{{ baseEntity | json }}</pre>
+<!-- <pre style="background: rgb(255, 255, 255);min-height: 20px;">{{ baseEntity | json }}</pre> -->
