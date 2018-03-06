@@ -54,11 +54,11 @@ Roles:
     ☐ Main Menu always visible.
       ☐ Add PR List menu.
     ✔ Email Address field in User form. @done(18-03-02 13:21)
-    ☐ Approval Request button, disable when clicked.
+    ✔ Approval Request button, disable when clicked. @done(18-03-05 17:23)
     ☐ PR Number column in Approvals list.
-    ☐ Approve and Reject buttons: Confirm dialgo with optional Response Description.
+    ✔ Approve and Reject buttons: Confirm dialgo with optional Response Description. @done(18-03-05 17:23)
     ☐ Display Response Description as read only below Request Description.
-    ☐ Display Approval Status.
+    ✔ Display Approval Status. @done(18-03-05 17:23)
     ☐ Lock PR when it is Approved.
     ☐ "Approve to MRO" functionality.
 

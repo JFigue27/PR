@@ -4,18 +4,22 @@
   </div>
   <textarea  *ngIf=" getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' " 
   matInput [(ngModel)]="baseEntity.ResponseDescription" matAutosizeMinRows="4" (ngModelChange)="on_input_change(item);"
-  matTextareaAutosize matAutosizeMaxRows="10" class="form-input border-bottom"> </textarea>
+  matTextareaAutosize matAutosizeMaxRows="10" class="form-input border-bottom"  style="width:98%;"> </textarea>
 
   <textarea *ngIf=" getCurrentRole() === 'User' " matInput [(ngModel)]="baseEntity.RequestDescription" matAutosizeMinRows="4"
-  (ngModelChange)="on_input_change(item);" matTextareaAutosize matAutosizeMaxRows="10" class="form-input border-bottom"> </textarea>
+  (ngModelChange)="on_input_change(item);" matTextareaAutosize matAutosizeMaxRows="10" class="form-input border-bottom" style="width:98%;"> </textarea>
 </div>
 
 
 <div class="div-buttons">
-  <button *ngIf=" getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' "
-  type="submit" mat-raised-button color="basic" (click)="approvePr()">Approve</button>
-  <button *ngIf=" getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' "
-  type="submit" mat-raised-button color="warn" (click)="rejectPR()">Reject</button>
+  <button *ngIf=" ( getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' ) 
+                     && baseEntity.Status==='Rejected' || baseEntity.Status === 'Pending' "
+  type="submit" mat-raised-button color="basic" (click)="answerApproval('Quote')">Approve</button>
+  <button *ngIf=" ( getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' ) 
+                    && baseEntity.Status==='Quote'  || baseEntity.Status === 'Pending' "
+  type="submit" mat-raised-button color="warn" (click)="answerApproval('Rejected')">Reject</button>
+
+
   <button *ngIf="baseEntity.PurchaseRequestKey == 0 && getCurrentRole() === 'User' " type="submit" mat-raised-button color="basic" (click)="rejectPR()">Request</button>
 </div>
 

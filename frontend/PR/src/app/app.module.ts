@@ -19,6 +19,7 @@ import { DepartmentFormComponent } from '../components/department-form-component
 import { AccountFormComponent } from '../components/account-form-component/account-form-component';
 import { ApprovalFormComponent } from '../components/approval-form-component/approval-form-component';
 import { EmailFormComponent } from '../components/email-form-component/email-form-component';
+import { confirmComponent } from '../components/confirm-component/confirm-component';
 
 //MODULES
 import { AttachmentsModule } from '../components/attachments.module';
@@ -76,6 +77,7 @@ import { MatButtonModule } from '@angular/material/button';
     ApprovalComponent,
     ApprovalFormComponent,
     EmailFormComponent,
+    confirmComponent,
     //Pages
     HomePage,
     ListPage,
@@ -121,6 +123,7 @@ import { MatButtonModule } from '@angular/material/button';
     ApprovalComponent,
     ApprovalFormComponent,
     EmailFormComponent,
+    confirmComponent,
     //Pages
     HomePage,
     ListPage,

@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, Inject } from '@angular/core';
 import { ApprovalServiceProvider } from '../../providers/approval-service';
 import { FormController } from '../../services/FormController';
 import { UserServiceProvider } from '../../providers/user-service';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { confirmComponent } from '../confirm-component/confirm-component';
 
 @Component({
   selector: 'approval-form-component',
@@ -11,6 +12,7 @@ import { MatDialog } from '@angular/material';
 
 export class ApprovalFormComponent extends FormController implements OnInit {
   users = [];
+  response: string;
   @Input() pr: any;
   @Input() approverKey: number;
   constructor (
@@ -30,7 +32,7 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   
   ngOnChanges(changes: SimpleChanges): void {
 
-    if (changes.pr && changes.pr.firstChange == false){
+    if (changes.pr && changes.pr.firstChange == false) {
 
       this.approvalService.getSingleWhere('PurchaseRequestKey', this.pr.PurchaseRequestKey)
       .subscribe(oResponse => {
@@ -50,18 +52,22 @@ export class ApprovalFormComponent extends FormController implements OnInit {
     this.baseEntity.PurchaseRequestKey = this.pr.PurchaseRequestKey;
   }
 
-  approvePr() {
-    this.baseEntity.Status = 'Quote';
+  answerApproval(status) {
+    this.baseEntity.Status = status;
     this.baseEntity.editMode = true;
+    this.response = this.baseEntity.ResponseDescription;
     this.baseEntity.ConvertedDateResponse = new Date();
-    this.save();
-  }
+    let dialog = this.dialog.open(confirmComponent, {
+      width: '300px',
+      data: { response: this.baseEntity.ResponseDescription }
+    });
+    dialog.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      this.baseEntity.ResponseDescription = result;
+      this.save();
+    });
 
-  rejectPr() {
-    this.baseEntity.Status = 'Rejected';
-    this.baseEntity.editMode = true;
-    this.baseEntity.ConvertedDateResponse = new Date();
-    this.save();
   }
 
   getCurrentRole() {
@@ -77,3 +83,4 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   afterRemove() {
   }
 }
+

@@ -1,0 +1,14 @@
+<div class="header-text" color="accent">
+    Confirm Request
+</div>
+<mat-dialog-content>
+    <mat-form-field class="full-width">
+        <textarea  matInput [(ngModel)]="comment" matAutosizeMinRows="3" 
+        matTextareaAutosize matAutosizeMaxRows="10" style="width:98%;"> </textarea>
+    </mat-form-field>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button [mat-dialog-close]="comment" color="primary">Ok</button>
+    <button mat-raised-button [mat-dialog-close]="comment" color="basic">Close</button>
+</mat-dialog-actions>
