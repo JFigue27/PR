@@ -23,6 +23,10 @@ namespace BusinessSpecificLogic.Logic
             {
                 dbQuery = dbQuery.Where(e => e.UserApproverKey == LoggedUser.UserID || e.UserRequisitorKey == LoggedUser.UserID);
             }
+            else if (LoggedUser.Role == "MRO")
+            {
+                dbQuery = dbQuery.Where(e => e.Status == "Quote");
+            }
             else
             {
                 dbQuery = dbQuery.Where(e => e.UserRequisitorKey == LoggedUser.UserID);

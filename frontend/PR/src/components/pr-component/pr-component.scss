@@ -76,7 +76,7 @@ pr-component {
 		background-color:#63b963;
 	}
 
-	.notes, .approval-comments {
+	.notes {
 		background-color: #f2f2f2;
 	}
 
@@ -84,17 +84,13 @@ pr-component {
 		background-color:#f0c345;
 	}
 
-	.approval-comments > div {
-		background-color:#aaaaaa;
-	}
-
-	.notes > div > p, .approval-comments > div > p {
+	.notes > div > p {
 		text-align: center;
 		font-size: 18px;
-		font-weight: 800;
+		font-weight: 500;
 	}
 
-	.notes > textarea, .approval-comments > textarea {
+	.notes > textarea {
 		margin-left: 10px;
 	}
 
@@ -103,24 +99,4 @@ pr-component {
 		margin-top: 10px;
 		float: right;
 	}
-
-	.pr-button {
-        border-radius: 5px;
-        color: white;
-        font-size: 20px;
-        padding: 8px;
-        margin-left: 10px;
-        box-shadow: 1px 1px 4px #9d9d9d;
-    }
-
-	.request , .verify {
-		background-color: #2690fd;
-	 }
-	 
-	.approve, .save {
-		background-color:#088608;
-	 }
-	 .reject {
-		background-color:#e12121e0;
- 	}
 }

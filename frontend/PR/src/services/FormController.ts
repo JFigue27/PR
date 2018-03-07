@@ -59,15 +59,12 @@ export abstract class FormController {
 		this.config.service.remove().subscribe(this.afterRemove);
 	}
 
-	save() {
-		if (this.baseEntity.editMode) {
-				this.config.service.save(this.baseEntity).subscribe(oEntity => {
-				this.afterSave();
-				alertify.success('SUCCESFULLY SAVED');
-				return Observable.empty();
-			});
-		}
-		return Observable.empty();
+	save() {	
+		this.config.service.save(this.baseEntity).subscribe(oEntity => {
+			this.afterSave();
+			alertify.success('SUCCESFULLY SAVED');
+			return Observable.empty();
+		});
 	}
 
 	undo() {

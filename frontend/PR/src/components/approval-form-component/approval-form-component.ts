@@ -33,7 +33,6 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   ngOnChanges(changes: SimpleChanges): void {
 
     if (changes.pr && changes.pr.firstChange == false) {
-
       this.approvalService.getSingleWhere('PurchaseRequestKey', this.pr.PurchaseRequestKey)
       .subscribe(oResponse => {
         this.load(oResponse.Result);
@@ -53,18 +52,15 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   }
 
   answerApproval(status) {
-    this.baseEntity.Status = status;
-    this.baseEntity.editMode = true;
-    this.response = this.baseEntity.ResponseDescription;
-    this.baseEntity.ConvertedDateResponse = new Date();
-    let dialog = this.dialog.open(confirmComponent, {
-      width: '300px',
-      data: { response: this.baseEntity.ResponseDescription }
-    });
-    dialog.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
+  let dialog = this.dialog.open(confirmComponent, {
+    width: '300px', data: { response: this.baseEntity.ResponseDescription }
+  });
+  dialog.afterClosed().subscribe(result => {
+      this.baseEntity.editMode = true;
+      this.response = this.baseEntity.ResponseDescription;
+      this.baseEntity.ConvertedDateResponse = new Date();
       this.baseEntity.ResponseDescription = result;
+      this.baseEntity.Status = status;
       this.save();
     });
 

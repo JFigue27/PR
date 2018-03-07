@@ -9,7 +9,6 @@ import { PRPage } from '../../pages/pr-page/pr-page';
   templateUrl: 'approval-component.html'
 })
 export class ApprovalComponent extends ListController implements OnInit {
-
   constructor (
                 public nav: NavController,
                 public approvalService: ApprovalServiceProvider,
