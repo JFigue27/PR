@@ -12,7 +12,7 @@
         <input matInput placeholder="Budget" [(ngModel)]="baseEntity.Budget" (ngModelChange)="on_input_change();">
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <mat-select [(ngModel)]="baseEntity.ManagerKey" (ngModelChange)="on_input_change(item);">
+        <mat-select [(ngModel)]="baseEntity.ManagerKey" placeholder="Select a manager" (ngModelChange)="on_input_change(item);">
           <mat-option *ngFor="let user of users" [value]="user.UserKey">
             {{ user.Value }}
           </mat-option>

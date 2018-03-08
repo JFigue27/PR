@@ -1,6 +1,7 @@
 // http://ionicframework.com/docs/theming/
 // @import "./common/prebuilt-themes/indigo-pink";
 @import "./common/prebuilt-themes/ok";
+@import "./common/table";
 
 .content {
     background-color: #ebebeb;
@@ -17,6 +18,16 @@ mat-dialog-container {
 	border-bottom: 1px solid rgba(0, 0, 0, 0.36);
 	-webkit-appearance: none; 
 	box-shadow:none; 
+}
+
+.button-fixed {
+	position: fixed !important;
+	right: 15%;
+	bottom: 50px;
+	font-size: 20px;
+	height: 70px !important; 
+	width: 70px !important;
+	display: block;
 }
 
 * {

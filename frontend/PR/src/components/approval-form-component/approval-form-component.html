@@ -12,10 +12,10 @@
     </mat-form-field>
     <br>
     <mat-form-field class="input" *ngIf=" getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' ">
-      <input matInput placeholder="Response" [(ngModel)]="baseEntity.RequestDescription">
+      <input matInput placeholder="Response" [(ngModel)]="baseEntity.ResponseDescription">
     </mat-form-field>
     <mat-form-field class="input" *ngIf=" getCurrentRole() === 'User' || getCurrentRole() === 'MRO' ">
-      <input matInput placeholder="Response" [(ngModel)]="baseEntity.RequestDescription" readonly>
+      <input matInput placeholder="Response" [(ngModel)]="baseEntity.ResponseDescription" readonly>
     </mat-form-field>
 
   </div>

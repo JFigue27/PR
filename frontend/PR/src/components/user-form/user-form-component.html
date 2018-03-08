@@ -32,11 +32,13 @@
         </label>
       
         <div *ngIf="baseEntity.UserKey == 0 || baseEntity.ChangePassword">
-          <input type="password" placeholder="Password" class="input-personalized input-password" [(ngModel)]="baseEntity.Password"
-            (ngModelChange)="on_input_change();">
-      
-          <input type="password" placeholder="Confirm Password" class="input-personalized input-password" [(ngModel)]="baseEntity.ConfirmPassword"
-            (ngModelChange)="on_input_change();">
+
+        <mat-form-field class="example-full-width input-password">
+          <input matInput type="password" placeholder="Password" [(ngModel)]="baseEntity.Password" (ngModelChange)="on_input_change();">
+        </mat-form-field>
+        <mat-form-field class="example-full-width input-password">
+            <input matInput type="password" placeholder="Confirm password" [(ngModel)]="baseEntity.ConfirmPassword" (ngModelChange)="on_input_change();">
+        </mat-form-field>
         </div>
       </div> 
 

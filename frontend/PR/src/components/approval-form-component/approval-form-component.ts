@@ -71,6 +71,7 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   }
 
   afterLoad() {
+    this.pr.ApprovalStatus = this.baseEntity.Status;
   }
 
   afterSave() { 
