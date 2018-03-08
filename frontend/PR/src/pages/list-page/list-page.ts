@@ -18,7 +18,6 @@ export class ListPage extends ListController {
   
   user:string;
   constructor(
-              public navCtrl: NavController,
               public nav: NavController,
               public modal:ModalController,
               public userService:UserServiceProvider

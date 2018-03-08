@@ -52,7 +52,7 @@ Roles:
     ✔ To be able to add Supplier from PR screen. @done(18-03-01 15:40)
     ✔ Requisition Name autopopulated. @done(18-03-01 15:40)
     ✔ Send Test Email => Post to api/User/SendTestEmail @done(18-03-02 11:09)
-    ☐ Main Menu always visible.
+    ✔ Main Menu always visible. @done(18-03-08 11:16)
     ✔ Add PR List menu. @done(18-03-06 10:44)
     ✔ Email Address field in User form. @done(18-03-02 13:21)
     ✔ Approval Request button, disable when clicked. @done(18-03-05 17:23)

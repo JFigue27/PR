@@ -25,7 +25,7 @@ namespace BusinessSpecificLogic.Logic
             }
             else if (LoggedUser.Role == "MRO")
             {
-                dbQuery = dbQuery.Where(e => e.Status == "Quote");
+                dbQuery = dbQuery.Where(e => e.Status == "Quote" || e.Status == "Approved");
             }
             else
             {

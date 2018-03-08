@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, SimpleChanges, Inject } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { ApprovalServiceProvider } from '../../providers/approval-service';
 import { FormController } from '../../services/FormController';
 import { UserServiceProvider } from '../../providers/user-service';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { confirmComponent } from '../confirm-component/confirm-component';
 
 @Component({

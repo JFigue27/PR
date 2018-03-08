@@ -1,16 +1,16 @@
 <ion-header>
-  <ion-navbar >
-    <div ion-row no-padding>
-      <div col-12 col-md-2>PR System</div>
+  <ion-navbar color="accent">
+    <div ion-row  no-padding>
+      <div col-12 col-md-2 class="main-logo">PR System</div>
       <div col-12 col-md-10 ion-row no-padding>
-        <div col-5 col-md-4 color="primary"></div> 
-        <button col-5 col-md-2 col-lg-1 mat-raised-button color="basic" (click)="openPR()">PR List</button>
-        <button col-5 col-md-2 col-lg-1 mat-raised-button color="basic" (click)="openApproval()">Approvals</button>
-        <button col-5 col-md-2 col-lg-1 mat-raised-button color="basic" (click)="openAccount()">Accounts</button>
-        <button col-5 col-md-2 col-lg-1 mat-raised-button color="basic" (click)="openDepartment()">Departments</button>
-        <button col-5 col-md-2 col-lg-1 mat-raised-button color="basic" (click)="openUser()">Users</button>
-        <button col-5 col-md-2 col-lg-1 mat-raised-button color="basic" (click)="openSupplier()">Suppliers</button>
-        <button col-5 col-md-2 col-lg-1 mat-raised-button color="basic" [matMenuTriggerFor]="menu">
+        <div col-5 col-md-4 class="botton-menu"></div> 
+        <button col-5 col-md-2 col-lg-1 mat-raised-button color="primary" class="botton-menu"class="botton-menu" (click)="openPR()">PR List</button>
+        <button col-5 col-md-2 col-lg-1 mat-raised-button color="primary" class="botton-menu" (click)="openApproval()">Approvals</button>
+        <button col-5 col-md-2 col-lg-1 mat-raised-button color="primary" class="botton-menu" (click)="openAccount()">Accounts</button>
+        <button col-5 col-md-2 col-lg-1 mat-raised-button color="primary" class="botton-menu" (click)="openDepartment()">Departments</button>
+        <button col-5 col-md-2 col-lg-1 mat-raised-button color="primary" class="botton-menu" (click)="openUser()">Users</button>
+        <button col-5 col-md-2 col-lg-1 mat-raised-button color="primary" class="botton-menu" (click)="openSupplier()">Suppliers</button>
+        <button col-5 col-md-2 col-lg-1 mat-raised-button color="accent" class="botton-menu" [matMenuTriggerFor]="menu">
           <ion-icon name="ios-contact"></ion-icon> {{ getUserName() | uppercase }}
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="openProfile()">Profile</button>

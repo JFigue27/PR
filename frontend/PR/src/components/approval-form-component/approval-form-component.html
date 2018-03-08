@@ -4,16 +4,20 @@
   </div>
   <div class="body">
 
-    <mat-form-field class="example-full-width">
-      <input *ngIf=" getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' " matInput placeholder="Request" [(ngModel)]="baseEntity.RequestDescription">
+    <mat-form-field class="input" *ngIf=" getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' || getCurrentRole() === 'MRO' ">
+      <input matInput placeholder="Request" [(ngModel)]="baseEntity.RequestDescription" readonly>
+    </mat-form-field>
+    <mat-form-field class="input" *ngIf=" getCurrentRole() === 'User' " matInput placeholder="Request">
       <input *ngIf=" getCurrentRole() === 'User' " matInput placeholder="Request" [(ngModel)]="baseEntity.RequestDescription">
     </mat-form-field>
     <br>
-    <mat-form-field class="example-full-width">
-      <input *ngIf=" getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' " matInput placeholder="Response"
-        [(ngModel)]="baseEntity.RequestDescription">
-      <input *ngIf=" getCurrentRole() === 'User' " matInput placeholder="Response" [(ngModel)]="baseEntity.RequestDescription">
+    <mat-form-field class="input" *ngIf=" getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' ">
+      <input matInput placeholder="Response" [(ngModel)]="baseEntity.RequestDescription">
     </mat-form-field>
+    <mat-form-field class="input" *ngIf=" getCurrentRole() === 'User' || getCurrentRole() === 'MRO' ">
+      <input matInput placeholder="Response" [(ngModel)]="baseEntity.RequestDescription" readonly>
+    </mat-form-field>
+
   </div>
 
 </div>
@@ -26,13 +30,12 @@
   <button *ngIf=" ( getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' ) 
                       && (  baseEntity.Status==='Quote'  || baseEntity.Status === 'Pending' )" type="submit" mat-raised-button
     color="warn" (click)="answerApproval('Rejected')">Reject</button>
-  
+
+  <button *ngIf=" ( getCurrentRole() === 'MRO' ) && (  baseEntity.Status==='Quote' )" 
+    mat-raised-button color="primary" (click)="answerApproval('Approved')">Finalize</button>
   
   <button *ngIf="baseEntity.ApprovalKey === 0 " type="submit" mat-raised-button color="basic"
     (click)="save()">Request</button>
   </div>
 
-<!-- <pre style="background: rgb(255, 255, 255);min-height: 20px;">{{ baseEntity | json }}</pre> -->
-
-
-<!-- && getCurrentRole() === 'User' -->
+<!-- <pre>{{ baseEntity | json }}</pre> -->

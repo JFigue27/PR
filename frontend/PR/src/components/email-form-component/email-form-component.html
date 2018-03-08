@@ -13,10 +13,13 @@
         <input matInput type="password" placeholder="Password" [(ngModel)]="baseEntity.EmailPassword"
         (ngModelChange)="on_input_change();">
       </mat-form-field>
-      <button ion-button (click)="save()">Save</button>
-      <button ion-button color="light" (click)="testEmail()" >Send test email</button>
+      <!-- <button ion-button (click)="save()">Save</button> -->
+      <!-- <button ion-button color="light" (click)="testEmail()" >Send test email</button> -->
+      
+      <button mat-raised-button color="accent" (click)="save()">Save</button>
+      <button mat-raised-button color="basic" (click)="testEmail()" >Send test email</button>
     </div>
   </div>
 </div>
 
-<pre style="background: gray; min-height: 20px; font-size:18px;">{{ baseEntity | json }}</pre>
+<!-- <pre>{{ baseEntity | json }}</pre> -->

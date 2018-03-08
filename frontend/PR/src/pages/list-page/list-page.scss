@@ -1,13 +1,31 @@
-.div-main {
-    display: inline;
+list-page {
+    
+    .div-main {
+        display: inline;
+    }
+    
+    .main-logo {
+        font-size: 22px;
+        font-weight: 400;
+    }
+
+    .div-menu {
+        text-align: center;
+        border-bottom:1px solid rgb(167, 167, 167);
+        font-size: 14px;
+        font-weight: 500;
+        font-size: 15px;
+        margin-left: 10px;
+    }
+
+    .botton-menu {
+        margin-left: 10px;
+    }
+
+    @media only screen and (max-width: 1000px) {
+        .botton-menu {
+            margin-top: 20px;
+        }
+    }
+
 }
-.div-menu{
-    text-align: center;
-    border-bottom:1px solid rgb(167, 167, 167);
-    font-size: 14px;
-    font-weight: 500;
-    font-size: 15px;
-    margin-left: 10px;
-}
- 
- 

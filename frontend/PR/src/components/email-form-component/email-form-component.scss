@@ -10,7 +10,7 @@ email-form-component {
     .card-header {
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
-        background-color: rgb(129, 129, 129);
+        background-color: #00679b;
         color:white;
         font-size: 22px;
         font-weight: 300;
@@ -18,9 +18,22 @@ email-form-component {
         border-bottom: 1px solid #acacac;
     }
 
+    // .card-header {
+    //     font-size: 22px;
+    //     font-weight: 400;
+    //     text-align: center;
+    //     padding:10px;
+    //     border-bottom: 1px solid #00679b;
+    //     color: #00679b;
+    //     width: 75%;
+    //     margin: auto;
+    // }
+
+
+
     .card-body {
         padding: 2em;
-        border-bottom-left-radius: 15px;
+        border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
     }
 
@@ -35,6 +48,9 @@ email-form-component {
     }
 
     .example-form > button {
-        width: 150px;
+        width: 180px;
+        font-size: 20px;
+        margin-right: 10px;
+        margin-top: 10px;
     }
 }

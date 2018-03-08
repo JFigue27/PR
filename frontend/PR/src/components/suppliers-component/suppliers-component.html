@@ -1,23 +1,24 @@
-<section class="section-users">
+<div class="logo">
   <h1>
     <ion-icon name="ios-contact" md="md-contacts"></ion-icon> Suppliers
   </h1>
-
-  <ion-card class="card-items">
-    <ion-list>
-      <div ion-row class="item" *ngFor="let item of baseList">
-        <div (click)="openItem(item)" col-11 col-md-11 class="item-info">
-          <ion-label>{{ item.Value }}</ion-label>
-        </div>
-        <div (click)="removeItem(item)" col-1 col-md-1 class="item-delete">
-          <div>
-            <ion-icon class="icon-delete" name="trash"></ion-icon>
-          </div>
-        </div>
-      </div>
-    </ion-list>
-  </ion-card>
-
-  <button ion-button (click)="addItem()" class="btn-add-item">+</button>
-
-</section>
+</div>
+<div class="supplier-table table-responsive-vertical shadow-z-1" ng-hide="!baseList || baseList.length == 0">
+  <table class="table table-condensed" style="table-layout: fixed;">
+    <thead>
+      <tr>
+        <th>Supplier</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of baseList" (click)="openItem(item)">
+        <td data-title="Supplier">{{ item.Value }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="logo">
+  <button mat-mini-fab color="primary" (click)="addItem()" style="float:right;">
+    <ion-icon ios="ios-add" md="md-add"></ion-icon>
+  </button>
+</div>
