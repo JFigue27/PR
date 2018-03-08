@@ -1,40 +1,8 @@
-.section-list {
-    width: 70%;
-    margin: auto;
-}
+list-component {
 
-.item-info > ion-label {
-    margin-left: 10px;
-}
-
-.item:hover {
-    background-color: #ebebeb;
-    -webkit-transition: width 2s; /* Safari */
-    transition:all 0.4s ease;
-}
-
-.item-delete > div {
-    width: 60%;
-    background-color: white;
-    margin-top: 7px;
-    margin-left: 10px;
-    text-align: center;
-    box-shadow: 0px 0px 2px 2px  rgb(187, 187, 187);
-    display: none;
-}
-
-.icon-delete {
-    font-size: 30px;
-}
-.btn-add-item {
-    float: right;
-    margin-right: 11px;
-    border-radius: 30px;
-}
-
-@media (max-width: 1000px) {
-    .section-list {
-      width: 100%;
-      margin: 0%;
+    .logo, .pr-table {
+        width: 70%;
+        margin: auto;
     }
-  }
+
+}

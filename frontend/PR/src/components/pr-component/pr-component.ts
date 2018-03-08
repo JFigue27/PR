@@ -108,7 +108,6 @@ export class PRComponent extends FormController implements OnInit {
     }
   }
 
-
   getCurrentRole() {
     return this.userService.LoggedUser.Roles;
   }
@@ -165,8 +164,6 @@ export class PRComponent extends FormController implements OnInit {
   }
 
   openModal() {
-    this.save().subscribe(function () {
-
       let currentDepartment = this.departments.find(d => d.id == this.baseEntity.DepartmentKey);
       let price = 0;
       if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier1Key) {
@@ -194,7 +191,6 @@ export class PRComponent extends FormController implements OnInit {
           }
         });
       }
-    });
   }
 
   getApprover() {

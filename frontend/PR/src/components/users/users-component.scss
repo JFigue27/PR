@@ -1,45 +1,8 @@
-users {
-    display: inline; 
-}
-.section-users{
-    width: 60%;
-    margin: auto;
-}
+users-component {
 
-.div-users{
-    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
-    padding: 0.5em;
-    background-color: white;
-}
+    .logo, .user-table {
+        width: 60%;
+        margin: auto;
+    }
 
-.single-user{
-    height: 45px;
-    padding: 10px;
-    font-size:18px;
-}
-
-.single-user:hover{
-    background-color: #e4e4e4;
-    -webkit-transition: width 2s; /* Safari */
-    transition:all 0.8s ease;
-}
-
-.single-user > div {
-    float: left;
-    width: 95%;
-}
-
-.single-user > button {
-    float: right;
-    box-shadow: 0 2px 4px 2px rgba(0,8,0,0.2);
-    background-color: white;
-    border: 1px solid rgb(168, 168, 168);
-    width: 25px;
-    height: 25px;
-    display: none;
-}
-.btn-add-item {
-    float: right;
-    margin-right: 1px;
-    border-radius: 30px;
 }

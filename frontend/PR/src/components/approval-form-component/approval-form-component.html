@@ -3,18 +3,17 @@
     <p>Approval</p>
   </div>
   <div class="body">
-    <p class="text">Request</p>
-    <input *ngIf=" getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' " 
-    type="text" class="input" [(ngModel)]="baseEntity.RequestDescription" disabled>
 
-    <input *ngIf=" getCurrentRole() === 'User' " 
-    type="text" class="input" [(ngModel)]="baseEntity.RequestDescription">
-    <br><br>
-    <p class="text">Response</p>
-    <input *ngIf=" getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' "
-     type="text" class="input" [(ngModel)]="baseEntity.ResponseDescription">
-    <input *ngIf=" getCurrentRole() === 'User' "
-    type="text" class="input" [(ngModel)]="baseEntity.ResponseDescription" disabled>
+    <mat-form-field class="example-full-width">
+      <input *ngIf=" getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' " matInput placeholder="Request" [(ngModel)]="baseEntity.RequestDescription">
+      <input *ngIf=" getCurrentRole() === 'User' " matInput placeholder="Request" [(ngModel)]="baseEntity.RequestDescription">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+      <input *ngIf=" getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' " matInput placeholder="Response"
+        [(ngModel)]="baseEntity.RequestDescription">
+      <input *ngIf=" getCurrentRole() === 'User' " matInput placeholder="Response" [(ngModel)]="baseEntity.RequestDescription">
+    </mat-form-field>
   </div>
 
 </div>

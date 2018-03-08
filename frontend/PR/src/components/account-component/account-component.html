@@ -1,17 +1,27 @@
-<section class="section-users">
+
+<div class="logo">
   <h1>
-    <ion-icon name="ios-contact"></ion-icon> Accounts
+    <ion-icon ios="ios-card" md="md-card"></ion-icon> Accounts
   </h1>
-
-    <ion-card class="card-items">
-      <ion-list>
-        <div ion-row class="item" *ngFor="let item of baseList">
-          <div (click)="openItem(item)" col-11 col-md-11 class="item-info">
-            <ion-label>{{ item.Value }} &nbsp;&nbsp; {{ item.Description }}</ion-label>
-          </div>
-        </div>
-      </ion-list>
-    </ion-card>
-  <button ion-button (click)="addItem()" class="btn-add-item">+</button>
-
-</section>
+</div>
+<div class="account-table table-responsive-vertical shadow-z-1" ng-hide="!baseList || baseList.length == 0">
+  <table class="table table-condensed" style="table-layout: fixed;">
+    <thead>
+      <tr> 
+        <th>Description</th>
+        <th>Account</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of baseList" (click)="openItem(item)"> 
+        <td data-title="Account">{{ item.Value }}</td>
+        <td data-title="Description">{{ item.Description }}</td> 
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="logo">
+  <button mat-mini-fab color="primary" (click)="addItem()" style="float:right;">
+    <ion-icon ios="ios-add" md="md-add"></ion-icon>
+  </button>
+</div>
