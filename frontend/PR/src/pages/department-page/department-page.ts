@@ -5,7 +5,6 @@ import { SuppliersPage } from '../suppliers/suppliers-page';
 import { ApprovalPage } from '../approval-page/approval-page';
 import { LoginComponent } from '../../components/login/login';
 import { UserServiceProvider } from '../../providers/user-service';
-import { ListController } from '../../services/ListController';
 import { EmailPage } from '../email-page/email-page';
 import { ListPage } from '../list-page/list-page';
 import { AccountPage } from '../account-page/account-page';

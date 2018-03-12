@@ -6,7 +6,6 @@ import { DepartmentPage } from '../department-page/department-page';
 import { ApprovalPage } from '../approval-page/approval-page';
 import { LoginComponent } from '../../components/login/login';
 import { UserServiceProvider } from '../../providers/user-service';
-import { ListController } from '../../services/ListController';
 import { EmailPage } from '../email-page/email-page';
 import { ListPage } from '../list-page/list-page';
 

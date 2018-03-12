@@ -25,18 +25,18 @@ export class PRComponent extends FormController implements OnInit {
   userRole: string;
   currencies = ['Dlls', 'Mxn'];
 
-  constructor(
+  constructor (
     public dialog: MatDialog,
-    public listService: PRServiceProvider,
     private params: NavParams,
     public userService: UserServiceProvider,
+    public PRService: PRServiceProvider,
     private departmentService: DepartmentServiceProvider,
     private accountService: AccountServiceProvider,
     private approvalService: ApprovalServiceProvider,
     private supplierService: SupplierServiceProvider,
     public modal: ModalController
   ) {
-    super({ service: listService });
+    super({ service: PRService });
   }
 
   ngOnInit() {

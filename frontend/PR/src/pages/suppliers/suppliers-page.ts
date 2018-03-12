@@ -4,7 +4,6 @@ import { UsersPage } from '../users/users-page';
 import { DepartmentPage } from '../department-page/department-page';
 import { LoginComponent } from '../../components/login/login';
 import { UserServiceProvider } from '../../providers/user-service';
-import { ListController } from '../../services/ListController';
 import { ListPage } from '../list-page/list-page';
 import { AccountPage } from '../account-page/account-page';
 import { ApprovalPage } from '../approval-page/approval-page';

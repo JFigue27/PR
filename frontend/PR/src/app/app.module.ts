@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpClientModule } from '@angular/common/http';
-
+import { FileUploadModule } from 'ng2-file-upload';
 //COMPONENTS
 import { MyApp } from './app.component';
 import { LoginComponent } from '../components/login/login';
@@ -103,6 +103,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatTableModule,
     MatMenuModule,
     MatButtonModule,
+    FileUploadModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

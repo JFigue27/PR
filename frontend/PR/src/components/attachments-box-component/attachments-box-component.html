@@ -1,4 +1,6 @@
-<!-- Generated template for the AttachmentsBoxComponent component -->
-<div>
-  {{text}}
+
+<div (click)="openFileBrowser()" style="border: 1px solid black;">
+  <p>File section</p>
+  <input type="file" id="file" ng2FileSelect (click)="openFileBrowser()" [uploader]="uploader" />
+  <h1>archivo folder : {{ ownerEntity.AttachmentsFolder }}</h1>
 </div>
