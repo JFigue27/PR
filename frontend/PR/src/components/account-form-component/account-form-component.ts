@@ -10,8 +10,7 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 })
 
 export class AccountFormComponent extends FormController implements OnInit {
-  errorMessage: string;
-  departments = [];
+  private departments = [];
   constructor (
             @Inject(MAT_DIALOG_DATA)public data:any,
             public accountService: AccountServiceProvider,

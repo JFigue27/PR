@@ -1,7 +1,22 @@
 attachments-box-component {
-    .attachment-wrapper { 
-        border: 2px dashed rgb(21, 122, 12);
+    .attachment-wrapper > p {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .attachment-wrapper > div { 
+        border: 2px dashed #00679b;
         width: 30%;
         padding: 15px;
+    }
+    
+    .btn-file {
+        background-color: #00679b;
+        color:white;
+        font-size: 15px;
+        padding:10px;
+    }
+    .btn-file > input {
+        display: none;
     }
 }

@@ -15,7 +15,7 @@ import { EmailPage } from '../email-page/email-page';
   templateUrl: 'pr-page.html',
 })
 export class PRPage {
-  user: string;
+  private user: string;
   constructor(
     public nav: NavController,
     public modal: ModalController,

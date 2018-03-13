@@ -15,7 +15,7 @@ import { EmailPage } from '../email-page/email-page';
 })
 
 export class UsersPage {
-  user: string;
+  private user: string;
   constructor(
     public nav: NavController,
     public modal: ModalController,

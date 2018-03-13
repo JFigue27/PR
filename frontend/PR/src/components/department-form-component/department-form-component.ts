@@ -9,8 +9,7 @@ import { UserServiceProvider } from '../../providers/user-service';
   templateUrl: 'department-form-component.html'
 })
 export class DepartmentFormComponent extends FormController implements OnInit {
-  errorMessage: string;
-  users=[];
+  private users=[];
 
   constructor (
                 @Inject(MAT_DIALOG_DATA) public data: any,

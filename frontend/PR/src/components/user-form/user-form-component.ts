@@ -8,7 +8,6 @@ import { MAT_DIALOG_DATA } from '@angular/material';
   templateUrl: 'user-form-component.html'
 })
 export class UserFormComponent extends FormController implements OnInit { 
-  errorMessage: string;
   roles = [
     { value: 'User', viewValue: 'User' },
     { value: 'DepartmentManager', viewValue: 'Department Manager' },

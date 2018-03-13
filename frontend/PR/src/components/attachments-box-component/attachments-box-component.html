@@ -1,6 +1,13 @@
 
-<div (click)="openFileBrowser()" class="attachment-wrapper">
-  <p>File section</p>
-  <input type="file" id="file" ng2FileSelect (click)="openFileBrowser()" [uploader]="uploader" multiple>
-  <h4>archivo folder : {{ ownerEntity.Attachments?.FileName }}</h4>
-</div>
+ <div *ngIf="baseEntity.UserKey == 0">
+   ok
+ </div>
+<!-- <div class="attachment-wrapper">
+  <p>Attachments</p>
+  <div (click)="openFileBrowser()">
+    <button class="btn-file">Add files
+      <input type="file" id="file" ng2FileSelect (click)="openFileBrowser()" [uploader]="uploader" multiple>
+    </button>
+  </div>
+</div> -->
+  

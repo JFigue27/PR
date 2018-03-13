@@ -14,7 +14,7 @@ import { EmailPage } from '../email-page/email-page';
   templateUrl: 'suppliers-page.html',
 })
 export class SuppliersPage {
-  user: string;
+  private user: string;
   constructor(
     public nav: NavController,
     public modal: ModalController,

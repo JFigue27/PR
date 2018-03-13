@@ -8,7 +8,7 @@ import alertify from 'alertifyjs';
   templateUrl: 'email-form-component.html'
 })
 export class EmailFormComponent extends FormController implements OnInit {
-  id: string;
+  private id: string;
   constructor (
                 public userService: UserServiceProvider
               ) {

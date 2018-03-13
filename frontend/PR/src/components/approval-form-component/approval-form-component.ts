@@ -11,8 +11,8 @@ import { confirmComponent } from '../confirm-component/confirm-component';
 })
 
 export class ApprovalFormComponent extends FormController implements OnInit {
-  users = [];
-  response: string;
+  private users = [];
+  private response: string;
   @Input() pr: any;
   @Input() approverKey: number;
   constructor (

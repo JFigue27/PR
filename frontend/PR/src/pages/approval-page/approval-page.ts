@@ -14,7 +14,7 @@ import { AccountPage } from '../account-page/account-page';
   templateUrl: 'approval-page.html',
 })
 export class ApprovalPage {
-  user: string;
+  private user: string;
   constructor(
     public nav: NavController,
     public modal: ModalController,

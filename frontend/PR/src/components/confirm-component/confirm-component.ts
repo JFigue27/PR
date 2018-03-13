@@ -6,7 +6,7 @@ import { MAT_DIALOG_DATA } from '@angular/material';
     templateUrl: 'confirm-component.html',
 })
 export class confirmComponent implements OnInit {
-    comment:string;
+    private comment:string;
     constructor (
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {

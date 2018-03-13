@@ -14,7 +14,7 @@ import { ListPage } from '../list-page/list-page';
   templateUrl: 'account-page.html',
 })
 export class AccountPage {
-  user: string;
+  private user: string;
   constructor (
       public nav: NavController,
       public modal: ModalController,

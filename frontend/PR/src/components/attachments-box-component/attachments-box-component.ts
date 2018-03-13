@@ -1,7 +1,6 @@
-import { Component, Input, OnChanges, SimpleChanges, OnInit, ElementRef } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges,ElementRef } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { Config } from '../../services/config';
-import { FormController } from '../../services/FormController';
 import { PRServiceProvider } from '../../providers/pr-service';
 import alertify from 'alertifyjs';
 // import { Observable } from 'rxjs/Observable';
@@ -34,8 +33,8 @@ export class AttachmentsBoxComponent implements OnChanges {
   private attachmentsListName: string;
   private attachmentsFolder: string;
   private api_name: string = 'api_attachments';
-  private uploadingPromise: any;
-  private ErrorThrown: boolean;
+  // private uploadingPromise: any;
+  // private ErrorThrown: boolean;
 
   constructor(
     public PRService: PRServiceProvider,
@@ -48,7 +47,6 @@ export class AttachmentsBoxComponent implements OnChanges {
       //Variables Initialization
       this.attachmentsListName = this.customListBind || 'Attachments';
       this.attachmentsFolder = this.customFolderBind || 'AttachmentsFolder';
-
       
       //Public accesors
       this.ownerEntity[this.api_name] = {};
@@ -70,14 +68,14 @@ export class AttachmentsBoxComponent implements OnChanges {
       }
       
       //Callbacks
-      this.uploader.onAfterAddingFile = function(fileItem){
+      this.uploader.onAfterAddingFile = function(fileItem) {
 
       }
 
       // A single file was uploaded succesfully
       this.uploader.onSuccessItem = function (item, response:any, status, headers) {
 
-        if(!response.ErrorThrown){
+        if (!response.ErrorThrown) {
           this.ownerEntity[this.attachmentsFolder] = response.ResponseDescription;
           let theAttachment = this.getAttachment(item.file.name);
           theAttachment.isForUpload = false;

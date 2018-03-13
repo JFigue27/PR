@@ -17,13 +17,13 @@ import { SupplierFormComponent } from '../supplier-form-component/supplier-form-
   templateUrl: 'pr-component.html'
 })
 export class PRComponent extends FormController implements OnInit {
-  accounts = [];
-  departments = [];
-  suppliers = [];
-  users = [];
-  approval: any;
-  userRole: string;
-  currencies = ['Dlls', 'Mxn'];
+  private accounts = [];
+  private departments = [];
+  private suppliers = [];
+  private users = [];
+  private approval: any;
+  public userRole: string;
+  public currencies = ['Dlls', 'Mxn'];
 
   constructor (
     public dialog: MatDialog,

@@ -14,8 +14,7 @@ import { AccountPage } from '../account-page/account-page';
   templateUrl: 'department-page.html',
 })
 export class DepartmentPage {
-
-  user: string;
+  private user: string;
   constructor(
     public nav: NavController,
     public modal: ModalController,
