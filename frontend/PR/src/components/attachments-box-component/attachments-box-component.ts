@@ -108,7 +108,9 @@ export class AttachmentsBoxComponent implements OnChanges {
   }
 
   openFileBrowser() {
-    // get
+    console.log('hola');
+    let filebutton = document.getElementById('file');
+    filebutton.click();
   }
 
   

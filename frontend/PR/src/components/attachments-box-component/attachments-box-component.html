@@ -1,6 +1,6 @@
 
-<div (click)="openFileBrowser()" style="border: 1px solid black;">
+<div (click)="openFileBrowser()" class="attachment-wrapper">
   <p>File section</p>
-  <input type="file" id="file" ng2FileSelect (click)="openFileBrowser()" [uploader]="uploader" />
-  <h1>archivo folder : {{ ownerEntity.AttachmentsFolder }}</h1>
+  <input type="file" id="file" ng2FileSelect (click)="openFileBrowser()" [uploader]="uploader" multiple>
+  <h4>archivo folder : {{ ownerEntity.Attachments?.FileName }}</h4>
 </div>
