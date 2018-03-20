@@ -1,5 +1,6 @@
 import { CRUDFactory } from './CRUDFactory';
 import { IEntity } from './IEntity';
+import { Observable } from 'rxjs/RX';
 import alertify from 'alertifyjs';
 
 interface IConfigListController {
@@ -90,7 +91,11 @@ export abstract class ListController {
         // this.load();
     }
 
-    saveItem() {
+    saveItem(item) {
+        this.config.service.save(item).subscribe(oEntity => {
+            alertify.success('SUCCESFULLY SAVED');
+            return Observable.empty();
+        });
     }
 
     save() {

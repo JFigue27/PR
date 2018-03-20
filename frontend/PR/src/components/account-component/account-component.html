@@ -10,18 +10,29 @@
       <tr> 
         <th>Description</th>
         <th>Account</th>
+        <th>Budget</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of baseList" (click)="openItem(item)"> 
+      <tr *ngFor="let item of baseList">
         <td data-title="Account">{{ item.Value }}</td>
-        <td data-title="Description">{{ item.Description }}</td> 
+        <td data-title="Description">{{ item.Description }}</td>
+        <td data-title="Description">
+          <input type="text" [(ngModel)]="item.Budget"   class="input-personalized">
+        </td>
+        <td>
+          <button mat-raised-button color="primary" class="button-save" (click)="saveItem(item)">Save</button>
+        </td>
       </tr>
     </tbody>
   </table>
 </div>
 <div class="logo">
-  <button mat-mini-fab color="primary" (click)="addItem()" style="float:right;">
+  <button mat-mini-fab color="primary" (click)="addItem()" class="button-fixed">
     <ion-icon ios="ios-add" md="md-add"></ion-icon>
   </button>
 </div>
+
+<!-- (click)="openItem(item)" -->
+<pre>{{ baseList | json }}</pre>
