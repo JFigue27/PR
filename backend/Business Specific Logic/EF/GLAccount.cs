@@ -27,6 +27,7 @@ namespace BusinessSpecificLogic.EF
         public int? DepartmentKey { get; set; }
         [ForeignKey("DepartmentKey")]
         public Department Department { get; set; }
+        public decimal? Budget { get; set; }
         ///End:Generated:Properties<<<
     }
 }

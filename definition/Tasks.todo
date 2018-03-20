@@ -23,48 +23,47 @@ TODO
 ✔ Pre-Quote column. @done(18-02-13 11:38)
   ✔ Two additional quote columns. @done(18-02-13 11:38)
   Approval Process:
-    ☐ Department Manager once final quote is accepted.
+    ✔ Department Manager once final quote is accepted. @done(18-03-20 08:03)
     ✔ If quote exceeds manager’s authorization level, redirect to VIP. @done(18-02-27 12:03)
-    ☐ Once accepted, redirect Purchasing Manager for final approval.
-    ☐ Send to Buyer.
-  ☐ Handle approval/rejection responses.
+    ✔ Once accepted, redirect Purchasing Manager for final approval. @done(18-03-20 08:03)
+    ✔ Send to Buyer. @done(18-03-20 08:03)
+  ✔ Handle approval/rejection responses. @done(18-03-20 08:03)
   ✔ Supplier catalog. @done(18-02-13 11:38)
   ✔ Select suppliers in PR columns. @done(18-02-13 13:40)
-  ☐ Filter PR List by department, rejected, approved
+  ✔ Filter PR List by department, rejected, approved @done(18-03-20 08:03)
   ✔ PO Field. @done(18-02-14 12:30)
-Roles:
-  ✔ Administrator @done(18-02-13 11:38)
-  ✔ User @done(18-02-13 11:38)
-    -Requisitor
-  ✔ Department Manager @done(18-02-13 11:38)
-    -Make Approvals
-  ✔ General Manager @done(18-02-13 11:38)
-  ✔ MRO (Buyer) @done(18-02-13 11:38)
-    -Make quotations.
-    -Purchase
-    ✔ Filter by current user in PR LIST @done(18-03-02 10:14)
-    ✔ Add status in PR list @done(18-03-02 10:14)
-    ✔ Replace appproval modal instead embed it in PRForm @done(18-03-01 15:41)
-
-
-    
-    
-    ✔ Supplier only has Value field. @done(18-03-01 12:12)
-    ✔ To be able to add Supplier from PR screen. @done(18-03-01 15:40)
-    ✔ Requisition Name autopopulated. @done(18-03-01 15:40)
-    ✔ Send Test Email => Post to api/User/SendTestEmail @done(18-03-02 11:09)
-    ✔ Main Menu always visible. @done(18-03-08 11:16)
-    ✔ Add PR List menu. @done(18-03-06 10:44)
-    ✔ Email Address field in User form. @done(18-03-02 13:21)
-    ✔ Approval Request button, disable when clicked. @done(18-03-05 17:23)
-    ✔ Approve and Reject buttons: Confirm dialgo with optional Response Description. @done(18-03-05 17:23)
-    ✔ Display Response Description as read only below Request Description. @done(18-03-06 10:44)
-    ✔ Display Approval Status. @done(18-03-05 17:23)
-    ☐ Lock PR when it is Approved.
-    ☐ "Approve to MRO" functionality.
+  ✔Make quotations. @done(18-03-20 08:03)
+  ✔Purchase @done(18-03-20 08:03)
+  ✔ Filter by current user in PR LIST @done(18-03-02 10:14)
+  ✔ Add status in PR list @done(18-03-02 10:14)
+  ✔ Replace appproval modal instead embed it in PRForm @done(18-03-01 15:41)
+  ✔ Supplier only has Value field. @done(18-03-01 12:12)
+  ✔ To be able to add Supplier from PR screen. @done(18-03-01 15:40)
+  ✔ Requisition Name autopopulated. @done(18-03-01 15:40)
+  ✔ Send Test Email => Post to api/User/SendTestEmail @done(18-03-02 11:09)
+  ✔ Main Menu always visible. @done(18-03-08 11:16)
+  ✔ Add PR List menu. @done(18-03-06 10:44)
+  ✔ Email Address field in User form. @done(18-03-02 13:21)
+  ✔ Approval Request button, disable when clicked. @done(18-03-05 17:23)
+  ✔ Approve and Reject buttons: Confirm dialgo with optional Response Description. @done(18-03-05 17:23)
+  ✔ Display Response Description as read only below Request Description. @done(18-03-06 10:44)
+  ✔ Display Approval Status. @done(18-03-05 17:23)
+  ✔ Lock PR when it is Approved. @done(18-03-20 08:02)
+  ✔ "Approve to MRO" functionality. @done(18-03-20 08:02)
 
 
 
+
+------------------------------------------------------------------------------------------------------------------
+Roles
+ - Administrator
+ - User
+ - Requisitord
+ - Department Manager
+ - Make Approvals
+ - General Manager
+ - MRO (Buyer)
+ 
 ------------------------------------------------------------------------------------------------------------------
 Entities 
   -User
