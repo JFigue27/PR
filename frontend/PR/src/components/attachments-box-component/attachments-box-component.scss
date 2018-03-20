@@ -1,13 +1,24 @@
 attachments-box-component {
+    
     .attachment-wrapper > p {
         font-size: 16px;
         font-weight: 500;
     }
 
     .attachment-wrapper > div { 
-        border: 2px dashed #00679b;
+        border: 1px dashed #00679b;
         width: 30%;
-        padding: 15px;
+        padding: 10px;
+    }
+
+    .no-files{
+        margin:10px;
+        font-size: 16px;
+        font-weight: 500;
+    }
+    .item {
+        border-bottom: 1px solid #d4d4d4;
+        margin: 5px;
     }
     
     .btn-file {
@@ -16,7 +27,25 @@ attachments-box-component {
         font-size: 15px;
         padding:10px;
     }
+    
     .btn-file > input {
         display: none;
     }
+
+    .to-delete {
+        text-decoration: line-through;
+        color: red;
+    }
+    
+    .undo {
+        color:red;
+    }
+    .show-close, .show-close-text {
+        display: inline;
+    }
+    
+    .hide-close, .hide-close-text {
+        display: none;
+    }
+
 }

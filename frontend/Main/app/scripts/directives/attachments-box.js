@@ -37,7 +37,10 @@ angular.module('Main').directive('attachmentsBox', function(FileUploader, appCon
                         <span class="btn btn-xs btn-link pull-right" style="color: red;padding: 0;" ng-hide="printmode || readOnly || !attachment.ToDelete" ng-click="cancelRemove($index);$event.stopPropagation();">(cancel remove)</span>
                     </p>
                     <button type="button" ng-hide="readOnly" class="btn btn-success btn-xs hidden-print" ng-click="addAttachment();$event.stopPropagation();">Add File</button>
-                </div>`,
+                </div>
+                <h3>ok</h3>
+    <pre>{{ownerEntity | json:4}}</pre>
+    `,
         compile: function compile(tElement, tAttrs, transclude) {
             return {
                 pre: function preLink(scope, iElement, iAttrs, controller) {
@@ -131,30 +134,6 @@ angular.module('Main').directive('attachmentsBox', function(FileUploader, appCon
                             scope.ownerEntity[scope.attachmentsList].splice(index, 1);
                         } else {
                             scope.ownerEntity[scope.attachmentsList][index].ToDelete = true;
-                            // alertify.confirm(
-                            //     'This action cannot be undo, do you want to continue?',
-                            //     function() {
-                            //         scope.$apply(function() {
-                            //             $http.get(appConfig.API_URL + 'attachment_delete?directory=' + attachment.Directory + '&fileName=' + attachment.FileName + '&attachmentKind=' + scope.kind).then(function(data) {
-                            //                 var backendResponse = data;
-                            //                 if (!backendResponse.ErrorThrown) {
-                            //                     scope.ownerEntity[scope.attachmentsList].splice(index, 1);
-                            //                     $timeout(function() {
-                            //                         alertify.success('File deleted successfully.');
-                            //                     }, 100);
-                            //                 } else {
-                            //                     alertify.alert('An error has occurried, see console for more details.').set('modal', true);
-                            //                     console.debug(response);
-                            //                 }
-                            //                 scope.afterDelete({
-                            //                     oEntity: scope.ownerEntity
-                            //                 });
-                            //             }, function(data) {
-                            //                 alertify.alert('An error has occurried, see console for more details.').set('modal', true);
-                            //                 console.debug(data);
-                            //             });
-                            //         });
-                            //     });
                         }
                     };
                     scope.cancelRemove = function(index) {

@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 import { FileUploadModule } from 'ng2-file-upload';
 //COMPONENTS
 import { MyApp } from './app.component';
@@ -37,7 +38,6 @@ import { EmailPage } from '../pages/email-page/email-page';
 
 //SERVICES
 import { LoginService } from '../services/login.service';
-import { CommonModule } from '@angular/common';
 
 //PROVIDERS
 import { PRServiceProvider } from '../providers/pr-service';

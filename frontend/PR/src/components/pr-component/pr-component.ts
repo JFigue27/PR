@@ -221,7 +221,7 @@ export class PRComponent extends FormController implements OnInit {
         this.suppliers = oResult.Result;
       });
     });
-  }
+}
   removeItemLocally = function (index) {
     this.baseEntity.PRLines.splice(index, 1);
   }
@@ -260,6 +260,15 @@ export class PRComponent extends FormController implements OnInit {
 
   afterSave() {
     this.handleDynamicRows(this.baseEntity.PRLines);
+  }
+
+  save() {
+
+    this.baseEntity.api_attachments.uploadFiles().then(response => {
+      super.save();
+    });
+
+    
   }
 
 

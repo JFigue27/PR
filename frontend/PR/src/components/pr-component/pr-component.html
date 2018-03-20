@@ -20,7 +20,7 @@
                     <input matInput [(ngModel)]="baseEntity.FriendlyIdentifier" placeholder="Fiendly Identifier" (ngModelChange)="on_input_change();">
                 </mat-form-field>
             </div>
-            <attachments-box-component [ownerEntity]="baseEntity"></attachments-box-component>
+            <attachments-box-component [ownerEntity]="baseEntity" kind="PR_Attachments"></attachments-box-component>
 
         </ion-card-header>
 

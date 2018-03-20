@@ -1,13 +1,22 @@
-
- <div *ngIf="baseEntity.UserKey == 0">
-   ok
- </div>
-<!-- <div class="attachment-wrapper">
+<div class="attachment-wrapper">
   <p>Attachments</p>
-  <div (click)="openFileBrowser()">
-    <button class="btn-file">Add files
-      <input type="file" id="file" ng2FileSelect (click)="openFileBrowser()" [uploader]="uploader" multiple>
+  <div>
+    <div class="no-files" *ngIf="ownerEntity[attachmentsListName]?.length===0">
+      No files.
+    </div>
+      <p *ngFor="let item of ownerEntity.Attachments; let i = index;" class="item">
+        <!-- <i class="material-icons">file_upload</i> -->
+        <span *ngIf="item.isForUpload">subir</span>
+        <!-- <a href="{{API_URL}}_download?directory={{item.Directory}}&fileName={{item.FileName}}&attachmentKind=PR_Attachments" [ngClass]="getToDeleteStyle(i)">{{item.FileName }}</a> -->        
+        <a href="">{{item.FileName }}</a>
+        <span (click)="cancelRemove(i)" style="float: right;" [ngClass]="getCancelRemoveStyle(i)" class="undo" >undo</span>
+        <span (click)="removeAttachment(item, i)" style="float: right;" [ngClass]="getCloseStyle(i)">
+          <ion-icon name="close"></ion-icon>
+        </span>
+      </p>
+    <button class="btn-file" (click)="openFileBrowser()">Add files
+      <input type="file" id="file" ng2FileSelect [uploader]="uploader" multiple>
     </button>
   </div>
-</div> -->
-  
+</div>
+<!-- <pre>{{ ownerEntity | json }}</pre>  -->

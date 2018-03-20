@@ -8,6 +8,6 @@
  * Constant in the Main.
  */
 angular.module('Main').constant('appConfig', {
-    API_URL: 'http://localhost:57063/api/',
+    API_URL: 'http://JRZD104:57063/api/',
     APP_NAME: 'Main'
 });
