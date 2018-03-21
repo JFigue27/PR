@@ -1,0 +1,265 @@
+Frontend Migration from Angualr 1 to Angular 4:
+  Services:
+    ✔ AppConfig. @done (18-01-05 11:10)
+        ✔ A shared service to store the base URL and app name. @done (18-01-05 11:10)
+    ✔ localStorage. @done(18-03-21 11:20)
+        ✔ To do some research to find the best component for angular 4. @done(18-03-21 11:20)
+    ✔ AuthService. @done(18-03-21 11:20)
+        ✔ Login. @done(18-03-21 11:20)
+            ✔ Post to api/token. @done (18-01-05 11:29) @done(18-03-21 11:19)
+            ✔ Store token on local storage. @done (18-01-05 11:29)
+            ✔ Retrieve user's role from backend. @done(18-03-21 11:20)
+        ✔ Logout. @done (18-01-05 11:49)
+            ✔ Remove info from local storage. @done (18-01-05 11:49)
+            ✔ Open login popup. @done (18-01-05 11:49)
+        ✔ AuthInterceptor. @done(18-03-21 11:20)
+            ✔ Intercept all requests and add header with token. @done (18-01-05 11:50)
+            ✔ Intercepl all responses and for 401 error logout. @done(18-03-21 11:20)
+                ✔ Logic for Known Exceptions. @done(18-03-21 11:20)
+                ✔ Logic for 401 (session expired) => open login popup. @done(18-03-21 11:20)
+            
+    ☐ CRUDFactory.
+        Server Operations:
+        ✔ createInstance():                                             Create a Entity instance without inserting it in database. @done(18-03-21 11:35)
+        
+        ✔ loadEntity(id):                                               Pull a single Entity given an ID, should accept query parameters. @done(18-03-21 11:35)
+        ✔ loadEntities():                                               Pull all Entities and stores them on local array. @done(18-03-21 11:35)
+        ✔ loadSingleWhere(sProp, value):                                Pull a single Entity where its property (sProp) equals value. @done(18-03-21 11:35)
+        ✔ getPage(limit, page, qParams)                                 Pull Page List based On Page Number. @done(18-03-21 11:36)
+                                                                        -Can filter by Query Parameters.
+                                                                        -0 as limit means pull all records
+        
+        ✔ save(oEntity, qParams)                       Inserts or Updates a single Entity. @done(18-03-21 11:36)
+        ☐ setProperty(oEntity, sProp, value, qParams)  Update a single property of Entity.  
+        
+        ☐ remove(oEntityOrId, qParams)                 Remove single Entity either by Entity object or Entity ID.
+        
+        ☐ customGet(sCustomMethod)                                      HTTP GET to Custom Endpoint.
+        ☐ customPost(sCustomMethod, oData)                              HTTP POST to Custom Endpoint.
+        
+        ☐ updateBatch(oArrayEntities)                                   Updates an array of entities in a single round to backend.
+        ☐ insertBatch(oArrayEntities)                                   Insert an array of entities in a single round to backend.
+        ☐ removeBatch(oArrayEntitiesOrIds)                              Removes array of Entities or IDs in a single round to backend.
+
+        ☐ finalize(oEntity, oArrayBelonging, oParams)                   Entity is locked out and status changes to 'Finalized'
+        ☐ unfinalize(oEntity, oArrayBelonging, oParams)                 Entity's Status sets back to 'In Progress', Entity is unlocked.
+        ☐ assign(oEntity, oUser)                                        Sets a User responsible for and Entity.
+        Local Operations:
+            ☐ getById()
+            ☐ getAll()
+            ☐ getRecursiveBySeedId()
+            ☐ getRawAll()
+            ☐ setRawAll()
+        To Refactor from Angular 1.x:
+            ✔ Function for handling all response errors. @done (18-01-05 11:51)
+            ✔ Known Exceptions show message instead of stack trace. @done (18-01-05 11:51)
+            ☐ Show Stack Trace under a Technical Details button.
+            ✔ Decouple Alertify and ActivityIndicator. @done (18-01-05 11:54)
+                -Update: We don't need Alertify and ActivityIndicator at all on CRUD Factory.
+                   -Except for generalError function.
+            ✔ Not always trigger alertify. @done (18-01-05 11:54)
+            ☐ Validation Results Popup.
+            ☐ Response object: Result, Message, ErrorsList, ValidationsList, AdditionalData
+                TODO Alfredo: Complete backend CommonResponse.
+            ☐ Common Error Types: Modal, Message, Alert, Incident.
+                TODO Alfredo: Complete backend error responses.
+    -------------------------------------
+    ☐ RFactory.
+    ☐ HotKeys.
+    ☐ RealTime.
+    ☐ Exceptions.js.
+
+  Controllers:
+    ☐ formController.
+        Methods:
+            ✔ Accept in constructor a settings object. @done (18-01-05 11:57)
+                ✔ service (CRUDFactory instance) @done (18-01-05 11:57)
+            ✔ remove(oEntity). @done (18-01-05 11:57)
+                ✔ service.remove(). @done (18-01-05 11:57)
+                ✔ afterRemove(). @done (18-01-05 11:57)
+            ✔ createInstance(). @done (18-01-05 12:03)
+                ✔ service.createInstance(). @done (18-01-05 12:01)
+                ✔ afterCreate(). @done (18-01-05 12:03)
+            ✔ on_input_change(). @done (18-01-05 12:03)
+                ✔ baseEntity.editMode = true @done (18-01-05 12:03)
+            ✔ save(). @done (18-01-05 12:03)
+                ✔ if baseEntity.editMode then service.save(). @done (18-01-05 12:03)
+                ✔ call afterSave() @done (18-01-05 12:03)
+            ☐ undo().
+                ☐ copy original Entity from service cache to current form.
+                    -Update: Pull again Entity from server.
+            ✔ load(oEntityOrID). @done (18-01-05 12:24)
+                ✔ refresh(oEntityOrID). @done (18-01-05 12:12)
+                ✔ should return observeble/proimse. @done (18-01-05 12:24)
+            ✔ refresh(oEntityOrID). @done (18-01-05 12:24)
+                ✔ case oEntityOrID = null/''/undefined @done (18-01-05 12:10)
+                    ✔ createInstance() @done (18-01-05 12:10)
+                    ✔ afterCreate() @done (18-01-05 12:10)
+                ✔ case oEntityOrID > 0: @done (18-01-05 12:24)
+                    ✔ service.loadEntity() @done (18-01-05 12:11)
+                    ✔ afterLoad() @done (18-01-05 12:11)
+                ✔ case oEntityOrID is an object: @done (18-01-05 12:12)
+                    ✔ baseEntity = oEntityOrID @done (18-01-05 12:12)
+                    ✔ afterLoad() @done (18-01-05 12:12)
+                ✔ Should return observable/promse @done (18-01-05 12:24)
+        Hooks:
+            ✔ afterLoad(). @done (18-01-05 12:25)
+            ✔ afterCreate(). @done (18-01-05 12:25)
+            ✔ afterRemove(). @done (18-01-05 12:25)
+            ✔ afterSave(). @done (18-01-05 12:25)
+
+    ☐ listController.
+        Methods:
+            ☐ Accept in constructor a settings object.
+                ✔ service (CRUDFactory instance). @done (18-01-05 12:26)
+                ✔ paginate (enable/disable pagination). @done (18-01-05 12:28)
+                ☐ perPage (how many entries per page).
+                    -Update: rename perPage to limit.
+                ✔ filters (object with key,values to filter at backend) @done (18-01-05 12:34)
+            ☐ Should handle filterStorageName per (endpoing and page)
+                ☐ Should store filter settings.
+            ✔ removeItem(oEntity). @done (18-01-11 12:37)
+                ✔ service.remove(oEntity, baseList). @done (18-01-11 12:37)
+                    -TODO: remove oEntity parameter.
+                ✔ afterRemove(). @done (18-01-05 12:50)
+            ✔ openItem(oEntity) @done (18-01-11 12:37)
+                ✔ onOpenItem() @done (18-01-11 12:37)
+                    -TODO: modal code should be on component instead of here.
+                ✔ append any additional arguments found on openItem to onOpenItem call. @done (18-01-11 12:37)
+            ☐ checkItem
+                ☐ add id to a local array of ids to be deleted.
+                ☐ if unchecked, then find id in this array and remove it from there.
+            ☐ removeSelected()
+                ☐ send ids to be removed to server.
+                TODO Alfredo: backend delete in batch.
+            ☐ pageChanged(newPage)
+                ☐ filterOptions.page = newPage
+                ☐ updateList().
+            ☐ saveItem(oItem)
+                ☐ service.save(oItem)
+            ☐ on_input_change().
+                ☐ baseEntity.editMode = true
+            ☐ save()
+                ☐ foreach item in baseList: saveItem() if editMode = true
+            ☐ undoItem).
+                ☐ copy original Entity from service cache to current item.
+            ☐ refresh()
+                ☐ if filterOptions = null then clearFilters().
+                ☐ else updateList().
+            ☐ getSelectedCount() //count items where .selected = true.
+            ☐ unselectAll() //set .selected = false to all items.
+            ☐ selectAll() //set .selected = true to all items.
+            ☐ getSelected() //get list of selected items.
+            ☐ setFilterOptions()
+                ☐ get from localStorage
+                ☐ if filterOptions = null then clearFilters()
+            ☐ persistFilter
+                ☐ save current filterOptions to localStorage
+            ☐ load(qParams)
+                ☐ _staticQParams = qParams
+                ☐ setFilterOptions()
+                ☐ updateList()
+            ☐ _makeQueryParameters() //make query params from filterOptions
+            ☐ _updateList()
+                ☐ service.getPage(perPage, page, queryParams)
+                ☐ baseList = commonResponse.Result
+                ☐ get itemsCount, totalItems from commonResponse.AdditionalData
+                ☐ _persistFilter()
+                ☐ set itemIndex for all oItems in baseList
+                ☐ afterLoad()
+
+            ☐ clearFilters()
+                ☐ initialize filterOptions = 
+                    {perPage: _perPage,
+                    page: 1,
+                    itemsCount: 0
+                    }
+                ☐ _persistFilter().
+            ☐ go(path)
+                ☐ navigate to path
+            ☐ create() ??
+        Hooks:
+            ☐ afterLoad().
+            ☐ onOpenItem().
+            ☐ afterRemove().
+            ☐ afterCreate()??
+
+  Widgets/Components:
+    ☐ Layout:
+        ☐ Main Top Toolbar. (Login, Navigation, Logo, App Title, Notifications, ActivityIndiator).
+            ☐ Navigation Menu loaded async by User Role.
+        ☐ Bottom Toolbar for Lists. (Filtering, Search, Batch Remove, Create, Pagination, Sort).
+        ☐ Bottom Toolbar for Single Form. (Create, Checkout, Checkin, Finalize, Delete, Print, Reload/Refresh).
+    ☐ Spin Loading.
+      ☐ Display Spin Loading only when certain time is exceeded.
+    ☐ Pagination.
+    ☐ Modal.
+    ☐ Horizontal Lists sortable by Drag and Drop.
+    ☐ Selectize. (Single and Multiple selection).
+    ☐ Attachments.
+        ☐ Search best existing component for angular ^2.
+        ☐ Parameters:
+            ☐ ownerEntity.
+            ☐ printMode.
+            ☐ kind.
+            ☐ readOnly.
+            ☐ customListBind.
+            ☐ customFolderBind.
+        ☐ ON_AFTER_ADDING_FILE: When user selects a file from browser.
+            ☐ Initialize local list if empty/null.
+            ☐ Add oAttachment selected to local list.
+            ☐ Trigger on_input_change.
+        ☐ ON_SUCCESS_ITEM: A single file was uploaded successfully.
+            ☐ Assign generated folder to AttachmentFolder property. (Could be a custom one).
+            ☐ Mark oAttachment in local list for not upload.
+        ☐ ON_COMPLETE_ALL: All files where uploaded successfully.
+            ☐ Resolve or Reject promise based on ErrorThrown.
+        ☐ ON_BEFORE_UPLOAD_ITEM: Called before an item is uploaded.
+            ☐ Point URL to "attachments" endpoint and add query parameters: "attachmentKind" and "targetFolder";
+        ☐ Should append an api to ownerEntity to interact with AttachmentsBox.
+        ☐ UPLOAD_FILES(): Function to start uploading all pending attachments.
+        ☐ REMOVE_ATTACHMENT(): Function to mark an attachment for being deleted (Attachment is actually deleted until user clicks Save).
+        ☐ CANCEL_REMOVE(): Unmarks attachment for being deleted.
+        ☐ ADD_ATTACHMENT(): Open Browser to search for a file.
+    ☐ Buttons that do not accept double click.
+    ☐ Confirm Buttons: Two actions in same space, maybe: first action just a click, second action: to slide to right.
+    ☐ Alertify.
+    ☐ Login.
+      ☐ Login should not redirect to home.
+    ☐ Selection from List.
+      ☐ Responsible.
+    ☐ Commenting.
+    ☐ ToDos.
+    ☐ Notifications.
+    ☐ Send Email.
+    ☐ Toggle Navigation Toolbar.
+        ☐ Keep data when switching back.
+    -------------------------------------
+    ☐ Tables editables.
+      ☐ Display/Hide set of columns for list of items and store in local storage.
+    ☐ Tree-Grid sortable by Drag and Drop.
+      ☐ Display/Hide set of columns for list of items and store in local storage.
+    ☐ Attachments with viewer for images/pdfs.
+    ☐ Chat.
+    
+  Views:
+    ☐ List.
+      ☐ Display/Hide set of columns for list of items and store in local storage.
+    ☐ Single Form.
+    ☐ Catalog.
+    ☐ About.
+    ☐ Search in system.
+    -------------------------------------
+    ☐ Recursive List.
+
+
+
+
+Test Application:
+    ☐ User Entity
+        ☐ User List
+            ☐ Create new User
+            ✔ Remove User @done (18-01-05 12:00)
+                ✔ Should refresh afterRemove @done (18-01-05 12:00)
+        ☐ User Form
+            ✔ on_input_change to all input controls @done (18-01-05 12:02)

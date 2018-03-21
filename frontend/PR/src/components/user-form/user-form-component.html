@@ -18,6 +18,15 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-select placeholder="Department" [(ngModel)]="baseEntity.DepartmentKey" (ngModelChange)="on_input_change(item);">
+          <mat-option *ngFor="let department of departments" [value]="department.id">
+            {{ department.Value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Email" [(ngModel)]="baseEntity.Email" (ngModelChange)="on_input_change();">
       </mat-form-field>

@@ -15,6 +15,7 @@ TODO
   ✔ Remove "Remove button". @done(18-02-13 11:37)
   ☐ Upload signed document.
   ☐ Attachments.
+  ☐ Pagination.
   ✔ Account Dropdown. @done(18-02-13 11:38)
   ✔ Departments Catalog. @done(18-02-13 11:38)
       ✔ Field: Budget per department. @done(18-02-13 11:38)
@@ -50,7 +51,11 @@ TODO
   ✔ Display Approval Status. @done(18-03-05 17:23)
   ✔ Lock PR when it is Approved. @done(18-03-20 08:02)
   ✔ "Approve to MRO" functionality. @done(18-03-20 08:02)
-
+  ✔ Add user-department relationship in user form @done(18-03-21 11:16)
+  ☐ Add account-department relationship (many to one)
+  ☐ Accounts > show current balance
+  ☐ Accounts > should be only editable by Finance / general manager role
+  ☐ in case amount is more than the department budget should be renamed department manager by general manager
 
 
 
