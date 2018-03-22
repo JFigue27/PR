@@ -113,11 +113,11 @@ Frontend Migration from Angualr 1 to Angular 4:
             ☐ Accept in constructor a settings object.
                 ✔ service (CRUDFactory instance). @done (18-01-05 12:26)
                 ✔ paginate (enable/disable pagination). @done (18-01-05 12:28)
-                ☐ perPage (how many entries per page).
+                ✔ perPage (how many entries per page). @done(18-03-22 16:36)
                     -Update: rename perPage to limit.
                 ✔ filters (object with key,values to filter at backend) @done (18-01-05 12:34)
-            ☐ Should handle filterStorageName per (endpoing and page)
-                ☐ Should store filter settings.
+            ☐ Should handle filterStorageName per (endpoint and page)
+                ✔ Should store filter settings. @done(18-03-22 16:37)
             ✔ removeItem(oEntity). @done (18-01-11 12:37)
                 ✔ service.remove(oEntity, baseList). @done (18-01-11 12:37)
                     -TODO: remove oEntity parameter.
@@ -132,57 +132,52 @@ Frontend Migration from Angualr 1 to Angular 4:
             ☐ removeSelected()
                 ☐ send ids to be removed to server.
                 TODO Alfredo: backend delete in batch.
-            ☐ pageChanged(newPage)
-                ☐ filterOptions.page = newPage
-                ☐ updateList().
-            ☐ saveItem(oItem)
-                ☐ service.save(oItem)
-            ☐ on_input_change().
-                ☐ baseEntity.editMode = true
+            ✔ pageChanged(newPage) @done(18-03-22 16:36)
+                ✔ filterOptions.page = newPage @done(18-03-22 16:36)
+                ✔ updateList(). @done(18-03-22 16:36)
+            ✔ saveItem(oItem) @done(18-03-22 16:35)
+                ✔ service.save(oItem) @done(18-03-22 16:35)
+            ✔ on_input_change(). @done(18-03-22 16:36)
+                ✔ baseEntity.editMode = true @done(18-03-22 16:36)
             ☐ save()
                 ☐ foreach item in baseList: saveItem() if editMode = true
-            ☐ undoItem).
+            ☐ undoItem().
                 ☐ copy original Entity from service cache to current item.
-            ☐ refresh()
-                ☐ if filterOptions = null then clearFilters().
-                ☐ else updateList().
+            ✔ refresh() @done(18-03-22 16:35)
+                ✔ if filterOptions = null then clearFilters(). @done(18-03-22 16:35)
+                ✔ else updateList(). @done(18-03-22 16:35)
             ☐ getSelectedCount() //count items where .selected = true.
             ☐ unselectAll() //set .selected = false to all items.
             ☐ selectAll() //set .selected = true to all items.
             ☐ getSelected() //get list of selected items.
-            ☐ setFilterOptions()
-                ☐ get from localStorage
-                ☐ if filterOptions = null then clearFilters()
-            ☐ persistFilter
-                ☐ save current filterOptions to localStorage
-            ☐ load(qParams)
-                ☐ _staticQParams = qParams
-                ☐ setFilterOptions()
-                ☐ updateList()
-            ☐ _makeQueryParameters() //make query params from filterOptions
-            ☐ _updateList()
-                ☐ service.getPage(perPage, page, queryParams)
-                ☐ baseList = commonResponse.Result
-                ☐ get itemsCount, totalItems from commonResponse.AdditionalData
-                ☐ _persistFilter()
-                ☐ set itemIndex for all oItems in baseList
-                ☐ afterLoad()
+            ✔ setFilterOptions() @done(18-03-22 16:06)
+                ✔ get from localStorage @done(18-03-22 16:06)
+                ✔ if filterOptions = null then clearFilters() @done(18-03-22 16:06)
+            ✔ persistFilter @done(18-03-22 14:40)
+                ✔ save current filterOptions to localStorage @done(18-03-22 14:40)
+            ✔ load(qParams) @done(18-03-22 16:06)
+                ✔ _staticQParams = qParams @done(18-03-22 16:06)
+                ✔ setFilterOptions() @done(18-03-22 16:06)
+                ✔ updateList() @done(18-03-22 16:06)
+            ✔ _makeQueryParameters() //make query params from filterOptions @done(18-03-22 16:15)
+            ✔ _updateList() @done(18-03-22 16:25)
+                ✔ service.getPage(perPage, page, queryParams) @done(18-03-22 16:25)
+                ✔ baseList = commonResponse.Result @done(18-03-22 16:25)
+                ✔ get itemsCount, totalItems from commonResponse.AdditionalData @done(18-03-22 16:25)
+                ✔ _persistFilter() @done(18-03-22 16:25)
+                ✔ set itemIndex for all oItems in baseList @done(18-03-22 16:25)
+                ✔ afterLoad() @done(18-03-22 16:25)
 
-            ☐ clearFilters()
-                ☐ initialize filterOptions = 
-                    {perPage: _perPage,
-                    page: 1,
-                    itemsCount: 0
-                    }
-                ☐ _persistFilter().
+            ✔ clearFilters() @done(18-03-22 16:00)
+                ✔ _persistFilter(). @done(18-03-22 16:01)
             ☐ go(path)
                 ☐ navigate to path
-            ☐ create() ??
+            ✔ create() ?? @done(18-03-22 16:32)
         Hooks:
-            ☐ afterLoad().
-            ☐ onOpenItem().
-            ☐ afterRemove().
-            ☐ afterCreate()??
+            ✔ afterLoad(). @done(18-03-22 16:32)
+            ✔ onOpenItem(). @done(18-03-22 16:32)
+            ✔ afterRemove(). @done(18-03-22 16:32)
+            ✔ afterCreate()?? @done(18-03-22 16:32)
 
   Widgets/Components:
     ☐ Layout:

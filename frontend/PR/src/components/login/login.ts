@@ -13,7 +13,7 @@ export class LoginComponent {
   
   constructor(public nav: NavController, private loginService: LoginService,
               
-  ) {
+) {
   }
 
   login(formValues) {

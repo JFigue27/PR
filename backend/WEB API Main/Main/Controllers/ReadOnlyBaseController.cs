@@ -38,7 +38,7 @@ namespace ReusableWebAPI.Controllers
         {
             //reserved and invalid params:
             if (new string[] {
-                "perPage",
+                "limit",
                 "page",
                 "filterGeneral",
                 "itemsCount",
@@ -149,8 +149,8 @@ namespace ReusableWebAPI.Controllers
             }
         }
 
-        [HttpGet, Route("GetPage/{perPage}/{page}")]
-        virtual public CommonResponse GetPage(int perPage, int page)
+        [HttpGet, Route("GetPage/{limit}/{page}")]
+        virtual public CommonResponse GetPage(int limit, int page)
         {
             CommonResponse response = new CommonResponse();
             List<Expression<Func<Entity, bool>>> db_wheres = new List<Expression<Func<Entity, bool>>>();
@@ -282,7 +282,7 @@ namespace ReusableWebAPI.Controllers
             }
 
 
-            return logic.GetPage(perPage, page, filterGeneral, wheres.ToArray(), orderBy, db_wheres.ToArray());
+            return logic.GetPage(limit, page, filterGeneral, wheres.ToArray(), orderBy, db_wheres.ToArray());
         }
 
         protected Expression<Func<Entity, object>> orderBy = null;

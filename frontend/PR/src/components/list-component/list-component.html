@@ -21,6 +21,8 @@
     </tbody>
   </table>
 </div>
+<mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator>
 <div class="logo">
   <button mat-mini-fab color="primary" (click)="addItem()" class="button-fixed button-fixed-list">
     <ion-icon ios="ios-add" md="md-add"></ion-icon>

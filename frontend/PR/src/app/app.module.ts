@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FileUploadModule } from 'ng2-file-upload';
+
 //COMPONENTS
 import { MyApp } from './app.component';
 import { LoginComponent } from '../components/login/login';
@@ -57,6 +58,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -104,6 +106,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatMenuModule,
     MatButtonModule,
     FileUploadModule,
+    MatPaginatorModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
