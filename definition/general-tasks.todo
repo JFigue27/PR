@@ -187,7 +187,7 @@ Frontend Migration from Angualr 1 to Angular 4:
         ☐ Bottom Toolbar for Single Form. (Create, Checkout, Checkin, Finalize, Delete, Print, Reload/Refresh).
     ☐ Spin Loading.
       ☐ Display Spin Loading only when certain time is exceeded.
-    ☐ Pagination.
+    ✔ Pagination. @done(18-03-23 12:59)
     ☐ Modal.
     ☐ Horizontal Lists sortable by Drag and Drop.
     ☐ Selectize. (Single and Multiple selection).

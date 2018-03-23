@@ -30,6 +30,16 @@ mat-dialog-container {
 	display: block;
 }
 
+.mat-paginator-container {
+	height: 50px !important;
+	background-color: #e3e3e3;
+}
+
+.mat-paginator-page-size-label, .mat-paginator-page-size-select, .mat-paginator-range-label {
+	font-size: 17px;
+	color: rgb(99, 99, 99);
+}
+
 * {
 	font-family: 'Roboto', sans-serif;
 }
