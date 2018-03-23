@@ -34,9 +34,6 @@ export class UserFormComponent extends FormController implements OnInit {
 
   }
 
-  close() {
-  }
-
   afterCreate() {
   }
 

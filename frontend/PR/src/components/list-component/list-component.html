@@ -6,6 +6,9 @@
   </h1>
 </div>
 <div class="pr-table table-responsive-vertical shadow-z-1" ng-hide="!baseList || baseList.length == 0">
+  <mat-paginator #paginator [pageSize]="filterOptions?.limit" [length]="filterOptions?.itemsCount" [pageIndex]="filterOptions?.page -1"
+    [pageSizeOptions]="[5, 10, 20]" (page)="pageChanged($event.pageIndex + 1, $event.pageSize);">
+  </mat-paginator>
   <table class="table table-condensed" style="table-layout: fixed;">
     <thead>
       <tr>
@@ -20,9 +23,10 @@
       </tr>
     </tbody>
   </table>
+  <mat-paginator #paginator [pageSize]="filterOptions?.limit" [length]="filterOptions?.itemsCount" 
+  [pageIndex]="filterOptions?.page -1" [pageSizeOptions]="[5, 10, 20]" (page)="pageChanged($event.pageIndex + 1, $event.pageSize);">
+  </mat-paginator>
 </div>
-<mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
-</mat-paginator>
 <div class="logo">
   <button mat-mini-fab color="primary" (click)="addItem()" class="button-fixed button-fixed-list">
     <ion-icon ios="ios-add" md="md-add"></ion-icon>

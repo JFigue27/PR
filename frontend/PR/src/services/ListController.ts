@@ -81,8 +81,11 @@ export abstract class ListController {
         this.onOpenItem.apply(this, theArguments);
     }
 
-    pageChanged(newPage:any) {
+    pageChanged(newPage:any, limit?:number) {
         this.filterOptions.page = newPage;
+        if(limit > 0 ){
+            this.filterOptions.limit = limit;
+        }
         this.updateList();
     }
 
