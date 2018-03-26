@@ -47,13 +47,14 @@
         </mat-form-field>
         <mat-form-field class="example-full-width input-password">
             <input matInput type="password" placeholder="Confirm password" [(ngModel)]="baseEntity.ConfirmPassword" (ngModelChange)="on_input_change();">
-        </mat-form-field>
+        </mat-form-field> 
         </div>
       </div> 
 
 
       <button mat-raised-button mat-dialog-close color="accent" (click)="save()">Save</button>
       <button mat-raised-button mat-dialog-close color="basic">Close</button>
+      <button mat-raised-button color="basic" (click)="undo(baseEntity.id)">Undo changes</button>      
     </div>
   </div>
 </div>

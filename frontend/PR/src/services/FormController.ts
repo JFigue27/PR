@@ -67,8 +67,10 @@ export abstract class FormController {
 		});
 	}
 
-	undo() {
-		this.baseEntity = this.config.service.getById(this.baseEntity.id);
+	undo(id:any) {
+		this.config.service.loadEntity(id).subscribe(oResult =>{
+			this.baseEntity = oResult.Result;
+		});
 	}
 	//End Form Methods
 

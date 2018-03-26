@@ -21,27 +21,19 @@ Frontend Migration from Angualr 1 to Angular 4:
     ☐ CRUDFactory.
         Server Operations:
         ✔ createInstance():                                             Create a Entity instance without inserting it in database. @done(18-03-21 11:35)
-        
         ✔ loadEntity(id):                                               Pull a single Entity given an ID, should accept query parameters. @done(18-03-21 11:35)
         ✔ loadEntities():                                               Pull all Entities and stores them on local array. @done(18-03-21 11:35)
         ✔ loadSingleWhere(sProp, value):                                Pull a single Entity where its property (sProp) equals value. @done(18-03-21 11:35)
         ✔ getPage(limit, page, qParams)                                 Pull Page List based On Page Number. @done(18-03-21 11:36)
-                                                                        -Can filter by Query Parameters.
-                                                                        -0 as limit means pull all records
-        
-        ✔ save(oEntity, qParams)                       Inserts or Updates a single Entity. @done(18-03-21 11:36)
-        ☐ setProperty(oEntity, sProp, value, qParams)  Update a single property of Entity.  
-        
-        ☐ remove(oEntityOrId, qParams)                 Remove single Entity either by Entity object or Entity ID.
-        
+        ✔ save(oEntity, qParams)                                        Inserts or Updates a single Entity. @done(18-03-21 11:36)
+        ☐ setProperty(oEntity, sProp, value, qParams)                   Update a single property of Entity.  
+        ☐ remove(oEntityOrId, qParams)                                  Remove single Entity either by Entity object or Entity ID.
         ☐ customGet(sCustomMethod)                                      HTTP GET to Custom Endpoint.
         ☐ customPost(sCustomMethod, oData)                              HTTP POST to Custom Endpoint.
-        
         ☐ updateBatch(oArrayEntities)                                   Updates an array of entities in a single round to backend.
         ☐ insertBatch(oArrayEntities)                                   Insert an array of entities in a single round to backend.
         ☐ removeBatch(oArrayEntitiesOrIds)                              Removes array of Entities or IDs in a single round to backend.
-
-        ☐ finalize(oEntity, oArrayBelonging, oParams)                   Entity is locked out and status changes to 'Finalized'
+        ☐ finalize(oEntity, oParams)                                    Entity is locked out and status changes to 'Finalized'
         ☐ unfinalize(oEntity, oArrayBelonging, oParams)                 Entity's Status sets back to 'In Progress', Entity is unlocked.
         ☐ assign(oEntity, oUser)                                        Sets a User responsible for and Entity.
         Local Operations:
@@ -85,9 +77,8 @@ Frontend Migration from Angualr 1 to Angular 4:
             ✔ save(). @done (18-01-05 12:03)
                 ✔ if baseEntity.editMode then service.save(). @done (18-01-05 12:03)
                 ✔ call afterSave() @done (18-01-05 12:03)
-            ☐ undo().
-                ☐ copy original Entity from service cache to current form.
-                    -Update: Pull again Entity from server.
+            ✔ undo(). @done(18-03-26 13:31)
+                ✔ copy original Entity from service cache to current form. @done(18-03-26 13:31)
             ✔ load(oEntityOrID). @done (18-01-05 12:24)
                 ✔ refresh(oEntityOrID). @done (18-01-05 12:12)
                 ✔ should return observeble/proimse. @done (18-01-05 12:24)
@@ -120,7 +111,6 @@ Frontend Migration from Angualr 1 to Angular 4:
                 ✔ Should store filter settings. @done(18-03-22 16:37)
             ✔ removeItem(oEntity). @done (18-01-11 12:37)
                 ✔ service.remove(oEntity, baseList). @done (18-01-11 12:37)
-                    -TODO: remove oEntity parameter.
                 ✔ afterRemove(). @done (18-01-05 12:50)
             ✔ openItem(oEntity) @done (18-01-11 12:37)
                 ✔ onOpenItem() @done (18-01-11 12:37)
@@ -218,9 +208,9 @@ Frontend Migration from Angualr 1 to Angular 4:
         ☐ ADD_ATTACHMENT(): Open Browser to search for a file.
     ☐ Buttons that do not accept double click.
     ☐ Confirm Buttons: Two actions in same space, maybe: first action just a click, second action: to slide to right.
-    ☐ Alertify.
-    ☐ Login.
-      ☐ Login should not redirect to home.
+    ✔ Alertify. @done(18-03-26 12:24)
+    ✔ Login. @done(18-03-26 12:24)
+      ✔ Login should not redirect to home. @done(18-03-26 12:24)
     ☐ Selection from List.
       ☐ Responsible.
     ☐ Commenting.
@@ -257,4 +247,4 @@ Test Application:
             ✔ Remove User @done (18-01-05 12:00)
                 ✔ Should refresh afterRemove @done (18-01-05 12:00)
         ☐ User Form
-            ✔ on_input_change to all input controls @done (18-01-05 12:02)
+            ✔ on_input_change to all input controls @done (18-01-05 12:02) NJR70552856 USPS

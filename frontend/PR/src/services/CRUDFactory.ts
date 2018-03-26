@@ -19,7 +19,8 @@ export interface ICommonResponse {
 export abstract class CRUDFactory {
     baseUrl: string = Config.API_URL;
     protected http: HttpClient;
-    
+    public arrAllRecords:Array<any>=[];
+    public catalogs;
     constructor(private config: IConfig) {
     }
 
@@ -60,11 +61,6 @@ export abstract class CRUDFactory {
             .map(d => d.Result)
             .catch(this.generalError);
     }
-
-    getById(id: number): IEntity {
-        return null;
-    }
-
     
     getPage(limit, pageNumber, params='?') {
         return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/getPage/' + limit +
@@ -123,7 +119,9 @@ export abstract class CRUDFactory {
             .catch(this.generalError);
     }
 
-
+    setProperty(oEntity, sProperty, Value, qParams) {
+    }
+    
     updateEntity(oEntity) {
         this.adapterOut(oEntity);
         return this.http.put<ICommonResponse>(this.baseUrl + this.config.endPoint + '/' + oEntity.id, '=' + encodeURIComponent(JSON.stringify(oEntity)), this.addAuthorization())
@@ -163,6 +161,45 @@ export abstract class CRUDFactory {
         }
         return Observable.throw(error.statusText);
     }
+
+    // LOCAL OPERATIONS
+    getById(id) {
+        for (let i = 0; i < this.arrAllRecords.length; i++) {
+            if (id == this.arrAllRecords[i].id) {
+                return 0;
+            }
+            return null;
+        }
+    }
+
+    getAll() {
+        for (let i = 0; i < this.arrAllRecords.length; i++) {
+            this.arrAllRecords[i] = this.arrAllRecords[i];
+        }
+        return this.arrAllRecords;
+    }
+
+    getRecursiveBySeedId(){
+
+    }
+
+    getRawAll() {
+        return this.arrAllRecords;
+    }
+
+    setRawAll(arr:any) {
+        this.arrAllRecords = arr;
+    }
+
+    populateCatalogValues(oEntity) {
+        for (let catalog in this.catalogs) {
+            if (this.catalogs.hasOwnProperty(catalog)) {
+                oEntity[''+ catalog] = this.catalogs[catalog].getById(oEntity['' + catalog + 'Key']);
+            }
+            
+        }
+    }
+
 
     abstract adapterIn(oEntity:any);
 

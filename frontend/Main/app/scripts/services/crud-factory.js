@@ -357,7 +357,7 @@ angular.module('Main').service('validatorService', function() {
         _mainConfig = oMainConfig;
         var mainEntity = new ClassEntity(oMainConfig);
 
-        var _catalogs;
+        // var _catalogs;
         var createCatalogs = function(arrCatalogNames) {
             _catalogs = {};
             for (var i = 0; i < arrCatalogNames.length; i++) {
@@ -381,9 +381,11 @@ angular.module('Main').service('validatorService', function() {
         }
         //END CONFIG//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
         var _arrAllRecords = [];
-
+        var _removeBatch = _removeSelected;
+        var _loadEntitiesExecuted = false;
+        var _loadCatalogsExecuted = false;
+        var _loadDependenciesExecuted = false;
 
         var _populateCatalogValues = function(entity) {
             for (var catalog in _catalogs) {
@@ -549,22 +551,11 @@ angular.module('Main').service('validatorService', function() {
 
             return deferred.promise;
         };
-        // var _saveBatchSerial = function(arrEntities, index, callBackSuccess, callBackError, callBackComplete) {
-        //     if (arrEntities[i]) {
-        //         _save(arrEntities[i]).then(function(data) {
-        //             callBackSuccess(data);
-        //         }, function(data) {
-        //             callBackError(data);
-        //         }).finally(function() {
-        //             index++;
-        //             _saveBatchSerial(arrEntities, index, callBackSuccess, callBackError, callba);
-        //         });
-        //     }
-        //     callBackComplete();
-        // };
+ 
         var _updateBatch = function(arrEntities) {
             return _customPost('updateBatch', arrEntities);
         };
+
         var _addBatch = function(addQty, theArrayBelonging) {
             var promises = [];
             for (var i = 0; i < addQty; i++) {
@@ -574,6 +565,7 @@ angular.module('Main').service('validatorService', function() {
             }
             return $q.all(promises);
         };
+
         var _remove = function(theEntity, theArrayBelonging, theParameters) {
             var deferred = $q.defer();
             if (theParameters === undefined || theParameters == null) {
@@ -740,12 +732,6 @@ angular.module('Main').service('validatorService', function() {
             }
             return deferred.promise;
         };
-
-        var _removeBatch = _removeSelected;
-
-        var _loadEntitiesExecuted = false;
-        var _loadCatalogsExecuted = false;
-        var _loadDependenciesExecuted = false;
 
         var _loadEntities = function(bForce) {
             var deferred = $q.defer();
