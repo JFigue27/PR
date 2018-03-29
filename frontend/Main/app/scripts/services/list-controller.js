@@ -44,7 +44,7 @@ angular.module('Main').factory('listController', function($log, $q, localStorage
 
         var _filterStorageName = _baseService.entityName + $location.path();
         var _filters = oMainConfig.filters || {};
-        var _perPage = oMainConfig.perPage || 10;
+        var _limit = oMainConfig.limit || 10;
 
         var _paginate = oMainConfig.paginate !== undefined ? oMainConfig.paginate : true;
         //END CONFIG/////////////////////////////////////
@@ -158,7 +158,7 @@ angular.module('Main').factory('listController', function($log, $q, localStorage
             angular.copy(originalItem, oItem);
         };
         scope.refresh = function() {
-            if (!scope.filterOptions || scope.filterOptions.perPage == undefined) {
+            if (!scope.filterOptions || scope.filterOptions.limit == undefined) {
                 scope.clearFilters();
             } else {
                 _updateList();
@@ -304,19 +304,19 @@ angular.module('Main').factory('listController', function($log, $q, localStorage
         var _updateList = function() {
             scope.isLoading = true;
 
-            var perPage = scope.filterOptions.perPage;
+            var limit = scope.filterOptions.limit;
             var page = scope.filterOptions.page;
 
             if (!_paginate) {
                 page = 1;
-                perPage = 0;
+                limit = 0;
                 scope.filterOptions.page = 1;
-                scope.filterOptions.perPage = 0;
+                scope.filterOptions.limit = 0;
             }
 
             var queryParameters = _makeQueryParameters();
 
-            return _baseService.getFilteredPage(perPage, page, queryParameters).then(function(data) {
+            return _baseService.getFilteredPage(limit, page, queryParameters).then(function(data) {
                 scope.baseList = data.Result;
 
                 scope.filterOptions.itemsCount = data.AdditionalData.total_filtered_items;
@@ -325,7 +325,7 @@ angular.module('Main').factory('listController', function($log, $q, localStorage
 
                 for (var i = 0; i < scope.baseList.length; i++) {
                     var current = scope.baseList[i];
-                    current.itemIndex = (scope.filterOptions.page - 1) * scope.filterOptions.perPage + i + 1;
+                    current.itemIndex = (scope.filterOptions.page - 1) * scope.filterOptions.limit + i + 1;
                 }
                 _afterLoad();
                 scope.isLoading = false;
@@ -335,7 +335,7 @@ angular.module('Main').factory('listController', function($log, $q, localStorage
 
         scope.clearFilters = function() {
             scope.filterOptions = {
-                perPage: _perPage,
+                limit: _limit,
                 page: 1,
                 itemsCount: 0,
                 filterUser: null

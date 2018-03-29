@@ -357,7 +357,7 @@ angular.module('Main').service('validatorService', function() {
         _mainConfig = oMainConfig;
         var mainEntity = new ClassEntity(oMainConfig);
 
-        // var _catalogs;
+        var _catalogs;
         var createCatalogs = function(arrCatalogNames) {
             _catalogs = {};
             for (var i = 0; i < arrCatalogNames.length; i++) {
@@ -1117,14 +1117,14 @@ angular.module('Main').service('validatorService', function() {
             return deferred.promise;
         };
 
-        var _getPage = function(perPage, pageNumber, qParams) {
+        var _getPage = function(limit, pageNumber, qParams) {
             var deferred = $q.defer();
 
             if (qParams === undefined || qParams == null) {
                 qParams = '?';
             }
 
-            $http.get(appConfig.API_URL + mainEntity.entityName + '/getPage/' + perPage + '/' + pageNumber + qParams + '&noCache=' + Number(new Date()))
+            $http.get(appConfig.API_URL + mainEntity.entityName + '/getPage/' + limit + '/' + pageNumber + qParams + '&noCache=' + Number(new Date()))
                 .then(function(response) {
                     var backendResponse = response.data;
                     if (backendResponse.ErrorThrown) {
