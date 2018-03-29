@@ -24,7 +24,8 @@ namespace BusinessSpecificLogic.Logic
             return dbQuery.Include(e => e.PRLines)
                 .Include(e => e.DepartmentAssigned)
                 .Include(e => e.InfoTrack)
-                .Include(e => e.GeneralManager);
+                .Include(e => e.GeneralManager)
+                .Include(e => e.Requisitor);
         }
 
         protected override void OnGetSingle(PurchaseRequest entity)
@@ -57,6 +58,19 @@ namespace BusinessSpecificLogic.Logic
                 {
                     ctx.Entry(entity.GeneralManager).State = EntityState.Unchanged;
                 }
+                if (entity.Requisitor != null)
+                {
+                    ctx.Entry(entity.Requisitor).State = EntityState.Unchanged;
+                }
+                if (entity.DepartmentAssigned != null)
+                {
+                    ctx.Entry(entity.DepartmentAssigned).State = EntityState.Unchanged; 
+                }
+                if (entity.DepartmentManager != null)
+                {
+                    ctx.Entry(entity.DepartmentManager).State = EntityState.Unchanged;
+                }
+
                 #region PR Number Generation
 
                 DateTimeOffset date = DateTimeOffset.Now;
@@ -87,6 +101,8 @@ namespace BusinessSpecificLogic.Logic
                 entity.PRNumberKey = cqaNumber.PRNumberKey;
 
                 #endregion
+
+                entity.RequisitorKey = LoggedUser.UserID;
             }
 
 
@@ -127,13 +143,35 @@ namespace BusinessSpecificLogic.Logic
         protected override void OnCreateInstance(PurchaseRequest entity)
         {
             var ctx = context as POContext;
-            var user = ctx.Users.FirstOrDefault(u => u.Role == "GeneralManager");
+            var user = ctx.Users.AsNoTracking().FirstOrDefault(u => u.Role == "GeneralManager");
             if (user == null)
             {
                 throw new KnownError("You have not configured a General Manager yet");
             }
+
             entity.GeneralManagerKey = user.id;
             entity.GeneralManager = user;
+
+            var requisitor = ctx.Users.AsNoTracking().FirstOrDefault(u => u.UserKey == LoggedUser.UserID);
+            if (requisitor == null)
+            {
+                throw new KnownError("Logged user not found");
+            }
+            entity.Requisitor = requisitor;
+            entity.RequisitorKey = requisitor.id;
+
+
+            var department = ctx.Departments.AsNoTracking()
+                .Include(d => d.Manager)
+                .FirstOrDefault(d => d.DepartmentKey == LoggedUser.DeparmentKey);
+            if (department == null)
+            {
+                throw new KnownError("Department not found or not set for current user");
+            }
+
+            entity.DepartmentKey = department.id;
+            entity.DepartmentAssigned = department;
+            entity.DepartmentManagerKey = department.Manager.id;
         }
     }
 }

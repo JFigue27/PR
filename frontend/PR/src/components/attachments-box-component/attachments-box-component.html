@@ -1,7 +1,7 @@
 <div class="attachment-wrapper">
   <p>Attachments</p>
   <div>
-    <div class="no-files" *ngIf="ownerEntity[attachmentsListName]?.length===0">
+    <div class="no-files" *ngIf="ownerEntity[attachmentsListName]?.length==0">
       No files.
     </div>
       <p *ngFor="let item of ownerEntity.Attachments; let i = index;" class="item">
@@ -14,9 +14,8 @@
           <ion-icon name="close"></ion-icon>
         </span>
       </p>
-    <button class="btn-file" (click)="openFileBrowser()">Add files
-      <input type="file" id="file" ng2FileSelect [uploader]="uploader" multiple>
-    </button>
+      <input type="file" id="file"  (uploader.response)="onUploaderResponse($event);"
+       ng2FileSelect [uploader]="uploader" multiple>
   </div>
 </div>
 <!-- <pre>{{ ownerEntity | json }}</pre>  -->

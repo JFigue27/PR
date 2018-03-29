@@ -14,12 +14,12 @@ import { PageEvent } from '@angular/material';
 export class ListComponent extends ListController implements OnInit {
   constructor (
                 public userService:UserServiceProvider,
-                public listService: PRServiceProvider,
+                public PrService: PRServiceProvider,
                 public nav: NavController,
                 private app: App
-            ) {
-                super({ service: listService, paginate: true, limit: 2 });
-        }
+              ) {
+                super({ service: PrService, paginate: true, limit: 2 });
+              }
 
   ngOnInit() {
 
@@ -36,11 +36,14 @@ export class ListComponent extends ListController implements OnInit {
 
 
   addItem() {
-    this.nav.push(PRPage, { oEntityOrId: null });
+    this.PrService.createInstance().subscribe(oInstance => {
+      this.PrService.createEntity(oInstance).subscribe(oEntity => {
+        this.nav.push(PRPage, { oEntityOrId: oEntity });
+      });
+    });
   }
   
   afterLoad() {
-    console.log(this.filterOptions.itemsCount);
   }
 
   onOpenItem(oEntity: any) {

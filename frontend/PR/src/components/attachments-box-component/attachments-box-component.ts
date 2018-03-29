@@ -72,7 +72,7 @@ export class AttachmentsBoxComponent implements OnChanges {
       
       //Callbacks
       this.uploader.onAfterAddingFile = function(fileItem) {
-        if(!self.ownerEntity[self.attachmentsListName] && self.ownerEntity[self.attachmentsListName].length == 0){
+        if(!self.ownerEntity[self.attachmentsListName]){
           self.ownerEntity[self.attachmentsListName] = [];
         }
         self.ownerEntity[self.attachmentsListName].push({
@@ -84,7 +84,7 @@ export class AttachmentsBoxComponent implements OnChanges {
 
       // A single file was uploaded succesfully
       // this.uploader.onCompleteItem = (item, response:any, status, headers) => {
-
+      //   var backendResponse = response;
       //   if (!response.ErrorThrown) {
       //     this.ownerEntity[this.attachmentsFolder] = response.ResponseDescription;
       //     let theAttachment = this.getAttachment(item.file.name);
@@ -95,16 +95,16 @@ export class AttachmentsBoxComponent implements OnChanges {
       //   }
       // }
       this.uploader.onSuccessItem = (item, response:any, status, headers) => {
-        var backendResponse = response;
+        var backendResponse = JSON.parse(response);
         console.log('backend response');
         console.log(backendResponse);
-        if (!response.ErrorThrown) {
-          this.ownerEntity[this.attachmentsFolder] = response.ResponseDescription;
+        if (!backendResponse.ErrorThrown) {
+          this.ownerEntity[this.attachmentsFolder] = backendResponse.ResponseDescription;
           let theAttachment = this.getAttachment(item.file.name);
           theAttachment.isForUpload = false;
         } else {
           this.ErrorThrown = true;
-          alertify.alert(response.responseDescription).set('modal', true);
+          alertify.alert(backendResponse.responseDescription).set('modal', true);
         }
       }
 
@@ -119,11 +119,14 @@ export class AttachmentsBoxComponent implements OnChanges {
       }
 
       this.uploader.onBeforeUploadItem = (item) =>{
+        item.withCredentials = false;
         item.url = this.API_URL + '?attachmentKind=' + (this.kind || '') + '&targetFolder=' + (this.ownerEntity[this.attachmentsFolder] || '');
       }
-
-
     }
+  }
+
+  onUploaderResponse(){
+    console.log(arguments);
   }
 
   initializeApi(){

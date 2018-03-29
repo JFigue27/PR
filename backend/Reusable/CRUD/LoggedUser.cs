@@ -42,6 +42,11 @@ namespace Reusable
                     {
                         UserName = claimUserName.Value;
                     }
+                    Claim claimDepartment = claims.First(c => c.Type == "DepartmentKey");
+                    if (claimDepartment != null)
+                    {
+                        DeparmentKey = int.Parse(claimDepartment.Value);
+                    }
                 }
             }
         }
@@ -49,5 +54,6 @@ namespace Reusable
         public string Role { get; set; }
         public int? UserID { get; set; }
         public string UserName { get; set; }
+        public int DeparmentKey { get; set; }
     }
 }

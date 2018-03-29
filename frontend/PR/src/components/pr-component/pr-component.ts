@@ -25,7 +25,7 @@ export class PRComponent extends FormController implements OnInit {
   public userRole: string;
   public currencies = ['Dlls', 'Mxn'];
 
-  constructor (
+  constructor(
     public dialog: MatDialog,
     private params: NavParams,
     public userService: UserServiceProvider,
@@ -57,12 +57,15 @@ export class PRComponent extends FormController implements OnInit {
     this.supplierService.loadEntities().subscribe(oResult => {
       this.suppliers = oResult.Result;
     });
-
-    this.approvalService.getSingleWhere('PurchaseRequestKey', this.params.get('oEntityOrId'))
-      .subscribe(oResponse => {
-        this.approval = oResponse.Result;
-      });
-
+    let PurchaseRequestKey: number;
+    if (this.params.get('oEntityOrId') > 0) {
+      PurchaseRequestKey = this.params.get('oEntityOrId');
+    } else {
+      PurchaseRequestKey = this.params.get('oEntityOrId').id;
+    }
+    this.approvalService.getSingleWhere('PurchaseRequestKey', PurchaseRequestKey).subscribe(oResponse => {
+      this.approval = oResponse.Result;
+    });
   }
 
   getSupplier1Sum() {
@@ -163,33 +166,33 @@ export class PRComponent extends FormController implements OnInit {
   }
 
   openModal() {
-      let currentDepartment = this.departments.find(d => d.id == this.baseEntity.DepartmentKey);
-      let price = 0;
-      if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier1Key) {
-        price = this.getSupplier1Sum();
-      } else if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier2Key) {
-        price = this.getSupplier2Sum();
-      } else if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier3Key) {
-        price = this.getSupplier3Sum();
-      }
+    let currentDepartment = this.departments.find(d => d.id == this.baseEntity.DepartmentKey);
+    let price = 0;
+    if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier1Key) {
+      price = this.getSupplier1Sum();
+    } else if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier2Key) {
+      price = this.getSupplier2Sum();
+    } else if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier3Key) {
+      price = this.getSupplier3Sum();
+    }
 
-      if (currentDepartment && currentDepartment.Budget && currentDepartment.Budget >= price) {
-        this.dialog.open(ApprovalFormComponent, {
-          data: {
-            oEntityOrId: this.approval ? this.approval.id : { PurchaseRequestKey: this.baseEntity.id },
-            PurchaseRequestKey: this.baseEntity.id,
-            ManagerAssigned: this.baseEntity.DepartmentManagerKey
-          }, width: '700px'
-        });
-      } else {
-        this.dialog.open(ApprovalFormComponent, {
-          data: {
-            oEntityOrId: this.approval ? this.approval.id : { PurchaseRequestKey: this.baseEntity.id },
-            PurchaseRequestKey: this.baseEntity.id,
-            ManagerAssigned: this.baseEntity.GeneralManagerKey
-          }
-        });
-      }
+    if (currentDepartment && currentDepartment.Budget && currentDepartment.Budget >= price) {
+      this.dialog.open(ApprovalFormComponent, {
+        data: {
+          oEntityOrId: this.approval ? this.approval.id : { PurchaseRequestKey: this.baseEntity.id },
+          PurchaseRequestKey: this.baseEntity.id,
+          ManagerAssigned: this.baseEntity.DepartmentManagerKey
+        }, width: '700px'
+      });
+    } else {
+      this.dialog.open(ApprovalFormComponent, {
+        data: {
+          oEntityOrId: this.approval ? this.approval.id : { PurchaseRequestKey: this.baseEntity.id },
+          PurchaseRequestKey: this.baseEntity.id,
+          ManagerAssigned: this.baseEntity.GeneralManagerKey
+        }
+      });
+    }
   }
 
   getApprover() {
@@ -203,17 +206,17 @@ export class PRComponent extends FormController implements OnInit {
       price = this.getSupplier3Sum();
     }
 
-    if (currentDepartment && currentDepartment.Budget && currentDepartment.Budget >= price) {      
+    if (currentDepartment && currentDepartment.Budget && currentDepartment.Budget >= price) {
       return this.baseEntity.DepartmentManagerKey;
-      
+
     } else {
-        return  this.baseEntity.GeneralManagerKey
+      return this.baseEntity.GeneralManagerKey
     }
   }
 
   newSupplier() {
     let dialog = this.dialog.open(SupplierFormComponent, {
-      data: { oEntityOrId: null}
+      data: { oEntityOrId: null }
     });
 
     dialog.afterClosed().subscribe(result => {
@@ -221,7 +224,7 @@ export class PRComponent extends FormController implements OnInit {
         this.suppliers = oResult.Result;
       });
     });
-}
+  }
   removeItemLocally = function (index) {
     this.baseEntity.PRLines.splice(index, 1);
   }
@@ -268,7 +271,7 @@ export class PRComponent extends FormController implements OnInit {
       super.save();
     });
 
-    
+
   }
 
 

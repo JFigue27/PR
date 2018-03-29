@@ -34,6 +34,7 @@ namespace ReusableWebAPI.Auth
             context.AdditionalResponseParameters.Add("UserName", claims.Find(c => c.Type == "userName").Value);
             context.AdditionalResponseParameters.Add("DisplayName", claims.Find(c => c.Type == "displayName").Value);
             context.AdditionalResponseParameters.Add("Email", claims.Find(c => c.Type == "email").Value);
+            context.AdditionalResponseParameters.Add("DepartmentKey", claims.Find(c => c.Type == "DepartmentKey").Value);
 
             return base.TokenEndpoint(context);
         }
@@ -71,6 +72,7 @@ namespace ReusableWebAPI.Auth
             identity.AddClaim(new Claim("userName", theUser.UserName));
             identity.AddClaim(new Claim("email", theUser.Email ?? ""));
             identity.AddClaim(new Claim("displayName", theUser.Value ?? ""));
+            identity.AddClaim(new Claim("DepartmentKey", theUser.DepartmentKey.ToString()));
 
             context.Validated(identity);
         }

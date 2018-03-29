@@ -1,5 +1,5 @@
 import { CRUDFactory } from './CRUDFactory';
-import { IEntity } from './IEntity';
+// import { IEntity } from './IEntity';
 import { Observable } from 'rxjs/RX';
 import alertify from 'alertifyjs';
 
