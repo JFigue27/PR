@@ -5,5 +5,9 @@ module.exports = {
   copyCommon: {
     src: ['{{SRC}}/common/**/*'],
     dest: '{{WWW}}/common'
+  },
+  copyReports: {
+    src: ['{{SRC}}/reports/**/*'],
+    dest: '{{WWW}}/reports'
   }
 }

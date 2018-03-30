@@ -225,6 +225,11 @@ export class PRComponent extends FormController implements OnInit {
       });
     });
   }
+
+  print() {
+    window.open("reports/purchase-request.html");
+  }
+
   removeItemLocally = function (index) {
     this.baseEntity.PRLines.splice(index, 1);
   }

@@ -80,20 +80,9 @@ export class AttachmentsBoxComponent implements OnChanges {
           Directory: (self.ownerEntity[self.attachmentsFolder] || ''),
           isForUpload: true
         });
+        this.ownerEntity.editMode = true;
       }
-
-      // A single file was uploaded succesfully
-      // this.uploader.onCompleteItem = (item, response:any, status, headers) => {
-      //   var backendResponse = response;
-      //   if (!response.ErrorThrown) {
-      //     this.ownerEntity[this.attachmentsFolder] = response.ResponseDescription;
-      //     let theAttachment = this.getAttachment(item.file.name);
-      //     theAttachment.isForUpload = false;
-      //   } else {
-      //     this.ErrorThrown = true;
-      //     alertify.alert(response.responseDescription).set('modal', true);
-      //   }
-      // }
+ 
       this.uploader.onSuccessItem = (item, response:any, status, headers) => {
         var backendResponse = JSON.parse(response);
         console.log('backend response');
@@ -110,7 +99,6 @@ export class AttachmentsBoxComponent implements OnChanges {
 
       //Resolves promise only if all files were uploader succesfully
       this.uploader.onCompleteAll = () => {
-        console.log(this);
         if (!this.ErrorThrown) {
           this.uploadingPromiseResolve();
         } else {

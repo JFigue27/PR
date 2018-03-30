@@ -182,29 +182,29 @@ Frontend Migration from Angualr 1 to Angular 4:
     ☐ Horizontal Lists sortable by Drag and Drop.
     ☐ Selectize. (Single and Multiple selection).
     ☐ Attachments.
-        ☐ Search best existing component for angular ^2.
+        ✔ Search best existing component for angular ^2. @done(18-03-30 12:04)
         ☐ Parameters:
-            ☐ ownerEntity.
+            ✔ ownerEntity. @done(18-03-30 12:04)
             ☐ printMode.
-            ☐ kind.
+            ✔ kind. @done(18-03-30 12:06)
             ☐ readOnly.
-            ☐ customListBind.
-            ☐ customFolderBind.
-        ☐ ON_AFTER_ADDING_FILE: When user selects a file from browser.
-            ☐ Initialize local list if empty/null.
-            ☐ Add oAttachment selected to local list.
-            ☐ Trigger on_input_change.
-        ☐ ON_SUCCESS_ITEM: A single file was uploaded successfully.
-            ☐ Assign generated folder to AttachmentFolder property. (Could be a custom one).
-            ☐ Mark oAttachment in local list for not upload.
-        ☐ ON_COMPLETE_ALL: All files where uploaded successfully.
-            ☐ Resolve or Reject promise based on ErrorThrown.
-        ☐ ON_BEFORE_UPLOAD_ITEM: Called before an item is uploaded.
-            ☐ Point URL to "attachments" endpoint and add query parameters: "attachmentKind" and "targetFolder";
-        ☐ Should append an api to ownerEntity to interact with AttachmentsBox.
-        ☐ UPLOAD_FILES(): Function to start uploading all pending attachments.
-        ☐ REMOVE_ATTACHMENT(): Function to mark an attachment for being deleted (Attachment is actually deleted until user clicks Save).
-        ☐ CANCEL_REMOVE(): Unmarks attachment for being deleted.
+            ✔ customListBind. @done(18-03-30 12:06)
+            ✔ customFolderBind. @done(18-03-30 12:06)
+        ✔ ON_AFTER_ADDING_FILE: When user selects a file from browser. @done(18-03-30 12:06)
+            ✔ Initialize local list if empty/null. @done(18-03-30 12:06)
+            ✔ Add oAttachment selected to local list. @done(18-03-30 12:07)
+            ✔ Trigger on_input_change. @done(18-03-30 12:08)
+        ✔ ON_SUCCESS_ITEM: A single file was uploaded successfully. @done(18-03-30 12:08)
+            ✔ Assign generated folder to AttachmentFolder property. (Could be a custom one). @done(18-03-30 12:09)
+            ✔ Mark oAttachment in local list for not upload. @done(18-03-30 12:09)
+        ✔ ON_COMPLETE_ALL: All files where uploaded successfully. @done(18-03-30 12:09)
+            ✔ Resolve or Reject promise based on ErrorThrown. @done(18-03-30 12:09)
+        ✔ ON_BEFORE_UPLOAD_ITEM: Called before an item is uploaded. @done(18-03-30 12:09)
+            ✔ Point URL to "attachments" endpoint and add query parameters: "attachmentKind" and "targetFolder"; @done(18-03-30 12:09)
+        ✔ Should append an api to ownerEntity to interact with AttachmentsBox. @done(18-03-30 12:09)
+        ✔ UPLOAD_FILES(): Function to start uploading all pending attachments. @done(18-03-30 12:10)
+        ✔ REMOVE_ATTACHMENT(): Function to mark an attachment for being deleted (Attachment is actually deleted until user clicks Save). @done(18-03-30 12:10)
+        ✔ CANCEL_REMOVE(): Unmarks attachment for being deleted. @done(18-03-30 12:10)
         ☐ ADD_ATTACHMENT(): Open Browser to search for a file.
     ☐ Buttons that do not accept double click.
     ☐ Confirm Buttons: Two actions in same space, maybe: first action just a click, second action: to slide to right.
