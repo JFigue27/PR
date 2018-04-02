@@ -9,7 +9,7 @@ namespace ReusableWebAPI.Controllers
         // GET: api/Ping
         public IEnumerable<string> Get()
         {
-            return new string[] { "March PO", "is", "working!" };
+            return new string[] { "March 30 PO", "is", "working!" };
         }
 
         // GET: api/Ping/5

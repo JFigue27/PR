@@ -24,7 +24,7 @@ namespace Reusable
         public LoggedUser LoggedUser { get; set; }
 
         protected DbContext context;
-        protected IReadOnlyRepository<Entity> repository;
+        public IReadOnlyRepository<Entity> repository;
 
         public ReadOnlyLogic(DbContext context, IReadOnlyRepository<Entity> repository, LoggedUser LoggedUser)//, int? byUserId)
         {

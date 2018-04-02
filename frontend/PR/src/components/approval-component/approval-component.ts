@@ -26,6 +26,10 @@ export class ApprovalComponent extends ListController implements OnInit {
     });
   }
 
+  getIconStatus(status:string){
+    return "<ion-icon name='getIconStatus(item.status)'></ion-icon> ";
+  }
+
   afterLoad() {
   }
 

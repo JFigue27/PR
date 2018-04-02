@@ -11,7 +11,7 @@
                         <br>
                         <b>PO Number:</b>&nbsp;&nbsp;
                         <input type="text" class="form-input border-bottom" (ngModelChange)="on_input_change()"
-                            [(ngModel)]="baseEntity.PONumber" style="width:65%;">
+                            [(ngModel)]="baseEntity.PONumber" style="width:55%;">
                     </ion-col>
                 </ion-row>
             </ion-grid>
@@ -167,17 +167,16 @@
                         <ion-grid>
                             <ion-row>
                                 <ion-col col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 class="col-input">
-                                    Purpose or Use
+                                    Use
                                 </ion-col>
                                 <ion-col col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10>
                                     <input type="text" class="form-input border-bottom" [(ngModel)]="baseEntity.PurposeOrUse" />
                                 </ion-col>
                                 <ion-col col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 class="col-input">
-                                    Requisition name
+                                    Requisitor
                                 </ion-col>
                                 <ion-col col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10>
-                            
-                                    <p>{{ baseEntity.Requisitor?.Value }}</p>
+                                    <p class="p-user">{{ baseEntity.Requisitor?.Value }}</p>
                                     </ion-col>
                                 <ion-col col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 class="col-input">
                                     Department
@@ -206,10 +205,10 @@
                     <ion-col col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 no-padding>
                         <ion-grid>
                             <ion-row>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 class="col-input">
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 class="col-input">
                                     Department manager
                                 </ion-col>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10>
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9>
                                     <mat-select [(ngModel)]="baseEntity.DepartmentManagerKey" placeholder="Select.." (ngModelChange)="on_input_change(item);"
                                         class="border-bottom" style="width:80%;">
                                         <mat-option *ngFor="let user of users" [value]="user.id">
@@ -217,26 +216,26 @@
                                         </mat-option>
                                     </mat-select>
                                 </ion-col>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 class="col-input">
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 class="col-input">
                                     Manager Signature
                                 </ion-col>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10>
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9>
                                     <input type="text" class="form-input border-bottom" [(ngModel)]="baseEntity.PurposedOrUse" />
                                 </ion-col>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 class="col-input">
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 class="col-input">
                                     General Manager
                                 </ion-col>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10>
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9>
                                     <p class="form-input border-bottom">{{ baseEntity.GeneralManager?.Value }}</p>
                                 </ion-col>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 class="col-input">
-                                    Account No.
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 class="col-input">
+                                    Account
                                 </ion-col>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10>
+                                <ion-col col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9>
                                     <mat-select [(ngModel)]="baseEntity.AccountNo" placeholder="Select.." (ngModelChange)="on_input_change(item);" class="border-bottom"
                                         style="width:80%;">
                                         <mat-option *ngFor="let account of accounts" [value]="account.id">
-                                            {{ account.Value }}
+                                            {{ account.Value }} &nbsp;&nbsp;&nbsp; {{ account.Description}}
                                         </mat-option>
                                     </mat-select>
                                 </ion-col>

@@ -15,8 +15,12 @@ namespace BusinessSpecificLogic.Logic
 
     public class PurchaseRequestLogic : DocumentLogic<PurchaseRequest>, IPurchaseRequestLogic
     {
-        public PurchaseRequestLogic(DbContext context, IDocumentRepository<PurchaseRequest> repository, LoggedUser LoggedUser) : base(context, repository, LoggedUser)
+        private readonly ApprovalLogic approvalLogic;
+
+        public PurchaseRequestLogic(DbContext context, IDocumentRepository<PurchaseRequest> repository, LoggedUser LoggedUser,
+            ApprovalLogic approvalLogic) : base(context, repository, LoggedUser)
         {
+            this.approvalLogic = approvalLogic;
         }
 
         protected override IQueryable<PurchaseRequest> StaticDbQueryForList(IQueryable<PurchaseRequest> dbQuery)
@@ -138,6 +142,17 @@ namespace BusinessSpecificLogic.Logic
                     ctx.SaveChanges();
                 }
             }
+            if (mode == OPERATION_MODE.ADD)
+            {
+                CommonResponse approvalResponse = approvalLogic.CreateInstance(new Approval()
+                {
+                    PurchaseRequestKey = entity.id
+                });
+
+                Approval approval = (Approval) approvalResponse.Result;
+                approvalLogic.repository.Add(approval);
+            }
+
         }
 
         protected override void OnCreateInstance(PurchaseRequest entity)

@@ -42,8 +42,8 @@ export class AttachmentsBoxComponent implements OnChanges {
   }
   
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.ownerEntity.firstChange == false) {
-      
+    if (changes.ownerEntity.currentValue.AAA_EntityName) {
+
       //Variables Initialization
       let self = this;
       this.ownerEntity[this.api_name] = {};
@@ -80,13 +80,11 @@ export class AttachmentsBoxComponent implements OnChanges {
           Directory: (self.ownerEntity[self.attachmentsFolder] || ''),
           isForUpload: true
         });
-        this.ownerEntity.editMode = true;
+        self.ownerEntity.editMode = true;
       }
  
       this.uploader.onSuccessItem = (item, response:any, status, headers) => {
         var backendResponse = JSON.parse(response);
-        console.log('backend response');
-        console.log(backendResponse);
         if (!backendResponse.ErrorThrown) {
           this.ownerEntity[this.attachmentsFolder] = backendResponse.ResponseDescription;
           let theAttachment = this.getAttachment(item.file.name);
@@ -113,20 +111,14 @@ export class AttachmentsBoxComponent implements OnChanges {
     }
   }
 
-  onUploaderResponse(){
-    console.log(arguments);
+  onUploaderResponse() {
   }
 
-  initializeApi(){
+  initializeApi() {
   }
 
   cancelRemove(index) {
     this.ownerEntity[this.attachmentsListName][index].ToDelete = false;
-  }
-
-  openFileBrowser() {
-    let file = document.getElementById('file');
-    file.click();
   }
  
   getAttachment(sName) {

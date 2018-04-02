@@ -31,10 +31,8 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   }
   
   ngOnChanges(changes: SimpleChanges): void {
-
-    if (changes.pr && changes.pr.firstChange == false) {
-      this.approvalService.getSingleWhere('PurchaseRequestKey', this.pr.PurchaseRequestKey)
-      .subscribe(oResponse => {
+    if (changes.pr && changes.pr.currentValue.AAA_EntityName) {
+      this.approvalService.getSingleWhere('PurchaseRequestKey', this.pr.PurchaseRequestKey).subscribe(oResponse => {
         this.load(oResponse.Result);
       });  
     }
@@ -49,6 +47,7 @@ export class ApprovalFormComponent extends FormController implements OnInit {
     this.baseEntity.UserRequisitorKey = this.userService.LoggedUser.UserKey;
     this.baseEntity.UserApproverKey = this.pr.DepartmentManagerKey;
     this.baseEntity.PurchaseRequestKey = this.pr.PurchaseRequestKey;
+    this.baseEntity.Title = "Purchase Request - " + this.pr.FriendlyIdentifier;
   }
 
   answerApproval(status) {

@@ -22,7 +22,7 @@ namespace Reusable
 
     public abstract class Logic<Entity> : ReadOnlyLogic<Entity>, ILogic<Entity> where Entity : BaseEntity, new()
     {
-        protected new IRepository<Entity> repository;
+        public new IRepository<Entity> repository;
 
         public Logic(DbContext context, IRepository<Entity> repository, LoggedUser LoggedUser) : base(context, repository, LoggedUser)
         {

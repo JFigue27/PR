@@ -34,8 +34,8 @@
   <button *ngIf=" ( getCurrentRole() === 'MRO' ) && (  baseEntity.Status==='Quote' )" 
     mat-raised-button color="primary" (click)="answerApproval('Approved')">Finalize</button>
   
-  <button *ngIf="baseEntity.ApprovalKey === 0 " type="submit" mat-raised-button color="basic"
+  <button *ngIf="(baseEntity.Status != 'Rejected') && (baseEntity.Status != 'Quote') && ( baseEntity.Status != 'Approved') " type="submit" mat-raised-button color="basic"
     (click)="save()">Request</button>
   </div>
 
-<!-- <pre>{{ baseEntity | json }}</pre> -->
+<pre>{{ baseEntity | json }}</pre>

@@ -16,7 +16,7 @@ namespace Reusable
 
     public abstract class DocumentLogic<Document> : Logic<Document>, IDocumentLogic<Document> where Document : BaseDocument, new()
     {
-        protected new IDocumentRepository<Document> repository;
+        public new IDocumentRepository<Document> repository;
 
         public DocumentLogic(DbContext context, IDocumentRepository<Document> repository, LoggedUser LoggedUser) : base(context, repository, LoggedUser)
         {

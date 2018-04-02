@@ -41,6 +41,7 @@ namespace BusinessSpecificLogic.Logic
         {
             entity.Status = "Pending";
             entity.Hyperlink = "http://apps.capsonic.com/PR/Main/?id=" + entity.PurchaseRequestKey;
+            entity.UserRequisitorKey = (int) LoggedUser.UserID;
         }
 
         protected override void onBeforeSaving(Approval entity, BaseEntity parent = null, OPERATION_MODE mode = OPERATION_MODE.NONE)
@@ -70,7 +71,7 @@ namespace BusinessSpecificLogic.Logic
             entity.UserApprover = ctx.Users.FirstOrDefault(u => u.UserKey == entity.UserApproverKey);
 
 
-            if (mode == OPERATION_MODE.ADD)
+            if (mode == OPERATION_MODE.UPDATE)
             {
                 Email emailEntity = new Email();
                 emailEntity.CreatedAt = DateTimeOffset.Now;
@@ -86,7 +87,7 @@ namespace BusinessSpecificLogic.Logic
                     From = currentUser.Email,
                     Subject = "PR - " + pr.PRNumber.GeneratedNumber + ". " + entity.Title,
                     Body = "PR - " + pr.PRNumber.GeneratedNumber + ". " + entity.Title
-                            + "<br><br>" + entity.RequestDescription
+                            + "<br><b>Description</b><br>" + entity.RequestDescription
                             + @"<br><br>Open document here: <a href=""" + hyperlink + @""">" + pr.PRNumber.GeneratedNumber + "</a>"
                 };
 

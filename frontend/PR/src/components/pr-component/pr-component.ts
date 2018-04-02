@@ -6,7 +6,7 @@ import { UserServiceProvider } from '../../providers/user-service';
 import { SupplierServiceProvider } from '../../providers/supplier-service';
 import { DepartmentServiceProvider } from '../../providers/department-service';
 import { AccountServiceProvider } from '../../providers/account-service';
-import { ApprovalServiceProvider } from '../../providers/approval-service';
+// import { ApprovalServiceProvider } from '../../providers/approval-service';
 import { MatDialog } from '@angular/material';
 import { ApprovalFormComponent } from '../approval-form-component/approval-form-component';
 import { ModalController } from 'ionic-angular/components/modal/modal-controller';
@@ -25,19 +25,19 @@ export class PRComponent extends FormController implements OnInit {
   public userRole: string;
   public currencies = ['Dlls', 'Mxn'];
 
-  constructor(
-    public dialog: MatDialog,
-    private params: NavParams,
-    public userService: UserServiceProvider,
-    public PRService: PRServiceProvider,
-    private departmentService: DepartmentServiceProvider,
-    private accountService: AccountServiceProvider,
-    private approvalService: ApprovalServiceProvider,
-    private supplierService: SupplierServiceProvider,
-    public modal: ModalController
-  ) {
-    super({ service: PRService });
-  }
+  constructor (
+                public dialog: MatDialog,
+                private params: NavParams,
+                public userService: UserServiceProvider,
+                public PRService: PRServiceProvider,
+                private departmentService: DepartmentServiceProvider,
+                private accountService: AccountServiceProvider,
+                // private approvalService: ApprovalServiceProvider,
+                private supplierService: SupplierServiceProvider,
+                public modal: ModalController
+              ) {
+                super({ service: PRService });
+            }
 
   ngOnInit() {
     this.load(this.params.get('oEntityOrId'));
@@ -63,9 +63,9 @@ export class PRComponent extends FormController implements OnInit {
     } else {
       PurchaseRequestKey = this.params.get('oEntityOrId').id;
     }
-    this.approvalService.getSingleWhere('PurchaseRequestKey', PurchaseRequestKey).subscribe(oResponse => {
-      this.approval = oResponse.Result;
-    });
+    // this.approvalService.getSingleWhere('PurchaseRequestKey', PurchaseRequestKey).subscribe(oResponse => {
+    //   this.approval = oResponse.Result;
+    // });
   }
 
   getSupplier1Sum() {
@@ -165,35 +165,35 @@ export class PRComponent extends FormController implements OnInit {
     this.baseEntity.DepartmentKey = department.id;
   }
 
-  openModal() {
-    let currentDepartment = this.departments.find(d => d.id == this.baseEntity.DepartmentKey);
-    let price = 0;
-    if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier1Key) {
-      price = this.getSupplier1Sum();
-    } else if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier2Key) {
-      price = this.getSupplier2Sum();
-    } else if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier3Key) {
-      price = this.getSupplier3Sum();
-    }
+  // openModal() {
+  //   let currentDepartment = this.departments.find(d => d.id == this.baseEntity.DepartmentKey);
+  //   let price = 0;
+  //   if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier1Key) {
+  //     price = this.getSupplier1Sum();
+  //   } else if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier2Key) {
+  //     price = this.getSupplier2Sum();
+  //   } else if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier3Key) {
+  //     price = this.getSupplier3Sum();
+  //   }
 
-    if (currentDepartment && currentDepartment.Budget && currentDepartment.Budget >= price) {
-      this.dialog.open(ApprovalFormComponent, {
-        data: {
-          oEntityOrId: this.approval ? this.approval.id : { PurchaseRequestKey: this.baseEntity.id },
-          PurchaseRequestKey: this.baseEntity.id,
-          ManagerAssigned: this.baseEntity.DepartmentManagerKey
-        }, width: '700px'
-      });
-    } else {
-      this.dialog.open(ApprovalFormComponent, {
-        data: {
-          oEntityOrId: this.approval ? this.approval.id : { PurchaseRequestKey: this.baseEntity.id },
-          PurchaseRequestKey: this.baseEntity.id,
-          ManagerAssigned: this.baseEntity.GeneralManagerKey
-        }
-      });
-    }
-  }
+  //   if (currentDepartment && currentDepartment.Budget && currentDepartment.Budget >= price) {
+  //     this.dialog.open(ApprovalFormComponent, {
+  //       data: {
+  //         oEntityOrId: this.approval ? this.approval.id : { PurchaseRequestKey: this.baseEntity.id },
+  //         PurchaseRequestKey: this.baseEntity.id,
+  //         ManagerAssigned: this.baseEntity.DepartmentManagerKey
+  //       }, width: '700px'
+  //     });
+  //   } else {
+  //     this.dialog.open(ApprovalFormComponent, {
+  //       data: {
+  //         oEntityOrId: this.approval ? this.approval.id : { PurchaseRequestKey: this.baseEntity.id },
+  //         PurchaseRequestKey: this.baseEntity.id,
+  //         ManagerAssigned: this.baseEntity.GeneralManagerKey
+  //       }
+  //     });
+  //   }
+  // }
 
   getApprover() {
     let currentDepartment = this.departments.find(d => d.id == this.baseEntity.DepartmentKey);
@@ -271,12 +271,9 @@ export class PRComponent extends FormController implements OnInit {
   }
 
   save() {
-
-    this.baseEntity.api_attachments.uploadFiles().then(response => {
-      super.save();
-    });
-
-
+      this.baseEntity.api_attachments.uploadFiles().then(response => {
+        super.save();
+      });
   }
 
 
