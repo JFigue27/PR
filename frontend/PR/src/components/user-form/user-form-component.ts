@@ -14,6 +14,7 @@ export class UserFormComponent extends FormController implements OnInit {
     { value: 'User', viewValue: 'User' },
     { value: 'DepartmentManager', viewValue: 'Department Manager' },
     { value: 'GeneralManager', viewValue: 'General Manager'},
+    { value: 'Buyer', viewValue: 'Buyer' },
     { value: 'MRO', viewValue: 'MRO' }
   ];
  
@@ -38,6 +39,10 @@ export class UserFormComponent extends FormController implements OnInit {
   }
 
   afterLoad() {
+  }
+
+  beforeSave(){
+    
   }
 
   afterSave(){

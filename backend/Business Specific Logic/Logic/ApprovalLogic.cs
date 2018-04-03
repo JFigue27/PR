@@ -25,7 +25,11 @@ namespace BusinessSpecificLogic.Logic
             }
             else if (LoggedUser.Role == "MRO")
             {
-                dbQuery = dbQuery.Where(e => e.Status == "Quote" || e.Status == "Approved");
+                dbQuery = dbQuery.Where(e => e.Status == "Quote" || e.Status == "Quoted" || e.Status == "Approved" || e.Status == "Quote Rejected");
+            }
+            else if (LoggedUser.Role == "Buyer")
+            {
+                dbQuery = dbQuery.Where(e => e.Status == "Approved");
             }
             else
             {
@@ -39,7 +43,6 @@ namespace BusinessSpecificLogic.Logic
 
         protected override void OnCreateInstance(Approval entity)
         {
-            entity.Status = "Pending";
             entity.Hyperlink = "http://apps.capsonic.com/PR/Main/?id=" + entity.PurchaseRequestKey;
             entity.UserRequisitorKey = (int) LoggedUser.UserID;
         }
@@ -69,6 +72,7 @@ namespace BusinessSpecificLogic.Logic
             }
             #endregion
             entity.UserApprover = ctx.Users.FirstOrDefault(u => u.UserKey == entity.UserApproverKey);
+            entity.UserRequisitor = ctx.Users.FirstOrDefault(u => u.UserKey == entity.UserRequisitorKey);
 
 
             if (mode == OPERATION_MODE.UPDATE)
@@ -85,17 +89,53 @@ namespace BusinessSpecificLogic.Logic
                     EmailAddress = currentUser.Email,
                     Password = currentUser.EmailPassword,
                     From = currentUser.Email,
-                    Subject = "PR - " + pr.PRNumber.GeneratedNumber + ". " + entity.Title,
-                    Body = "PR - " + pr.PRNumber.GeneratedNumber + ". " + entity.Title
+                    Subject = "PR - " + pr.PRNumber.GeneratedNumber + " [" +  entity.Status + "] " + entity.Title,
+                    Body = "PR - " + pr.PRNumber.GeneratedNumber + ". " + " [" + entity.Status + "] " + entity.Title
                             + "<br><b>Description</b><br>" + entity.RequestDescription
                             + @"<br><br>Open document here: <a href=""" + hyperlink + @""">" + pr.PRNumber.GeneratedNumber + "</a>"
                 };
 
-                emailService.To.Add(entity.UserApprover.Email);
-
-
-                emailService.Bcc.Add(currentUser.Email);
-
+                switch (entity.Status)
+                {
+                    case "Pending":
+                        emailService.To.Add(entity.UserApprover.Email);
+                        break;
+                    case "Quote":
+                        emailService.To.Add(entity.UserRequisitor.Email);
+                        var mros = ctx.Users.Where(u => u.Role == "MRO").ToList();
+                        foreach (var mro in mros)
+                        {
+                            emailService.To.Add(mro.Email);
+                        }
+                        break;
+                    case "Rejected":
+                        emailService.To.Add(entity.UserRequisitor.Email);
+                        break;
+                    case "Quoted":
+                        emailService.To.Add(entity.UserApprover.Email);
+                        break;
+                    case "Quote Rejected":
+                        var mrosRejected = ctx.Users.Where(u => u.Role == "MRO").ToList();
+                        foreach (var mro in mrosRejected)
+                        {
+                            emailService.To.Add(mro.Email);
+                        }
+                        break;
+                    case "Approved":
+                        emailService.To.Add(entity.UserRequisitor.Email);
+                        var buyers = ctx.Users.Where(u => u.Role == "Buyer").ToList();
+                        foreach (var buyer in buyers)
+                        {
+                            emailService.To.Add(buyer.Email);
+                        }
+                        break;
+                    case "Finalized":
+                        emailService.To.Add(entity.UserRequisitor.Email);
+                        emailService.To.Add(entity.UserApprover.Email);
+                        break;
+                    default:
+                        break;
+                }
 
                 try
                 {

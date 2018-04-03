@@ -34,7 +34,8 @@ export abstract class FormController {
 			case oEntityOrID > 0:
 				this.config.service.loadEntity(oEntityOrID)
 					.subscribe(oResult => {
-						this.baseEntity = oResult.Result
+						this.baseEntity = oResult.Result;
+						this.baseEntity.editMode = false;
 						this.afterLoad();
 					});
 				break;
@@ -42,12 +43,14 @@ export abstract class FormController {
 			//Create instance
 			case (!oEntityOrID || (oEntityOrID && (oEntityOrID instanceof Object || typeof (oEntityOrID) == 'object')
 					&& !oEntityOrID.hasOwnProperty('id'))):
+				this.baseEntity.editMode = false;
 				this.createInstance(oEntityOrID);
 				break;
 			
 			//Open by Object
 			case oEntityOrID instanceof Object || typeof (oEntityOrID) == 'object':
 				this.baseEntity = oEntityOrID;
+				this.baseEntity.editMode = false;
 				this.afterLoad();
 				break;
 			default:
@@ -60,9 +63,11 @@ export abstract class FormController {
 	}
 
 	save() {	
+		this.beforeSave();
 		this.config.service.save(this.baseEntity).subscribe(oEntity => {
 			this.afterSave();
 			alertify.success('SUCCESFULLY SAVED');
+			this.baseEntity.editMode = false;
 			return Observable.empty();
 		});
 	}
@@ -86,6 +91,8 @@ export abstract class FormController {
 
 	abstract afterCreate();
 
+	abstract beforeSave();
+	
 	abstract afterSave();
 
 	abstract afterRemove();

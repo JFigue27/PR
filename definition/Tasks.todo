@@ -60,7 +60,8 @@ TODO
     ☐ Approvals > sort by date requested - status
     ☐ main menu > hide user section
     ☐ email content functionality
-    ☐ PR > reload approval object when saved
+    ✔ PR > reload approval object when saved @done(18-04-03 14:07)
+    ☐ Approval > MRO should also see Quote Rejected PR status
 
 
 

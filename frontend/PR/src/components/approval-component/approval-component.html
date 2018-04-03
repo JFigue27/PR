@@ -12,8 +12,9 @@
   <table class="table table-condensed" style="table-layout: fixed;">
     <thead>
       <tr>
-        <th style="width:100px;">Status</th>
-        <th style="width:120px;">Requested By</th>
+        <th class="width-4"><ion-icon ios="ios-create" md="md-create" class="icon-status"></ion-icon></th>
+        <th class="width-10">Status</th>
+        <th class="width-10">Requested by</th>
         <th>Description</th>
         <th>Manager Response</th>
         <th>Date Requested</th>
@@ -21,8 +22,13 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of baseList" (click)="openItem(item)">
-        <td style="width:100px;" data-title="Status"> <span onclick="getIconStatus(item.status)"></span> {{ item.Status }}</td>
-        <td style="width:120px;" data-title="Requested By">{{ item.InfoTrack?.User_CreatedBy.Value }}</td>
+        <td class="width-4">
+          <ion-icon *ngIf="item.Status == 'Approved' || item.Status == 'Finalized' " name='ios-checkmark' class="icon-status" style="color:teal;"></ion-icon>
+          <ion-icon *ngIf="item.Status == 'Pending' || item.Status == 'Quote' || item.Status == 'Quoted' || item.Status == 'Quote Rejected' " name='ios-remove-circle-outline' class="icon-status" style="color:gray;"></ion-icon>
+          <ion-icon *ngIf="item.Status == 'Rejected' " name='ios-close-outline' class="icon-status" style="color:red;"></ion-icon>
+        </td>
+        <td class="width-10" data-title="Status"> {{ item.Status }}</td>
+        <td class="width-10" data-title="Requested By">{{ item.InfoTrack?.User_CreatedBy.Value }}</td>
         <td data-title="Description">{{ item.RequestDescription }}</td>
         <td data-title="Date Requested">{{ item.ResponseDescription }}</td>
         <td data-title="Date Requested">{{ item.DateRequested }}</td>

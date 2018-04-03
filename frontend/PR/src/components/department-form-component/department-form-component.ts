@@ -36,6 +36,10 @@ export class DepartmentFormComponent extends FormController implements OnInit {
   afterLoad() {
   }
 
+  beforeSave() {
+
+  }
+  
   afterSave() {
     this.load(this.data.oEntityOrId);
   }

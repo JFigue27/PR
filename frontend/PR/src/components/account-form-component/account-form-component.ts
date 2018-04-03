@@ -35,6 +35,9 @@ export class AccountFormComponent extends FormController implements OnInit {
   afterLoad() {
   }
 
+  beforeSave() {
+
+  }
   afterSave() {
   }
 

@@ -1,21 +1,16 @@
 <div class="box-pr-form approval-comments">
-  <div class="header">
+  <div class="header primary-color">
     <p>Approval</p>
   </div>
   <div class="body">
 
-    <mat-form-field class="input" *ngIf=" getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' || getCurrentRole() === 'MRO' ">
-      <input matInput placeholder="Request" [(ngModel)]="baseEntity.RequestDescription" readonly>
+    <mat-form-field class="input" >
+      <input matInput placeholder="Request" [(ngModel)]="baseEntity.RequestDescription" [readonly]=" getCurrentRole() != 'User' ">
     </mat-form-field>
-    <mat-form-field class="input" *ngIf=" getCurrentRole() === 'User' " matInput placeholder="Request">
-      <input *ngIf=" getCurrentRole() === 'User' " matInput placeholder="Request" [(ngModel)]="baseEntity.RequestDescription">
-    </mat-form-field>
-    <br>
-    <mat-form-field class="input" *ngIf=" getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' ">
-      <input matInput placeholder="Response" [(ngModel)]="baseEntity.ResponseDescription">
-    </mat-form-field>
-    <mat-form-field class="input" *ngIf=" getCurrentRole() === 'User' || getCurrentRole() === 'MRO' ">
-      <input matInput placeholder="Response" [(ngModel)]="baseEntity.ResponseDescription" readonly>
+    <br>   
+    <mat-form-field class="input">
+      <input matInput placeholder="Response" [(ngModel)]="baseEntity.ResponseDescription" 
+      [readonly]="getCurrentRole() === 'User' || getCurrentRole() === 'MRO'">
     </mat-form-field>
 
   </div>
@@ -24,6 +19,8 @@
 
 
 <div class="div-buttons">
+
+  <!-- communication between Manager and User -->
   <button *ngIf=" ( getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' ) 
                        && (  baseEntity.Status==='Rejected' || baseEntity.Status === 'Pending' ) " type="submit" mat-raised-button
     color="primary" (click)="answerApproval('Quote')">Approve</button>
@@ -31,11 +28,21 @@
                       && (  baseEntity.Status==='Quote'  || baseEntity.Status === 'Pending' )" type="submit" mat-raised-button
     color="warn" (click)="answerApproval('Rejected')">Reject</button>
 
-  <button *ngIf=" ( getCurrentRole() === 'MRO' ) && (  baseEntity.Status==='Quote' )" 
-    mat-raised-button color="primary" (click)="answerApproval('Approved')">Finalize</button>
+  <!-- communication between Manager  and MRO -->
+  <button *ngIf=" ( getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' ) 
+                        && (  baseEntity.Status==='Quoted' )" type="submit" mat-raised-button
+    color="warn" (click)="answerApproval('Quote Rejected')">Reject quote</button>
+
+  <button *ngIf=" ( getCurrentRole() === 'DepartmentManager' || getCurrentRole() === 'GeneralManager' ) 
+                    && (  baseEntity.Status==='Quoted' )" type="submit" mat-raised-button 
+  color="primary" (click)="answerApproval('Approved')">Approve quote</button>
   
-  <button *ngIf="(baseEntity.Status != 'Rejected') && (baseEntity.Status != 'Quote') && ( baseEntity.Status != 'Approved') " type="submit" mat-raised-button color="basic"
-    (click)="save()">Request</button>
+
+  <button *ngIf=" ( getCurrentRole() === 'MRO' ) && ( (  baseEntity.Status==='Quote' ) || ( baseEntity.Status==='Quote Rejected' ))" 
+    mat-raised-button color="primary" (click)="answerApproval('Quoted')">Send</button>
+  
+  <button *ngIf="( (!baseEntity.Status) || (baseEntity.Status == 'Rejected') || (baseEntity.Status == 'Pending') ) && (getCurrentRole() == 'User') && (pr.editMode == false) " type="submit" mat-raised-button color="basic"
+     (click)="requestApproval('Pending')">Request</button>
   </div>
 
-<pre>{{ baseEntity | json }}</pre>
+<!-- <pre>{{ baseEntity | json }}</pre> -->

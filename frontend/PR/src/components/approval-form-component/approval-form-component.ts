@@ -44,17 +44,29 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   
   afterCreate() { 
     this.baseEntity.ConvertedDateRequested = new Date();
-    this.baseEntity.UserRequisitorKey = this.userService.LoggedUser.UserKey;
-    this.baseEntity.UserApproverKey = this.pr.DepartmentManagerKey;
-    this.baseEntity.PurchaseRequestKey = this.pr.PurchaseRequestKey;
-    this.baseEntity.Title = "Purchase Request - " + this.pr.FriendlyIdentifier;
+  }
+  
+  requestApproval(status) {
+    let dialog = this.dialog.open(confirmComponent, {
+      width: '300px', data: { response: this.baseEntity.RequestDescription }
+    });
+    dialog.afterClosed().subscribe(result => {
+      this.baseEntity.editMode = true;
+      this.response = this.baseEntity.RequestDescription;
+      this.baseEntity.ConvertedDateResponse = new Date();
+      this.baseEntity.RequestDescription = result;
+      this.baseEntity.Status = status;
+      this.save();
+    });
+
   }
 
+
   answerApproval(status) {
-  let dialog = this.dialog.open(confirmComponent, {
-    width: '300px', data: { response: this.baseEntity.ResponseDescription }
-  });
-  dialog.afterClosed().subscribe(result => {
+    let dialog = this.dialog.open(confirmComponent, {
+      width: '300px', data: { response: this.baseEntity.ResponseDescription }
+    });
+    dialog.afterClosed().subscribe(result => {
       this.baseEntity.editMode = true;
       this.response = this.baseEntity.ResponseDescription;
       this.baseEntity.ConvertedDateResponse = new Date();
@@ -62,15 +74,21 @@ export class ApprovalFormComponent extends FormController implements OnInit {
       this.baseEntity.Status = status;
       this.save();
     });
-
+    
   }
-
+  
   getCurrentRole() {
     return this.userService.LoggedUser.Roles;
   }
-
+  
   afterLoad() {
     this.pr.ApprovalStatus = this.baseEntity.Status;
+    // this.baseEntity.UserApproverKey = this.approverKey;
+  }
+  
+  beforeSave() {
+    this.baseEntity.Title = "Purchase Request - " + this.pr.FriendlyIdentifier;
+    this.baseEntity.UserApproverKey = this.approverKey;
   }
 
   afterSave() { 

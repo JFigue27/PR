@@ -36,6 +36,10 @@ export class EmailFormComponent extends FormController implements OnInit {
   afterLoad() {
   }
 
+  beforeSave() {
+
+  }
+
   afterSave() {
   }
 

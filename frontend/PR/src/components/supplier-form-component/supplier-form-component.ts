@@ -30,6 +30,9 @@ export class SupplierFormComponent extends FormController implements OnInit {
   afterLoad() {
   }
 
+  beforeSave(){
+    
+  }
   afterSave() {
   }
   

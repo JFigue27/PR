@@ -4,5 +4,18 @@ approval-component {
         width: 90%;
         margin: auto;
     }
+    .icon-status {
+        font-size: 28px;
+        font-weight: 800;
+        margin-left: 35%;
+    }
 
+    @media (min-width:800px) {
+        .width-4 {
+            width:4%;
+        }
+        .width-10{
+            width:10%;
+        }
+    }
 }

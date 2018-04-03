@@ -146,7 +146,8 @@ namespace BusinessSpecificLogic.Logic
             {
                 CommonResponse approvalResponse = approvalLogic.CreateInstance(new Approval()
                 {
-                    PurchaseRequestKey = entity.id
+                    PurchaseRequestKey = entity.id,
+                    Title = "Purchase Request - " + entity.FriendlyIdentifier
                 });
 
                 Approval approval = (Approval) approvalResponse.Result;

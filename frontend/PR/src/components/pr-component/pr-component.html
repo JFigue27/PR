@@ -1,31 +1,33 @@
-<fieldset [disabled]="baseEntity.ApprovalStatus == 'Approved' " class="printableZone" style="border:none;">
-    <ion-card>
-        <ion-card-header>
-            <ion-grid>
-                <ion-row>
-                    <ion-col col-10 col-sm-10 col-md-10 col-lg-10 col-lg-10>
-                        <h1>Purchase Request</h1>
-                    </ion-col>
-                    <ion-col col-2 col-sm-2 col-md-2 col-lg-2 col-lg-2>
-                        <b>PR Number:</b>&nbsp;&nbsp; {{ baseEntity.PRNumber?.GeneratedNumber }}
-                        <br>
-                        <b>PO Number:</b>&nbsp;&nbsp;
-                        <input type="text" class="form-input border-bottom" (ngModelChange)="on_input_change()"
-                            [(ngModel)]="baseEntity.PONumber" style="width:55%;">
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-            <div style="margin-left:10px;margin-top:10px;">
-                <mat-form-field style="width:100%;">
-                    <input matInput [(ngModel)]="baseEntity.FriendlyIdentifier" placeholder="Fiendly Identifier" (ngModelChange)="on_input_change();">
-                </mat-form-field>
-            </div>
+<ion-card>
+    <ion-card-header>
+        <ion-grid>
+            <ion-row>
+                <ion-col col-10 col-sm-10 col-md-10 col-lg-10 col-lg-10>
+                    <h1><b>Purchase Request</b></h1>
+                </ion-col>
+                <ion-col col-2 col-sm-2 col-md-2 col-lg-2 col-lg-2>
+                    <b>PR Number:</b>&nbsp;&nbsp; {{ baseEntity.PRNumber?.GeneratedNumber }}
+                    <br>
+                    <b>PO Number:</b>&nbsp;&nbsp;
+                    <input type="text" class="form-input border-bottom" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.PONumber"
+                        style="width:55%;">
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <div style="margin-left:14px;margin-top:10px;">
+            <mat-form-field style="width:99%;">
+                <input matInput [(ngModel)]="baseEntity.FriendlyIdentifier" [disabled]="baseEntity.ApprovalStatus == 'Approved' " 
+                placeholder="Fiendly Identifier" (ngModelChange)="on_input_change();">
+            </mat-form-field>
+        </div>
+        <div style="margin-left:14px;">
             <attachments-box-component [ownerEntity]="baseEntity" kind="PR_Attachments"></attachments-box-component>
+        </div>
 
-        </ion-card-header>
+    </ion-card-header>
 
-        <ion-card-content>
-
+    <ion-card-content>
+        <fieldset [disabled]="baseEntity.ApprovalStatus == 'Approved' " class="printableZone" style="border:none;">
 
             <div class="table-responsive form-grid">
                 <table class="table-pr">
@@ -159,9 +161,9 @@
                     </tbody>
                 </table>
             </div>
- 
 
-            <ion-grid class="box-pr-form" style="margin-top: 2em;margin-bottom: 2em;">                
+
+            <ion-grid class="box-pr-form" style="margin-top: 2em;margin-bottom: 2em;">
                 <ion-row>
                     <ion-col col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 no-padding>
                         <ion-grid>
@@ -177,7 +179,7 @@
                                 </ion-col>
                                 <ion-col col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10>
                                     <p class="p-user">{{ baseEntity.Requisitor?.Value }}</p>
-                                    </ion-col>
+                                </ion-col>
                                 <ion-col col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 class="col-input">
                                     Department
                                 </ion-col>
@@ -193,15 +195,15 @@
                                     Date
                                 </ion-col>
                                 <ion-col col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10>
-                                    <input [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" class="form-input border-bottom"
-                                        (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.ConvertedDateDepartmentManager">
+                                    <input [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" class="form-input border-bottom" (ngModelChange)="on_input_change()"
+                                        [(ngModel)]="baseEntity.ConvertedDateDepartmentManager">
                                     <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
                                     <mat-datepicker #myDatepicker></mat-datepicker>
                                 </ion-col>
                             </ion-row>
                         </ion-grid>
                     </ion-col>
-            
+
                     <ion-col col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 no-padding>
                         <ion-grid>
                             <ion-row>
@@ -248,32 +250,29 @@
 
             <ion-grid>
                 <ion-row>
-                    <ion-col col-xs-12 col-sm-12 col-md-5 col-lg-5>
+                    <ion-col col-xs-12 col-sm-12 col-md-5 col-lg-5 no-padding>
                         <div class="box-pr-form notes">
                             <div>
                                 <p>Notes</p>
                             </div>
-                            <textarea matInput [(ngModel)]="baseEntity.Notes" matAutosizeMinRows="7" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)"
+                            <textarea matInput [(ngModel)]="baseEntity.Notes" matAutosizeMinRows="6" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)"
                                 matTextareaAutosize matAutosizeMaxRows="10" class="form-input border-bottom" style="width:98%;"> </textarea>
                         </div>
                     </ion-col>
-                    <ion-col col-sm-12 col-xs-12 col-md-2></ion-col>
-                    <ion-col col-sm-12 col-xs-12 col-md-5>
-                        <approval-form-component [pr]="baseEntity" [approverKey]="getApprover()" ></approval-form-component>
+                    <ion-col col-sm-12 col-xs-12 col-md-2 no-padding></ion-col>
+                    <ion-col col-sm-12 col-xs-12 col-md-5 no-padding>
+                        <approval-form-component [pr]="baseEntity" [approverKey]="getApprover()"></approval-form-component>
                     </ion-col>
                 </ion-row>
             </ion-grid>
+        </fieldset>
         </ion-card-content>
-    </ion-card>
+</ion-card>
 
-    <div class="div-buttons">
-        <div>
-            <button type="button" (click)="print()" mat-raised-button color="primary">Print</button>
-            <button type="submit" (click)="save()" mat-raised-button color="primary">Save</button>
-        </div>
+<div class="div-buttons">
+    <div>
+        <button type="button" (click)="print()" mat-raised-button color="primary">Print</button>
+        <button type="submit" (click)="save()" mat-raised-button color="primary">Save</button>
     </div>
-</fieldset>
-
-<br>
-<br>
-<pre>{{ baseEntity | json }}</pre>
+</div>
+<!-- <pre>{{ baseEntity | json }}</pre> -->
