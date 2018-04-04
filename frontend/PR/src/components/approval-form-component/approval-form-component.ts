@@ -38,7 +38,6 @@ export class ApprovalFormComponent extends FormController implements OnInit {
     }
   }
 
-
   close() { 
   }
   
@@ -83,7 +82,6 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   
   afterLoad() {
     this.pr.ApprovalStatus = this.baseEntity.Status;
-    // this.baseEntity.UserApproverKey = this.approverKey;
   }
   
   beforeSave() {

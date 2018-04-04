@@ -162,90 +162,73 @@
                 </table>
             </div>
 
-            <!-- ================= User form ================= -->
-            <ion-grid class="box-pr-form" style="margin-top: 2em;margin-bottom: 2em;">
-                <ion-row>
-                    <ion-col col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 no-padding>
-                        <ion-grid>
-                            <ion-row>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 class="col-input">
-                                    Use
-                                </ion-col>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10>
-                                    <input type="text" class="form-input border-bottom" [(ngModel)]="baseEntity.PurposeOrUse" />
-                                </ion-col>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 class="col-input">
-                                    Requisitor
-                                </ion-col>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10>
-                                    <p class="p-user">{{ baseEntity.Requisitor?.Value }}</p>
-                                </ion-col>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 class="col-input">
-                                    Department
-                                </ion-col>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10>
-                                    <mat-select [(ngModel)]="baseEntity.DepartmentKey" placeholder="Select.." (ngModelChange)="on_input_change(item);on_department_change(baseEntity.DepartmentKey);"
-                                        class="border-bottom" style="width:80%;">
-                                        <mat-option *ngFor="let department of departments" [value]="department.id">
-                                            {{ department.Value }}
-                                        </mat-option>
-                                    </mat-select>
-                                </ion-col>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 class="col-input">
-                                    Date
-                                </ion-col>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10>
-                                    <input [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" class="form-input border-bottom" (ngModelChange)="on_input_change()"
-                                        [(ngModel)]="baseEntity.ConvertedDateDepartmentManager">
-                                    <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
-                                    <mat-datepicker #myDatepicker></mat-datepicker>
-                                </ion-col>
-                            </ion-row>
-                        </ion-grid>
-                    </ion-col>
+            <!-- ================= Form ================= -->
+            <div ion-row no-padding class="form">
+                <div col-md-6 col-sm-12 ion-row>
+                    
+                    <div col-md-2 col-sm-12>
+                        <b>Use</b>
+                    </div>
+                    <div col-md-10  col-sm-12>
+                        <input type="text" class="form-input border-bottom" [(ngModel)]="baseEntity.PurposeOrUse" />
+                    </div>
 
-                    <ion-col col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 no-padding>
-                        <ion-grid>
-                            <ion-row>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 class="col-input">
-                                    Department manager
-                                </ion-col>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9>
-                                    <mat-select [(ngModel)]="baseEntity.DepartmentManagerKey" placeholder="Select.." (ngModelChange)="on_input_change(item);"
-                                        class="border-bottom" style="width:80%;">
-                                        <mat-option *ngFor="let user of users" [value]="user.id">
-                                            {{ user.Value }}
-                                        </mat-option>
-                                    </mat-select>
-                                </ion-col>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 class="col-input">
-                                    Manager Signature
-                                </ion-col>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9>
-                                    <input type="text" class="form-input border-bottom" [(ngModel)]="baseEntity.PurposedOrUse" />
-                                </ion-col>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 class="col-input">
-                                    General Manager
-                                </ion-col>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9>
-                                    <p class="form-input border-bottom">{{ baseEntity.GeneralManager?.Value }}</p>
-                                </ion-col>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 class="col-input">
-                                    Account
-                                </ion-col>
-                                <ion-col col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9>
-                                    <mat-select [(ngModel)]="baseEntity.AccountNo" placeholder="Select.." (ngModelChange)="on_input_change(item);" class="border-bottom"
-                                        style="width:80%;">
-                                        <mat-option *ngFor="let account of accounts" [value]="account.id">
-                                            {{ account.Value }} &nbsp;&nbsp;&nbsp; {{ account.Description}}
-                                        </mat-option>
-                                    </mat-select>
-                                </ion-col>
-                            </ion-row>
-                        </ion-grid>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
+                    <div col-md-2 col-sm-12>
+                        <b>Requisitor</b>
+                    </div>
+                    <div col-md-10 col-sm-12>
+                        <p class="p-user">{{ baseEntity.Requisitor?.Value }}</p>
+                    </div>
+
+                    <div col-md-2 col-sm-12>
+                        <b>Department</b>
+                    </div>
+                    <div col-md-10 col-sm-12>
+                        <p class="p-user">{{ baseEntity.DepartmentAssigned?.Value }}</p>
+                    </div>
+
+                    <div col-md-2 col-sm-12>
+                        <b>Date</b>
+                    </div>
+                    <div col-md-10 col-sm-12>
+                        <input [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" class="form-input border-bottom"
+                        (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.ConvertedDateDepartmentManager">
+                        <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #myDatepicker></mat-datepicker>
+                    </div>
+
+                </div>
+                
+                <div col-md-6 col-sm-12 ion-row>
+                
+                    <div col-md-2 col-sm-12>
+                        <b>Approver</b>
+                    </div>
+                    <div col-md-10 col-sm-12>
+                        <p class="p-user">{{ baseEntity.DepartmentAssigned?.Manager?.Value }}</p>
+                    </div>
+                
+                    <div col-md-2 col-sm-12>
+                        <b>Manager Signature</b>
+                    </div>
+                    <div col-md-10 col-sm-12>
+                        <input type="text" class="form-input border-bottom" [(ngModel)]="baseEntity.PurposedOrUse" />
+                    </div>
+                
+                    <div col-md-2 col-sm-12>
+                        <b>Account</b>
+                    </div>
+                    <div col-md-10 col-sm-12>
+                        <mat-select [(ngModel)]="baseEntity.AccountNo" placeholder="Select.." (ngModelChange)="on_input_change(item);" class="border-bottom"
+                            style="width:80%;">
+                            <mat-option *ngFor="let account of accounts" [value]="account.id">
+                                {{ account.Value }} &nbsp;&nbsp;&nbsp; {{ account.Description}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
+                
+                </div>
+            </div>
             
             <!-- ================= notes ================= -->
             <ion-grid>
