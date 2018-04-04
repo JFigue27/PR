@@ -23,12 +23,12 @@
         <div style="margin-left:14px;">
             <attachments-box-component [ownerEntity]="baseEntity" kind="PR_Attachments"></attachments-box-component>
         </div>
-
     </ion-card-header>
 
     <ion-card-content>
         <fieldset [disabled]="baseEntity.ApprovalStatus == 'Approved' " class="printableZone" style="border:none;">
 
+            <!-- ================= Dynamic table ================= -->
             <div class="table-responsive form-grid">
                 <table class="table-pr">
                     <thead>
@@ -162,7 +162,7 @@
                 </table>
             </div>
 
-
+            <!-- ================= User form ================= -->
             <ion-grid class="box-pr-form" style="margin-top: 2em;margin-bottom: 2em;">
                 <ion-row>
                     <ion-col col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 no-padding>
@@ -246,8 +246,8 @@
                     </ion-col>
                 </ion-row>
             </ion-grid>
-
-
+            
+            <!-- ================= notes ================= -->
             <ion-grid>
                 <ion-row>
                     <ion-col col-xs-12 col-sm-12 col-md-5 col-lg-5 no-padding>
@@ -265,8 +265,9 @@
                     </ion-col>
                 </ion-row>
             </ion-grid>
+
         </fieldset>
-        </ion-card-content>
+    </ion-card-content>
 </ion-card>
 
 <div class="div-buttons">

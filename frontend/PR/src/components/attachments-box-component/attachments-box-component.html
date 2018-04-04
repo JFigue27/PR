@@ -12,7 +12,9 @@
           <ion-icon name="close"></ion-icon>
         </span>
       </p>
-      <input type="file" id="file" ng2FileSelect [uploader]="uploader" multiple>
+      <button class="btn-file primary-color" (click)="openFileBrowser()">Add files
+        <input type="file" id="file" ng2FileSelect [uploader]="uploader" multiple>
+      </button>
   </div>
 </div>
 <!-- <pre>{{ ownerEntity | json }}</pre>  -->

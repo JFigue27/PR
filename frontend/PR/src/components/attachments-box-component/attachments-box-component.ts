@@ -133,6 +133,10 @@ export class AttachmentsBoxComponent implements OnChanges {
     return this.uploader.queue.find(d => d.file.name == sName);
   }
 
+  openFileBrowser(){
+    let file = document.getElementById('file');
+-   file.click();
+  }
   // User clicks X on selected file
   removeAttachment(attachment, index) {
     if (attachment.isForUpload) {
