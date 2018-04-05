@@ -43,6 +43,9 @@
   
   <button *ngIf="( (!baseEntity.Status) || (baseEntity.Status == 'Rejected') || (baseEntity.Status == 'Pending') ) && (getCurrentRole() == 'User') && (pr.editMode == false) " type="submit" mat-raised-button color="basic"
      (click)="requestApproval('Pending')">Request</button>
+
+  <button *ngIf="baseEntity.Status == 'Approved' && getCurrentRole() == 'Buyer' "
+    type="submit" mat-raised-button color="basic" (click)="requestApproval('Finalized')">Finalize</button>
   </div>
 
-<!-- <pre>{{ baseEntity | json }}</pre> -->
+<pre>{{ baseEntity | json }}</pre>

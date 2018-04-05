@@ -205,7 +205,7 @@
                         <b>Approver</b>
                     </div>
                     <div col-md-10 col-sm-12>
-                        <p class="p-user">{{ baseEntity.DepartmentAssigned?.Manager?.Value }}</p>
+                        <p class="p-user">{{ getApproverByKey(getApprover())?.Value }}</p>
                     </div>
                 
                     <div col-md-2 col-sm-12>
@@ -259,4 +259,4 @@
         <button type="submit" (click)="save()" mat-raised-button color="primary">Save</button>
     </div>
 </div>
-<!-- <pre>{{ baseEntity | json }}</pre> -->
+<pre>{{ baseEntity | json }}</pre>

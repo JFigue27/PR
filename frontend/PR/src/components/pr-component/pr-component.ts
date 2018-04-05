@@ -214,6 +214,10 @@ export class PRComponent extends FormController implements OnInit {
     }
   }
 
+  getApproverByKey(id:number){
+    return this.users.find(u => u.UserKey == id);
+  }
+
   newSupplier() {
     let dialog = this.dialog.open(SupplierFormComponent, {
       data: { oEntityOrId: null }

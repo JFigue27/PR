@@ -98,6 +98,7 @@ namespace BusinessSpecificLogic.Logic
                 switch (entity.Status)
                 {
                     case "Pending":
+                        emailService.To.Add(pr.DepartmentManager.Email);
                         emailService.To.Add(entity.UserApprover.Email);
                         break;
                     case "Quote":
@@ -112,6 +113,7 @@ namespace BusinessSpecificLogic.Logic
                         emailService.To.Add(entity.UserRequisitor.Email);
                         break;
                     case "Quoted":
+                        emailService.To.Add(pr.DepartmentManager.Email);
                         emailService.To.Add(entity.UserApprover.Email);
                         break;
                     case "Quote Rejected":
