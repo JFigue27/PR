@@ -4,6 +4,6 @@ namespace Reusable.Auth
 {
     public class AuthContext : IdentityDbContext<IdentityUser>
     {
-        public AuthContext() : base("POConn") { }
+        public AuthContext() : base("AccountsConn") { }
     }
 }

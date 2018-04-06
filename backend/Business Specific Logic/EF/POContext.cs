@@ -30,7 +30,7 @@ namespace BusinessSpecificLogic.EF
 
         #region From Reusable Modules
         public virtual DbSet<Track> Tracks { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+        //public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Workflow> Workflows { get; set; }
         public virtual DbSet<Step> Steps { get; set; }
         public virtual DbSet<StepOperation> StepOperations { get; set; }
@@ -41,39 +41,39 @@ namespace BusinessSpecificLogic.EF
         {
             
             #region Reusable
-            modelBuilder.Entity<User>()
-                .Property(e => e.Identicon64)
-                .IsUnicode(false);
+            //modelBuilder.Entity<User>()
+            //    .Property(e => e.Identicon64)
+            //    .IsUnicode(false);
 
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.Sorts)
-                .WithOptional(e => e.User)
-                .HasForeignKey(e => e.Sort_User_ID);
+            //modelBuilder.Entity<User>()
+            //    .HasMany(e => e.Sorts)
+            //    .WithOptional(e => e.User)
+            //    .HasForeignKey(e => e.Sort_User_ID);
 
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.Tracks)
-                .WithOptional(e => e.User_LastEditedBy)
-                .HasForeignKey(e => e.User_LastEditedByKey);
+            //modelBuilder.Entity<User>()
+            //    .HasMany(e => e.Tracks)
+            //    .WithOptional(e => e.User_LastEditedBy)
+            //    .HasForeignKey(e => e.User_LastEditedByKey);
 
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.Tracks1)
-                .WithOptional(e => e.User_RemovedBy)
-                .HasForeignKey(e => e.User_RemovedByKey);
+            //modelBuilder.Entity<User>()
+            //    .HasMany(e => e.Tracks1)
+            //    .WithOptional(e => e.User_RemovedBy)
+            //    .HasForeignKey(e => e.User_RemovedByKey);
 
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.Tracks2)
-                .WithOptional(e => e.User_AssignedTo)
-                .HasForeignKey(e => e.User_AssignedToKey);
+            //modelBuilder.Entity<User>()
+            //    .HasMany(e => e.Tracks2)
+            //    .WithOptional(e => e.User_AssignedTo)
+            //    .HasForeignKey(e => e.User_AssignedToKey);
 
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.Tracks3)
-                .WithOptional(e => e.User_AssignedBy)
-                .HasForeignKey(e => e.User_AssignedByKey);
+            //modelBuilder.Entity<User>()
+            //    .HasMany(e => e.Tracks3)
+            //    .WithOptional(e => e.User_AssignedBy)
+            //    .HasForeignKey(e => e.User_AssignedByKey);
 
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.Tracks4)
-                .WithOptional(e => e.User_CreatedBy)
-                .HasForeignKey(e => e.User_CreatedByKey);
+            //modelBuilder.Entity<User>()
+            //    .HasMany(e => e.Tracks4)
+            //    .WithOptional(e => e.User_CreatedBy)
+            //    .HasForeignKey(e => e.User_CreatedByKey);
 
             #endregion
         }

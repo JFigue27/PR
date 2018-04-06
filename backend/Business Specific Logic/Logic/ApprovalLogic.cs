@@ -4,6 +4,8 @@ using Reusable.Email;
 using System;
 using System.Data.Entity;
 using System.Linq;
+using Dapper;
+using Reusable.Auth;
 
 namespace BusinessSpecificLogic.Logic
 {
@@ -44,109 +46,114 @@ namespace BusinessSpecificLogic.Logic
         protected override void OnCreateInstance(Approval entity)
         {
             entity.Hyperlink = "http://apps.capsonic.com/PR/Main/?id=" + entity.PurchaseRequestKey;
-            entity.UserRequisitorKey = (int) LoggedUser.UserID;
+            entity.UserRequisitorKey = (int)LoggedUser.UserID;
         }
 
         protected override void onBeforeSaving(Approval entity, BaseEntity parent = null, OPERATION_MODE mode = OPERATION_MODE.NONE)
         {
-
-
-            var ctx = context as POContext;
-
-
-            #region Validations
-            User currentUser = ctx.Users.AsNoTracking().FirstOrDefault(u => u.UserKey == LoggedUser.UserID);
-            if (currentUser == null)
+            using (var accounts_ctx = new AuthContext())
             {
-                throw new KnownError("Logged User not found or session expired.");
-            }
+                var ctx = context as POContext;
 
 
-            var pr = ctx.PurchaseRequests.AsNoTracking().Include(c => c.PRNumber)
-                .FirstOrDefault(c => c.PurchaseRequestKey == entity.PurchaseRequestKey);
+                #region Validations
+                //User currentUser = ctx.Users.AsNoTracking().FirstOrDefault(u => u.UserKey == LoggedUser.UserID);
+
+                //if (currentUser == null)
+                //{
+                //    throw new KnownError("Logged User not found or session expired.");
+                //}
+
+                var pr = ctx.PurchaseRequests.AsNoTracking().Include(c => c.PRNumber)
+                    .FirstOrDefault(c => c.PurchaseRequestKey == entity.PurchaseRequestKey);
 
 
-            if (pr == null)
-            {
-                throw new KnownError("PR document does not exist anymore.");
-            }
-            #endregion
-            entity.UserApprover = ctx.Users.FirstOrDefault(u => u.UserKey == entity.UserApproverKey);
-            entity.UserRequisitor = ctx.Users.FirstOrDefault(u => u.UserKey == entity.UserRequisitorKey);
-
-
-            if (mode == OPERATION_MODE.UPDATE)
-            {
-                Email emailEntity = new Email();
-                emailEntity.CreatedAt = DateTimeOffset.Now;
-
-
-                var hyperlink = entity.Hyperlink;
-
-
-                EmailService emailService = new EmailService("secure.emailsrvr.com", 587)
+                if (pr == null)
                 {
-                    EmailAddress = currentUser.Email,
-                    Password = currentUser.EmailPassword,
-                    From = currentUser.Email,
-                    Subject = "PR - " + pr.PRNumber.GeneratedNumber + " [" +  entity.Status + "] " + entity.Title,
-                    Body = "PR - " + pr.PRNumber.GeneratedNumber + ". " + " [" + entity.Status + "] " + entity.Title
-                            + "<br><b>Description</b><br>" + entity.RequestDescription
-                            + @"<br><br>Open document here: <a href=""" + hyperlink + @""">" + pr.PRNumber.GeneratedNumber + "</a>"
-                };
-
-                switch (entity.Status)
-                {
-                    case "Pending":
-                        emailService.To.Add(pr.DepartmentManager.Email);
-                        emailService.To.Add(entity.UserApprover.Email);
-                        break;
-                    case "Quote":
-                        emailService.To.Add(entity.UserRequisitor.Email);
-                        var mros = ctx.Users.Where(u => u.Role == "MRO").ToList();
-                        foreach (var mro in mros)
-                        {
-                            emailService.To.Add(mro.Email);
-                        }
-                        break;
-                    case "Rejected":
-                        emailService.To.Add(entity.UserRequisitor.Email);
-                        break;
-                    case "Quoted":
-                        emailService.To.Add(pr.DepartmentManager.Email);
-                        emailService.To.Add(entity.UserApprover.Email);
-                        break;
-                    case "Quote Rejected":
-                        var mrosRejected = ctx.Users.Where(u => u.Role == "MRO").ToList();
-                        foreach (var mro in mrosRejected)
-                        {
-                            emailService.To.Add(mro.Email);
-                        }
-                        break;
-                    case "Approved":
-                        emailService.To.Add(entity.UserRequisitor.Email);
-                        var buyers = ctx.Users.Where(u => u.Role == "Buyer").ToList();
-                        foreach (var buyer in buyers)
-                        {
-                            emailService.To.Add(buyer.Email);
-                        }
-                        break;
-                    case "Finalized":
-                        emailService.To.Add(entity.UserRequisitor.Email);
-                        emailService.To.Add(entity.UserApprover.Email);
-                        break;
-                    default:
-                        break;
+                    throw new KnownError("PR document does not exist anymore.");
                 }
+                #endregion
+                //entity.UserApprover = ctx.Users.FirstOrDefault(u => u.UserKey == entity.UserApproverKey);
+                //entity.UserRequisitor = ctx.Users.FirstOrDefault(u => u.UserKey == entity.UserRequisitorKey);
+                entity.UserRequisitor = accounts_ctx.Database.Connection.QueryFirst("select * from [User] where UserKey = @UserKey",
+                    new { UserKey = entity.UserRequisitorKey});
 
-                try
-                {
-                    emailService.SendMail();
-                }
-                catch (Exception ex)
-                {
-                    throw new KnownError("Could not send email, please verify your Profile settings.\n" + ex.Message);
-                }
+
+                //if (mode == OPERATION_MODE.UPDATE)
+                //{
+                //    Email emailEntity = new Email();
+                //    emailEntity.CreatedAt = DateTimeOffset.Now;
+
+
+                //    var hyperlink = entity.Hyperlink;
+
+
+                //    EmailService emailService = new EmailService("secure.emailsrvr.com", 587)
+                //    {
+                //        EmailAddress = currentUser.Email,
+                //        Password = currentUser.EmailPassword,
+                //        From = currentUser.Email,
+                //        Subject = "PR - " + pr.PRNumber.GeneratedNumber + " [" + entity.Status + "] " + entity.Title,
+                //        Body = "PR - " + pr.PRNumber.GeneratedNumber + ". " + " [" + entity.Status + "] " + entity.Title
+                //                + "<br><b>Description</b><br>" + entity.RequestDescription
+                //                + @"<br><br>Open document here: <a href=""" + hyperlink + @""">" + pr.PRNumber.GeneratedNumber + "</a>"
+                //    };
+
+                //    switch (entity.Status)
+                //    {
+                //        case "Pending":
+                //            emailService.To.Add(pr.DepartmentManager.Email);
+                //            emailService.To.Add(entity.UserApprover.Email);
+                //            break;
+                //        case "Quote":
+                //            emailService.To.Add(entity.UserRequisitor.Email);
+                //            var mros = ctx.Users.Where(u => u.Role == "MRO").ToList();
+                //            foreach (var mro in mros)
+                //            {
+                //                emailService.To.Add(mro.Email);
+                //            }
+                //            break;
+                //        case "Rejected":
+                //            emailService.To.Add(entity.UserRequisitor.Email);
+                //            break;
+                //        case "Quoted":
+                //            emailService.To.Add(pr.DepartmentManager.Email);
+                //            emailService.To.Add(entity.UserApprover.Email);
+                //            break;
+                //        case "Quote Rejected":
+                //            var mrosRejected = ctx.Users.Where(u => u.Role == "MRO").ToList();
+                //            foreach (var mro in mrosRejected)
+                //            {
+                //                emailService.To.Add(mro.Email);
+                //            }
+                //            break;
+                //        case "Approved":
+                //            emailService.To.Add(entity.UserRequisitor.Email);
+                //            var buyers = ctx.Users.Where(u => u.Role == "Buyer").ToList();
+                //            foreach (var buyer in buyers)
+                //            {
+                //                emailService.To.Add(buyer.Email);
+                //            }
+                //            break;
+                //        case "Finalized":
+                //            emailService.To.Add(entity.UserRequisitor.Email);
+                //            emailService.To.Add(entity.UserApprover.Email);
+                //            break;
+                //        default:
+                //            break;
+                //    }
+
+                //    try
+                //    {
+                //        emailService.SendMail();
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        throw new KnownError("Could not send email, please verify your Profile settings.\n" + ex.Message);
+                //    }
+                //}
+
+
             }
         }
     }

@@ -42,11 +42,11 @@ namespace Reusable
                     {
                         UserName = claimUserName.Value;
                     }
-                    Claim claimDepartment = claims.First(c => c.Type == "DepartmentKey");
-                    if (claimDepartment != null && claimDepartment.Value != null && !string.IsNullOrWhiteSpace(claimDepartment.Value))
-                    {
-                        DeparmentKey = int.Parse(claimDepartment.Value);
-                    }
+                    //Claim claimDepartment = claims.First(c => c.Type == "DepartmentKey");
+                    //if (claimDepartment != null && claimDepartment.Value != null && !string.IsNullOrWhiteSpace(claimDepartment.Value))
+                    //{
+                    //    DeparmentKey = int.Parse(claimDepartment.Value);
+                    //}
                 }
             }
         }

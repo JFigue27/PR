@@ -159,36 +159,36 @@ namespace BusinessSpecificLogic.Logic
 
         protected override void OnCreateInstance(PurchaseRequest entity)
         {
-            var ctx = context as POContext;
-            var user = ctx.Users.AsNoTracking().FirstOrDefault(u => u.Role == "GeneralManager");
-            if (user == null)
-            {
-                throw new KnownError("You have not configured a General Manager yet");
-            }
+            //var ctx = context as POContext;
+            //var user = ctx.Users.AsNoTracking().FirstOrDefault(u => u.Role == "GeneralManager");
+            //if (user == null)
+            //{
+            //    throw new KnownError("You have not configured a General Manager yet");
+            //}
 
-            entity.GeneralManagerKey = user.id;
-            entity.GeneralManager = user;
+            //entity.GeneralManagerKey = user.id;
+            //entity.GeneralManager = user;
 
-            var requisitor = ctx.Users.AsNoTracking().FirstOrDefault(u => u.UserKey == LoggedUser.UserID);
-            if (requisitor == null)
-            {
-                throw new KnownError("Logged user not found");
-            }
-            entity.Requisitor = requisitor;
-            entity.RequisitorKey = requisitor.id;
+            //var requisitor = ctx.Users.AsNoTracking().FirstOrDefault(u => u.UserKey == LoggedUser.UserID);
+            //if (requisitor == null)
+            //{
+            //    throw new KnownError("Logged user not found");
+            //}
+            //entity.Requisitor = requisitor;
+            //entity.RequisitorKey = requisitor.id;
 
 
-            var department = ctx.Departments.AsNoTracking()
-                .Include(d => d.Manager)
-                .FirstOrDefault(d => d.DepartmentKey == LoggedUser.DeparmentKey);
-            if (department == null)
-            {
-                throw new KnownError("Department not found or not set for current user");
-            }
+            //var department = ctx.Departments.AsNoTracking()
+            //    .Include(d => d.Manager)
+            //    .FirstOrDefault(d => d.DepartmentKey == LoggedUser.DeparmentKey);
+            //if (department == null)
+            //{
+            //    throw new KnownError("Department not found or not set for current user");
+            //}
 
-            entity.DepartmentKey = department.id;
-            entity.DepartmentAssigned = department;
-            entity.DepartmentManagerKey = department.Manager.id;
+            //entity.DepartmentKey = department.id;
+            //entity.DepartmentAssigned = department;
+            //entity.DepartmentManagerKey = department.Manager.id;
         }
     }
 }

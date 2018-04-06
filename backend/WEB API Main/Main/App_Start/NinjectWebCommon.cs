@@ -92,7 +92,6 @@ namespace ReusableWebAPI.App_Start
             ///End:Generated:DI<<<
             #endregion
 
-            kernel.Bind<IUserLogic>().To<UserLogic>();
             kernel.Bind<IWorkflowLogic>().To<WorkflowLogic>();
             kernel.Bind<IStepLogic>().To<StepLogic>();
             kernel.Bind<IStepOperationLogic>().To<StepOperationLogic>();

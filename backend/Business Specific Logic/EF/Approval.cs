@@ -31,11 +31,11 @@ namespace BusinessSpecificLogic.EF
         [ForeignKey("PurchaseRequestKey")]
         public PurchaseRequest PurchaseRequest { get; set; }
         public int UserRequisitorKey { get; set; }
-        [ForeignKey("UserRequisitorKey")]
-        public User UserRequisitor { get; set; }
+        [NotMapped]
+        public dynamic UserRequisitor { get; set; }
         public int? UserApproverKey { get; set; }
-        [ForeignKey("UserApproverKey")]
-        public User UserApprover { get; set; }
+        [NotMapped]
+        public dynamic UserApprover { get; set; }
         public string Hyperlink { get; set; }
         public string Title { get; set; }
         ///End:Generated:Properties<<<

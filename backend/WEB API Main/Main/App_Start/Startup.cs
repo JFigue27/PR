@@ -1,5 +1,4 @@
 using ReusableWebAPI.App_Start;
-using ReusableWebAPI.Auth;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
 using Ninject.Web.Common.OwinHost;

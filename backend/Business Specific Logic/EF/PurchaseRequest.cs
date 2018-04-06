@@ -27,16 +27,16 @@ namespace BusinessSpecificLogic.EF
         ///Start:Generated:Properties<<<
         public string PurposeOrUse { get; set; }
         public int? RequisitorKey { get; set; }
-        [ForeignKey("RequisitorKey")]
-        public User Requisitor { get; set; }
+        [NotMapped]
+        public dynamic Requisitor { get; set; }
         public string RequisitionName { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
         public int? DepartmentManagerKey { get; set; }
-        [ForeignKey("DepartmentManagerKey")]
-        public User DepartmentManager { get; set; }
+        [NotMapped]
+        public dynamic DepartmentManager { get; set; }
         public int? GeneralManagerKey { get; set; }
-        [ForeignKey("GeneralManagerKey")]
-        public User GeneralManager { get; set; }
+        [NotMapped]
+        public dynamic GeneralManager { get; set; }
         public string AccountNo { get; set; }
         public string FriendlyIdentifier { get; set; }
         public DateTimeOffset? DateDepartmentManager { get; set; }
