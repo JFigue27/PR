@@ -22,6 +22,7 @@ import { AccountFormComponent } from '../components/account-form-component/accou
 import { ApprovalFormComponent } from '../components/approval-form-component/approval-form-component';
 import { EmailFormComponent } from '../components/email-form-component/email-form-component';
 import { confirmComponent } from '../components/confirm-component/confirm-component';
+import { }
 
 //MODULES
 import { AttachmentsModule } from '../components/attachments.module';
@@ -50,7 +51,7 @@ import { AccountServiceProvider } from '../providers/account-service';
 import { ApprovalServiceProvider } from '../providers/approval-service';
 
 //Angular Material components
-import { MatNativeDateModule, MatDatepickerModule } from '@angular/material';
+import { MatNativeDateModule, MatDatepickerModule, MatRadioModule } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -59,6 +60,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSidenavModule } from '@angular/material/sidenav';
+
 
 
 @NgModule({
@@ -107,6 +110,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatButtonModule,
     FileUploadModule,
     MatPaginatorModule,
+    MatSidenavModule,
+    MatRadioModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

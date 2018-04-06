@@ -5,7 +5,7 @@
         <H1>PR System</H1>
       </div>
       <div (click)="sidenav.toggle()" class="side-nav-menus" (click)="openPR()">
-        <ion-icon ios="ios-list-box" md="md-list-box"></ion-icon>&nbsp;&nbsp;  PR List
+        <ion-icon ios="ios-list-box" md="md-list-box"></ion-icon>&nbsp;&nbsp; PR List
       </div>
       <div (click)="sidenav.toggle()" class="side-nav-menus" (click)="openApproval()">
         <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle"> </ion-icon>&nbsp;&nbsp; Approvals
@@ -14,7 +14,7 @@
         <ion-icon ios="ios-card" md="md-card"></ion-icon>&nbsp;&nbsp; Accounts
       </div>
       <div (click)="sidenav.toggle()" class="side-nav-menus" (click)="openDepartment()">
-        <ion-icon ios="ios-filing" md="md-filing"></ion-icon>&nbsp;&nbsp;   Departments
+        <ion-icon ios="ios-filing" md="md-filing"></ion-icon>&nbsp;&nbsp; Departments
       </div>
       <div (click)="sidenav.toggle()" class="side-nav-menus" (click)="openUser()">
         <ion-icon md="md-contact"></ion-icon>&nbsp;&nbsp; Users
@@ -29,14 +29,10 @@
         <ion-icon ios="ios-power" md="md-power"></ion-icon>&nbsp;&nbsp; Logout
       </div>
     </mat-sidenav>
-  
+
     <mat-sidenav-content>
       <div class="nav-bar">
         <button mat-raised-button (click)="sidenav.toggle()" color="basic">
           <ion-icon ios="ios-reorder" md="md-reorder"></ion-icon>
         </button>
       </div>
-      <list-component></list-component>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-</ion-content>

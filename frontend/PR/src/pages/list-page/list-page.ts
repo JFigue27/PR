@@ -9,6 +9,7 @@ import { LoginComponent } from '../../components/login/login';
 import { UserServiceProvider } from '../../providers/user-service';
 import { ListController } from '../../services/ListController';
 import { EmailPage } from '../email-page/email-page';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'list-page',
@@ -16,6 +17,8 @@ import { EmailPage } from '../email-page/email-page';
 })
 export class ListPage extends ListController {
   private user:string;
+  mode = new FormControl('over');
+
   constructor(
               public nav: NavController,
               public modal:ModalController,

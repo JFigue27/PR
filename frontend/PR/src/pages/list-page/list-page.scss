@@ -1,5 +1,51 @@
 list-page {
-    
+
+    .example-container {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .nav-bar {
+        position: relative;
+        background: #fbfbfb;
+        width: 100%;
+        box-shadow: 1px 1px 8px #c3c3c3;
+        border: 1px solid #d4d4d4;
+        margin-bottom: 3%;
+        padding: 7px;
+    }
+
+    .sidenav {
+        width: 250px;
+    }
+
+    .side-nav-title {
+        text-align: center;
+        margin-top: 17px;
+        border-bottom: 1px solid #a7a7a7;
+        width: 74%;
+        margin-left: 10%;
+        margin-bottom: 10%;
+    }
+
+    .side-nav-menus {
+        font-size: 16px;
+        font-weight: 500;
+        padding: 12px;
+        margin-left: 10%;
+        border-bottom: 1px solid #dddddd;
+        width: 65%;
+        margin-left: 15%;
+    }
+
+    .side-nav-menus:hover{
+        background-color: rgb(230, 230, 230);
+        transition: 0.5s ease;
+    }
+
     .div-main {
         display: inline;
     }
