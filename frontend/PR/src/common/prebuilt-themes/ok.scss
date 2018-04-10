@@ -592,7 +592,7 @@ input.mat-input-element {
     background: rgba(0, 0, 0, .04);
 }
 .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
-    color: #00679b;
+    color: #006064;
 }
 .mat-accent .mat-option.mat-selected:not(.mat-option-disabled) {
     color: #5d40ff;
@@ -626,7 +626,7 @@ input.mat-input-element {
     background: #7468bb;
 }
 .mat-primary .mat-pseudo-checkbox-checked, .mat-primary .mat-pseudo-checkbox-indeterminate {
-    background: #00679b;
+    background: #006064;
 }
 .mat-warn .mat-pseudo-checkbox-checked, .mat-warn .mat-pseudo-checkbox-indeterminate {
     background: #f44336;
@@ -666,7 +666,7 @@ input.mat-input-element {
     background-color: transparent;
 }
 .mat-button.mat-primary, .mat-icon-button.mat-primary {
-    color: #00679b;
+    color: #006064;
 }
 .mat-button.mat-accent, .mat-icon-button.mat-accent {
     color: #5d40ff;
@@ -694,7 +694,7 @@ input.mat-input-element {
     color: rgba(0, 0, 0, .38);
 }
 .mat-fab.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary {
-    background-color: #00679b;
+    background-color: #006064;
 }
 .mat-fab.mat-accent, .mat-mini-fab.mat-accent, .mat-raised-button.mat-accent {
     background-color: #5d40ff;
@@ -769,7 +769,7 @@ input.mat-input-element {
     background-color: #fafafa;
 }
 .mat-checkbox-checked.mat-primary .mat-checkbox-background, .mat-checkbox-indeterminate.mat-primary .mat-checkbox-background {
-    background-color: #00679b;
+    background-color: #006064;
 }
 .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
     background-color: #5d40ff;
@@ -881,7 +881,7 @@ input.mat-input-element {
     background-color: rgba(0, 0, 0, .04);
 }
 .mat-calendar-body-selected {
-    background-color: #00679b;
+    background-color: #006064;
     color: rgba(255, 255, 255, .87);
 }
 .mat-calendar-body-disabled>.mat-calendar-body-selected {
@@ -929,7 +929,7 @@ input.mat-input-element {
     color: rgba(0, 0, 0, .54);
 }
 .mat-focused .mat-form-field-label {
-    color: #00679b;
+    color: #006064;
 }
 .mat-focused .mat-form-field-label.mat-accent {
     color: #5d40ff;
@@ -949,7 +949,7 @@ input.mat-input-element {
     background-repeat: repeat-x;
 }
 .mat-form-field-ripple {
-    background-color: #00679b;
+    background-color: #006064;
 }
 .mat-form-field-ripple.mat-accent {
     background-color: #5d40ff;
@@ -970,7 +970,7 @@ input.mat-input-element {
     color: #f44336;
 }
 .mat-icon.mat-primary {
-    color: #00679b;
+    color: #006064;
 }
 .mat-icon.mat-accent {
     color: #5d40ff;
@@ -982,7 +982,7 @@ input.mat-input-element {
     color: rgba(0, 0, 0, .38);
 }
 .mat-input-element {
-    caret-color: #00679b;
+    caret-color: #006064;
 }
 .mat-input-element::placeholder {
     color: rgba(0, 0, 0, .42);
@@ -1063,7 +1063,7 @@ input.mat-input-element {
     background-color: #c5cae9;
 }
 .mat-progress-bar-fill::after {
-    background-color: #00679b;
+    background-color: #006064;
 }
 
 .mat-progress-bar.mat-accent .mat-progress-bar-buffer {
@@ -1079,7 +1079,7 @@ input.mat-input-element {
     background-color: #f44336;
 }
 .mat-progress-spinner circle, .mat-spinner circle {
-    stroke: #00679b;
+    stroke: #006064;
 }
 .mat-progress-spinner.mat-accent circle, .mat-spinner.mat-accent circle {
     stroke: #5d40ff;
@@ -1100,10 +1100,10 @@ input.mat-input-element {
     color: rgba(0, 0, 0, .38);
 }
 .mat-radio-button.mat-primary.mat-radio-checked .mat-radio-outer-circle {
-    border-color: #00679b;
+    border-color: #006064;
 }
 .mat-radio-button.mat-primary .mat-radio-inner-circle {
-    background-color: #00679b;
+    background-color: #006064;
 }
 .mat-radio-button.mat-primary .mat-radio-ripple .mat-ripple-element {
     background-color: rgba(63, 81, 181, .26);
@@ -1145,7 +1145,7 @@ input.mat-input-element {
     background: rgba(0, 0, 0, .12);
 }
 .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
-    color: #00679b;
+    color: #006064;
 }
 .mat-form-field.mat-focused.mat-accent .mat-select-arrow {
     color: #5d40ff;
@@ -1186,7 +1186,7 @@ input.mat-input-element {
     background-color: rgba(233, 30, 99, .12);
 }
 .mat-slide-toggle.mat-primary.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
-    background-color: #00679b;
+    background-color: #006064;
 }
 .mat-slide-toggle.mat-primary.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
     background-color: rgba(63, 81, 181, .5);
@@ -1225,7 +1225,7 @@ input.mat-input-element {
     background-color: rgba(0, 0, 0, .26);
 }
 .mat-primary .mat-slider-thumb, .mat-primary .mat-slider-thumb-label, .mat-primary .mat-slider-track-fill {
-    background-color: #00679b;
+    background-color: #006064;
 }
 .mat-primary .mat-slider-thumb-label-text {
     color: rgba(255, 255, 255, .87);
@@ -1290,7 +1290,7 @@ input.mat-input-element {
     color: rgba(0, 0, 0, .38);
 }
 .mat-step-header .mat-step-icon {
-    background-color: #00679b;
+    background-color: #006064;
     color: rgba(255, 255, 255, .87);
 }
 .mat-step-header .mat-step-icon-not-touched {
@@ -1336,7 +1336,7 @@ input.mat-input-element {
     background-color: rgba(197, 202, 233, .3);
 }
 .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-    background-color: #00679b;
+    background-color: #006064;
 }
 .mat-tab-group.mat-primary.mat-background-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary.mat-background-primary .mat-ink-bar {
     background-color: rgba(255, 255, 255, .87);
@@ -1363,7 +1363,7 @@ input.mat-input-element {
     background-color: rgba(197, 202, 233, .3);
 }
 .mat-tab-group.mat-background-primary .mat-tab-header, .mat-tab-group.mat-background-primary .mat-tab-links, .mat-tab-nav-bar.mat-background-primary .mat-tab-header, .mat-tab-nav-bar.mat-background-primary .mat-tab-links {
-    background-color: #00679b;
+    background-color: #006064;
 }
 .mat-tab-group.mat-background-primary .mat-tab-label, .mat-tab-group.mat-background-primary .mat-tab-link, .mat-tab-nav-bar.mat-background-primary .mat-tab-label, .mat-tab-nav-bar.mat-background-primary .mat-tab-link {
     color: rgba(255, 255, 255, .87);
@@ -1427,7 +1427,7 @@ input.mat-input-element {
     color: rgba(0, 0, 0, .87);
 }
 .mat-toolbar.mat-primary {
-    background: #00679b;
+    background: #006064;
     color: rgba(255, 255, 255, .87);
 }
 .mat-toolbar.mat-accent {
@@ -1449,7 +1449,18 @@ input.mat-input-element {
     color: #5d40ff;
 }
 
+// .primary-color {
+//     background-color: #006064;
+//     color:white;
+// }
+
+
 .primary-color {
-    background-color: #00679b;
+    background-color: #006064;
+    color:white;
+}
+
+.primary-color-accent {
+    background-color: #006064;
     color:white;
 }

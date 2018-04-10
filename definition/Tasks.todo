@@ -57,11 +57,13 @@ TODO
   ☐ Accounts > should be only editable by Finance / general manager role
   ☐ in case amount is more than the department budget should be renamed department manager by general manager
 ------------------------------------------------------------------------------------------------------------------
-    ☐ Approvals > sort by date requested - status
-    ☐ main menu > hide user section
-    ☐ email content functionality
-    ✔ PR > reload approval object when saved @done(18-04-03 14:07)
-    ☐ Approval > MRO should also see Quote Rejected PR status
+☐ main menu > hide user section
+✔ email content functionality @done(18-04-09 13:29)
+✔ PR > reload approval object when saved @done(18-04-03 14:07)
+✔ Approval > MRO should also see Quote Rejected PR status @done(18-04-09 13:29)
+✔ Approvals > sort by date requested - status @done(18-04-09 13:46)
+✔ localStorage > filter per listController @done(18-04-09 13:46)
+✔ remove pre tags @done(18-04-09 13:46)
 
 
 

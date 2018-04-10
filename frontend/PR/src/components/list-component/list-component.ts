@@ -6,6 +6,7 @@ import { PRServiceProvider } from '../../providers/pr-service';
 import { App } from 'ionic-angular/components/app/app';
 import { UserServiceProvider } from '../../providers/user-service';
 import { PageEvent } from '@angular/material';
+import { utils } from '../../common/utils';
 
 @Component({
   selector: 'list-component',
@@ -18,14 +19,21 @@ export class ListComponent extends ListController implements OnInit {
                 public nav: NavController,
                 private app: App
               ) {
-                super({ service: PrService, paginate: true, limit: 2 });
+                  super({ service: PrService, paginate: true, limit: 10, filterName: 'prFilter' });
               }
 
   ngOnInit() {
 
     this.app.viewWillEnter.subscribe(viewCtrl => {
       if (viewCtrl.name == "ListPage") {
-        this.load('filterUser='+this.userService.LoggedUser.UserKey);
+        let PrKey = utils.getParameterByName('id', null);
+        if (PrKey) {
+
+          window.history.replaceState({}, document.title, "/PR/Main");
+          this.nav.push(PRPage, { oEntityOrId: PrKey });
+        } else {
+          this.load('filterUser='+this.userService.LoggedUser.UserKey);
+        }
       }
     });
   }
@@ -36,11 +44,16 @@ export class ListComponent extends ListController implements OnInit {
 
 
   addItem() {
-    this.PrService.createInstance().subscribe(oInstance => {
-      this.PrService.createEntity(oInstance).subscribe(oEntity => {
-        this.nav.push(PRPage, { oEntityOrId: oEntity });
+    if (confirm('Are you sure you want to create a new PR?')) {
+      this.PrService.createInstance().subscribe(oInstance => {
+        this.PrService.createEntity(oInstance).subscribe(oEntity => {
+          this.nav.push(PRPage, { oEntityOrId: oEntity });
+        });
       });
-    });
+ }
+
+        
+
   }
   
   afterLoad() {

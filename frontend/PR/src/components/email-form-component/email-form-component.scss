@@ -3,33 +3,20 @@ email-form-component {
         background-color: white;
         width: 50%;
         margin: auto;
-        margin-top: 2%;
+        margin-top: 5%;
         height: 400px;
+        box-shadow: 1px 1px 2px #b7b7b7;
     }
 
     .card-header {
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
-        background-color: #00679b;
         color:white;
         font-size: 22px;
         font-weight: 300;
         padding:10px;
         border-bottom: 1px solid #acacac;
-    }
-
-    // .card-header {
-    //     font-size: 22px;
-    //     font-weight: 400;
-    //     text-align: center;
-    //     padding:10px;
-    //     border-bottom: 1px solid #00679b;
-    //     color: #00679b;
-    //     width: 75%;
-    //     margin: auto;
-    // }
-
-
+    }  
 
     .card-body {
         padding: 2em;

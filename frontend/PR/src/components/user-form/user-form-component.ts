@@ -12,8 +12,8 @@ export class UserFormComponent extends FormController implements OnInit {
   public departments = [];
   roles = [
     { value: 'User', viewValue: 'User' },
-    { value: 'DepartmentManager', viewValue: 'Department Manager' },
-    { value: 'GeneralManager', viewValue: 'General Manager'},
+    { value: 'Department Manager', viewValue: 'Department Manager' },
+    { value: 'General Manager', viewValue: 'General Manager'},
     { value: 'Buyer', viewValue: 'Buyer' },
     { value: 'MRO', viewValue: 'MRO' }
   ];

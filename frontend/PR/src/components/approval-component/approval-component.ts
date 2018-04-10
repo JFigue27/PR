@@ -14,9 +14,9 @@ export class ApprovalComponent extends ListController implements OnInit {
                 public approvalService: ApprovalServiceProvider,
                 private app: App
             ) {
-          super({ service: approvalService });
-          this.baseList =[];
-      }
+              super({ service: approvalService, paginate: true, limit: 10, filterName: 'ApprovalFilter' });
+              this.baseList =[];
+            }
 
   ngOnInit() {
     this.app.viewWillEnter.subscribe(viewCtrl => {

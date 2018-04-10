@@ -30,7 +30,8 @@ namespace BusinessSpecificLogic.Logic
                 .Include(e => e.DepartmentAssigned.Manager)
                 .Include(e => e.InfoTrack)
                 .Include(e => e.GeneralManager)
-                .Include(e => e.Requisitor);
+                .Include(e => e.Requisitor)
+                .OrderByDescending(e => e.InfoTrack.Date_CreatedOn);
         }
 
         protected override void OnGetSingle(PurchaseRequest entity)
@@ -160,7 +161,7 @@ namespace BusinessSpecificLogic.Logic
         protected override void OnCreateInstance(PurchaseRequest entity)
         {
             var ctx = context as POContext;
-            var user = ctx.Users.AsNoTracking().FirstOrDefault(u => u.Role == "GeneralManager");
+            var user = ctx.Users.AsNoTracking().FirstOrDefault(u => u.Role == "General Manager");
             if (user == null)
             {
                 throw new KnownError("You have not configured a General Manager yet");
@@ -176,6 +177,12 @@ namespace BusinessSpecificLogic.Logic
             }
             entity.Requisitor = requisitor;
             entity.RequisitorKey = requisitor.id;
+
+            //var manager = ctx.Users.AsNoTracking().FirstOrDefault(u => u.UserKey == LoggedUser.UserID);
+            //if (requisitor == null)
+            //{
+            //    throw new KnownError("Logged user not found");
+            //}
 
 
             var department = ctx.Departments.AsNoTracking()

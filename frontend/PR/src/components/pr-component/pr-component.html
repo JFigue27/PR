@@ -3,14 +3,14 @@
         <ion-grid>
             <ion-row>
                 <ion-col col-10 col-sm-10 col-md-10 col-lg-10 col-lg-10>
-                    <h1><b>Purchase Request</b></h1>
+                    <h1><b>Purchase Request</b> - {{ baseEntity.ApprovalStatus }} </h1>
                 </ion-col>
                 <ion-col col-2 col-sm-2 col-md-2 col-lg-2 col-lg-2>
                     <b>PR Number:</b>&nbsp;&nbsp; {{ baseEntity.PRNumber?.GeneratedNumber }}
                     <br>
                     <b>PO Number:</b>&nbsp;&nbsp;
                     <input type="text" class="form-input border-bottom" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.PONumber"
-                        style="width:55%;">
+                        style="width:55%;" [disabled]="getCurrentRole() != 'Buyer' " >
                 </ion-col>
             </ion-row>
         </ion-grid>
@@ -21,12 +21,12 @@
             </mat-form-field>
         </div>
         <div style="margin-left:14px;">
-            <attachments-box-component [ownerEntity]="baseEntity" kind="PR_Attachments"></attachments-box-component>
+            <attachments-box-component [readonly]="getLockedStatus()" [ownerEntity]="baseEntity" kind="PR_Attachments"></attachments-box-component>
         </div>
     </ion-card-header>
 
     <ion-card-content>
-        <fieldset [disabled]="baseEntity.ApprovalStatus == 'Approved' " class="printableZone" style="border:none;">
+        <fieldset [disabled]="getLockedStatus()" class="printableZone" style="border:none;">
 
             <!-- ================= Dynamic table ================= -->
             <div class="table-responsive form-grid">
@@ -219,7 +219,7 @@
                         <b>Account</b>
                     </div>
                     <div col-md-10 col-sm-12>
-                        <mat-select [(ngModel)]="baseEntity.AccountNo" placeholder="Select.." (ngModelChange)="on_input_change(item);" class="border-bottom"
+                        <mat-select [disabled]="getLockedStatus()" [(ngModel)]="baseEntity.AccountNo" placeholder="Select.." (ngModelChange)="on_input_change(item);" class="border-bottom"
                             style="width:80%;">
                             <mat-option *ngFor="let account of accounts" [value]="account.id">
                                 {{ account.Value }} &nbsp;&nbsp;&nbsp; {{ account.Description}}
@@ -229,7 +229,7 @@
                 
                 </div>
             </div>
-            
+            </fieldset>
             <!-- ================= notes ================= -->
             <ion-grid>
                 <ion-row>
@@ -238,7 +238,7 @@
                             <div>
                                 <p>Notes</p>
                             </div>
-                            <textarea matInput [(ngModel)]="baseEntity.Notes" matAutosizeMinRows="6" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)"
+                            <textarea [disabled]="getLockedStatus()" matInput [(ngModel)]="baseEntity.Notes" matAutosizeMinRows="6" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)"
                                 matTextareaAutosize matAutosizeMaxRows="10" class="form-input border-bottom" style="width:98%;"> </textarea>
                         </div>
                     </ion-col>
@@ -249,14 +249,13 @@
                 </ion-row>
             </ion-grid>
 
-        </fieldset>
     </ion-card-content>
 </ion-card>
 
 <div class="div-buttons">
     <div>
         <button type="button" (click)="print()" mat-raised-button color="primary">Print</button>
-        <button type="submit" (click)="save()" mat-raised-button color="primary">Save</button>
+        <button *ngIf="!getLockedStatus() || (getCurrentRole() == 'Buyer' && baseEntity.ApprovalStatus == 'Approved') " type="submit" (click)="save()" mat-raised-button color="primary">Save</button>
     </div>
 </div>
-<pre>{{ baseEntity | json }}</pre>
+<!-- <pre>{{ baseEntity | json }}</pre> -->

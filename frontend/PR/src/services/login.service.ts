@@ -7,7 +7,7 @@ import { UserServiceProvider } from '../providers/user-service';
 
 @Injectable()
 export class LoginService {
-    url = Config.ACCOUNTS_API_URL;
+    url = Config.API_URL;
 
     constructor(
         private http: HttpClient,

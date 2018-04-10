@@ -1,20 +1,19 @@
-<div class="attachment-wrapper">
+<div class="attachment-wrapper" (dblclick)="openFileBrowser()">
   <p>Attachments</p>
   <div>
+    <input type="file" id="file" class="btn-file primary-color"  ng2FileSelect [uploader]="uploader" multiple>
     <div class="no-files" *ngIf="ownerEntity[attachmentsListName]?.length==0">
       No files.
     </div>
-      <p *ngFor="let item of ownerEntity.Attachments; let i = index;" class="item">
-        <span *ngIf="item.isForUpload">subir</span>
-        <a href="{{API_URL}}_download?directory={{item.Directory}}&fileName={{item.FileName}}&attachmentKind={{ kind }}" [ngClass]="getToDeleteStyle(i)">{{item.FileName }}</a>
-        <span (click)="cancelRemove(i)" style="float: right;" [ngClass]="getCancelRemoveStyle(i)" class="undo" >undo</span>
-        <span (click)="removeAttachment(item, i)" style="float: right;" [ngClass]="getCloseStyle(i)">
-          <ion-icon name="close"></ion-icon>
-        </span>
-      </p>
-      <button class="btn-file primary-color" (click)="openFileBrowser()">Add files
-        <input type="file" id="file" ng2FileSelect [uploader]="uploader" multiple>
-      </button>
+    <p *ngFor="let item of ownerEntity.Attachments; let i = index;" class="item">
+      <span *ngIf="item.isForUpload">subir</span>
+      <a href="{{API_URL}}_download?directory={{item.Directory}}&fileName={{item.FileName}}&attachmentKind={{ kind }}" [ngClass]="getToDeleteStyle(i)">{{item.FileName }}</a>
+      <span *ngIf="!readonly" (click)="cancelRemove(i)" style="float: right;" [ngClass]="getCancelRemoveStyle(i)" class="undo" >undo</span>
+      <span *ngIf="!readonly" (click)="removeAttachment(item, i)" style="float: right;" [ngClass]="getCloseStyle(i)">
+        <ion-icon name="close"></ion-icon>
+      </span>
+    </p>
+    <button class="btn-file primary-color" (click)="openFileBrowser()" *ngIf="!readonly" >Add files</button>
   </div>
 </div>
 <!-- <pre>{{ ownerEntity | json }}</pre>  -->

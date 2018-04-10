@@ -8,6 +8,7 @@ import { LoginComponent } from '../../components/login/login';
 import { UserServiceProvider } from '../../providers/user-service';
 import { EmailPage } from '../email-page/email-page';
 import { ListPage } from '../list-page/list-page';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'account-page',
@@ -15,11 +16,9 @@ import { ListPage } from '../list-page/list-page';
 })
 export class AccountPage {
   private user: string;
-  constructor (
-      public nav: NavController,
-      public modal: ModalController,
-      public userService: UserServiceProvider
-      ) {
+  mode = new FormControl('over');
+
+  constructor ( public nav: NavController, public modal: ModalController, public userService: UserServiceProvider ) {
         this.user = this.userService.LoggedUser.UserName;
     }
     
@@ -59,6 +58,10 @@ export class AccountPage {
 
   getUserName() {
     return this.userService.LoggedUser.UserName;
+  }
+
+  getUserRole() {
+    return this.userService.LoggedUser.Roles;
   }
 
   afterLoad() {

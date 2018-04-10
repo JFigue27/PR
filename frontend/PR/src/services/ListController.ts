@@ -1,5 +1,5 @@
 import { CRUDFactory } from './CRUDFactory';
-import { IEntity } from './IEntity';
+// import { IEntity } from './IEntity';
 import { Observable } from 'rxjs/RX';
 import alertify from 'alertifyjs';
 
@@ -187,7 +187,7 @@ export abstract class ListController {
 
 
     //Start List Events
-    on_input_change(oItem: IEntity) {
+    on_input_change(oItem: any) {
         oItem.editMode = true;
     }
     //End List Events

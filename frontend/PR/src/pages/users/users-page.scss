@@ -1,30 +1,68 @@
 users-page {
     
-    .div-main {
-        display: inline;
-    }
-    
-    .main-logo {
-        font-size: 22px;
-        font-weight: 400;
+    .nav-container {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
     }
 
-    .div-menu {
+    .nav-bar {
+        position: relative;
+        background: #0097A7;
+        width: 100%;
+        box-shadow: 1px 1px 8px #c3c3c3;
+        border: 1px solid #d4d4d4;
+        margin-bottom: 3%;
+        padding: 7px;
+    }
+
+    .nav-sidenav {
+        width: 250px;
+    }
+
+    .nav-title {
         text-align: center;
-        border-bottom:1px solid rgb(167, 167, 167);
-        font-size: 14px;
+        margin-top: 17px;
+        border-bottom: 1px solid #a7a7a7;
+        width: 74%;
+        margin-left: 10%;
+        margin-bottom: 10%;
+    }
+
+    .nav-menus {
+        font-size: 16px;
         font-weight: 500;
-        font-size: 15px;
-        margin-left: 10px;
+        padding: 12px;
+        margin-left: 10%;
+        border-bottom: 1px solid #dddddd;
+        width: 65%;
+        margin-left: 15%;
     }
 
-    .botton-menu {
-        margin-left: 10px;
+    .nav-menus:hover{
+        background-color: rgb(230, 230, 230);
+        transition: 0.5s ease;
     }
 
-    @media only screen and (max-width: 1000px) {
-        .botton-menu {
-            margin-top: 20px;
+    .title {
+        font-size: 23px;
+        font-weight: 400;
+        margin-left: 2%;
+        color:white;
+    }
+    .full-menu-button {
+        float: right;
+        margin-right: 10px;
+    }
+    .profile{
+        height: 35px;
+    }
+
+    @media only screen and (max-width: 1300px){
+        .full-menu-button{
+            display: none;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace BusinessSpecificLogic.Logic
 
         protected override IQueryable<Approval> StaticDbQueryForList(IQueryable<Approval> dbQuery)
         {
-            if (LoggedUser.Role == "DepartmentManager" || LoggedUser.Role == "GeneralManager")
+            if (LoggedUser.Role == "Department Manager" || LoggedUser.Role == "General Manager")
             {
                 dbQuery = dbQuery.Where(e => e.UserApproverKey == LoggedUser.UserID || e.UserRequisitorKey == LoggedUser.UserID);
             }
@@ -29,7 +29,7 @@ namespace BusinessSpecificLogic.Logic
             }
             else if (LoggedUser.Role == "Buyer")
             {
-                dbQuery = dbQuery.Where(e => e.Status == "Approved");
+                dbQuery = dbQuery.Where(e => e.Status == "Approved" || e.Status == "Finalized");
             }
             else
             {
@@ -38,7 +38,9 @@ namespace BusinessSpecificLogic.Logic
 
             return dbQuery
                 .Include(e => e.InfoTrack)
-                .Include(e => e.InfoTrack.User_CreatedBy);
+                .Include(e => e.InfoTrack.User_CreatedBy)
+                .OrderByDescending(e => e.DateRequested)
+                .ThenBy(e => e.Status);
         }
 
         protected override void OnCreateInstance(Approval entity)
@@ -63,6 +65,7 @@ namespace BusinessSpecificLogic.Logic
 
 
             var pr = ctx.PurchaseRequests.AsNoTracking().Include(c => c.PRNumber)
+                .Include(e => e.DepartmentManager)
                 .FirstOrDefault(c => c.PurchaseRequestKey == entity.PurchaseRequestKey);
 
 
@@ -102,7 +105,7 @@ namespace BusinessSpecificLogic.Logic
                         emailService.To.Add(entity.UserApprover.Email);
                         break;
                     case "Quote":
-                        emailService.To.Add(entity.UserRequisitor.Email);
+                        emailService.To.Add(entity.UserRequisitor?.Email);
                         var mros = ctx.Users.Where(u => u.Role == "MRO").ToList();
                         foreach (var mro in mros)
                         {

@@ -14,7 +14,7 @@ export class UsersComponent extends ListController implements OnInit {
                 public dialog:MatDialog,
                 public userService: UserServiceProvider
           ){
-            super({ service: userService });
+              super({ service: userService, paginate: true, limit: 10, filterName: 'UserFilter' });
           }
 
   ngOnInit() {

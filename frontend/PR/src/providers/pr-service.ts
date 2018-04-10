@@ -10,7 +10,8 @@ export class PRServiceProvider extends CRUDFactory {
         super({ endPoint: 'PurchaseRequest'});   
         this.http = http;
     }
-    
+
+
     adapterIn(oEntity: any) {
         if (!oEntity.PRLines){
             oEntity.PRLines = [];

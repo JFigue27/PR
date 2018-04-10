@@ -13,7 +13,7 @@ export class SuppliersComponent extends ListController implements OnInit {
               public dialog:MatDialog,
               public supplierService: SupplierServiceProvider,
             ) {
-                super({ service: supplierService });
+    super({ service: supplierService, paginate: true, limit: 10, filterName: 'SupplierFilter' });
             }
 
   ngOnInit() {

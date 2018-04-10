@@ -9,18 +9,18 @@ import { ListPage } from '../list-page/list-page';
 import { AccountPage } from '../account-page/account-page';
 import { ApprovalPage } from '../approval-page/approval-page';
 import { EmailPage } from '../email-page/email-page';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'pr-page',
   templateUrl: 'pr-page.html',
 })
 export class PRPage {
+
   private user: string;
-  constructor(
-    public nav: NavController,
-    public modal: ModalController,
-    public userService: UserServiceProvider
-  ) {
+  mode = new FormControl('over');
+
+  constructor ( public nav: NavController, public modal: ModalController, public userService: UserServiceProvider ) {
     this.user = this.userService.LoggedUser.UserName;
   }
 
@@ -60,6 +60,10 @@ export class PRPage {
 
   getUserName() {
     return this.userService.LoggedUser.UserName;
+  }
+
+  getUserRole() {
+    return this.userService.LoggedUser.Roles;
   }
 
   afterLoad() {

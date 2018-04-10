@@ -13,7 +13,7 @@ export class AccountComponent extends ListController implements OnInit {
                 public dialog:MatDialog,
                 public accountService: AccountServiceProvider
               ) {
-                  super({ service: accountService });
+                  super({ service: accountService, paginate: true, limit: 10, filterName: 'AccountFilter' });
               }
 
   ngOnInit() {

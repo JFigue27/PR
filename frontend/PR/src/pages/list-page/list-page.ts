@@ -19,14 +19,11 @@ export class ListPage extends ListController {
   private user:string;
   mode = new FormControl('over');
 
-  constructor(
-              public nav: NavController,
-              public modal:ModalController,
-              public userService:UserServiceProvider
-            ) {
-    super({ service: userService });
-    this.user = this.userService.LoggedUser.UserName;
-  }
+  constructor( public nav: NavController, public modal:ModalController, public userService:UserServiceProvider ) 
+            {
+              super({ service: userService });
+              this.user = this.userService.LoggedUser.UserName;
+            }
 
   openUser(){
     this.nav.push(UsersPage);
@@ -64,6 +61,10 @@ export class ListPage extends ListController {
 
   getUserName(){
     return this.userService.LoggedUser.UserName;
+  }
+
+  getUserRole(){
+    return this.userService.LoggedUser.Roles;
   }
 
   afterLoad() {

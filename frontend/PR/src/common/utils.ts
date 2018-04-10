@@ -6,6 +6,6 @@ export class utils {
             results = regex.exec(url);
         if (!results) return null;
         if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 }

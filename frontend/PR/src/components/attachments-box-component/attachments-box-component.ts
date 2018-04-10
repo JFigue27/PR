@@ -42,7 +42,7 @@ export class AttachmentsBoxComponent implements OnChanges {
   }
   
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.ownerEntity.currentValue.AAA_EntityName) {
+    if (changes.ownerEntity && changes.ownerEntity.currentValue && changes.ownerEntity.currentValue.AAA_EntityName) {
 
       //Variables Initialization
       let self = this;
@@ -134,8 +134,10 @@ export class AttachmentsBoxComponent implements OnChanges {
   }
 
   openFileBrowser(){
-    let file = document.getElementById('file');
--   file.click();
+    if (!this.readonly) {
+      let file = document.getElementById('file');
+      file.click();
+    }
   }
   // User clicks X on selected file
   removeAttachment(attachment, index) {

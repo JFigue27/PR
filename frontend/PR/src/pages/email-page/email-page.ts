@@ -8,6 +8,7 @@ import { UserServiceProvider } from '../../providers/user-service';
 import { ListPage } from '../list-page/list-page';
 import { AccountPage } from '../account-page/account-page';
 import { ApprovalPage } from '../approval-page/approval-page';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'email-page',
@@ -15,11 +16,9 @@ import { ApprovalPage } from '../approval-page/approval-page';
 })
 export class EmailPage {
   private user: string;
-  constructor(
-    public nav: NavController,
-    public modal: ModalController,
-    public userService: UserServiceProvider
-  ) {
+  mode = new FormControl('over');
+
+  constructor ( public nav: NavController, public modal: ModalController, public userService: UserServiceProvider ) {
     this.user = this.userService.LoggedUser.UserName;
   }
 
@@ -59,6 +58,10 @@ export class EmailPage {
 
   getUserName() {
     return this.userService.LoggedUser.UserName;
+  }
+
+  getUserRole() {
+    return this.userService.LoggedUser.Roles;
   }
 
   afterLoad() {

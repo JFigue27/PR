@@ -8,20 +8,21 @@ import { UserServiceProvider } from '../../providers/user-service';
 import { EmailPage } from '../email-page/email-page';
 import { ListPage } from '../list-page/list-page';
 import { AccountPage } from '../account-page/account-page';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'department-page',
   templateUrl: 'department-page.html',
 })
 export class DepartmentPage {
+
   private user: string;
-  constructor(
-    public nav: NavController,
-    public modal: ModalController,
-    public userService: UserServiceProvider
-  ) {
-    this.user = this.userService.LoggedUser.UserName;
-  }
+  mode = new FormControl('over');
+  
+  constructor ( public nav: NavController, public modal: ModalController, public userService: UserServiceProvider ) 
+              {
+                this.user = this.userService.LoggedUser.UserName;
+              }
 
   openUser() {
     this.nav.push(UsersPage);
@@ -59,6 +60,10 @@ export class DepartmentPage {
 
   getUserName() {
     return this.userService.LoggedUser.UserName;
+  }
+
+  getUserRole() {
+    return this.userService.LoggedUser.Roles;
   }
 
   afterLoad() {

@@ -1,6 +1,5 @@
 list-page {
-
-    .example-container {
+    .nav-container {
         position: absolute;
         top: 0;
         bottom: 0;
@@ -10,7 +9,7 @@ list-page {
 
     .nav-bar {
         position: relative;
-        background: #fbfbfb;
+        background: #0097A7;
         width: 100%;
         box-shadow: 1px 1px 8px #c3c3c3;
         border: 1px solid #d4d4d4;
@@ -18,11 +17,11 @@ list-page {
         padding: 7px;
     }
 
-    .sidenav {
+    .nav-sidenav {
         width: 250px;
     }
 
-    .side-nav-title {
+    .nav-title {
         text-align: center;
         margin-top: 17px;
         border-bottom: 1px solid #a7a7a7;
@@ -31,7 +30,7 @@ list-page {
         margin-bottom: 10%;
     }
 
-    .side-nav-menus {
+    .nav-menus {
         font-size: 16px;
         font-weight: 500;
         padding: 12px;
@@ -41,37 +40,28 @@ list-page {
         margin-left: 15%;
     }
 
-    .side-nav-menus:hover{
+    .nav-menus:hover{
         background-color: rgb(230, 230, 230);
         transition: 0.5s ease;
     }
 
-    .div-main {
-        display: inline;
-    }
-    
-    .main-logo {
-        font-size: 22px;
+    .title {
+        font-size: 23px;
         font-weight: 400;
+        margin-left: 2%;
+        color:white;
+    }
+    .full-menu-button {
+        float: right;
+        margin-right: 10px;
+    }
+    .profile{
+        height: 35px;
     }
 
-    .div-menu {
-        text-align: center;
-        border-bottom:1px solid rgb(167, 167, 167);
-        font-size: 14px;
-        font-weight: 500;
-        font-size: 15px;
-        margin-left: 10px;
-    }
-
-    .botton-menu {
-        margin-left: 10px;
-    }
-
-    @media only screen and (max-width: 1000px) {
-        .botton-menu {
-            margin-top: 20px;
+    @media only screen and (max-width: 1300px){
+        .full-menu-button{
+            display: none;
         }
     }
-
 }
