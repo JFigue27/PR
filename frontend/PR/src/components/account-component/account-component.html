@@ -11,15 +11,15 @@
   <table class="table table-condensed" style="table-layout: fixed;">
     <thead>
       <tr> 
+        <th>Account Number</th>
         <th>Description</th>
-        <th>Account</th>
         <th>Budget</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of baseList">
-        <td data-title="Account">{{ item.Value }}</td>
+      <tr *ngFor="let item of baseList" (click)="openItem(item)">
+        <td data-title="Account Number">{{ item.Value }}</td>
         <td data-title="Description">{{ item.Description }}</td>
         <td data-title="Description">
           <input type="text" [(ngModel)]="item.Budget"   class="input-personalized">

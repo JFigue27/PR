@@ -33,7 +33,7 @@
                 <table class="table-pr">
                     <thead>
                         <tr>
-                            <th colspan="4"></th>
+                        <th colspan="4"></th>
                             <th colspan="2" [ngClass]="getSupplier1Style()">
                                 <mat-select placeholder="$" class="currencies" [(ngModel)]="baseEntity.SupplierCurrency1" (ngModelChange)="on_input_change(item);">
                                     <mat-option *ngFor="let currency of currencies" [value]="currency">
