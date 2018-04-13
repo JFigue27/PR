@@ -19,19 +19,44 @@ namespace BusinessSpecificLogic.Logic
 
         protected override IQueryable<Approval> StaticDbQueryForList(IQueryable<Approval> dbQuery)
         {
-            if (LoggedUser.Role == "Department Manager" || LoggedUser.Role == "General Manager")
+            if (LoggedUser.Role == "Department Manager")
             {
-                dbQuery = dbQuery.Where(e => e.UserApproverKey == LoggedUser.UserID || e.UserRequisitorKey == LoggedUser.UserID);
+                dbQuery = dbQuery.Where(e => (e.UserApproverKey == LoggedUser.UserID
+                                            || e.UserRequisitorKey == LoggedUser.UserID)
+                                            || e.Status == "PM Approved"
+                                            || e.Status == "Finance Quote"
+                                            || e.Status == "GM Rejected"
+                                            || e.Status == "DM Rejected");
+            }
+            else if (LoggedUser.Role == "General Manager")
+            {
+                dbQuery = dbQuery.Where(e => (e.UserApproverKey == LoggedUser.UserID
+                                            || e.UserRequisitorKey == LoggedUser.UserID)
+                                            || e.Status == "DM Approved"
+                                            || e.Status == "GM Rejected");
+            }
+            else if(LoggedUser.Role == "Finance")
+            {
+                dbQuery = dbQuery.Where(e => e.Status == "DM Approved"
+                                            || e.Status == "GM Rejected");
+            }
+            else if (LoggedUser.Role == "Administrator")
+            {
+                //We do not filter for Administrator
             }
             else if (LoggedUser.Role == "MRO")
             {
-                dbQuery = dbQuery.Where(e => e.Status == "Quote" || e.Status == "Quoted" || e.Status == "Approved" || e.Status == "Quote Rejected");
+                dbQuery = dbQuery.Where(e => e.PurchaseRequest.PRType == "MRO" 
+                                             && e.Status == "MRO Quote" 
+                                             || e.Status == "MRO Quoted" 
+                                             || e.Status == "Approved" 
+                                             || e.Status == "Quote Rejected");
             }
             else if (LoggedUser.Role == "Buyer")
             {
                 dbQuery = dbQuery.Where(e => e.Status == "Approved" || e.Status == "Finalized");
             }
-            else
+            else //User
             {
                 dbQuery = dbQuery.Where(e => e.UserRequisitorKey == LoggedUser.UserID);
             }
@@ -39,7 +64,7 @@ namespace BusinessSpecificLogic.Logic
             return dbQuery
                 .Include(e => e.InfoTrack)
                 .Include(e => e.InfoTrack.User_CreatedBy)
-                .OrderByDescending(e => e.DateRequested)
+                .OrderByDescending(e => e.InfoTrack.Date_EditedOn)
                 .ThenBy(e => e.Status);
         }
 
@@ -104,7 +129,7 @@ namespace BusinessSpecificLogic.Logic
                         emailService.To.Add(pr.DepartmentManager.Email);
                         emailService.To.Add(entity.UserApprover.Email);
                         break;
-                    case "Quote":
+                    case "MRO Quote":
                         emailService.To.Add(entity.UserRequisitor?.Email);
                         var mros = ctx.Users.Where(u => u.Role == "MRO").ToList();
                         foreach (var mro in mros)
@@ -112,13 +137,28 @@ namespace BusinessSpecificLogic.Logic
                             emailService.To.Add(mro.Email);
                         }
                         break;
-                    case "Rejected":
+                    case "Finance Quote":
+                        emailService.To.Add(entity.UserRequisitor?.Email);
+                        var finances = ctx.Users.Where(u => u.Role == "Finance").ToList();
+                        foreach (var finance in finances)
+                        {
+                            emailService.To.Add(finance.Email);
+                        }
+                        break;
+
+                    case "DM Rejected":
                         emailService.To.Add(entity.UserRequisitor.Email);
                         break;
-                    case "Quoted":
+
+                    case "GM Rejected":
+                        emailService.To.Add(entity.UserRequisitor.Email);
+                        break;
+
+                    case "MRO Quoted":
                         emailService.To.Add(pr.DepartmentManager.Email);
                         emailService.To.Add(entity.UserApprover.Email);
                         break;
+
                     case "Quote Rejected":
                         var mrosRejected = ctx.Users.Where(u => u.Role == "MRO").ToList();
                         foreach (var mro in mrosRejected)

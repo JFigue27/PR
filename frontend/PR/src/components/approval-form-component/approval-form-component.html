@@ -18,17 +18,49 @@
 </div>
 
 
-<div class="div-buttons">
+<div class="div-buttons">  
+
+  <div *ngIf="getCurrentRole() == 'User' && (!baseEntity.Status || baseEntity.Status == 'Pending' || baseEntity.Status == 'Rejected') ">
+    <button mat-raised-button color="basic" (click)="requestApproval('Pending')">Request to Manager</button>
+    <button mat-raised-button color="basic" (click)="requestApproval('MRO Quote')">Request to MRO</button>
+    <button mat-raised-button color="basic" (click)="requestApproval('Finance Quote')">Request to finance</button>
+  </div>
+
+  <div *ngIf="getCurrentRole() == 'MRO'">
+    <button mat-raised-button color="basic" (click)="answerApproval('MRO Quoted')">Send to Purchasing Manager</button>
+    <button *ngIf="baseEntity.Status == 'Approved' " mat-raised-button color="basic" (click)="requestApproval('Finalized')">Finalize</button>
+  </div>
+
+  <div *ngIf="getCurrentRole() == 'Department Manager'">
+    <button *ngIf="baseEntity.Status == 'Pending' || baseEntity.Status == 'DM Rejected' " mat-raised-button color="basic" (click)="answerApproval('DM Quote')">Approve</button>
+    <button *ngIf="baseEntity.Status == 'Pending' || baseEntity.Status == 'Quote' " mat-raised-button color="warn" (click)="answerApproval('DM Rejected')">Reject</button>
+    <button *ngIf="baseEntity.Status == 'PM Approved' " mat-raised-button color="basic" (click)="answerApproval('DM Approved')">Approve quote</button>
+    <button *ngIf="baseEntity.Status == 'PM Approved' " mat-raised-button color="warn" (click)="answerApproval('DM Quote Rejected')">Reject quote</button>
+  </div>
+
+  <div *ngIf="getCurrentRole() == 'General Manager'">
+    <button *ngIf="" mat-raised-button color="basic" (click)="answerApproval('GM Approved')">Approve quote</button>
+    <button *ngIf="" mat-raised-button color="warn" (click)="answerApproval('GM Rejected')">Reject quote</button>  
+  </div>
+        
+  <div *ngIf="getCurrentRole() == 'Purchasing Manager'">
+    <button *ngIf="" mat-raised-button color="basic" (click)="requestApproval('Quote Rejected')">Reject Quote</button>
+    <button *ngIf="" mat-raised-button color="basic" (click)="requestApproval('Quote Approved')">Approve Quote</button>
+  </div>
+
+</div>
+
+<!-- <pre>{{ baseEntity | json }}</pre> -->
+
 
   <!-- communication between Manager and User -->
-  <button *ngIf=" ( getCurrentRole() == 'Department Manager' || getCurrentRole() == 'General Manager' ) 
+  <!-- <button *ngIf=" ( getCurrentRole() == 'Department Manager' || getCurrentRole() == 'General Manager' ) 
                        && (  baseEntity.Status == 'Rejected' || baseEntity.Status == 'Pending' ) " type="submit" mat-raised-button
     color="primary" (click)="answerApproval('Quote')">Approve</button>
   <button *ngIf=" ( getCurrentRole() == 'Department Manager' || getCurrentRole() == 'General Manager' ) 
                       && (  baseEntity.Status=='Quote'  || baseEntity.Status == 'Pending' )" type="submit" mat-raised-button
     color="warn" (click)="answerApproval('Rejected')">Reject</button>
 
-  <!-- communication between Manager  and MRO -->
   <button *ngIf=" ( getCurrentRole() == 'Department Manager' || getCurrentRole() == 'General Manager' ) 
                         && (  baseEntity.Status=='Quoted' )" type="submit" mat-raised-button
     color="warn" (click)="answerApproval('Quote Rejected')">Reject quote</button>
@@ -47,6 +79,4 @@
 
   <button *ngIf="baseEntity.Status == 'Approved' && getCurrentRole() == 'Buyer' "
     type="submit" mat-raised-button color="basic" (click)="requestApproval('Finalized')">Finalize</button>
-  </div>
-
-<!-- <pre>{{ baseEntity | json }}</pre> -->
+  </div> -->

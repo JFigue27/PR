@@ -1,7 +1,6 @@
 import { Observable } from 'rxjs/RX';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Config } from './config';
-import { IEntity } from './IEntity';
 import alertify from 'alertifyjs';
 
 export interface IConfig {

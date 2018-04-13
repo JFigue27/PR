@@ -18,6 +18,7 @@
         <th>Description</th>
         <th>Manager Response</th>
         <th>Date Requested</th>
+        <th>Date Last Edited</th>
       </tr>
     </thead>
     <tbody>
@@ -31,10 +32,11 @@
         <td class="width-10" data-title="Requested By">{{ item.InfoTrack?.User_CreatedBy.Value }}</td>
         <td data-title="Description">{{ item.RequestDescription }}</td>
         <td data-title="Date Requested">{{ item.ResponseDescription }}</td>
-        <td data-title="Date Requested">{{ item.DateRequested }}</td>
+        <td data-title="Date Requested">{{ item.InfoTrack?.Date_CreatedOn | date: 'medium'}}</td>
+        <td data-title="Date Last Edited">{{ item.InfoTrack?.Date_EditedOn | date: 'medium'}}</td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<!-- <pre>{{ baseList | json }}</pre> -->
+<pre>{{ baseList | json }}</pre>

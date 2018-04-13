@@ -70,5 +70,7 @@ namespace BusinessSpecificLogic.EF
 
         public string AttachmentsFolder { get; set; }
         public List<Attachment> Attachments { get; set; }
+
+        public string PRType { get; set; } //MRO or MRP, where MRP = Finance
     }
 }

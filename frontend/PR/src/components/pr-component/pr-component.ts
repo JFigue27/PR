@@ -110,7 +110,8 @@ export class PRComponent extends FormController implements OnInit {
     return this.userService.LoggedUser.Roles;
   }
 
-  getLockedStatus(){
+  getLockedStatus() {
+    
     let status = this.baseEntity.ApprovalStatus;
     let role = this.userService.LoggedUser.Roles;
     if (!status || status == "Pending" || status == "Rejected") return false;
@@ -137,6 +138,7 @@ export class PRComponent extends FormController implements OnInit {
       }  
     return true;
   }
+  
   getSupplier1Style() {
     if (this.baseEntity.SupplierSelectedKey && this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier1Key) {
       return 'SupplierSelected';
@@ -287,6 +289,7 @@ export class PRComponent extends FormController implements OnInit {
       this.handleDynamicRows(this.baseEntity.PRLines);
     }
     this.baseEntity.RequisitionName = this.userService.LoggedUser.UserName;
+    this.baseEntity.DateDepartmentManager = new Date();
     this.baseEntity.ConvertedDateDepartmentManager = new Date();
   }
 

@@ -83,13 +83,40 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   afterLoad() {
     this.pr.ApprovalStatus = this.baseEntity.Status;
   }
+
+  showButtons() {
+    let status = this.baseEntity.Status;
+    let role = this.userService.LoggedUser.Roles;
+    
+    console.log('BEGIN SWITCH role ' + role + ' status ' + status);
+    switch (role) {
+      case "User":
+      if ( !status || status == "Pending" || status == "Rejected") return true;
+        break;
+      case "MRO":
+        if (status == "MRO Quote" || status == "Quote Rejected") return true;
+        break;
+      case "Department Manager":
+        if (status || status == "Pending" || status == "MRO Quoted") return true;
+        break;
+      case "General Manager":
+        if (status || status == "Pending" || status == "MRO Quoted") return true;
+        break;
+      case "Buyer":
+        if (status || status == "Approved") return false;
+        break;
+      default:
+        return false;
+    }
+  }
   
   beforeSave() {
     this.baseEntity.Title = "Purchase Request - " + this.pr.FriendlyIdentifier;
     this.baseEntity.UserApproverKey = this.approverKey;
   }
 
-  afterSave() { 
+  afterSave() {
+    this.pr.ApprovalStatus = this.baseEntity.Status;
   }
 
   afterRemove() {

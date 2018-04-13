@@ -52,12 +52,12 @@ TODO
   ✔ Lock PR when it is Approved. @done(18-03-20 08:02)
   ✔ "Approve to MRO" functionality. @done(18-03-20 08:02)
   ✔ Add user-department relationship in user form @done(18-03-21 11:16)
-  ☐ Add account-department relationship (many to one)
+  ✔ Add account-department relationship (many to one) @done(18-04-12 12:41)
   ☐ Accounts > show current balance
   ☐ Accounts > should be only editable by Finance / general manager role
   ☐ in case amount is more than the department budget should be renamed department manager by general manager
 ------------------------------------------------------------------------------------------------------------------
-☐ main menu > hide user section
+✔ main menu > hide user section @done(18-04-12 12:41)
 ✔ email content functionality @done(18-04-09 13:29)
 ✔ PR > reload approval object when saved @done(18-04-03 14:07)
 ✔ Approval > MRO should also see Quote Rejected PR status @done(18-04-09 13:29)
@@ -107,6 +107,7 @@ Approvals
   -DateResponse
   -ResponseDescription
 
+  ☐ antes de llegar a department manager de vuelta que confirme en el caso que se exceda el presupuesto del departamento si se ira a otra segunda confirmacion con el gerente general
 
   Si el seleccionado excede el limite de 250dlls se enviara correo al superior del departamento (RicardoWong)
     approvals page
@@ -117,3 +118,7 @@ Approvals
     budget por cuentas
 
 
+
+
+boton para paty que consulte primero con josue antes de enviar 
+al gerente de departamento o gerente general
