@@ -46,6 +46,7 @@ export class ListComponent extends ListController implements OnInit {
   addItem() {
     if (confirm('Are you sure you want to create a new PR?')) {
       this.PrService.createInstance().subscribe(oInstance => {
+        oInstance.DepartmentAssigned.Manager = null;
         this.PrService.createEntity(oInstance).subscribe(oEntity => {
           this.nav.push(PRPage, { oEntityOrId: oEntity });
         });

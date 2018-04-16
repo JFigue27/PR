@@ -12,7 +12,7 @@ import { confirmComponent } from '../confirm-component/confirm-component';
 
 export class ApprovalFormComponent extends FormController implements OnInit {
   private users = [];
-  private response: string;
+  private response: string; 
   @Input() pr: any;
   @Input() approverKey: number;
   constructor (
@@ -46,40 +46,43 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   }
   
   requestApproval(status) {
-    let dialog = this.dialog.open(confirmComponent, {
-      width: '300px', data: { response: this.baseEntity.RequestDescription }
-    });
-    dialog.afterClosed().subscribe(result => {
+    if (confirm('confirm request') ) {
       this.baseEntity.editMode = true;
       this.response = this.baseEntity.RequestDescription;
       this.baseEntity.ConvertedDateResponse = new Date();
-      this.baseEntity.RequestDescription = result;
       this.baseEntity.Status = status;
       this.save();
-    });
-
+      }; 
   }
 
 
   answerApproval(status) {
-    let dialog = this.dialog.open(confirmComponent, {
-      width: '300px', data: { response: this.baseEntity.ResponseDescription }
-    });
-    dialog.afterClosed().subscribe(result => {
+    if (confirm('Confirm response status: ' + status)) {
       this.baseEntity.editMode = true;
       this.response = this.baseEntity.ResponseDescription;
       this.baseEntity.ConvertedDateResponse = new Date();
-      this.baseEntity.ResponseDescription = result;
       this.baseEntity.Status = status;
       this.save();
-    });
+    };
+    // let dialog = this.dialog.open(confirmComponent, {
+    //   width: '300px', data: { response: this.baseEntity.ResponseDescription }
+    // });
+    // dialog.afterClosed().subscribe(result => {
+    //   this.baseEntity.editMode = true;
+    //   this.response = this.baseEntity.ResponseDescription;
+    //   this.baseEntity.ConvertedDateResponse = new Date();
+    //   this.baseEntity.ResponseDescription = result;
+    //   this.baseEntity.Status = status;
+    //   this.save();
+    // });
     
   }
   
   getCurrentRole() {
     return this.userService.LoggedUser.Roles;
   }
-  
+
+
   afterLoad() {
     this.pr.ApprovalStatus = this.baseEntity.Status;
   }
@@ -116,7 +119,6 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   }
 
   afterSave() {
-    this.pr.ApprovalStatus = this.baseEntity.Status;
   }
 
   afterRemove() {

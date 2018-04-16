@@ -3,7 +3,7 @@
         <ion-grid>
             <ion-row>
                 <ion-col col-10 col-sm-10 col-md-10 col-lg-10 col-lg-10>
-                    <h1><b>Purchase Request</b> - {{ baseEntity.ApprovalStatus }} </h1>
+                    <h1><b>Purchase Request</b> - {{ baseEntity.ApprovalStatus }}</h1>
                 </ion-col>
                 <ion-col col-2 col-sm-2 col-md-2 col-lg-2 col-lg-2>
                     <b>PR Number:</b>&nbsp;&nbsp; {{ baseEntity.PRNumber?.GeneratedNumber }}
@@ -255,7 +255,8 @@
 <div class="div-buttons">
     <div>
         <button type="button" (click)="print()" mat-raised-button color="primary">Print</button>
-        <button *ngIf="!getLockedStatus() || (getCurrentRole() == 'Buyer' && baseEntity.ApprovalStatus == 'Approved') " type="submit" (click)="save()" mat-raised-button color="primary">Save</button>
+        <button *ngIf="!getLockedStatus() || (getCurrentRole() == 'Buyer' && baseEntity.ApprovalStatus == 'Approved') " 
+        type="submit" (click)="save()" mat-raised-button color="primary">Save</button>
     </div>
 </div>
-<!-- <pre>{{ baseEntity | json }}</pre> -->
+<pre>{{ baseEntity | json }}</pre>

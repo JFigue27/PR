@@ -70,7 +70,7 @@ namespace BusinessSpecificLogic.Logic
                 }
                 if (entity.DepartmentAssigned != null)
                 {
-                    ctx.Entry(entity.DepartmentAssigned).State = EntityState.Unchanged; 
+                    ctx.Entry(entity.DepartmentAssigned).State = EntityState.Unchanged;
                 }
                 if (entity.DepartmentManager != null)
                 {

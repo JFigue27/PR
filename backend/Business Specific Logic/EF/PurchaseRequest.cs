@@ -14,8 +14,8 @@ namespace BusinessSpecificLogic.EF
         {
             ///Start:Generated:Constructor<<<
 			sys_active = true;
-			///End:Generated:Constructor<<<
-
+            ///End:Generated:Constructor<<<
+            PRType = "MRO";
 
         }
 

@@ -122,17 +122,17 @@ export class PRComponent extends FormController implements OnInit {
       //   if (!status || status == "Pending" || status == "Rejected" ) return false;
       //   break;
       case "MRO":
-        if (status == "Quote" || status == "Quote Rejected") return false;
+        if (status == "MRO Quote" || status == "PM Rejected" || status == "DM Quote") return false;
+        break;
+      case "Purchasing Manager":
+        if (status == "MRO Quoted" || status == "PM Approved") return false;
         break;
       case "Department Manager":
-        if (status == "Pending" || status == "Quoted") return false;
+        if (status == "Pending" || status == "Quoted" || status == "DM Rejected") return false;
         break;
       case "General Manager":
         if (status == "Pending" || status == "Quoted") return false;
         break;
-      // case "Buyer":
-      //   if (status == "Approved") return false;
-      //   break;
       case "Administrator":
         return false;
       }  

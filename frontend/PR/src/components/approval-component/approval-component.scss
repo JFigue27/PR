@@ -9,6 +9,18 @@ approval-component {
         font-weight: 800;
         margin-left: 35%;
     }
+    
+    .icon-pending {
+        color: gray;
+    }
+
+    .icon-ok {
+        color: teal;
+    }
+
+    .icon-fail {
+        color: red;
+    }
 
     @media (min-width:800px) {
         .width-4 {

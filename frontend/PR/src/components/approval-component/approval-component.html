@@ -24,9 +24,22 @@
     <tbody>
       <tr *ngFor="let item of baseList" (click)="openItem(item)">
         <td class="width-4">
-          <ion-icon *ngIf="item.Status == 'Approved' || item.Status == 'Finalized' " name='ios-checkmark' class="icon-status" style="color:teal;"></ion-icon>
-          <ion-icon *ngIf="item.Status == 'Pending' || item.Status == 'Quote' || item.Status == 'Quoted' || item.Status == 'Quote Rejected' " name='ios-remove-circle-outline' class="icon-status" style="color:gray;"></ion-icon>
-          <ion-icon *ngIf="item.Status == 'Rejected' " name='ios-close-outline' class="icon-status" style="color:red;"></ion-icon>
+          <ion-icon name='ios-checkmark' class="icon-status icon-ok" *ngIf="item.Status == 'DM Approved' 
+                        || item.Status == 'Finalized'
+                        || item.Status == 'PM Approved'
+                        || item.Status == 'DM Quote Approved'
+                        || item.Status == 'GM Approved' "></ion-icon>
+          <ion-icon  name='ios-remove-circle-outline' class="icon-status icon-pending" *ngIf="item.Status == 'Pending' 
+                        || item.Status == 'MRO Quote'
+                        || item.Status == 'Quoted'
+                        || item.Status == 'DM Quote'
+                        || item.Status == 'MRO Quoted'
+                        || item.Status == 'Finance Quote'
+                        || item.Status == 'Quote Rejected' "></ion-icon>
+          <ion-icon name='ios-close-outline' class="icon-status icon-fail" *ngIf="item.Status == 'DM Rejected' 
+                        || item.Status == 'PM Rejected' 
+                        || item.Status == 'GM Rejected'
+                        || item.Status == 'DM Quote Rejected' "></ion-icon>
         </td>
         <td class="width-10" data-title="Status"> {{ item.Status }}</td>
         <td class="width-10" data-title="Requested By">{{ item.InfoTrack?.User_CreatedBy.Value }}</td>
@@ -39,4 +52,4 @@
   </table>
 </div>
 
-<pre>{{ baseList | json }}</pre>
+<!-- <pre>{{ baseList | json }}</pre> -->

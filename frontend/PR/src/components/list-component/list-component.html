@@ -12,14 +12,14 @@
   <table class="table table-condensed" style="table-layout: fixed;">
     <thead>
       <tr>
-        <th style="width:10%;">PR Number</th>
-        <th style="width:89%;">Description</th>
+        <th class="width-10">PR Number</th>
+        <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of baseList" (click)="openItem(item)">
-        <td  style="width:10%;" data-title="Account">{{ item.PRNumber.GeneratedNumber }}</td>
-        <td  style="width:89%;"data-title="Description">{{ item.FriendlyIdentifier }}</td>
+        <td class="width-10" data-title="Account">{{ item.PRNumber.GeneratedNumber }}</td>
+        <td data-title="Description">{{ item.FriendlyIdentifier }}</td>
       </tr>
     </tbody>
   </table>

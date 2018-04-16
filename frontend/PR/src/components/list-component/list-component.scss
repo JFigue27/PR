@@ -7,4 +7,12 @@ list-component {
     .button-fixed-list {
         right: 15% !important;
     }
+    @media (min-width:800px) {
+        .width-4 {
+            width:4%;
+        }
+        .width-10{
+            width:10%;
+        }
+    }
 }

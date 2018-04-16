@@ -1,16 +1,22 @@
 email-form-component {
+ 
+    .tab-divider {
+       width: 70%;
+        margin: auto;
+    }
+    
     .card {
         background-color: white;
-        width: 50%;
+        width: 80%;
         margin: auto;
-        margin-top: 5%;
         height: 400px;
+        margin-top: 3%;
         box-shadow: 1px 1px 2px #b7b7b7;
     }
 
     .card-header {
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
         color:white;
         font-size: 22px;
         font-weight: 300;

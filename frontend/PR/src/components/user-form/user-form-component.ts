@@ -11,11 +11,12 @@ import { DepartmentServiceProvider } from '../../providers/department-service';
 export class UserFormComponent extends FormController implements OnInit {
   public departments = [];
   roles = [
-    { value: 'User', viewValue: 'User' },
     { value: 'Department Manager', viewValue: 'Department Manager' },
+    { value: 'Finance', viewValue: 'Finance' },
     { value: 'General Manager', viewValue: 'General Manager'},
-    { value: 'Buyer', viewValue: 'Buyer' },
-    { value: 'MRO', viewValue: 'MRO' }
+    { value: 'MRO', viewValue: 'MRO' },
+    { value: 'Purchasing Manager', viewValue: 'Purchasing Manager' },
+    { value: 'User', viewValue: 'User' }
   ];
  
   constructor (

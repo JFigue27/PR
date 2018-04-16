@@ -21,24 +21,22 @@ namespace BusinessSpecificLogic.Logic
         {
             if (LoggedUser.Role == "Department Manager")
             {
-                dbQuery = dbQuery.Where(e => (e.UserApproverKey == LoggedUser.UserID
-                                            || e.UserRequisitorKey == LoggedUser.UserID)
-                                            || e.Status == "PM Approved"
-                                            || e.Status == "Finance Quote"
-                                            || e.Status == "GM Rejected"
-                                            || e.Status == "DM Rejected");
+                dbQuery = dbQuery
+                    .Where(e => (e.UserApproverKey == LoggedUser.UserID || e.UserRequisitorKey == LoggedUser.UserID));
             }
             else if (LoggedUser.Role == "General Manager")
             {
-                dbQuery = dbQuery.Where(e => (e.UserApproverKey == LoggedUser.UserID
-                                            || e.UserRequisitorKey == LoggedUser.UserID)
-                                            || e.Status == "DM Approved"
-                                            || e.Status == "GM Rejected");
+                dbQuery = dbQuery
+                    .Where(e => e.UserRequisitorKey == LoggedUser.UserID || e.UserApproverKey == LoggedUser.UserID );
             }
             else if(LoggedUser.Role == "Finance")
             {
-                dbQuery = dbQuery.Where(e => e.Status == "DM Approved"
-                                            || e.Status == "GM Rejected");
+                dbQuery = dbQuery
+                    .Include(e => e.PurchaseRequest)
+                    .Include(e => e.UserApprover)
+                    .Where(e => e.PurchaseRequest.PRType == "Finance" && e.Status != "Pending" && e.UserApproverKey > 0 && (
+                            (e.Status == "GM Approved" && e.UserApprover.Role == "General Manager") 
+                            || (e.Status == "DM Approved" && e.UserApprover.Role == "Department Manager") ));
             }
             else if (LoggedUser.Role == "Administrator")
             {
@@ -46,15 +44,16 @@ namespace BusinessSpecificLogic.Logic
             }
             else if (LoggedUser.Role == "MRO")
             {
-                dbQuery = dbQuery.Where(e => e.PurchaseRequest.PRType == "MRO" 
-                                             && e.Status == "MRO Quote" 
-                                             || e.Status == "MRO Quoted" 
-                                             || e.Status == "Approved" 
-                                             || e.Status == "Quote Rejected");
+                dbQuery = dbQuery.Include(e => e.PurchaseRequest)
+                    .Where(e => e.PurchaseRequest.PRType == "MRO" 
+                                             && e.Status != "Pending" 
+                                             && e.Status != "DM Rejected");
             }
-            else if (LoggedUser.Role == "Buyer")
+            else if (LoggedUser.Role == "Purchasing Manager ")
             {
-                dbQuery = dbQuery.Where(e => e.Status == "Approved" || e.Status == "Finalized");
+                dbQuery = dbQuery.Include(e => e.PurchaseRequest)
+                    .Where(e => e.PurchaseRequest.PRType == "MRO" && 
+                    ( e.Status != "Pending" || e.Status != "DM Rejected" || e.Status != "MRO Quote" ));
             }
             else //User
             {
@@ -130,6 +129,7 @@ namespace BusinessSpecificLogic.Logic
                         emailService.To.Add(entity.UserApprover.Email);
                         break;
                     case "MRO Quote":
+                    case "DM Quote":
                         emailService.To.Add(entity.UserRequisitor?.Email);
                         var mros = ctx.Users.Where(u => u.Role == "MRO").ToList();
                         foreach (var mro in mros)
@@ -184,7 +184,11 @@ namespace BusinessSpecificLogic.Logic
 
                 try
                 {
-                    emailService.SendMail();
+                    if (emailService.To.Count > 0)
+                    {
+                        emailService.SendMail();
+                    }
+
                 }
                 catch (Exception ex)
                 {

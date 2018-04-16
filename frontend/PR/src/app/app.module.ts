@@ -60,7 +60,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSidenavModule } from '@angular/material/sidenav';
-
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 @NgModule({
@@ -111,6 +111,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatPaginatorModule,
     MatSidenavModule,
     MatRadioModule,
+    MatTabsModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
