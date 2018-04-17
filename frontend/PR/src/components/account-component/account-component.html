@@ -6,27 +6,19 @@
 </div>
 <div class="account-table table-responsive-vertical shadow-z-1" ng-hide="!baseList || baseList.length == 0">
   <mat-paginator #paginator [pageSize]="filterOptions?.limit" [length]="filterOptions?.itemsCount" [pageIndex]="filterOptions?.page -1"
-    [pageSizeOptions]="[5, 10, 20]" (page)="pageChanged($event.pageIndex + 1, $event.pageSize);">
+  [pageSizeOptions]="[5, 10, 20, 50, 100]" (page)="pageChanged($event.pageIndex + 1, $event.pageSize);">
   </mat-paginator>
   <table class="table table-condensed" style="table-layout: fixed;">
     <thead>
       <tr> 
-        <th>Account Number</th>
+        <th class="width-20" >Account Number</th>
         <th>Description</th>
-        <th>Budget</th>
-        <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of baseList" (click)="openItem(item)">
-        <td data-title="Account Number">{{ item.Value }}</td>
+        <td class="width-20" data-title="Account Number">{{ item.Value }}</td>
         <td data-title="Description">{{ item.Description }}</td>
-        <td data-title="Description">
-          <input type="text" [(ngModel)]="item.Budget"   class="input-personalized">
-        </td>
-        <td>
-          <button mat-raised-button color="primary" class="button-save" (click)="saveItem(item)">Save</button>
-        </td>
       </tr>
     </tbody>
   </table>

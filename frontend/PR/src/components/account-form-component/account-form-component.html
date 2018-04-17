@@ -6,10 +6,10 @@
   <div class="card-body">
     <div class="example-form">
       <mat-form-field class="example-full-width">
-        <input matInput [(ngModel)]="baseEntity.Value" placeholder="Value" (ngModelChange)="on_input_change();">
+        <input matInput [(ngModel)]="baseEntity.Value" placeholder="Account Number" (ngModelChange)="on_input_change();">
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <textarea matInput [(ngModel)]="baseEntity.Description" placeholder="Comments"
+        <textarea matInput [(ngModel)]="baseEntity.Description" placeholder="Description"
          matAutosizeMinRows="3" (ngModelChange)="on_input_change();" matTextareaAutosize
           matAutosizeMaxRows="10" class="input-personalized textarea-description"> </textarea>
       </mat-form-field>

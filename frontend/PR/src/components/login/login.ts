@@ -10,9 +10,8 @@ import { NavController } from 'ionic-angular';
 export class LoginComponent {
   private errorMessage: string;
   
-  constructor(public nav: NavController, private loginService: LoginService,
-              
-) {
+  constructor(public nav: NavController, private loginService: LoginService ) {
+  
   }
 
   login(formValues) {

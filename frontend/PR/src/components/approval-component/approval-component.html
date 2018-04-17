@@ -7,7 +7,7 @@
 
 <div class="approval-table table-responsive-vertical shadow-z-1" ng-hide="!baseList || baseList.length == 0">
   <mat-paginator #paginator [pageSize]="filterOptions?.limit" [length]="filterOptions?.itemsCount" [pageIndex]="filterOptions?.page -1"
-    [pageSizeOptions]="[5, 10, 20]" (page)="pageChanged($event.pageIndex + 1, $event.pageSize);">
+    [pageSizeOptions]="[5, 10, 20, 50, 100]" (page)="pageChanged($event.pageIndex + 1, $event.pageSize);">
   </mat-paginator>
   <table class="table table-condensed" style="table-layout: fixed;">
     <thead>
@@ -15,7 +15,7 @@
         <th class="width-4"><ion-icon ios="ios-create" md="md-create" class="icon-status"></ion-icon></th>
         <th class="width-10">Status</th>
         <th class="width-10">Requested by</th>
-        <th>Description</th>
+        <th>User Request</th>
         <th>Manager Response</th>
         <th>Date Requested</th>
         <th>Date Last Edited</th>

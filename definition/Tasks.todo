@@ -13,7 +13,6 @@ TODO
   ✔ Notes field @done(18-02-13 11:37)
   ✔ Dlls or Mxn @done(18-02-13 11:37)
   ✔ Remove "Remove button". @done(18-02-13 11:37)
-  ☐ Upload signed document.
   ✔ Attachments. @done(18-03-30 12:12)
   ✔ Pagination. @done(18-03-30 12:12)
   ✔ Account Dropdown. @done(18-02-13 11:38)
@@ -64,7 +63,18 @@ TODO
 ✔ Approvals > sort by date requested - status @done(18-04-09 13:46)
 ✔ localStorage > filter per listController @done(18-04-09 13:46)
 ✔ remove pre tags @done(18-04-09 13:46)
-
+------------------------------------------------------------------------------------------------------------------April 17th
+☐ Remove field Manager signature
+✔ Rename  approval description in approval forms and approval list @done(18-04-17 17:27)
+✔ Rename to manager response in approval forms and approval list @done(18-04-17 17:27)
+☐ Manager can see all the PR
+☐ Add a relationship department - account
+✔ Add an option to show 50, 100 rows in all lists @done(18-04-17 17:27)
+☐ sort all list by name descending
+✔ Administrator role cannot create a pr @done(18-04-17 17:31)
+☐ In case a GM creates a PR it must be approved by another GM
+☐ In case a DM create a PR it must be approved by their GM
+✔ Accounts change to Account number and comments to Description @done(18-04-17 17:31)
 
 
 ------------------------------------------------------------------------------------------------------------------
@@ -117,8 +127,18 @@ Approvals
 
     budget por cuentas
 
-
-
+- Pending
+- DM Approve
+- GM Approve
+- MRO Quote
+- MRO Quoted
+- PM Approve
+- PM Reject
+- DM Quote Approved
+- DM QUote Rejected
+- GM Quote Approved
+- GM QUote Rejected
+- Finalized
 
 boton para paty que consulte primero con josue antes de enviar 
 al gerente de departamento o gerente general

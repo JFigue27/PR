@@ -5,7 +5,7 @@
 </div>
 <div class="supplier-table table-responsive-vertical shadow-z-1" ng-hide="!baseList || baseList.length == 0">
   <mat-paginator #paginator [pageSize]="filterOptions?.limit" [length]="filterOptions?.itemsCount" [pageIndex]="filterOptions?.page -1"
-    [pageSizeOptions]="[5, 10, 20]" (page)="pageChanged($event.pageIndex + 1, $event.pageSize);">
+    [pageSizeOptions]="[5, 10, 20, 50, 100]" (page)="pageChanged($event.pageIndex + 1, $event.pageSize);">
   </mat-paginator>
   <table class="table table-condensed" style="table-layout: fixed;">
     <thead>

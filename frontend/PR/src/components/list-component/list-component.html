@@ -7,7 +7,7 @@
 </div>
 <div class="pr-table table-responsive-vertical shadow-z-1" ng-hide="!baseList || baseList.length == 0">
   <mat-paginator #paginator [pageSize]="filterOptions?.limit" [length]="filterOptions?.itemsCount" [pageIndex]="filterOptions?.page -1"
-    [pageSizeOptions]="[5, 10, 20]" (page)="pageChanged($event.pageIndex + 1, $event.pageSize);">
+    [pageSizeOptions]="[5, 10, 20, 50, 100]" (page)="pageChanged($event.pageIndex + 1, $event.pageSize);">
   </mat-paginator>
   <table class="table table-condensed" style="table-layout: fixed;">
     <thead>
@@ -25,7 +25,7 @@
   </table>
 </div>
 <div class="logo">
-  <button mat-mini-fab color="primary" (click)="addItem()" class="button-fixed button-fixed-list">
+  <button *ngIf="userService.LoggedUser.Roles != 'Administrator'"  mat-mini-fab color="primary" (click)="addItem()" class="button-fixed button-fixed-list">
     <ion-icon ios="ios-add" md="md-add"></ion-icon>
   </button>
 </div>
