@@ -223,6 +223,11 @@ export class PRComponent extends FormController implements OnInit {
   getApprover() {
     let currentDepartment = this.departments.find(d => d.id == this.baseEntity.DepartmentKey);
     let price = 0;
+    let Requisitor = this.baseEntity.Requisitor.Role;
+    if (this.userService.LoggedUser.Roles == "Department Manager" || Requisitor == 'Department Manager' ){
+      return this.baseEntity.GeneralManagerKey;
+    }
+
     if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier1Key) {
       price = this.getSupplier1Sum();
     } else if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier2Key) {
@@ -233,7 +238,6 @@ export class PRComponent extends FormController implements OnInit {
 
     if (currentDepartment && currentDepartment.Budget && currentDepartment.Budget >= price) {
       return this.baseEntity.DepartmentManagerKey;
-
     } else {
       return this.baseEntity.GeneralManagerKey
     }

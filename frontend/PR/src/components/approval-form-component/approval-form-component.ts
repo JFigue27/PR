@@ -82,6 +82,9 @@ export class ApprovalFormComponent extends FormController implements OnInit {
     return this.userService.LoggedUser.Roles;
   }
 
+  getCurrentUser() {
+    return this.userService.LoggedUser;
+  }
 
   afterLoad() {
     this.pr.ApprovalStatus = this.baseEntity.Status;

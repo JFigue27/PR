@@ -32,11 +32,14 @@
   </div>
 
   <div *ngIf="getCurrentRole() == 'Department Manager'">
+
+    <button mat-raised-button color="basic" (click)="requestApproval('Pending')"
+    *ngIf="!baseEntity.Status || baseEntity.Status == 'Pending' ">Request to Manager</button>
     <button  mat-raised-button color="basic" (click)="answerApproval('DM Quote')"
     *ngIf=" !baseEntity.Status || baseEntity.Status == 'Pending' || baseEntity.Status == 'DM Rejected' ">Send to MRO</button>
     
     <button mat-raised-button color="warn" (click)="answerApproval('DM Rejected')"
-    *ngIf="baseEntity.Status == 'Pending' || baseEntity.Status == 'MRO Quote' || baseEntity.Status == 'DM Quote' ">Reject</button>
+    *ngIf="pr.InfoTrack?.User_CreatedByKey != getCurrentUser().UserKey  && ( baseEntity.Status == 'Pending' || baseEntity.Status == 'MRO Quote' || baseEntity.Status == 'DM Quote') ">Reject</button>
     
     <button *ngIf="baseEntity.Status == 'DM Quote Rejected' " mat-raised-button color="basic" (click)="answerApproval('DM Quote Approved')">Approve quote</button>
     <button *ngIf="baseEntity.Status == 'DM Quote Approved' " mat-raised-button color="warn" (click)="answerApproval('DM Quote Rejected')">Reject quote</button>
@@ -56,33 +59,6 @@
 
 </div>
 
-<pre>{{ baseEntity | json }}</pre>
+<!-- <pre> USUARIO: {{getCurrentUser().UserKey | json}}</pre> -->
+<!-- <pre>{{ baseEntity | json }}</pre> -->
 
-
-  <!-- communication between Manager and User -->
-  <!-- <button *ngIf=" ( getCurrentRole() == 'Department Manager' || getCurrentRole() == 'General Manager' ) 
-                       && (  baseEntity.Status == 'Rejected' || baseEntity.Status == 'Pending' ) " type="submit" mat-raised-button
-    color="primary" (click)="answerApproval('Quote')">Approve</button>
-  <button *ngIf=" ( getCurrentRole() == 'Department Manager' || getCurrentRole() == 'General Manager' ) 
-                      && (  baseEntity.Status=='Quote'  || baseEntity.Status == 'Pending' )" type="submit" mat-raised-button
-    color="warn" (click)="answerApproval('Rejected')">Reject</button>
-
-  <button *ngIf=" ( getCurrentRole() == 'Department Manager' || getCurrentRole() == 'General Manager' ) 
-                        && (  baseEntity.Status=='Quoted' )" type="submit" mat-raised-button
-    color="warn" (click)="answerApproval('Quote Rejected')">Reject quote</button>
-
-  <button *ngIf=" ( getCurrentRole() == 'Department Manager' || getCurrentRole() == 'General Manager' ) 
-                    && (  baseEntity.Status=='Quoted' )" type="submit" mat-raised-button 
-  color="primary" (click)="answerApproval('Approved')">Approve quote</button>
-  
-
-  <button *ngIf=" ( getCurrentRole() == 'MRO' ) && ( (  baseEntity.Status=='Quote' ) || ( baseEntity.Status=='Quote Rejected' )) 
-          && pr.editMode == false"   mat-raised-button color="primary" (click)="answerApproval('Quoted')">Send</button>
-  
-  <button *ngIf="( (!baseEntity.Status) || (baseEntity.Status == 'Rejected') || (baseEntity.Status == 'Pending') )
-   && (getCurrentRole() == 'User') && (pr.editMode == false) " type="submit" mat-raised-button color="basic"
-     (click)="requestApproval('Pending')">Request</button>
-
-  <button *ngIf="baseEntity.Status == 'Approved' && getCurrentRole() == 'Buyer' "
-    type="submit" mat-raised-button color="basic" (click)="requestApproval('Finalized')">Finalize</button>
-  </div> -->

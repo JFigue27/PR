@@ -9,7 +9,6 @@ import { NavController } from 'ionic-angular';
 
 export class LoginComponent {
   private errorMessage: string;
-  
   constructor(public nav: NavController, private loginService: LoginService ) {
   
   }
@@ -20,10 +19,12 @@ export class LoginComponent {
     } else { 
       const data = 'grant_type=password&userName=' + formValues.userName + '&password=' + formValues.password;
 
-      this.loginService.getToken(data).subscribe(results => {
-        localStorage.setItem('user', JSON.stringify(results));
+      this.loginService.getToken(data).then(results => {
         this.nav.pop();
-        });
+        })
+        .catch( response => {
+          this.errorMessage = response;
+        })
       }
     }
 

@@ -7,9 +7,23 @@ WORKFLOW
 - Purchase
   - Ricardo Wong or Dennis Breen if exceeds
   - Send to MRO to start the purchasing.
+------------------------------------------------------------------------------------------------------------------
+POSSIBLE STATUS
+- Pending
+- DM Approve
+- GM Approve
+- MRO Quote
+- MRO Quoted
+- PM Approve
+- PM Reject
+- DM Quote Approved
+- DM QUote Rejected
+- GM Quote Approved
+- GM QUote Rejected
+- Finalized
 
 ------------------------------------------------------------------------------------------------------------------
-TODO
+TO-DO LIST
   ✔ Notes field @done(18-02-13 11:37)
   ✔ Dlls or Mxn @done(18-02-13 11:37)
   ✔ Remove "Remove button". @done(18-02-13 11:37)
@@ -65,6 +79,7 @@ TODO
 ✔ remove pre tags @done(18-04-09 13:46)
 ------------------------------------------------------------------------------------------------------------------April 17th
 ☐ Remove field Manager signature
+✔ MRO button to confirm to the purchasing manager befor sending it to the department/general manager @done(18-04-18 08:10)
 ✔ Rename  approval description in approval forms and approval list @done(18-04-17 17:27)
 ✔ Rename to manager response in approval forms and approval list @done(18-04-17 17:27)
 ☐ Manager can see all the PR
@@ -74,21 +89,20 @@ TODO
 ✔ Administrator role cannot create a pr @done(18-04-17 17:31)
 ☐ In case a GM creates a PR it must be approved by another GM
 ☐ In case a DM create a PR it must be approved by their GM
+☐ User would never skip the manager approval before it is sent to the MRO
 ✔ Accounts change to Account number and comments to Description @done(18-04-17 17:31)
 
-
 ------------------------------------------------------------------------------------------------------------------
-Roles
- - Administrator
- - User
- - Requisitord
- - Department Manager
- - Make Approvals
- - General Manager
- - MRO (Buyer)
+ROLES
+  - User
+  - MRO
+  - Department Manager
+  - General Manager
+  - Purchasing Manager
+  - Administrator
  
 ------------------------------------------------------------------------------------------------------------------
-Entities 
+ENTITIES
   -User
   -Supplier
   -PurchaseRequest
@@ -97,18 +111,7 @@ Entities
   -Approvals
 
 ------------------------------------------------------------------------------------------------------------------
-PurchaseRequest pending
-  -Supplier selected (to know what supplier was chosen)
-
-------------------------------------------------------------------------------------------------------------------
-Supplier
-  -phone?
-  -address?
-  -webpage?
-  -description? (what this suppliers sales)
-
-------------------------------------------------------------------------------------------------------------------
-Approvals
+APPROVALS
   -PurchaseRequestKey
   -UserRequisitor
   -DateRequested
@@ -117,28 +120,5 @@ Approvals
   -DateResponse
   -ResponseDescription
 
-  ☐ antes de llegar a department manager de vuelta que confirme en el caso que se exceda el presupuesto del departamento si se ira a otra segunda confirmacion con el gerente general
 
-  Si el seleccionado excede el limite de 250dlls se enviara correo al superior del departamento (RicardoWong)
-    approvals page
-    pr number
-    DateRequestedAt
-    RequestBy
-
-    budget por cuentas
-
-- Pending
-- DM Approve
-- GM Approve
-- MRO Quote
-- MRO Quoted
-- PM Approve
-- PM Reject
-- DM Quote Approved
-- DM QUote Rejected
-- GM Quote Approved
-- GM QUote Rejected
-- Finalized
-
-boton para paty que consulte primero con josue antes de enviar 
-al gerente de departamento o gerente general
+  capsonic > calidad automotriz > part number SG
