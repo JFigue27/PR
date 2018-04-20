@@ -13,7 +13,7 @@
             <div (click)="sidenav.toggle()" class="nav-menus" (click)="openAccount()">
                 <ion-icon ios="ios-card" md="md-card"></ion-icon>&nbsp;&nbsp; Accounts
             </div>
-            <div (click)="sidenav.toggle()" class="nav-menus" (click)="openDepartment()">
+            <div *ngIf="getUserRole() == 'Administrator' " (click)="sidenav.toggle()" class="nav-menus" (click)="openDepartment()">
                 <ion-icon ios="ios-filing" md="md-filing"></ion-icon>&nbsp;&nbsp; Departments
             </div>
             <div *ngIf="getUserRole() == 'Administrator' "  (click)="sidenav.toggle()" class="nav-menus" (click)="openUser()">
@@ -45,7 +45,7 @@
                 </button>
                 <button mat-raised-button *ngIf="getUserRole() == 'Administrator' " class="full-menu-button" color="basic" (click)="openUser()">Users</button>
                 <button mat-raised-button class="full-menu-button" color="basic" (click)="openSupplier()">Suppliers</button>
-                <button mat-raised-button class="full-menu-button" color="basic" (click)="openDepartment()">Departments</button>
+                <button mat-raised-button *ngIf="getUserRole() == 'Administrator' " class="full-menu-button" color="basic" (click)="openDepartment()">Departments</button>
                 <button mat-raised-button class="full-menu-button" color="basic" (click)="openAccount()">Accounts</button>
                 <button mat-raised-button class="full-menu-button" color="accent" (click)="openApproval()">Approvals</button>
                 <button mat-raised-button class="full-menu-button" color="basic" (click)="openPR()">PR List</button>

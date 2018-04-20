@@ -4,6 +4,7 @@ import { HomePage } from '../pages/home/home';
 import { LoginComponent } from '../components/login/login';
 import { ListPage } from '../pages/list-page/list-page';
 import { UserServiceProvider } from '../providers/user-service';
+import { UsersPage } from '../pages/users/users-page';
 
 @Component({
   templateUrl: 'app.html'
@@ -12,20 +13,10 @@ export class MyApp {
 
   CurrentUser: string;
   @ViewChild(Nav) nav: Nav;
-  // rootPage: any = EmailPage;
-  rootPage: any = ListPage;
-  pages: Array<{ title: string, component: any }>;
+  rootPage: any = UsersPage;
 
-  constructor (
-              public platform: Platform,
-              public modal: ModalController,
-              public userService: UserServiceProvider
-        ) {
+  constructor ( public platform: Platform, public modal: ModalController, public userService: UserServiceProvider ) {
           this.initializeApp();
-          this.pages = [
-            { title: 'Home', component: HomePage },
-            { title: 'List', component: ListPage }
-          ];
       }
 
   initializeApp() {

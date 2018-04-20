@@ -22,6 +22,7 @@ import { AccountFormComponent } from '../components/account-form-component/accou
 import { ApprovalFormComponent } from '../components/approval-form-component/approval-form-component';
 import { EmailFormComponent } from '../components/email-form-component/email-form-component';
 import { confirmComponent } from '../components/confirm-component/confirm-component';
+import { FinderComponent } from '../components/finder/finder-component';
 
 //MODULES
 import { AttachmentsModule } from '../components/attachments.module';
@@ -82,6 +83,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     ApprovalFormComponent,
     EmailFormComponent,
     confirmComponent,
+    FinderComponent,
     //Pages
     HomePage,
     ListPage,

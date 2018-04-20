@@ -3,6 +3,7 @@ import { NavController, ModalController } from 'ionic-angular';
 import { SuppliersPage } from '../suppliers/suppliers-page';
 import { DepartmentPage } from '../department-page/department-page';
 import { LoginComponent } from '../../components/login/login';
+// import { FinderComponent } from '../../components/finder/finder-component';
 import { UserServiceProvider } from '../../providers/user-service';
 import { ListPage } from '../list-page/list-page';
 import { AccountPage } from '../account-page/account-page';

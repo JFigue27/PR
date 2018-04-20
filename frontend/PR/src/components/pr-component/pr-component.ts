@@ -118,20 +118,21 @@ export class PRComponent extends FormController implements OnInit {
     
     switch(role) {
       // User takes validation above
-      // case "User":
-      //   if (!status || status == "Pending" || status == "Rejected" ) return false;
-      //   break;
+      case "User":
+        if (!status || status == "Pending" || status == "DM Rejected" || status == "GM Rejected" ) return false;
+        break;
       case "MRO":
-        if (status == "MRO Quote" || status == "PM Rejected" || status == "DM Quote") return false;
+        if (status == "MRO Quote" || status == "PM Rejected" || status == "DM Quote"
+         || status == "GM Quote" || status == "DM Quote Approved" || status == "GM Quote Approved") return false;
         break;
       case "Purchasing Manager":
-        if (status == "MRO Quoted" || status == "PM Approved") return false;
+        if (status == "MRO Quoted" || status == "PM Approved" || status == "DM Quote Rejected" || status == "GM Quote Rejected") return false;
         break;
       case "Department Manager":
-        if (status == "Pending" || status == "Quoted" || status == "DM Rejected") return false;
+        if (status == "Pending" || status == "Quoted" || status == "DM Rejected" || status == "GM Rejected" || status == "PM Approved") return false;
         break;
       case "General Manager":
-        if (status == "Pending" || status == "Quoted") return false;
+        if (status == "Pending" || status == "GM Quote" || status == "GM Rejected" || status == "PM Approved") return false;
         break;
       case "Administrator":
         return false;
@@ -222,11 +223,12 @@ export class PRComponent extends FormController implements OnInit {
 
   getApprover() {
     let currentDepartment = this.departments.find(d => d.id == this.baseEntity.DepartmentKey);
-    let price = 0;
-    let Requisitor = this.baseEntity.Requisitor.Role;
-    if (this.userService.LoggedUser.Roles == "Department Manager" || Requisitor == 'Department Manager' ){
-      return this.baseEntity.GeneralManagerKey;
+    let price = 0; 
+
+    if ( this.baseEntity.Requisitor && this.baseEntity.Requisitor.Role && this.baseEntity.Requisitor.Role == "Department Manager"){
+        return this.baseEntity.GeneralManagerKey;
     }
+ 
 
     if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier1Key) {
       price = this.getSupplier1Sum();

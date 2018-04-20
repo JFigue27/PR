@@ -49,11 +49,17 @@ namespace BusinessSpecificLogic.Logic
                                              && e.Status != "Pending" 
                                              && e.Status != "DM Rejected");
             }
-            else if (LoggedUser.Role == "Purchasing Manager ")
+            else if (LoggedUser.Role == "Purchasing Manager")
             {
                 dbQuery = dbQuery.Include(e => e.PurchaseRequest)
-                    .Where(e => e.PurchaseRequest.PRType == "MRO" && 
-                    ( e.Status != "Pending" || e.Status != "DM Rejected" || e.Status != "MRO Quote" ));
+                    .Where(e => e.PurchaseRequest.PRType == "MRO" && e.Status != "Pending" &&
+                    (  e.Status != "DM Rejected" || e.Status != "MRO Quote" ));
+            }
+            else if (LoggedUser.Role == "Project Manager")
+            {
+                dbQuery = dbQuery.Include(e => e.PurchaseRequest)
+                    .Where(e => e.PurchaseRequest.PRType == "MRP" &&
+                    (e.Status == "DM Approved" || e.Status == "Project Manager Rejected" || e.Status == "Finalized"));
             }
             else //User
             {

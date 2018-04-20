@@ -91,16 +91,40 @@ TO-DO LIST
 ☐ In case a DM create a PR it must be approved by their GM
 ☐ User would never skip the manager approval before it is sent to the MRO
 ✔ Accounts change to Account number and comments to Description @done(18-04-17 17:31)
+☐ Save the PR when you click on any approval form button  - 1
+☐ Load the department that the user belongs to but still have the ability to change it through a select
+    ☐ when department select is changed automatically change the approver
+
+------------------------------------------------------------------------------------------------------------------
+MRP Workflow Case
+- Requisitor creates a new purchase request
+- Department Manager whether approves or denies send a response (at this time a approval is created)
+- Project Manager rejects if it has any mistake or issues as Finalized
+- Notifies back to user and DM
 
 ------------------------------------------------------------------------------------------------------------------
 ROLES
   - User
   - MRO
+  - Project Manager
   - Department Manager
   - General Manager
   - Purchasing Manager
   - Administrator
  
+------------------------------------------------------------------------------------------------------------------
+STATUS
+  - Pending
+  - MRO Quote
+  - MRO Quoted
+  - PM Rejected
+  - PM Approved
+  - DM Quote Rejected
+  - DM Quote Approved
+  - GM Quote Rejected
+  - GM Quote Approved
+  - Finalized
+
 ------------------------------------------------------------------------------------------------------------------
 ENTITIES
   -User

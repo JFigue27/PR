@@ -28,17 +28,20 @@
                         || item.Status == 'Finalized'
                         || item.Status == 'PM Approved'
                         || item.Status == 'DM Quote Approved'
+                        || item.Status == 'GM Quote Approved'
                         || item.Status == 'GM Approved' "></ion-icon>
           <ion-icon  name='ios-remove-circle-outline' class="icon-status icon-pending" *ngIf="item.Status == 'Pending' 
                         || item.Status == 'MRO Quote'
                         || item.Status == 'Quoted'
                         || item.Status == 'DM Quote'
+                        || item.Status == 'GM Quote'
                         || item.Status == 'MRO Quoted'
                         || item.Status == 'Finance Quote'
                         || item.Status == 'Quote Rejected' "></ion-icon>
           <ion-icon name='ios-close-outline' class="icon-status icon-fail" *ngIf="item.Status == 'DM Rejected' 
                         || item.Status == 'PM Rejected' 
                         || item.Status == 'GM Rejected'
+                        || item.Status == 'GM Quote Rejected'
                         || item.Status == 'DM Quote Rejected' "></ion-icon>
         </td>
         <td class="width-10" data-title="Status"> {{ item.Status }}</td>

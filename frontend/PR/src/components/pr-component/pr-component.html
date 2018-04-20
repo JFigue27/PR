@@ -10,7 +10,7 @@
                     <br>
                     <b>PO Number:</b>&nbsp;&nbsp;
                     <input type="text" class="form-input border-bottom" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.PONumber"
-                        style="width:55%;" [disabled]="getCurrentRole() != 'Buyer' " >
+                        style="width:55%;" [disabled]="getCurrentRole() != 'MRO' " >
                 </ion-col>
             </ion-row>
         </ion-grid>
@@ -254,9 +254,9 @@
 
 <div class="div-buttons">
     <div>
-        <button type="button" (click)="print()" mat-raised-button color="primary">Print</button>
-        <button *ngIf="!getLockedStatus() || (getCurrentRole() == 'Buyer' && baseEntity.ApprovalStatus == 'Approved') " 
+        <!-- <button type="button" (click)="print()" mat-raised-button color="primary">Print</button> -->
+        <button *ngIf="!getLockedStatus()  " 
         type="submit" (click)="save()" mat-raised-button color="primary">Save</button>
     </div>
 </div>
-<pre>{{ baseEntity | json }}</pre>
+<!-- <pre>{{ baseEntity | json }}</pre> -->

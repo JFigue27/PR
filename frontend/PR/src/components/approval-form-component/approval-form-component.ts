@@ -3,7 +3,6 @@ import { ApprovalServiceProvider } from '../../providers/approval-service';
 import { FormController } from '../../services/FormController';
 import { UserServiceProvider } from '../../providers/user-service';
 import { MatDialog } from '@angular/material';
-import { confirmComponent } from '../confirm-component/confirm-component';
 
 @Component({
   selector: 'approval-form-component',
@@ -56,25 +55,16 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   }
 
 
-  answerApproval(status) {
+  answerApproval(status, type?: any) {
     if (confirm('Confirm response status: ' + status)) {
       this.baseEntity.editMode = true;
       this.response = this.baseEntity.ResponseDescription;
       this.baseEntity.ConvertedDateResponse = new Date();
+      this.pr.PRType = type;
       this.baseEntity.Status = status;
+      this.pr.save();
       this.save();
-    };
-    // let dialog = this.dialog.open(confirmComponent, {
-    //   width: '300px', data: { response: this.baseEntity.ResponseDescription }
-    // });
-    // dialog.afterClosed().subscribe(result => {
-    //   this.baseEntity.editMode = true;
-    //   this.response = this.baseEntity.ResponseDescription;
-    //   this.baseEntity.ConvertedDateResponse = new Date();
-    //   this.baseEntity.ResponseDescription = result;
-    //   this.baseEntity.Status = status;
-    //   this.save();
-    // });
+    }; 
     
   }
   
@@ -122,6 +112,7 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   }
 
   afterSave() {
+    this.pr.ApprovalStatus = this.baseEntity.Status;
   }
 
   afterRemove() {

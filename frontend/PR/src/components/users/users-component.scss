@@ -1,5 +1,10 @@
 users-component {
-
+    .toolbar-bottom{
+        position: absolute;
+        bottom: 1px;
+        height: 50px;
+        width: 100%;
+    }
     .logo, .user-table {
         width: 60%;
         margin: auto;
