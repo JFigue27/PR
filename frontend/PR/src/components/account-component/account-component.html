@@ -1,10 +1,16 @@
 
-<div class="logo">
-  <h1>
-    <ion-icon ios="ios-card" md="md-card"></ion-icon> Accounts
-  </h1>
-</div>
-<div class="account-table table-responsive-vertical shadow-z-1" ng-hide="!baseList || baseList.length == 0">
+<section>
+  <h1><ion-icon ios="ios-card" md="md-card"></ion-icon> Accounts</h1>
+</section>
+
+<section class="search">
+  <input type="text" class="input-search" placeholder="Search" [(ngModel)]="filterOptions.filterGeneral" (ngModelChange)="refresh();">
+  <button class="button-search  primary-color" (click)="refresh();">
+    <ion-icon name="ios-search" md="md-search"></ion-icon>
+  </button>
+</section>
+
+<section class="table-responsive-vertical shadow-z-1" ng-hide="!baseList || baseList.length == 0">
   <mat-paginator #paginator [pageSize]="filterOptions?.limit" [length]="filterOptions?.itemsCount" [pageIndex]="filterOptions?.page -1"
   [pageSizeOptions]="[5, 10, 20, 50, 100]" (page)="pageChanged($event.pageIndex + 1, $event.pageSize);">
   </mat-paginator>
@@ -22,12 +28,10 @@
       </tr>
     </tbody>
   </table>
-</div>
-<div class="logo">
+</section>
+
+<section>
   <button mat-mini-fab color="primary" (click)="addItem()" class="button-fixed">
     <ion-icon ios="ios-add" md="md-add"></ion-icon>
   </button>
-</div>
-
-<!-- (click)="openItem(item)" -->
-<!-- <pre>{{ baseList | json }}</pre> -->
+</section>

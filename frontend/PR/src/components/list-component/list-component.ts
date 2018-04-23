@@ -16,26 +16,35 @@ export class ListComponent extends ListController implements OnInit {
   constructor (
                 public userService:UserServiceProvider,
                 public PrService: PRServiceProvider,
-                public nav: NavController,
-                private app: App
+                public nav: NavController
               ) {
                   super({ service: PrService, paginate: true, limit: 10, filterName: 'prFilter' });
               }
 
   ngOnInit() {
 
-    this.app.viewWillEnter.subscribe(viewCtrl => {
-      if (viewCtrl.name == "ListPage") {
-        let PrKey = utils.getParameterByName('id', null);
-        if (PrKey) {
+    // this.app.viewWillEnter.subscribe(viewCtrl => {
+    //   if (viewCtrl.name == "ListPage") {
+    //     let PrKey = utils.getParameterByName('id', null);
+    //     if (PrKey) {
 
-          window.history.replaceState({}, document.title, "/PR/Main");
-          this.nav.push(PRPage, { oEntityOrId: PrKey });
-        } else {
-          this.load('filterUser='+this.userService.LoggedUser.UserKey);
-        }
+    //       window.history.replaceState({}, document.title, "/PR/Main");
+    //       this.nav.push(PRPage, { oEntityOrId: PrKey });
+    //     } else {
+    //       this.load('filterUser='+this.userService.LoggedUser.UserKey);
+    //     }
+    //   }
+    // });
+
+    
+      let PrKey = utils.getParameterByName('id', null);
+      if (PrKey) {
+        window.history.replaceState({}, document.title, "/PR/Main");
+        this.nav.push(PRPage, { oEntityOrId: PrKey });
+      } else {
+        this.load('filterUser=' + this.userService.LoggedUser.UserKey);
       }
-    });
+
   }
   
   onPageChanged(pageEvent: PageEvent){

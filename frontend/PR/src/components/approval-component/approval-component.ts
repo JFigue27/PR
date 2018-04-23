@@ -14,16 +14,15 @@ export class ApprovalComponent extends ListController implements OnInit {
                 public approvalService: ApprovalServiceProvider,
                 private app: App
             ) {
-              super({ service: approvalService, paginate: true, limit: 10, filterName: 'ApprovalFilter' });
-              this.baseList =[];
+              super({ service: approvalService, paginate: true, limit: 10, filterName: 'AprovalFilter' });
             }
 
   ngOnInit() {
-    this.app.viewWillEnter.subscribe(viewCtrl => {
-      if (viewCtrl.name == "ApprovalPage") {
+    // this.app.viewWillEnter.subscribe(viewCtrl => {
+    //   if (viewCtrl.name == "ApprovalPage") {
         this.load();
-      }
-    });
+      // }
+    // });/
   }
 
   getIconStatus(status:string){

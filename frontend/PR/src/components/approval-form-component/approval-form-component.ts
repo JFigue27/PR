@@ -62,7 +62,6 @@ export class ApprovalFormComponent extends FormController implements OnInit {
       this.baseEntity.ConvertedDateResponse = new Date();
       this.pr.PRType = type;
       this.baseEntity.Status = status;
-      this.pr.save();
       this.save();
     }; 
     
