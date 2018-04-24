@@ -219,10 +219,10 @@
                         <b>Account</b>
                     </div>
                     <div col-md-10 col-sm-12>
-                        <mat-select [disabled]="getLockedStatus()" [(ngModel)]="baseEntity.AccountNo" placeholder="Select.." (ngModelChange)="on_input_change(item);" class="border-bottom"
-                            style="width:80%;">
+                        <mat-select placeholder="Select..." [(ngModel)]="baseEntity.GLAccountKey" class="border-bottom" style="width:80%;"
+                         (ngModelChange)="on_input_change(item);">
                             <mat-option *ngFor="let account of accounts" [value]="account.id">
-                                {{ account.Value }} &nbsp;&nbsp;&nbsp; {{ account.Description}}
+                                 {{ account.Value }} &nbsp;&nbsp; {{ account.Description }}
                             </mat-option>
                         </mat-select>
                     </div>
@@ -259,4 +259,7 @@
         type="submit" (click)="save()" mat-raised-button color="primary">Save</button>
     </div>
 </div>
-<!-- <pre>{{ baseEntity | json }}</pre> -->
+
+<pre>{{ accounts | json }}</pre>
+
+<pre>{{ baseEntity | json }}</pre>

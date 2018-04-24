@@ -37,7 +37,9 @@ namespace BusinessSpecificLogic.EF
         public int? GeneralManagerKey { get; set; }
         [ForeignKey("GeneralManagerKey")]
         public User GeneralManager { get; set; }
-        public string AccountNo { get; set; }
+        public int? GLAccountKey { get; set; }
+        [ForeignKey("GLAccountKey")]
+        public GLAccount AccountNo { get; set; }
         public string FriendlyIdentifier { get; set; }
         public DateTimeOffset? DateDepartmentManager { get; set; }
         public DateTimeOffset? DateGeneralManager { get; set; }
