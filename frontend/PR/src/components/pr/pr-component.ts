@@ -7,9 +7,9 @@ import { SupplierServiceProvider } from '../../providers/supplier-service';
 import { DepartmentServiceProvider } from '../../providers/department-service';
 import { AccountServiceProvider } from '../../providers/account-service';
 import { MatDialog } from '@angular/material';
-import { ApprovalFormComponent } from '../approval-form-component/approval-form-component';
+import { ApprovalFormComponent } from '../approval-form/approval-form-component';
 import { ModalController } from 'ionic-angular/components/modal/modal-controller';
-import { SupplierFormComponent } from '../supplier-form-component/supplier-form-component';
+import { SupplierFormComponent } from '../supplier-form/supplier-form-component';
 
 @Component({
   selector: 'pr-component',

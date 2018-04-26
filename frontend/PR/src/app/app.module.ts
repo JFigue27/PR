@@ -8,21 +8,19 @@ import { FileUploadModule } from 'ng2-file-upload';
 //COMPONENTS
 import { MyApp } from './app.component';
 import { LoginComponent } from '../components/login/login';
-import { ListComponent } from '../components/list-component/list-component';
+import { ListComponent } from '../components/list/list-component';
 import { UsersComponent } from '../components/users/users-component';
-import { ApprovalComponent } from '../components/approval-component/approval-component';
-import { SuppliersComponent } from '../components/suppliers-component/suppliers-component';
-import { AccountComponent } from '../components/account-component/account-component';
-import { DepartmentComponent } from '../components/department-component/department-component';
-import { PRComponent } from '../components/pr-component/pr-component';
+import { ApprovalComponent } from '../components/approval/approval-component';
+import { SuppliersComponent } from '../components/suppliers/suppliers-component';
+import { AccountComponent } from '../components/account/account-component';
+import { DepartmentComponent } from '../components/department/department-component';
+import { PRComponent } from '../components/pr/pr-component';
 import { UserFormComponent } from '../components/user-form/user-form-component';
-import { SupplierFormComponent } from '../components/supplier-form-component/supplier-form-component';
-import { DepartmentFormComponent } from '../components/department-form-component/department-form-component';
-import { AccountFormComponent } from '../components/account-form-component/account-form-component';
-import { ApprovalFormComponent } from '../components/approval-form-component/approval-form-component';
-import { EmailFormComponent } from '../components/email-form-component/email-form-component';
-import { confirmComponent } from '../components/confirm-component/confirm-component';
-import { FinderComponent } from '../components/finder/finder-component';
+import { SupplierFormComponent } from '../components/supplier-form/supplier-form-component';
+import { DepartmentFormComponent } from '../components/department-form/department-form-component';
+import { AccountFormComponent } from '../components/account-form/account-form-component';
+import { ApprovalFormComponent } from '../components/approval-form/approval-form-component';
+import { EmailFormComponent } from '../components/email-form/email-form-component';
 
 //MODULES
 import { AttachmentsModule } from '../components/attachments.module';
@@ -82,8 +80,6 @@ import { MatTabsModule } from '@angular/material/tabs';
     ApprovalComponent,
     ApprovalFormComponent,
     EmailFormComponent,
-    confirmComponent,
-    FinderComponent,
     //Pages
     HomePage,
     ListPage,
@@ -134,8 +130,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     ApprovalComponent,
     ApprovalFormComponent,
     EmailFormComponent,
-    confirmComponent,
-    //Pages
+    // //Pages
     HomePage,
     ListPage,
     PRPage,

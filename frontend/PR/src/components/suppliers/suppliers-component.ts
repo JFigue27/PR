@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SupplierServiceProvider } from '../../providers/supplier-service';
 import { ListController } from '../../services/ListController';
-import { SupplierFormComponent } from '../supplier-form-component/supplier-form-component';
+import { SupplierFormComponent } from '../supplier-form/supplier-form-component';
 import { MatDialog } from '@angular/material';
 
 @Component({

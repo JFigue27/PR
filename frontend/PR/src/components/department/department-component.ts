@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DepartmentServiceProvider } from '../../providers/department-service';
 import { ListController } from '../../services/ListController';
-import { DepartmentFormComponent } from '../department-form-component/department-form-component';
+import { DepartmentFormComponent } from '../department-form/department-form-component';
 import { MatDialog } from '@angular/material';
 
 @Component({

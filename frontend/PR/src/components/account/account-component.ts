@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountServiceProvider } from '../../providers/account-service';
-import { AccountFormComponent } from '../account-form-component/account-form-component';
+import { AccountFormComponent } from '../account-form/account-form-component';
 import { ListController } from '../../services/ListController';
 import { MatDialog } from '@angular/material';
 
