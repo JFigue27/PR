@@ -77,10 +77,10 @@
                             </th>
                         </tr>
                         <tr>
-                            <th width="6%">Item number</th>
+                            <th width="4%">Number</th>
                             <th width="35%">Description</th>
-                            <th width="5%">U/M</th>
-                            <th width="4%">Quantity.</th>
+                            <th width="5%">Units</th>
+                            <th width="4%">Quantity</th>
                             <th width="7%">Price Each</th>
                             <th width="7%">Total</th>
                             <th width="7%">Price Each</th>
@@ -186,17 +186,6 @@
                     <div col-md-10 col-sm-12>
                         <p class="p-user">{{ baseEntity.DepartmentAssigned?.Value }}</p>
                     </div>
-
-                    <div col-md-2 col-sm-12>
-                        <b>Date</b>
-                    </div>
-                    <div col-md-10 col-sm-12>
-                        <input [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" class="form-input border-bottom"
-                        (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.ConvertedDateDepartmentManager">
-                        <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
-                        <mat-datepicker #myDatepicker></mat-datepicker>
-                    </div>
-
                 </div>
                 
                 <div col-md-6 col-sm-12 ion-row>
@@ -209,13 +198,6 @@
                     </div>
                 
                     <div col-md-2 col-sm-12>
-                        <b>Manager Signature</b>
-                    </div>
-                    <div col-md-10 col-sm-12>
-                        <input type="text" class="form-input border-bottom" [(ngModel)]="baseEntity.PurposedOrUse" />
-                    </div>
-                
-                    <div col-md-2 col-sm-12>
                         <b>Account</b>
                     </div>
                     <div col-md-10 col-sm-12>
@@ -225,6 +207,16 @@
                                  {{ account.Value }} &nbsp;&nbsp; {{ account.Description }}
                             </mat-option>
                         </mat-select>
+                    </div>
+
+                    <div col-md-2 col-sm-12 class="margin-top-5">
+                        <b>Date</b>
+                    </div>
+                    <div col-md-10 col-sm-12 class="margin-top-5">
+                        <input [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" class="form-input border-bottom" (ngModelChange)="on_input_change()"
+                            [(ngModel)]="baseEntity.ConvertedDateDepartmentManager">
+                        <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #myDatepicker></mat-datepicker>
                     </div>
                 
                 </div>

@@ -50,6 +50,7 @@ export class PRComponent extends FormController implements OnInit {
     });
 
     this.userService.loadEntities().subscribe(oResult => {
+      console.log('users');
       this.users = oResult.Result;
     });
 
@@ -288,6 +289,9 @@ export class PRComponent extends FormController implements OnInit {
     if (this.baseEntity) {
       this.handleDynamicRows(this.baseEntity.PRLines);
     }
+    if (!this.baseEntity.ConvertedDateDepartmentManager){
+      this.baseEntity.ConvertedDateDepartmentManager = new Date();
+    }
   }
 
   afterCreate() {
@@ -295,7 +299,6 @@ export class PRComponent extends FormController implements OnInit {
       this.handleDynamicRows(this.baseEntity.PRLines);
     }
     this.baseEntity.RequisitionName = this.userService.LoggedUser.UserName;
-    this.baseEntity.DateDepartmentManager = new Date();
     this.baseEntity.ConvertedDateDepartmentManager = new Date();
   }
 
