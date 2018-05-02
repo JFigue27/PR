@@ -3,7 +3,6 @@ import { ListController } from '../../services/ListController';
 import { NavController } from 'ionic-angular';
 import { PRPage } from '../../pages/pr-page/pr-page';
 import { PRServiceProvider } from '../../providers/pr-service';
-import { App } from 'ionic-angular/components/app/app';
 import { UserServiceProvider } from '../../providers/user-service';
 import { PageEvent } from '@angular/material';
 import { utils } from '../../common/utils';

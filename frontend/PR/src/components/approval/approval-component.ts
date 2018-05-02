@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApprovalServiceProvider } from '../../providers/approval-service';
 import { ListController } from '../../services/ListController';
-import { NavController, App } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { PRPage } from '../../pages/pr-page/pr-page';
 
 @Component({
@@ -9,20 +9,14 @@ import { PRPage } from '../../pages/pr-page/pr-page';
   templateUrl: 'approval-component.html'
 })
 export class ApprovalComponent extends ListController implements OnInit {
-  constructor (
-                public nav: NavController,
-                public approvalService: ApprovalServiceProvider,
-                private app: App
-            ) {
+
+  constructor ( public nav: NavController, public approvalService: ApprovalServiceProvider ) 
+            {
               super({ service: approvalService, paginate: true, limit: 10, filterName: 'AprovalFilter' });
             }
 
   ngOnInit() {
-    // this.app.viewWillEnter.subscribe(viewCtrl => {
-    //   if (viewCtrl.name == "ApprovalPage") {
-        this.load();
-      // }
-    // });/
+      this.load();
   }
 
   getIconStatus(status:string){

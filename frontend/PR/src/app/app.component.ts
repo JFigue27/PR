@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, ModalController } from 'ionic-angular';
-import { HomePage } from '../pages/home/home';
 import { LoginComponent } from '../components/login/login';
 import { ListPage } from '../pages/list-page/list-page';
 import { UserServiceProvider } from '../providers/user-service';
