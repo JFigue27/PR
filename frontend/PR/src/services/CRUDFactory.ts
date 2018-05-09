@@ -37,7 +37,8 @@ export abstract class CRUDFactory {
         return this.http.post<ICommonResponse>(this.baseUrl + this.config.endPoint, '=' + encodeURIComponent(JSON.stringify(oEntity)), this.addAuthorization())
             .map(response => this.extractData(response), this)
             .map(o => o.Result)
-            .catch(this.generalError);
+            .catch(this.generalError)
+            .toPromise();
     }
 
     createInstance(oEntity = null): Observable<any> {
@@ -101,10 +102,12 @@ export abstract class CRUDFactory {
             .catch(this.generalError);
     }
 
-    save(oEntity): Observable<any> {
+    save(oEntity): Promise<any> {
         if (oEntity.id > 0) {
+            console.log('update')
             return this.updateEntity(oEntity);
         } else {
+            console.log('create')
             return this.createEntity(oEntity);
         }
     }
@@ -126,7 +129,8 @@ export abstract class CRUDFactory {
         return this.http.put<ICommonResponse>(this.baseUrl + this.config.endPoint + '/' + oEntity.id, '=' + encodeURIComponent(JSON.stringify(oEntity)), this.addAuthorization())
             .map(response => this.extractData(response), this)
             .map(o => o.Result)
-            .catch(this.generalError);
+            .catch(this.generalError)
+            .toPromise();
     }
 
     extractData(res: ICommonResponse): ICommonResponse {

@@ -64,11 +64,10 @@ export abstract class FormController {
 
 	save() {	
 		this.beforeSave();
-		this.config.service.save(this.baseEntity).subscribe(oEntity => {
+		return this.config.service.save(this.baseEntity).then(oEntity => {
 			this.afterSave();
 			alertify.success('SUCCESFULLY SAVED');
 			this.baseEntity.editMode = false;
-			return Observable.empty();
 		});
 	}
 

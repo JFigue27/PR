@@ -335,8 +335,8 @@ export class PRComponent extends FormController implements OnInit {
   }
 
   save() {
-      this.baseEntity.api_attachments.uploadFiles().then(response => {
-        super.save();
+      return this.baseEntity.api_attachments.uploadFiles().then(response => {
+        return super.save();
       });
   }
 
