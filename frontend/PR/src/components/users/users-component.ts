@@ -10,14 +10,15 @@ import { MatDialog } from '@angular/material';
 })
 export class UsersComponent extends ListController implements OnInit {
 
-  constructor (
-                public dialog:MatDialog,
-                public userService: UserServiceProvider
-          ){
-              super({ service: userService, paginate: true, limit: 10, filterName: 'UserFilter' });
+  constructor ( public dialog:MatDialog, public userService: UserServiceProvider) {
+            super({ 
+              service: userService,
+              paginate: true,
+              limit: 10,
+              filterName: 'UserFilter' });
           }
 
-  ngOnInit() {
+  ngOnInit() {  
     this.load();
   }
   

@@ -60,6 +60,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
+//Plugins
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 
 
 @NgModule({
@@ -110,6 +115,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatSidenavModule,
     MatRadioModule,
     MatTabsModule,
+    MatAutocompleteModule,
+    NgxSpinnerModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

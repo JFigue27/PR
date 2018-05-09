@@ -1,19 +1,28 @@
 list-component {
 
     section {
-        width: 60%;
+        width: 70%;
         margin: auto;
     }
     
+    .trash {
+        font-size: 20px;
+        margin-left: 20px;
+    }
+
     .button-fixed-list {
         right: 15% !important;
     }
+
     @media (min-width:800px) {
         .width-4 {
             width:4%;
         }
-        .width-10{
+        .width-10 {
             width:10%;
+        }
+        .width-7 {
+            width:7%;
         }
     }
 }

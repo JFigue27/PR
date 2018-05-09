@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { NavController } from 'ionic-angular';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'login',
@@ -9,8 +10,8 @@ import { NavController } from 'ionic-angular';
 
 export class LoginComponent {
   private errorMessage: string;
-  constructor(public nav: NavController, private loginService: LoginService ) {
-  
+  constructor(public nav: NavController, private loginService: LoginService, public spinner: NgxSpinnerService) {
+
   }
 
   login(formValues) {
@@ -18,13 +19,17 @@ export class LoginComponent {
       this.errorMessage = 'Username or Password fields are missing';
     } else { 
       const data = 'grant_type=password&userName=' + formValues.userName + '&password=' + formValues.password;
-
+      this.spinner.show();
       this.loginService.getToken(data).then(results => {
         this.nav.pop();
         })
         .catch( response => {
           this.errorMessage = response;
         })
+        .then( response => {
+          this.spinner.hide();
+        });
+        
       }
     }
 

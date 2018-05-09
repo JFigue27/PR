@@ -138,7 +138,7 @@ export abstract class CRUDFactory {
         //all incoming responses go through adapterIn hook
         if( Array.isArray(backendResponse.Result )) {
             backendResponse.Result.forEach( oEntity => this.adapterIn(oEntity))
-        } else {
+        } else if (typeof(backendResponse.Result) === 'object') {
             this.adapterIn(backendResponse.Result) 
         }
         return backendResponse;

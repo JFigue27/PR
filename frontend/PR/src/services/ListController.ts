@@ -105,12 +105,13 @@ export abstract class ListController {
 
     removeItem(user) {
         let self = this;
-        alertify.confirm('Are you sure you want to delete ' + user.Value + ' ?',
+        alertify.confirm('Are you sure you want to delete this item ?',
             function () {
-                self.config.service.removeEntity(user.UserKey).subscribe(results => {
-                    alertify.success('User succesfully deleted');
+                console.log('here')
+                self.config.service.removeEntity(user.id).subscribe(results => {
+                    alertify.success('Succesfully deleted');
                     self.afterRemove();
-                    this.updateList();
+                    self.updateList();
                 }
                 );
             },

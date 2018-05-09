@@ -10,6 +10,10 @@ import { MatDialog } from '@angular/material';
 import { ApprovalFormComponent } from '../approval-form/approval-form-component';
 import { ModalController } from 'ionic-angular/components/modal/modal-controller';
 import { SupplierFormComponent } from '../supplier-form/supplier-form-component';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
+import { startWith } from 'rxjs/operators/startWith';
+import { map } from 'rxjs/operators/map';
 
 @Component({
   selector: 'pr-component',
@@ -18,11 +22,15 @@ import { SupplierFormComponent } from '../supplier-form/supplier-form-component'
 export class PRComponent extends FormController implements OnInit {
   private accounts = [];
   private departments = [];
-  private suppliers = [];
+  private suppliers = []; 
   private users = [];
   private approval: any;
   public userRole: string;
+  public itemsSource: any;
   public currencies = ['Dlls', 'Mxn'];
+  filteredOptions: Observable<string[]>;
+
+  myControl: FormControl = new FormControl();
 
   constructor (
                 public dialog: MatDialog,
@@ -57,14 +65,27 @@ export class PRComponent extends FormController implements OnInit {
     this.supplierService.loadEntities().subscribe(oResult => {
       this.suppliers = oResult.Result;
     });
+
     let PurchaseRequestKey: number;
     if (this.params.get('oEntityOrId') > 0) {
       PurchaseRequestKey = this.params.get('oEntityOrId');
     } else {
       PurchaseRequestKey = this.params.get('oEntityOrId').id;
     }
-  }
 
+    // this.filteredOptions = this.myControl.valueChanges.pipe(startWith(''),
+    //   map(val => this.filter(val))
+    // );
+      
+    }
+
+  // filter(val: string): string[] {
+  //   return this.suppliers.filter(option =>
+  //     option.toLowerCase().indexOf(val.toLowerCase()) === 0);
+  // }
+
+
+   
   getSupplier1Sum() {
     if (this.baseEntity && this.baseEntity.PRLines) {
       return this.baseEntity.PRLines.reduce(function (currentValue, item) {
