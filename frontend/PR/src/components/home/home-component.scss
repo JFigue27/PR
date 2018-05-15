@@ -1,0 +1,42 @@
+home-component {
+    .section-main {
+        width: 98%;
+        height: 88%;
+        margin: auto;
+    }
+    
+    .header {
+        border-bottom: 1px solid #a6a6a6;
+        width: 90%;
+        margin-left: 4%;
+    }
+
+    .section-wrapper {
+        width: 90%;
+        margin-top:3%;
+    }
+    .section-div {
+        display: inline-block;
+        width: 110px;
+        height: 120px;
+        padding: 5px;
+        margin: auto;
+        margin-left: 8%;
+        text-align: center;
+    }
+
+    .section-label {
+        font-size: 18px;
+        font-weight: 700;
+        margin-top: 10px;
+    }
+
+    .section-img {
+        max-width:60%;
+        max-height:80%;
+    }
+    .section-div:hover {
+        box-shadow: 1px 4px 5px #b4b4b4;
+    }
+
+}

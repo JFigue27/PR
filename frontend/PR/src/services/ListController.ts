@@ -140,7 +140,7 @@ export abstract class ListController {
     }
 
     saveItem(item) {
-        this.config.service.save(item).subscribe(oEntity => {
+        this.config.service.save(item).then(oEntity => {
             alertify.success('SUCCESFULLY SAVED');
             return Observable.empty();
         });

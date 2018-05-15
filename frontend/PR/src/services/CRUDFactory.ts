@@ -159,6 +159,7 @@ export abstract class CRUDFactory {
             switch (error.status) {
                 case 401:
                     //TODO: Open Login Form.
+                    alertify.confirm('Your session has expired. Log in again');
                     return Observable.empty();
             }
         }

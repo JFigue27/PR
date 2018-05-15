@@ -1,6 +1,6 @@
 
 <section>
-  <h1><ion-icon name="ios-contact" md="md-book"></ion-icon> Approvals </h1>
+  <h2><ion-icon name="ios-contact" md="md-book"></ion-icon> Approvals </h2>
 </section>
 
 <section class="search">
@@ -20,7 +20,7 @@
         <th class="width-4"><ion-icon ios="ios-create" md="md-create" class="icon-status"></ion-icon></th>
         <th class="width-10">Status</th>
         <th class="width-10">Requested by</th>
-        <th>User Request</th>
+        <th>Identifier</th>
         <th>Manager Response</th>
         <th>Date Requested</th>
         <th>Date Last Edited</th>
@@ -43,7 +43,7 @@
                         || item.Status == 'MRO Quoted'
                         || item.Status == 'Finance Quote'
                         || item.Status == 'Quote Rejected' "></ion-icon>
-          <ion-icon name='ios-close-outline' class="icon-status icon-fail" *ngIf="item.Status == 'DM Rejected' 
+        <ion-icon name='ios-close-outline' class="icon-status icon-fail" *ngIf="item.Status == 'DM Rejected' 
                         || item.Status == 'PM Rejected' 
                         || item.Status == 'GM Rejected'
                         || item.Status == 'GM Quote Rejected'
@@ -51,7 +51,7 @@
         </td>
         <td class="width-10" data-title="Status"> {{ item.Status }}</td>
         <td class="width-10" data-title="Requested By">{{ item.InfoTrack?.User_CreatedBy.Value }}</td>
-        <td data-title="Description">{{ item.RequestDescription }}</td>
+        <td data-title="Description">{{ item.PurchaseRequest.FriendlyIdentifier }}</td>
         <td data-title="Date Requested">{{ item.ResponseDescription }}</td>
         <td data-title="Date Requested">{{ item.InfoTrack?.Date_CreatedOn | date: 'medium'}}</td>
         <td data-title="Date Last Edited">{{ item.InfoTrack?.Date_EditedOn | date: 'medium'}}</td>

@@ -40,18 +40,18 @@
                                         {{ currency }}
                                     </mat-option>
                                 </mat-select>
-                                <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                                <!-- <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
                                 <mat-autocomplete #auto="matAutocomplete">
                                     <mat-option *ngFor="let option of filteredOptions" [value]="option">
                                         {{ option }}
                                     </mat-option>
-                                </mat-autocomplete>
+                                </mat-autocomplete> -->
 
-                                <!-- <mat-select class="select-suppliers" [(ngModel)]="baseEntity.Supplier1Key" (ngModelChange)="on_input_change(item);on_supplier_select();">
+                                <mat-select class="select-suppliers" [(ngModel)]="baseEntity.Supplier1Key" (ngModelChange)="on_input_change(item);on_supplier_select();">
                                     <mat-option *ngFor="let supplier of suppliers" [value]="supplier.SupplierKey">
                                         {{ supplier.Value }}
                                     </mat-option>
-                                </mat-select> -->
+                                </mat-select>
                                 <button (click)="newSupplier()" class="add-supplier" [ngClass]="getSupplier1Style()">+</button>
                             </th>
 
@@ -201,7 +201,11 @@
                         <b>Approver</b>
                     </div>
                     <div col-md-10 col-sm-12>
-                        <p class="p-user">{{ getApproverByKey(getApprover())?.Value }}</p>
+                        <mat-select placeholder="Select..." [(ngModel)]="baseEntity.DepartmentManagerKey" class="border-bottom" style="width:80%;margin-bottom:5px;" (ngModelChange)="on_input_change(item);">
+                            <mat-option *ngFor="let user of users" [value]="user.id">
+                                {{ user.Value }}
+                            </mat-option>
+                        </mat-select>
                     </div>
                 
                     <div col-md-2 col-sm-12>
@@ -259,6 +263,6 @@
     </div>
 </div>
 <!-- 
-<pre>{{ accounts | json }}</pre>
+<pre>{{ accounts | json }}</pre>-->
 
-<pre>{{ baseEntity | json }}</pre> -->
+<!-- <pre>{{ baseEntity | json }}</pre>  -->

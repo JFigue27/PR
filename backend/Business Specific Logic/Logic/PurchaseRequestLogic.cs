@@ -25,6 +25,11 @@ namespace BusinessSpecificLogic.Logic
 
         protected override IQueryable<PurchaseRequest> StaticDbQueryForList(IQueryable<PurchaseRequest> dbQuery)
         {
+            if (LoggedUser.Role != "Administrator")
+            {
+                dbQuery = dbQuery.Where(e => e.RequisitorKey == LoggedUser.UserID);
+            }
+
             return dbQuery.Include(e => e.PRLines)
                 .Include(e => e.DepartmentAssigned)
                 .Include(e => e.DepartmentAssigned.Manager)
@@ -76,6 +81,12 @@ namespace BusinessSpecificLogic.Logic
                 {
                     ctx.Entry(entity.DepartmentManager).State = EntityState.Unchanged;
                 }
+
+                if (string.IsNullOrWhiteSpace(entity.FriendlyIdentifier))
+                {
+                    throw new KnownError("Friendly identifier is a required field");
+                }
+
 
                 #region PR Number Generation
 

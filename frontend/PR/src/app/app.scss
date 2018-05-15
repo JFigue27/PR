@@ -50,9 +50,11 @@ mat-dialog-container {
 	display: block;
 }
 
+//Paginator related
 .mat-paginator-container {
-	height: 50px !important;
-	background-color: #e3e3e3;
+    height: 50px !important;
+    min-height: 50px !important;
+	background-color: #dadada;
 }
 
 .mat-paginator-page-size-label, .mat-paginator-page-size-select, .mat-paginator-range-label {

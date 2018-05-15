@@ -26,14 +26,14 @@
   </div>
   <div *ngIf="getCurrentRole() == 'Department Manager'">
     <button mat-raised-button color="basic" (click)="saveApproval('Pending')" *ngIf="getCurrentUser().UserKey != baseEntity.UserApproverKey && 
-    (!baseEntity.Status || baseEntity.Status == 'Pending' || baseEntity.Status == 'GM Rejected') ">Request to General Manager</button>
+    (!baseEntity.Status || baseEntity.Status == 'Pending' || baseEntity.Status == 'GM Rejected') ">Request to Manager</button>
     <button mat-raised-button color="basic" (click)="saveApproval('DM Quote')" *ngIf="pr.InfoTrack?.User_CreatedByKey != getCurrentUser().UserKey && 
     (!baseEntity.Status || baseEntity.Status == 'Pending' || baseEntity.Status == 'DM Rejected') ">Send to MRO</button>
     <button mat-raised-button color="basic" (click)="saveApproval('DM Quote','MRP')" *ngIf="pr.InfoTrack?.User_CreatedByKey != getCurrentUser().UserKey && 
     (!baseEntity.Status || baseEntity.Status == 'Pending' || baseEntity.Status == 'DM Rejected') ">Send to Project Manager</button>
     <button mat-raised-button color="warn" (click)="saveApproval('DM Rejected')" *ngIf="pr.InfoTrack?.User_CreatedByKey != getCurrentUser().UserKey  &&
     ( baseEntity.Status == 'Pending' || baseEntity.Status == 'MRO Quote' || baseEntity.Status == 'DM Quote') ">Reject</button>
-    <button mat-raised-button color="basic" (click)="saveApproval('DM Quote Approved')" *ngIf="baseEntity.Status == 'DM Quote Rejected' || baseEntity.Status == 'PM Approved' ">Approve quote</button>
+    <button mat-raised-button color="basic" (click)="saveApproval('DM Approved')" *ngIf="baseEntity.Status == 'DM Quote Rejected' || baseEntity.Status == 'PM Approved' ">Approve quote</button>
     <button mat-raised-button color="warn" (click)="saveApproval('DM Quote Rejected')" *ngIf="baseEntity.Status == 'DM Quote Approved' || baseEntity.Status == 'PM Approved' ">Reject quote</button>
   </div>
   <div *ngIf="getCurrentRole() == 'General Manager'">

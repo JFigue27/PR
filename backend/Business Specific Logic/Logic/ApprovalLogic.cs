@@ -68,6 +68,7 @@ namespace BusinessSpecificLogic.Logic
 
             return dbQuery
                 .Include(e => e.InfoTrack)
+                .Include(e => e.PurchaseRequest)
                 .Include(e => e.InfoTrack.User_CreatedBy)
                 .OrderByDescending(e => e.InfoTrack.Date_EditedOn)
                 .ThenBy(e => e.Status);

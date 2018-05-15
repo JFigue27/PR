@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, ModalController } from 'ionic-angular';
 import { LoginComponent } from '../components/login/login';
-import { ListPage } from '../pages/list-page/list-page';
+import { HomePage } from '../pages/home/home-page';
 import { UserServiceProvider } from '../providers/user-service';
 
 @Component({
@@ -11,7 +11,7 @@ export class MyApp {
 
   CurrentUser: string;
   @ViewChild(Nav) nav: Nav;
-  rootPage: any = ListPage;
+  rootPage: any = HomePage;
 
   constructor ( public platform: Platform, public modal: ModalController, public userService: UserServiceProvider ) {
           this.initializeApp();

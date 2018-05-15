@@ -11,7 +11,7 @@ export abstract class FormController {
 
 	protected baseEntity: any = { id: 0, editMode: false };
 
-	constructor(private config: IConfigFormController) {
+	constructor( private config: IConfigFormController ) {
 	}
  
 	//Start Form Methods

@@ -595,7 +595,7 @@ input.mat-input-element {
     color: #006064;
 }
 .mat-accent .mat-option.mat-selected:not(.mat-option-disabled) {
-    color: #5d40ff;
+    color: #0075ed;
 }
 .mat-warn .mat-option.mat-selected:not(.mat-option-disabled) {
     color: #f44336;
@@ -669,7 +669,7 @@ input.mat-input-element {
     color: #006064;
 }
 .mat-button.mat-accent, .mat-icon-button.mat-accent {
-    color: #5d40ff;
+    color: #0075ed;
 }
 .mat-button.mat-warn, .mat-icon-button.mat-warn {
     color: #f44336;
@@ -697,7 +697,7 @@ input.mat-input-element {
     background-color: #006064;
 }
 .mat-fab.mat-accent, .mat-mini-fab.mat-accent, .mat-raised-button.mat-accent {
-    background-color: #5d40ff;
+    background-color: #0075ed;
 }
 .mat-fab.mat-warn, .mat-mini-fab.mat-warn, .mat-raised-button.mat-warn {
     background-color: #f44336;
@@ -772,7 +772,7 @@ input.mat-input-element {
     background-color: #006064;
 }
 .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-    background-color: #5d40ff;
+    background-color: #0075ed;
 }
 .mat-checkbox-checked.mat-warn .mat-checkbox-background, .mat-checkbox-indeterminate.mat-warn .mat-checkbox-background {
     background-color: #f44336;
@@ -829,7 +829,7 @@ input.mat-input-element {
     opacity: .54;
 }
 .mat-chip.mat-chip-selected.mat-accent {
-    background-color: #5d40ff;
+    background-color: #0075ed;
     color: #fff;
 }
 .mat-chip.mat-chip-selected.mat-accent .mat-chip-remove {
@@ -932,13 +932,13 @@ input.mat-input-element {
     color: #006064;
 }
 .mat-focused .mat-form-field-label.mat-accent {
-    color: #5d40ff;
+    color: #0075ed;
 }
 .mat-focused .mat-form-field-label.mat-warn {
     color: #f44336;
 }
 .mat-focused .mat-form-field-required-marker {
-    color: #5d40ff;
+    color: #0075ed;
 }
 .mat-form-field-underline {
     background-color: rgba(0, 0, 0, .42);
@@ -952,7 +952,7 @@ input.mat-input-element {
     background-color: #006064;
 }
 .mat-form-field-ripple.mat-accent {
-    background-color: #5d40ff;
+    background-color: #0075ed;
 }
 .mat-form-field-ripple.mat-warn {
     background-color: #f44336;
@@ -973,7 +973,7 @@ input.mat-input-element {
     color: #006064;
 }
 .mat-icon.mat-accent {
-    color: #5d40ff;
+    color: #0075ed;
 }
 .mat-icon.mat-warn {
     color: #f44336;
@@ -997,7 +997,7 @@ input.mat-input-element {
     color: rgba(0, 0, 0, .42);
 }
 .mat-accent .mat-input-element {
-    caret-color: #5d40ff;
+    caret-color: #0075ed;
 }
 .mat-form-field-invalid .mat-input-element, .mat-warn .mat-input-element {
     caret-color: #f44336;
@@ -1070,7 +1070,7 @@ input.mat-input-element {
     background-color: #ff80ab;
 }
 .mat-progress-bar.mat-accent .mat-progress-bar-fill::after {
-    background-color: #5d40ff;
+    background-color: #0075ed;
 }
 .mat-progress-bar.mat-warn .mat-progress-bar-buffer {
     background-color: #ffcdd2;
@@ -1082,7 +1082,7 @@ input.mat-input-element {
     stroke: #006064;
 }
 .mat-progress-spinner.mat-accent circle, .mat-spinner.mat-accent circle {
-    stroke: #5d40ff;
+    stroke: #0075ed;
 }
 .mat-progress-spinner.mat-warn circle, .mat-spinner.mat-warn circle {
     stroke: #f44336;
@@ -1109,10 +1109,10 @@ input.mat-input-element {
     background-color: rgba(63, 81, 181, .26);
 }
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-    border-color: #5d40ff;
+    border-color: #0075ed;
 }
 .mat-radio-button.mat-accent .mat-radio-inner-circle {
-    background-color: #5d40ff;
+    background-color: #0075ed;
 }
 .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
     background-color: rgba(255, 64, 129, .26);
@@ -1148,7 +1148,7 @@ input.mat-input-element {
     color: #006064;
 }
 .mat-form-field.mat-focused.mat-accent .mat-select-arrow {
-    color: #5d40ff;
+    color: #0075ed;
 }
 .mat-form-field.mat-focused.mat-warn .mat-select-arrow {
     color: #f44336;
@@ -1231,7 +1231,7 @@ input.mat-input-element {
     color: rgba(255, 255, 255, .87);
 }
 .mat-accent .mat-slider-thumb, .mat-accent .mat-slider-thumb-label, .mat-accent .mat-slider-track-fill {
-    background-color: #5d40ff;
+    background-color: #0075ed;
 }
 .mat-accent .mat-slider-thumb-label-text {
     color: #fff;
@@ -1345,7 +1345,7 @@ input.mat-input-element {
     background-color: rgba(255, 128, 171, .3);
 }
 .mat-tab-group.mat-accent .mat-ink-bar, .mat-tab-nav-bar.mat-accent .mat-ink-bar {
-    background-color: #5d40ff;
+    background-color: #0075ed;
 }
 .mat-tab-group.mat-accent.mat-background-accent .mat-ink-bar, .mat-tab-nav-bar.mat-accent.mat-background-accent .mat-ink-bar {
     background-color: #fff;
@@ -1384,7 +1384,7 @@ input.mat-input-element {
     background-color: rgba(255, 128, 171, .3);
 }
 .mat-tab-group.mat-background-accent .mat-tab-header, .mat-tab-group.mat-background-accent .mat-tab-links, .mat-tab-nav-bar.mat-background-accent .mat-tab-header, .mat-tab-nav-bar.mat-background-accent .mat-tab-links {
-    background-color: #5d40ff;
+    background-color: #0075ed;
 }
 .mat-tab-group.mat-background-accent .mat-tab-label, .mat-tab-group.mat-background-accent .mat-tab-link, .mat-tab-nav-bar.mat-background-accent .mat-tab-label, .mat-tab-nav-bar.mat-background-accent .mat-tab-link {
     color: #fff;
@@ -1431,7 +1431,7 @@ input.mat-input-element {
     color: rgba(255, 255, 255, .87);
 }
 .mat-toolbar.mat-accent {
-    background: #5d40ff;
+    background: #0075ed;
     color: #fff;
 }
 .mat-toolbar.mat-warn {
@@ -1446,15 +1446,8 @@ input.mat-input-element {
     color: #fff;
 }
 .mat-simple-snackbar-action {
-    color: #5d40ff;
+    color: #0075ed;
 }
-
-// .primary-color {
-//     background-color: #006064;
-//     color:white;
-// }
-
-
 .primary-color {
     background-color: #006064;
     color:white;

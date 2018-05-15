@@ -7,6 +7,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 
 //COMPONENTS
 import { MyApp } from './app.component';
+import { HomeComponent } from '../components/home/home-component';
 import { LoginComponent } from '../components/login/login';
 import { ListComponent } from '../components/list/list-component';
 import { UsersComponent } from '../components/users/users-component';
@@ -26,7 +27,7 @@ import { EmailFormComponent } from '../components/email-form/email-form-componen
 import { AttachmentsModule } from '../components/attachments.module';
 
 //PAGES
-import { HomePage } from '../pages/home/home';
+import { HomePage } from '../pages/home/home-page';
 import { ListPage } from '../pages/list-page/list-page';
 import { PRPage } from '../pages/pr-page/pr-page';
 import { UsersPage } from '../pages/users/users-page';
@@ -71,6 +72,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   declarations: [
     MyApp,
     //Components
+    HomeComponent,
     LoginComponent,
     ListComponent,
     PRComponent,

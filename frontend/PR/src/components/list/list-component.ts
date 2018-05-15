@@ -26,7 +26,7 @@ export class ListComponent extends ListController implements OnInit {
       window.history.replaceState({}, document.title, "/PR/Main");
       this.nav.push(PRPage, { oEntityOrId: PrKey });
     } else {
-      this.load('filterUser=' + this.userService.LoggedUser.UserKey);
+      this.load();
     }
   }
   
@@ -38,7 +38,7 @@ export class ListComponent extends ListController implements OnInit {
     if (confirm('Are you sure you want to create a new PR?')) {
         this.PrService.createInstance().subscribe(oInstance => {
         oInstance.DepartmentAssigned.Manager = null;
-        this.PrService.createEntity(oInstance).subscribe(oEntity => {
+        this.PrService.createEntity(oInstance).then(oEntity => {
           this.nav.push(PRPage, { oEntityOrId: oEntity });
         });
       });

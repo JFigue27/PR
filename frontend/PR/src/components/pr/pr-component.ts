@@ -12,8 +12,6 @@ import { ModalController } from 'ionic-angular/components/modal/modal-controller
 import { SupplierFormComponent } from '../supplier-form/supplier-form-component';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-import { startWith } from 'rxjs/operators/startWith';
-import { map } from 'rxjs/operators/map';
 
 @Component({
   selector: 'pr-component',
@@ -57,8 +55,8 @@ export class PRComponent extends FormController implements OnInit {
       this.accounts = oResult.Result;
     });
 
-    this.userService.loadEntities().subscribe(oResult => {
-      console.log('users');
+
+    this.userService.getPage(0, 1,'?Role=Department Manager&Role=General Manager').subscribe(oResult => {
       this.users = oResult.Result;
     });
 

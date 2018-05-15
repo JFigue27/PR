@@ -9,7 +9,10 @@ list-component {
         font-size: 20px;
         margin-left: 20px;
     }
-
+    tr:hover{
+        background: rgb(223, 223, 223);
+        -webkit-transition: 0.7s;
+    }
     .button-fixed-list {
         right: 15% !important;
     }
