@@ -20,13 +20,15 @@ export class ListComponent extends ListController implements OnInit {
                   super({ service: PrService, paginate: true, limit: 10, filterName: 'prFilter' });
               }
 
-  ngOnInit() {    
+  ngOnInit() {
     let PrKey = utils.getParameterByName('id', null);
     if (PrKey) {
       window.history.replaceState({}, document.title, "/PR/Main");
       this.nav.push(PRPage, { oEntityOrId: PrKey });
-    } else {
+    } else if (this.userService.LoggedUser.Roles == "Administrator") {
       this.load();
+    } else {
+      this.load('filterUser=' + this.userService.LoggedUser.UserKey);
     }
   }
   
