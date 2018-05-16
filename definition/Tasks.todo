@@ -67,8 +67,6 @@ TO-DO LIST
   ✔ Add user-department relationship in user form @done(18-03-21 11:16)
   ✔ Add account-department relationship (many to one) @done(18-04-12 12:41)
   ☐ Accounts > show current balance
-  ☐ Accounts > should be only editable by Finance / general manager role
-  ☐ in case amount is more than the department budget should be renamed department manager by general manager
 ------------------------------------------------------------------------------------------------------------------
 ✔ main menu > hide user section @done(18-04-12 12:41)
 ✔ email content functionality @done(18-04-09 13:29)
@@ -78,22 +76,32 @@ TO-DO LIST
 ✔ localStorage > filter per listController @done(18-04-09 13:46)
 ✔ remove pre tags @done(18-04-09 13:46)
 ------------------------------------------------------------------------------------------------------------------April 17th
-☐ Remove field Manager signature
+✔ Remove field Manager signature @done(18-05-16 10:32)
 ✔ MRO button to confirm to the purchasing manager befor sending it to the department/general manager @done(18-04-18 08:10)
 ✔ Rename  approval description in approval forms and approval list @done(18-04-17 17:27)
 ✔ Rename to manager response in approval forms and approval list @done(18-04-17 17:27)
-☐ Manager can see all the PR
+✔ Manager can see all the PR @done(18-05-16 10:32)
 ☐ Add a relationship department - account
 ✔ Add an option to show 50, 100 rows in all lists @done(18-04-17 17:27)
-☐ sort all list by name descending
+✔ sort all list by name descending @done(18-05-16 10:32)
 ✔ Administrator role cannot create a pr @done(18-04-17 17:31)
-☐ In case a GM creates a PR it must be approved by another GM
-☐ In case a DM create a PR it must be approved by their GM
-☐ User would never skip the manager approval before it is sent to the MRO
+✔ In case a GM creates a PR it must be approved by another GM @done(18-05-16 10:32)
+✔ In case a DM create a PR it must be approved by their GM @done(18-05-16 10:32)
+✔ User would never skip the manager approval before it is sent to the MRO @done(18-05-16 10:33)
 ✔ Accounts change to Account number and comments to Description @done(18-04-17 17:31)
-☐ Save the PR when you click on any approval form button  - 1
-☐ Load the department that the user belongs to but still have the ability to change it through a select
-    ☐ when department select is changed automatically change the approver
+✔ Save the PR when you click on any approval form button  - 1 @done(18-05-16 10:32)
+✔ Load the department that the user belongs to but still have the ability to change it through a select @done(18-05-16 10:32)
+    ✔ when department select is changed automatically change the approver @done(18-05-16 10:32)
+
+GL Accounts integration with FS:
+☐ 1. Create fileds from FS, prefix with FS_
+☐ 2. Make query to import data from FS.
+   ☐ If GLAccount does not exist, add.
+   ☐ If GLAccount already exists, just update.
+☐ 3. Add new FS-fields to GL-Account-Form as readonly.
+☐ 4. Create schedule job to run query created in point 2 every week.
+
+
 
 ------------------------------------------------------------------------------------------------------------------
 MRP Workflow Case
@@ -143,6 +151,3 @@ APPROVALS
   -Status
   -DateResponse
   -ResponseDescription
-
-
-  capsonic > calidad automotriz > part number SG

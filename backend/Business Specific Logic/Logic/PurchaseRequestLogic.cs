@@ -25,10 +25,10 @@ namespace BusinessSpecificLogic.Logic
 
         protected override IQueryable<PurchaseRequest> StaticDbQueryForList(IQueryable<PurchaseRequest> dbQuery)
         {
-            if (LoggedUser.Role != "Administrator")
-            {
-                dbQuery = dbQuery.Where(e => e.RequisitorKey == LoggedUser.UserID);
-            }
+            //if (LoggedUser.Role != "Administrator")
+            //{
+            //    dbQuery = dbQuery.Where(e => e.RequisitorKey == LoggedUser.UserID);
+            //}
 
             return dbQuery.Include(e => e.PRLines)
                 .Include(e => e.DepartmentAssigned)
