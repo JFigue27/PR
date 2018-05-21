@@ -36,6 +36,7 @@ namespace BusinessSpecificLogic.Logic
                 .Include(e => e.InfoTrack)
                 .Include(e => e.GeneralManager)
                 .Include(e => e.Requisitor)
+                .Include(e => e.PRNumber)
                 .OrderByDescending(e => e.InfoTrack.Date_CreatedOn);
         }
 
@@ -52,7 +53,7 @@ namespace BusinessSpecificLogic.Logic
 
             foreach (var item in entities)
             {
-                item.PRNumber = ctx.PRNumbers.FirstOrDefault(e => e.PRNumberKey == item.PRNumberKey);
+                //item.PRNumber = ctx.PRNumbers.FirstOrDefault(e => e.PRNumberKey == item.PRNumberKey);
 
                 item.PRLines = item.PRLines?.OrderBy(e => e.PRLineKey).ToList();
 
@@ -82,10 +83,10 @@ namespace BusinessSpecificLogic.Logic
                     ctx.Entry(entity.DepartmentManager).State = EntityState.Unchanged;
                 }
 
-                if (string.IsNullOrWhiteSpace(entity.FriendlyIdentifier))
-                {
-                    throw new KnownError("Friendly identifier is a required field");
-                }
+                //if (string.IsNullOrWhiteSpace(entity.FriendlyIdentifier))
+                //{
+                //    throw new KnownError("Friendly identifier is a required field");
+                //}
 
 
                 #region PR Number Generation

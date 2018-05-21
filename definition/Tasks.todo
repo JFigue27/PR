@@ -122,16 +122,19 @@ ROLES
  
 ------------------------------------------------------------------------------------------------------------------
 STATUS
-  - Pending
-  - MRO Quote
-  - MRO Quoted
-  - PM Rejected
-  - PM Approved
-  - DM Quote Rejected
-  - DM Quote Approved
-  - GM Quote Rejected
-  - GM Quote Approved
-  - Finalized
+  - Pending                - DM/GM    - Pending
+  - DM Quote Rejected      - User     - Rejected
+  - GM Quote Rejected      - User     - Rejected
+  - DM Quote Approved      - MRO      - In procces
+  - GM Quote Approved      - MRO      - In procces
+  - MRO Quoted             - PM       - In process
+  - PM Rejected            - MRO      - In process
+  - PM Approved            - DM/GM    - In process
+  - DM Rejected            - PM       - In process
+  - GM Rejected            - PM       - In process
+  - DM Approved            - MRO      - Approved
+  - GM Approved            - MRO      - Approved
+  - Finalized              - User     - Completed
 
 ------------------------------------------------------------------------------------------------------------------
 ENTITIES

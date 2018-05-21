@@ -28,6 +28,12 @@ namespace BusinessSpecificLogic.EF
         [ForeignKey("DepartmentKey")]
         public Department Department { get; set; }
         public decimal? Budget { get; set; }
+        public string FSMasterAccount { get; set; }
+        public string FSGLAccountDescription  { get; set; }
+        public string FSGLOrganizationDescription { get; set; }
+        public string FSIsGLAccountActiveOrInactive { get; set; }
+        public int FSGLMasterAccountKey { get; set; }
+        public string FSGLAccountGroupDescription { get; set; }
         ///End:Generated:Properties<<<
     }
 }

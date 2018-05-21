@@ -124,9 +124,64 @@ namespace BusinessSpecificLogic.Logic
                     Password = currentUser.EmailPassword,
                     From = currentUser.Email,
                     Subject = "PR - " + pr.PRNumber.GeneratedNumber + " [" +  entity.Status + "] " + entity.Title,
-                    Body = "PR - " + pr.PRNumber.GeneratedNumber + ". " + " [" + entity.Status + "] " + entity.Title
-                            + "<br><b>Description</b><br>" + entity.RequestDescription
-                            + @"<br><br>Open document here: <a href=""" + hyperlink + @""">" + pr.PRNumber.GeneratedNumber + "</a>"
+
+
+
+
+
+                    Body = @"<div style='width: 90%;margin: auto;box-shadow: 1px 1px 8px #c3c3c3;border: 1px solid #d4d4d4;'>
+    <div style='background: #006064;text-align: center;color: white;padding: 10px;'>
+        <div style='font-size: 20px;font-family: sans-serif;'>PR System notification</div>
+    </div>
+    <div  style='padding:20px;'>
+        <div style='font-size: 16px;margin-bottom: 10px; margin-left: 10px;font-family: sans-serif;'>
+            <label>
+                <b>User</b>
+            </label>
+            <br>
+            <span>" + currentUser.Value + @"</span>
+        </div>
+        <div style='font-size: 16px;margin-bottom: 10px; margin-left: 10px;font-family: sans-serif;'>
+            <label>
+                <b>Status</b>
+            </label>
+            <br>
+            <span>" + entity.Status + @"</span>
+        </div>
+        
+        <div style='font-size: 16px;margin-bottom: 10px; margin-left: 10px;font-family: sans-serif;'>
+            <label>
+                <b>PR Friendly Identifier</b>
+            </label>
+            <br>
+            <span> " + pr.FriendlyIdentifier + @"</span>
+        </div>
+    
+        <div style='font-size: 16px;margin-bottom: 10px; margin-left: 10px;font-family: sans-serif;'>
+            <label>
+                <b>Request message</b>
+            </label>
+            <br>
+            <span> " + entity.RequestDescription + @"</span>
+        </div>
+
+        <div style='font-size: 16px;margin-bottom: 10px;padding:10px;margin-left: 10px; color:#0075ed;border: none;border-radius: 5px;font-family: sans-serif;'>
+            <a href=' " + hyperlink + @" ' style='text-decoration: none;font-size: 22px;'>
+                Open document here
+            </a>
+        </div>
+    </div>
+</div>"
+
+
+
+
+
+
+                    //Body = "PR - " + pr.PRNumber.GeneratedNumber + ". " + " [" + entity.Status + "] " + entity.Title
+                    //        + "<br><b>Description</b><br>" + entity.RequestDescription
+                    //        + @"<br><br>Open document here: <a href=""" + hyperlink + @""">" + pr.PRNumber.GeneratedNumber + "</a>"
+
                 };
 
                 switch (entity.Status)

@@ -23,8 +23,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of baseList" (click)="openItem(item)">
-        <td class="width-20" data-title="Account Number">{{ item.Value }}</td>
-        <td data-title="Description">{{ item.Description }}</td>
+        <td class="width-20" data-title="Account Number">{{ item.FSMasterAccount }}</td>
+        <td data-title="Description">{{ item.FSGLAccountDescription }}</td>
       </tr>
     </tbody>
   </table>

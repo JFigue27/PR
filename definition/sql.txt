@@ -1,0 +1,60 @@
+INSERT INTO [CQADB].[dbo].[CatPart] (
+                   [Value]
+      ,[FSItemKey]
+      ,[FSItemNumber]
+      ,[FSItemDescription]
+      ,[FSItemReference1]
+      ,[FSItemRef1Desc]
+      ,[FSCustomerKey])
+SELECT DISTINCT
+       FSItem.ItemNumber,
+                  FSItem.ItemKey,
+                  FSItem.ItemNumber,
+       FSItem.ItemDescription,
+       FSItem.ItemReference1,
+       FSClassRef.ITEM_REF1_DESC,       
+       FSCustomer.CustomerKey
+FROM FSSERV.FSDBMR.dbo._NoLock_FS_Customer FSCustomer
+     INNER JOIN FSSERV.FSDBMR.dbo._NoLock_FS_COHeader FSCOHeader ON FSCustomer.CustomerKey = FSCOHeader.CustomerKey
+     INNER JOIN FSSERV.FSDBMR.dbo._NoLock_FS_COLine FSCOLine ON FSCOHeader.COHeaderKey = FSCOLine.COHeaderKey
+     INNER JOIN FSSERV.FSDBMR.dbo._NoLock_FS_Item FSItem ON FSCOLine.ItemKey = FSItem.ItemKey
+     LEFT OUTER JOIN FSSERV.FSDBMR.dbo._CAP_Class_Ref FSClassRef ON FSItem.ItemReference1 = FSClassRef.ITEM_REF1
+WHERE
+    NOT EXISTS (SELECT 1 FROM [CQADB].[dbo].[CatPart] 
+    WHERE FSItemKey = FSItem.ItemKey)
+    
+ORDER BY FSItem.ItemNumber;
+
+
+
+
+SELECT  FS_GLMasterAccount.MasterAccount MasterAccount, 
+        FS_GLMasterAccountData.GLAccountDescription,
+	FS_GLMasterAccountData.GLOrganizationDescription,
+        FS_GLMasterAccountData.IsGLAccountActiveOrInactive,
+	FS_GLMasterAccount.GLMasterAccountKey, 
+	FS_GLAccountGroup.GLAccountGroupDescription
+FROM  FS_GLMasterAccount INNER JOIN FS_GLMasterAccountData 
+	ON FS_GLMasterAccount.GLMasterAccountKey = FS_GLMasterAccountData.GLMasterAccountKey 
+INNER JOIN FS_GLAccountGroup
+	ON FS_GLMasterAccount.GLAccountGroupKey = FS_GLAccountGroup.GLAccountGroupKey
+GO
+
+
+
+
+
+SELECT  MasterAccount.MasterAccount MasterAccount, 
+        MasterAccountData.GLAccountDescription,
+	MasterAccountData.GLOrganizationDescription,
+        MasterAccountData.IsGLAccountActiveOrInactive,
+	MasterAccount.GLMasterAccountKey, 
+	GLAccountGroup.GLAccountGroupDescription
+FROM  
+FSSERV.FSDBMR.dbo.FS_GLMasterAccount MasterAccount INNER JOIN 
+FSSERV.FSDBMR.dbo.FS_GLMasterAccountData MasterAccountData
+	ON MasterAccount.GLMasterAccountKey = MasterAccountData.GLMasterAccountKey 
+INNER JOIN
+FSSERV.FSDBMR.dbo.FS_GLAccountGroup GLAccountGroup
+	ON MasterAccount.GLAccountGroupKey = AccountGroup.GLAccountGroupKey
+GO

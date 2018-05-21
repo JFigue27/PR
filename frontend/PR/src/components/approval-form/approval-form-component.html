@@ -18,12 +18,14 @@
   <div *ngIf="getCurrentRole() == 'User' && (!baseEntity.Status || baseEntity.Status == 'Pending' 
       || baseEntity.Status == 'DM Rejected' || baseEntity.Status == 'GM Rejected')">
     <button mat-raised-button color="basic" (click)="saveApproval('Pending')">Request to Manager</button>
-    <!-- <button mat-raised-button color="basic" (click)="saveApproval('MRO Quote')">Request to MRO</button> -->
   </div>
+  
   <div *ngIf="getCurrentRole() == 'MRO'">
-    <button mat-raised-button color="basic" (click)="saveApproval('MRO Quoted')" *ngIf="baseEntity.Status != 'DM Quote Approved' && baseEntity.Status != 'GM Quote Approved' && baseEntity.Status != 'Finalized' ">Send to Purchasing Manager</button>
+    <button mat-raised-button color="basic" (click)="saveApproval('MRO Quoted')" 
+    *ngIf="baseEntity.Status != 'DM Quote Approved' && baseEntity.Status != 'GM Quote Approved' && baseEntity.Status != 'Finalized' ">Send to Purchasing Manager</button>
     <button mat-raised-button color="basic" (click)="saveApproval('Finalized')" *ngIf="baseEntity.Status == 'DM Quote Approved' || baseEntity.Status == 'GM Quote Approved' ">Finalize</button>
   </div>
+  
   <div *ngIf="getCurrentRole() == 'Department Manager'">
     <button mat-raised-button color="basic" (click)="saveApproval('Pending')" *ngIf="getCurrentUser().UserKey != baseEntity.UserApproverKey && 
     (!baseEntity.Status || baseEntity.Status == 'Pending' || baseEntity.Status == 'GM Rejected') ">Request to Manager</button>
@@ -36,12 +38,14 @@
     <button mat-raised-button color="basic" (click)="saveApproval('DM Approved')" *ngIf="baseEntity.Status == 'DM Quote Rejected' || baseEntity.Status == 'PM Approved' ">Approve quote</button>
     <button mat-raised-button color="warn" (click)="saveApproval('DM Quote Rejected')" *ngIf="baseEntity.Status == 'DM Quote Approved' || baseEntity.Status == 'PM Approved' ">Reject quote</button>
   </div>
+  
   <div *ngIf="getCurrentRole() == 'General Manager'">
     <button mat-raised-button color="basic" (click)="saveApproval('GM Quote')" *ngIf=" !baseEntity.Status || baseEntity.Status == 'Pending' || baseEntity.Status == 'GM Rejected'">Send to MRO</button>
     <button mat-raised-button color="warn" (click)="saveApproval('GM Rejected')" *ngIf="baseEntity.Status == 'Pending' || baseEntity.Status == 'MRO Quote' || baseEntity.Status == 'GM Quote'">Reject</button>
     <button mat-raised-button color="basic" (click)="saveApproval('GM Quote Approved')" *ngIf="baseEntity.Status == 'GM Quote Rejected' || baseEntity.Status == 'PM Approved' ">Approve quote</button>
     <button mat-raised-button color="warn" (click)="saveApproval('GM Quote Rejected')" *ngIf="baseEntity.Status == 'GM Approved' || baseEntity.Status == 'PM Approved' ">Reject quote</button>
   </div>
+  
   <div *ngIf="getCurrentRole() == 'Purchasing Manager'">
     <button mat-raised-button color="warn" (click)="saveApproval('PM Rejected')" *ngIf="baseEntity.Status == 'MRO Quoted' || baseEntity.Status == 'PM Approved' ">Reject Quote</button>
     <button mat-raised-button color="basic" (click)="saveApproval('PM Approved')" *ngIf="baseEntity.Status == 'MRO Quoted' || baseEntity.Status == 'PM Rejected' 

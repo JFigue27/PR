@@ -20,7 +20,7 @@ export abstract class ListController {
 
     constructor(public config: IConfigListController ) {
         this.config.paginate = config.paginate == undefined ? true: this.config.paginate;
-        this.config.limit = config.limit || 10;
+        this.config.limit = config.limit || 20;
         this.config.filters = config.filters || '';
         if (config.paginate == false){
             this.config.limit = 0;
