@@ -12,7 +12,7 @@ namespace BusinessSpecificLogic.EF
         {
             ///Start:Generated:Constructor<<<
             sys_active = true;
-			///End:Generated:Constructor<<<
+            ///End:Generated:Constructor<<<
 
         }
 
@@ -39,5 +39,31 @@ namespace BusinessSpecificLogic.EF
         public string Hyperlink { get; set; }
         public string Title { get; set; }
         ///End:Generated:Properties<<<
+
+        [NotMapped]
+        public string FriendlyStatus
+        {
+            get
+            {
+                var sStatus = "";
+                switch (Status)
+                {
+                    case "Pending":
+                        return "Pending";
+                    case "DM Rejected":
+                    case "GM Rejected":
+                        return "Rejected";
+                    case "DM Quote Approved":
+                    case "GM Quote Approved":
+                        return "Approved for Quoting";
+                    case "MRO Quoted":
+                        return "Quoted submitted by MRO";
+                    default:
+                        break;
+                }
+
+                return sStatus;
+            }
+        }
     }
 }

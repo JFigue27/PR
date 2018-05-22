@@ -11,7 +11,8 @@ import { ApprovalFormComponent } from '../approval-form/approval-form-component'
 import { ModalController } from 'ionic-angular/components/modal/modal-controller';
 import { SupplierFormComponent } from '../supplier-form/supplier-form-component';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'pr-component',
@@ -20,14 +21,12 @@ import { Observable } from 'rxjs/Observable';
 export class PRComponent extends FormController implements OnInit {
   private accounts = [];
   private departments = [];
-  private suppliers = []; 
+  private suppliers:any=[]; 
   private users = [];
   private approval: any;
   public userRole: string;
   public itemsSource: any;
   public currencies = ['Dlls', 'Mxn'];
-  filteredOptions: Observable<string[]>;
-
   myControl: FormControl = new FormControl();
 
   constructor (
@@ -55,7 +54,6 @@ export class PRComponent extends FormController implements OnInit {
       this.accounts = oResult.Result;
     });
 
-
     this.userService.getPage(0, 1,'?Role=Department Manager&Role=General Manager').subscribe(oResult => {
       this.users = oResult.Result;
     });
@@ -65,24 +63,19 @@ export class PRComponent extends FormController implements OnInit {
     });
 
     let PurchaseRequestKey: number;
-    if (this.params.get('oEntityOrId') > 0) {
-      PurchaseRequestKey = this.params.get('oEntityOrId');
-    } else {
-      PurchaseRequestKey = this.params.get('oEntityOrId').id;
+      if (this.params.get('oEntityOrId') > 0) {
+        PurchaseRequestKey = this.params.get('oEntityOrId');
+      } else {
+        PurchaseRequestKey = this.params.get('oEntityOrId').id;
+      }
+    // this.suppliers = this.myControl.valueChanges.pipe(
+    //     startWith(''), map(val => this.filter(val))
+    //   );
     }
-
-    // this.filteredOptions = this.myControl.valueChanges.pipe(startWith(''),
-    //   map(val => this.filter(val))
-    // );
-      
-    }
-
   // filter(val: string): string[] {
   //   return this.suppliers.filter(option =>
-  //     option.toLowerCase().indexOf(val.toLowerCase()) === 0);
+  //     option.toLowerCase().includes(val.toLowerCase()));
   // }
-
-
    
   getSupplier1Sum() {
     if (this.baseEntity && this.baseEntity.PRLines) {

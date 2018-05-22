@@ -106,7 +106,7 @@ export class ApprovalFormComponent extends FormController implements OnInit {
 
   beforeSave() {
     this.baseEntity.Title = "Purchase Request - " + this.pr.FriendlyIdentifier;
-    this.baseEntity.UserApproverKey = this.approverKey;
+    this.baseEntity.UserApproverKey = this.pr.DepartmentManagerKey;
   }
 
   afterSave() {

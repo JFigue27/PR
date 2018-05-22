@@ -57,7 +57,7 @@
                         || item.Status == 'GM Quote Rejected'
                         || item.Status == 'DM Quote Rejected' "></ion-icon>
         </td>
-        <td class="width-10" data-title="Status"> {{ item.Status }}</td>
+        <td class="width-10" data-title="Status"> {{ item.Status }} {{item.FriendlyStatus}}</td>
         <td class="width-10" data-title="Requested By">{{ item.InfoTrack?.User_CreatedBy.Value }}</td>
         <td data-title="Description">{{ item.PurchaseRequest.FriendlyIdentifier }}</td>
         <td data-title="Date Requested">{{ item.ResponseDescription }}</td>
@@ -68,4 +68,4 @@
   </table>
 </section>
 <!-- <pre>{{ filterOptions | json }}</pre> -->
-<!-- <pre>{{ baseList | json }}</pre> -->
+<pre>{{ baseList | json }}</pre>
