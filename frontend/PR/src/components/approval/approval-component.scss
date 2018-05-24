@@ -1,14 +1,18 @@
 approval-component {
 
     section {
-        width: 90%;
+        width: 95%;
         margin: auto;
     }
     
+    .select-filter {
+        margin-left: 30px;
+    }
+
     .icon-status {
-        font-size: 28px;
+        font-size: 24px;
         font-weight: 800;
-        margin-left: 35%;
+        margin-left: 25%;
     }
     
     .icon-pending {
@@ -22,13 +26,29 @@ approval-component {
     .icon-fail {
         color: red;
     }
+    .row-pending {
+        // border: 3px solid rgb(240, 186, 21);
+        background: rgba(255, 231, 65, 0.21)
+    }
+    
+    .row-pending:hover {
+        // border: 3px solid rgb(240, 186, 21);
+        background: rgba(255, 226, 35, 0.39) !important;
+    }
+ 
 
     @media (min-width:800px) {
         .width-4 {
             width:4%;
         }
-        .width-10{
+        .width-7 {
+            width:8%;
+        }
+        .width-10 {
             width:10%;
+        }
+        .width-15 {
+            width:15%;
         }
     }
 }

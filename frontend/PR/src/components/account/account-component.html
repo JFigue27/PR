@@ -1,8 +1,4 @@
 
-<section>
-  <h1><ion-icon ios="ios-card" md="md-card"></ion-icon> Accounts</h1>
-</section>
-
 <section class="search">
   <input type="text" class="input-search" placeholder="Search" [(ngModel)]="filterOptions.filterGeneral" (ngModelChange)="refresh();">
   <button class="button-search  primary-color" (click)="refresh();">
@@ -23,8 +19,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of baseList" (click)="openItem(item)">
-        <td class="width-20" data-title="Account Number">{{ item.FSMasterAccount }}</td>
-        <td data-title="Description">{{ item.FSGLAccountDescription }}</td>
+        <td class="width-20" data-title="Account Number">{{ item.Value }}</td>
+        <td data-title="Description">{{ item.Description }}</td>
+        <!-- <td class="width-20" data-title="Account Number">{{ item.FSMasterAccount }}</td>
+        <td data-title="Description">{{ item.FSGLAccountDescription }}</td> -->
       </tr>
     </tbody>
   </table>

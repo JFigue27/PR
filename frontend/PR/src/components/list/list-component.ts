@@ -17,7 +17,7 @@ export class ListComponent extends ListController implements OnInit {
                 public PrService: PRServiceProvider,
                 public nav: NavController
               ) {
-                  super({ service: PrService, paginate: true, limit: 10, filterName: 'prFilter' });
+                  super({ service: PrService, paginate: true, limit: 20, filterName: 'prFilter' });
               }
 
   ngOnInit() {

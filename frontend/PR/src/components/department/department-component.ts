@@ -14,7 +14,7 @@ export class DepartmentComponent extends ListController implements OnInit  {
               public departmentSerivceProvider: DepartmentServiceProvider,
               public dialog:MatDialog
             ) {
-                super({ service: departmentSerivceProvider, paginate: true, limit: 10, filterName: 'DepartmentFilter' });
+                super({ service: departmentSerivceProvider, paginate: true, limit: 20, filterName: 'DepartmentFilter' });
               }
 
   ngOnInit() {

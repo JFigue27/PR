@@ -15,6 +15,10 @@
   </div>
 </div>
 <div class="div-buttons">
+  
+  
+  
+  
   <div *ngIf="getCurrentRole() == 'User' && (!baseEntity.Status || baseEntity.Status == 'Pending' 
       || baseEntity.Status == 'DM Rejected' || baseEntity.Status == 'GM Rejected')">
     <button mat-raised-button color="basic" (click)="saveApproval('Pending')">Request to Manager</button>

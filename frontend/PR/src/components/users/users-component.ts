@@ -14,7 +14,7 @@ export class UsersComponent extends ListController implements OnInit {
             super({ 
               service: userService,
               paginate: true,
-              limit: 10,
+              limit: 20,
               filterName: 'UserFilter' });
           }
 

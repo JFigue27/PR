@@ -53,11 +53,21 @@ namespace BusinessSpecificLogic.EF
                     case "DM Rejected":
                     case "GM Rejected":
                         return "Rejected";
-                    case "DM Quote Approved":
-                    case "GM Quote Approved":
-                        return "Approved for Quoting";
+                    case "DM Quote":
+                    case "GM Quote":
+                        return "Approved for quoting";
                     case "MRO Quoted":
                         return "Quoted submitted by MRO";
+                    case "PM Rejected":
+                        return "Quoted rejected by purchasing manager";
+                    case "PM Approved":
+                        return "Quoted ready for approval";
+                    case "DM Quote Rejected":
+                    case "GM Quote Rejected":
+                        return "Quoted rejected by manager";
+                    case "DM Quote Approved":
+                    case "GM Quote Approved":
+                        return "Approved";
                     default:
                         break;
                 }

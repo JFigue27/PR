@@ -1,17 +1,14 @@
-
-<section>
-  <h2><ion-icon name="ios-contact" md="md-book"></ion-icon> Approvals </h2>
-</section>
+ 
 
 <section class="search">
   <input type="text" class="input-search" placeholder="Search" [(ngModel)]="filterOptions.filterGeneral" (ngModelChange)="refresh();">
   <button class="button-search  primary-color" (click)="refresh();">
     <ion-icon name="ios-search" md="md-search"></ion-icon>
   </button>
-  <mat-form-field>
-    <mat-select placeholder="Filter by status">
+  <mat-form-field  class="select-filter">
+    <mat-select placeholder="Filter by status" (selectionChange)="filterStatus($event)">
       <mat-option *ngFor="let status of statuses" [value]="status.value">
-        {{ food.viewValue }}
+        {{ status.viewValue }}
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -20,52 +17,54 @@
 
 <section class="table-responsive-vertical shadow-z-1" ng-hide="!baseList || baseList.length == 0">
   <mat-paginator #paginator [pageSize]="filterOptions?.limit" [length]="filterOptions?.itemsCount" [pageIndex]="filterOptions?.page -1"
-    [pageSizeOptions]="[5, 10, 20, 50, 100]" (page)="pageChanged($event.pageIndex + 1, $event.pageSize);">
+    [pageSizeOptions]="[5, 10, 20, 50, 100]" (page)="pageChanged($event.pageIndex + 1, $event.pageSize).debounceTime(5000);">
   </mat-paginator>
   <table class="table table-condensed" style="table-layout: fixed;">
     <thead>
       <tr>
         <th class="width-4"><ion-icon ios="ios-create" md="md-create" class="icon-status"></ion-icon></th>
-        <th class="width-10">Status</th>
-        <th class="width-10">Requested by</th>
+        <th class="width-7">Status</th>
+        <th class="width-15">Status description</th>
+        <th class="width-10">User</th>
         <th>Identifier</th>
         <th>Manager Response</th>
-        <th>Date Requested</th>
-        <th>Date Last Edited</th>
+        <th class="width-10">Date Requested</th>
+        <th class="width-10">Date Last Edited</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of baseList" (click)="openItem(item)">
+      <tr *ngFor="let item of baseList" (click)="openItem(item)" class="tr-content" [ngClass]="getStatusStyle(item.Status)">
         <td class="width-4">
-          <ion-icon name='ios-checkmark' class="icon-status icon-ok" *ngIf="item.Status == 'DM Approved' 
-                        || item.Status == 'Finalized'
-                        || item.Status == 'PM Approved'
-                        || item.Status == 'DM Quote Approved'
-                        || item.Status == 'GM Quote Approved'
-                        || item.Status == 'GM Approved' "></ion-icon>
-          <ion-icon  name='ios-remove-circle-outline' class="icon-status icon-pending" *ngIf="item.Status == 'Pending' 
-                        || item.Status == 'MRO Quote'
-                        || item.Status == 'Quoted'
-                        || item.Status == 'DM Quote'
-                        || item.Status == 'GM Quote'
-                        || item.Status == 'MRO Quoted'
-                        || item.Status == 'Finance Quote'
-                        || item.Status == 'Quote Rejected' "></ion-icon>
-        <ion-icon name='ios-close-outline' class="icon-status icon-fail" *ngIf="item.Status == 'DM Rejected' 
-                        || item.Status == 'PM Rejected' 
-                        || item.Status == 'GM Rejected'
-                        || item.Status == 'GM Quote Rejected'
-                        || item.Status == 'DM Quote Rejected' "></ion-icon>
+          <i class="material-icons icon-status icon-ok"
+            *ngIf=" item.Status == 'DM Quote' || item.Status == 'GM Quote' || item.Status == 'PM Approved' ">
+            done
+          </i>
+          <i class="material-icons icon-status icon-ok"
+            *ngIf="item.Status == 'DM Approved' || item.Status == 'Finalized' || item.Status == 'GM Approved'">
+            done_all
+          </i>
+          <i class="material-icons icon-status " 
+            *ngIf="item.Status == 'Pending' || item.Status == 'MRO Quoted' || item.Status == 'Quote Rejected' ">
+            remove_circle_outline
+          </i>
+
+          <i class="material-icons icon-status icon-fail" 
+            *ngIf="item.Status == 'DM Rejected' || item.Status == 'PM Rejected' || item.Status == 'GM Rejected'
+                  || item.Status == 'GM Quote Rejected' || item.Status == 'DM Quote Rejected' ">
+            remove_circle_outline
+          </i>
+
         </td>
-        <td class="width-10" data-title="Status"> {{ item.Status }} {{item.FriendlyStatus}}</td>
+        <td class="width-7" data-title="Status"> {{ item.Status }}</td>
+        <td class="width-15" data-title="Status Description"> {{item.FriendlyStatus}}</td>
         <td class="width-10" data-title="Requested By">{{ item.InfoTrack?.User_CreatedBy.Value }}</td>
         <td data-title="Description">{{ item.PurchaseRequest.FriendlyIdentifier }}</td>
         <td data-title="Date Requested">{{ item.ResponseDescription }}</td>
-        <td data-title="Date Requested">{{ item.InfoTrack?.Date_CreatedOn | date: 'medium'}}</td>
-        <td data-title="Date Last Edited">{{ item.InfoTrack?.Date_EditedOn | date: 'medium'}}</td>
+        <td class="width-10" data-title="Date Requested">{{ item.InfoTrack?.Date_CreatedOn | date: 'MMM dd hh:mm a'}}</td>
+        <td class="width-10" data-title="Date Last Edited">{{ item.InfoTrack?.Date_EditedOn | date: 'MMM dd hh:mm a'}}</td>
       </tr>
     </tbody>
   </table>
 </section>
-<!-- <pre>{{ filterOptions | json }}</pre> -->
-<pre>{{ baseList | json }}</pre>
+<!-- <pre>{{ filterOptions | json }}</pre>
+<pre>{{ baseList | json }}</pre> -->

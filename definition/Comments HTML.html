@@ -1,0 +1,39 @@
+<script type="text/ng-template" id="recursiveComments">
+    <div ng-repeat="theComment in theComment.Comments">
+        <div class="media" style="border-top: 2px solid #E6E5E5;padding-top: 7px;">
+            <div class="media-left">
+                <img class="media-object img-thumbnail" src="" style="width:50px;" ng-src="{{getIdenticon(theComment)}}">
+            </div>
+            <div class="media-body" style="padding-top: 2px;">
+                <h6 class="media-heading" style="margin-top: 4px;">{{theComment.User}} {{theComment.CommentDate | date:'medium'}} </h6>
+                <pre style="background-color:transparent;text-align:justify;padding:0;min-height: 30px;border:0;white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word;">{{theComment.CommentText}}</pre>
+                <a href="" style="font-size:11px;margin-bottom: 10px;display: inline-block;" ng-click="showReply(this);" ng-hide="theComment.IsReplying">Reply</a>
+                <form ng-show="theComment.IsReplying">
+                    <div class="form-group" style="width:100%;">
+                        <div class="input-group">
+                            <textarea class="form-control custom-control msd-elastic" ng-model="replyText" rows="1" style="resize:none" show-focus="theComment.IsReplying"></textarea>
+                            <a href="" ng-click="theComment.IsReplying = false" class="input-group-addon btn btn-primary">Cancel</a>
+                            <a href="" ng-click="reply(theComment);" class="input-group-addon btn btn-primary">Reply</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div style="margin-left:50px;" ng-if="(theComment.Comments && theComment.Comments.length)">
+                <div ng-include="'recursiveComments'"></div>
+            </div>
+        </div>
+    </div>
+</script>
+<div class="container-fluid">
+    <h3>Comments</h3>
+    <div ng-include="'recursiveComments'"></div>
+    <form>
+        <div class="form-group" style="width:100%;margin-top:20px;">
+            <div class="input-group">
+                <textarea class="form-control custom-control msd-elastic" rows="4" ng-model="newComment" style="resize:none;height:50px;width: 100%;"></textarea>
+                <a href="" ng-click="addComment(ownerEntity);" class="input-group-addon btn btn-primary">Leave Comment
+                </a>
+            </div>
+        </div>
+    </form>
+</div>

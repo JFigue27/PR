@@ -1,9 +1,3 @@
-<section>
-  <h1>
-    <ion-icon name="ios-book" md="md-book"></ion-icon> Purchase Request List
-  </h1>
-</section>
-
 <section *ngIf="filterOptions"  class="search">
   <input type="text" class="input-search" placeholder="Search" [(ngModel)]="filterOptions.filterGeneral" (ngModelChange)="refresh();">
   <button class="button-search  primary-color" (click)="refresh();">
