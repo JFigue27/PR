@@ -4,6 +4,7 @@ import { ListController } from '../../services/ListController';
 import { NavController } from 'ionic-angular';
 import { PRPage } from '../../pages/pr-page/pr-page';
 import { UserServiceProvider } from '../../providers/user-service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'approval-component',
@@ -26,14 +27,21 @@ export class ApprovalComponent extends ListController implements OnInit {
   ];
 
 
-  constructor ( public nav: NavController, public approvalService: ApprovalServiceProvider, public userService:UserServiceProvider ) 
+  constructor ( 
+                public nav: NavController,
+                public approvalService: ApprovalServiceProvider,
+                public userService:UserServiceProvider,
+                public spinner: NgxSpinnerService
+              ) 
             {
               super({ service: approvalService, paginate: true, limit: 20, filterName: 'AprovalFilter' });
             }
 
   ngOnInit() {
-    this.clearFilters();
+      this.spinner.show();
+      this.clearFilters();
       this.load();
+      this.spinner.hide();
   }
 
   filterStatus(oEvent:any) {

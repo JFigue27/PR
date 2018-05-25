@@ -6,6 +6,7 @@ import { PRServiceProvider } from '../../providers/pr-service';
 import { UserServiceProvider } from '../../providers/user-service';
 import { PageEvent } from '@angular/material';
 import { utils } from '../../common/utils';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'list-component',
@@ -15,12 +16,14 @@ export class ListComponent extends ListController implements OnInit {
   constructor (
                 public userService:UserServiceProvider,
                 public PrService: PRServiceProvider,
-                public nav: NavController
+                public nav: NavController,
+                public spinner:NgxSpinnerService
               ) {
                   super({ service: PrService, paginate: true, limit: 20, filterName: 'prFilter' });
               }
 
   ngOnInit() {
+    this.spinner.show();
     let PrKey = utils.getParameterByName('id', null);
     if (PrKey) {
       window.history.replaceState({}, document.title, "/PR/Main");
@@ -30,6 +33,7 @@ export class ListComponent extends ListController implements OnInit {
     } else {
       this.load('filterUser=' + this.userService.LoggedUser.UserKey);
     }
+    this.spinner.hide();
   }
   
   onPageChanged(pageEvent: PageEvent){
@@ -47,10 +51,6 @@ export class ListComponent extends ListController implements OnInit {
     }
   }
   
-  delete(){
-    console.log('holaaaa');
-  }
-
   afterLoad() {
   }
 
