@@ -16,6 +16,7 @@ export class UserFormComponent extends FormController implements OnInit {
     { value: 'General Manager', viewValue: 'General Manager'},
     { value: 'MRO', viewValue: 'MRO' },
     { value: 'Purchasing Manager', viewValue: 'Purchasing Manager' },
+    { value: 'Project Manager', viewValue: 'Project Manager' },
     { value: 'User', viewValue: 'User' }
   ];
  

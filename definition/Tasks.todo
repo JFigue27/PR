@@ -94,11 +94,11 @@ TO-DO LIST
     ✔ when department select is changed automatically change the approver @done(18-05-16 10:32)
 
 GL Accounts integration with FS:
-☐ 1. Create fileds from FS, prefix with FS_
-☐ 2. Make query to import data from FS.
+✔ 1. Create fileds from FS, prefix with FS_ @done(18-05-29 11:07)
+✔ 2. Make query to import data from FS. @done(18-05-29 11:07)
    ☐ If GLAccount does not exist, add.
    ☐ If GLAccount already exists, just update.
-☐ 3. Add new FS-fields to GL-Account-Form as readonly.
+✔ 3. Add new FS-fields to GL-Account-Form as readonly. @done(18-05-29 11:07)
 ☐ 4. Create schedule job to run query created in point 2 every week.
 
 

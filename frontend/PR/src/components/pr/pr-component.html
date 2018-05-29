@@ -1,13 +1,19 @@
 <ion-card>
     <ion-card-header>
         <ion-grid>
-            <ion-row>
-                <ion-col col-10 col-sm-10 col-md-10 col-lg-10 col-lg-10>
-                    <h1><b>Purchase Request</b> - {{ baseEntity.ApprovalStatus }}</h1>
+            <ion-row class="resumen">
+                <ion-col col-10 col-sm-10 col-md-10 col-lg-10>
+                    <h1>
+                        <b>Purchase Request -</b> {{ baseEntity.PRNumber?.GeneratedNumber }}
+                        <div class="div-progress">
+                            <div>
+                                <label class="bar-status pending">{{ baseEntity.ApprovalStatus }}</label>
+                            </div>
+                            <mat-progress-bar  class="progress-bar" mode="determinate" [value]="displayStatusBar(baseEntity.ApprovalStatus)"></mat-progress-bar>
+                        </div>
+                    </h1>
                 </ion-col>
-                <ion-col col-2 col-sm-2 col-md-2 col-lg-2 col-lg-2>
-                    <b>PR Number:</b>&nbsp;&nbsp; {{ baseEntity.PRNumber?.GeneratedNumber }}
-                    <br>
+                <ion-col col-2 col-sm-2 col-md-2 col-lg-2>
                     <b>PO Number:</b>&nbsp;&nbsp;
                     <input type="text" class="form-input border-bottom" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.PONumber"
                         style="width:55%;" [disabled]="getCurrentRole() != 'MRO' " >
@@ -258,4 +264,4 @@
 <!-- 
 <pre>{{ accounts | json }}</pre>-->
 
-<!-- <pre>{{ baseEntity | json }}</pre>  -->
+<pre>{{ baseEntity | json }}</pre> 

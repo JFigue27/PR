@@ -4,6 +4,7 @@ import { PRServiceProvider } from '../../providers/pr-service';
 import { FormController } from '../../services/FormController';
 import { UserServiceProvider } from '../../providers/user-service';
 import { MatDialog } from '@angular/material';
+import { DialogComponent } from '../dialog/dialog-component';
 
 @Component({
   selector: 'approval-form-component',
@@ -15,14 +16,15 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   private response: string;
   @Input() pr: any;
   @Input() approverKey: number;
-  constructor(
-    public approvalService: ApprovalServiceProvider,
-    public PRService: PRServiceProvider,
-    public userService: UserServiceProvider,
-    public dialog: MatDialog
-  ) {
-    super({ service: approvalService });
-  }
+  
+  constructor (
+                public approvalService: ApprovalServiceProvider,
+                public PRService: PRServiceProvider,
+                public userService: UserServiceProvider,
+                public dialog: MatDialog
+              ) {
+                  super({ service: approvalService });
+            }
 
   ngOnInit() {
     this.userService.loadEntities().subscribe(oResult => {
@@ -39,31 +41,33 @@ export class ApprovalFormComponent extends FormController implements OnInit {
     }
   }
 
-  close() {
-
-  }
-
   afterCreate() {
     this.baseEntity.ConvertedDateRequested = new Date();
   }
 
-  saveApproval(status, type ? : any) {
-    if (confirm('Please confirm.')) {
+  saveApproval(status, type?:any) {
 
-      this.pr.api_attachments.uploadFiles().then(response => {
-        console.log('after upload files')
-        this.PRService.save(this.pr).then(r => {
-          this.baseEntity.editMode = true;
-          this.response = this.baseEntity.ResponseDescription;
-          this.baseEntity.ConvertedDateResponse = new Date();
-          this.pr.PRType = type;
-          this.baseEntity.Status = status;
-          this.save();
+    let dialogRef = this.dialog.open(DialogComponent, {
+      width: '550px',
+      height: '250px',
+      data: { messageDialog: 'Identifier', optional1: this.pr.FriendlyIdentifier}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result == true) {
+        this.pr.api_attachments.uploadFiles().then(response => {
+          console.log('after upload files');
+          this.PRService.save(this.pr).then(r => {
+            this.baseEntity.editMode = true;
+            this.response = this.baseEntity.ResponseDescription;
+            this.baseEntity.ConvertedDateResponse = new Date();
+            this.baseEntity.PRType = type;
+            this.baseEntity.Status = status;
+            this.save();
+          });
         });
-
-      });
-
-    }
+      }
+    });
   }
 
   getCurrentRole() {
@@ -81,8 +85,6 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   showButtons() {
     let status = this.baseEntity.Status;
     let role = this.userService.LoggedUser.Roles;
-
-    console.log('BEGIN SWITCH role ' + role + ' status ' + status);
     switch (role) {
       case "User":
         if (!status || status == "Pending" || status == "Rejected") return true;
@@ -107,6 +109,7 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   beforeSave() {
     this.baseEntity.Title = "Purchase Request - " + this.pr.FriendlyIdentifier;
     this.baseEntity.UserApproverKey = this.pr.DepartmentManagerKey;
+    this.pr.PRType = this.baseEntity.PRType;
   }
 
   afterSave() {

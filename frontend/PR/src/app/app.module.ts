@@ -8,6 +8,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 //COMPONENTS
 import { MyApp } from './app.component';
 import { HomeComponent } from '../components/home/home-component';
+import { DialogComponent } from '../components/dialog/dialog-component';
 import { LoginComponent } from '../components/login/login';
 import { ListComponent } from '../components/list/list-component';
 import { UsersComponent } from '../components/users/users-component';
@@ -62,6 +63,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 //Plugins
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -73,6 +75,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MyApp,
     //Components
     HomeComponent,
+    DialogComponent,
     LoginComponent,
     ListComponent,
     PRComponent,
@@ -118,14 +121,16 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MatRadioModule,
     MatTabsModule,
     MatAutocompleteModule,
+    MatProgressBarModule,
     NgxSpinnerModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     //Component
-    LoginComponent,
     MyApp,
+    LoginComponent,
+    DialogComponent,
     ListComponent,
     PRComponent,
     UserFormComponent,

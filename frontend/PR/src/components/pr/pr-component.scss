@@ -1,5 +1,15 @@
 pr-component {
+
+	.div-progress {
+		width: 40%;
+		display: inline-block;
+		margin-left: 15%;
+	}
 	
+	.progress-bar {
+		height: 10px;
+	}
+
 	.col-input {
 		font-weight: 600;
 	}

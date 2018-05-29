@@ -4,20 +4,23 @@ import { NavController } from 'ionic-angular';
 import { PRPage } from '../../pages/pr-page/pr-page';
 import { PRServiceProvider } from '../../providers/pr-service';
 import { UserServiceProvider } from '../../providers/user-service';
-import { PageEvent } from '@angular/material';
+import { PageEvent, MatDialog } from '@angular/material';
 import { utils } from '../../common/utils';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { DialogComponent } from '../dialog/dialog-component';
 
 @Component({
   selector: 'list-component',
   templateUrl: 'list-component.html'
 })
 export class ListComponent extends ListController implements OnInit {
+  messageDialog:string;
   constructor (
                 public userService:UserServiceProvider,
                 public PrService: PRServiceProvider,
                 public nav: NavController,
-                public spinner:NgxSpinnerService
+                public spinner:NgxSpinnerService,
+                public dialog:MatDialog
               ) {
                   super({ service: PrService, paginate: true, limit: 20, filterName: 'prFilter' });
               }
@@ -41,14 +44,22 @@ export class ListComponent extends ListController implements OnInit {
   }
 
   addItem() {
-    if (confirm('Are you sure you want to create a new PR?')) {
+    let dialogRef = this.dialog.open(DialogComponent, {
+      width: '550px',
+      height: '250px',
+      data: { messageDialog:'Please confirm to create a new Purchase Request', responseDialog: false}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result == true) { 
         this.PrService.createInstance().subscribe(oInstance => {
-        oInstance.DepartmentAssigned.Manager = null;
-        this.PrService.createEntity(oInstance).then(oEntity => {
-          this.nav.push(PRPage, { oEntityOrId: oEntity });
+          oInstance.DepartmentAssigned.Manager = null;
+          this.PrService.createEntity(oInstance).then(oEntity => {
+            this.nav.push(PRPage, { oEntityOrId: oEntity });
+          });
         });
-      });
-    }
+      }
+    });
   }
   
   afterLoad() {

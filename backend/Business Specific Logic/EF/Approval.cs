@@ -13,7 +13,7 @@ namespace BusinessSpecificLogic.EF
             ///Start:Generated:Constructor<<<
             sys_active = true;
             ///End:Generated:Constructor<<<
-
+            Status = "Created";
         }
 
         [Key]

@@ -1,0 +1,10 @@
+<h1 mat-dialog-title class="primary-color-font" style="border-bottom: 1px solid rgb(192, 192, 192)">Confirmation</h1>
+<div mat-dialog-content style="text-align: center;">
+  <h3 style="font-family: sans-serif;">{{ data.messageDialog }}</h3>
+  <h3 style="font-family: sans-serif;">{{ data.optional1 }}</h3>
+  <h3 style="font-family: sans-serif;">{{ data.optional2 }}</h3>
+</div>
+<div mat-dialog-actions style="float:right;">
+  <button mat-raised-button color="basic" (click)="onClose()">Cancel</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Accept</button>
+</div>

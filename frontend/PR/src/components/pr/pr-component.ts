@@ -24,6 +24,7 @@ export class PRComponent extends FormController implements OnInit {
   private suppliers:any=[]; 
   private users = [];
   private approval: any;
+  public progress: 20;
   public userRole: string;
   public itemsSource: any;
   public currencies = ['Dlls', 'Mxn'];
@@ -77,6 +78,33 @@ export class PRComponent extends FormController implements OnInit {
   //     option.toLowerCase().includes(val.toLowerCase()));
   // }
    
+  displayStatusBar(status:string){
+    switch (status) {
+      case "Created":
+        return 10
+      case "Pending":
+        return 20;
+      case "DM Quote":
+      case "GM Quote":
+        return 40;
+      case "MRO Quoted":
+        return 60;
+      case "PM Approved":
+        return 70;
+      case "DM Approved":
+      case "GM Approved":
+        return 90;
+      case "DM Rejected":
+      case "GM Rejected":
+        return 90;
+      case "Finalized":
+        return 100;
+      default:
+        return 0;
+    }
+  }
+
+
   getSupplier1Sum() {
     if (this.baseEntity && this.baseEntity.PRLines) {
       return this.baseEntity.PRLines.reduce(function (currentValue, item) {
@@ -127,12 +155,12 @@ export class PRComponent extends FormController implements OnInit {
     
     let status = this.baseEntity.ApprovalStatus;
     let role = this.userService.LoggedUser.Roles;
-    if (!status || status == "Pending" || status == "Rejected") return false;
+    if (status == "Created" || status == "Pending" || status == "Rejected") return false;
     
     switch(role) {
       // User takes validation above
       case "User":
-        if (!status || status == "Pending" || status == "DM Rejected" || status == "GM Rejected" ) return false;
+        if (status == "Created" || status == "Pending" || status == "DM Rejected" || status == "GM Rejected" ) return false;
         break;
       case "MRO":
         if (status == "MRO Quote" || status == "PM Rejected" || status == "DM Quote"
@@ -146,6 +174,9 @@ export class PRComponent extends FormController implements OnInit {
         break;
       case "General Manager":
         if (status == "Pending" || status == "GM Quote" || status == "GM Rejected" || status == "PM Approved") return false;
+        break;
+      case "Project Manager":
+        if (status == "DM Approved" || status == "Project Manager Rejected") return false;
         break;
       case "Administrator":
         return false;
