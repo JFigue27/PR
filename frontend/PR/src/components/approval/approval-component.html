@@ -17,7 +17,7 @@
 
 <section class="table-responsive-vertical shadow-z-1" ng-hide="!baseList || baseList.length == 0">
   <mat-paginator #paginator [pageSize]="filterOptions?.limit" [length]="filterOptions?.itemsCount" [pageIndex]="filterOptions?.page -1"
-    [pageSizeOptions]="[5, 10, 20, 50, 100]" (page)="pageChanged($event.pageIndex + 1, $event.pageSize).debounceTime(5000);">
+    [pageSizeOptions]="[5, 10, 20, 50, 100]" (page)="pageChanged($event.pageIndex + 1, $event.pageSize)">
   </mat-paginator>
   <table class="table table-condensed" style="table-layout: fixed;">
     <thead>
@@ -29,7 +29,7 @@
         <th>Identifier</th>
         <th>Manager Response</th>
         <th class="width-10">Date Requested</th>
-        <th class="width-10">Date Last Edited</th>
+        <th class="width-7">PO Number</th>
       </tr>
     </thead>
     <tbody>
@@ -61,7 +61,7 @@
         <td data-title="Description">{{ item.PurchaseRequest.FriendlyIdentifier }}</td>
         <td data-title="Date Requested">{{ item.ResponseDescription }}</td>
         <td class="width-10" data-title="Date Requested">{{ item.InfoTrack?.Date_CreatedOn | date: 'MMM dd hh:mm a'}}</td>
-        <td class="width-10" data-title="Date Last Edited">{{ item.InfoTrack?.Date_EditedOn | date: 'MMM dd hh:mm a'}}</td>
+        <td class="width-7" data-title="Status"> {{ item.PurchaseRequest.PONumber }}</td>
       </tr>
     </tbody>
   </table>

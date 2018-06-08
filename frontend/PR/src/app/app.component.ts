@@ -2,7 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, ModalController } from 'ionic-angular';
 import { LoginComponent } from '../components/login/login';
 import { HomePage } from '../pages/home/home-page';
-import { UserServiceProvider } from '../providers/user-service';
+import { UserService } from '../services/user.service';
+import { ListPage } from '../pages/list-page/list-page';
 
 @Component({
   templateUrl: 'app.html'
@@ -11,9 +12,10 @@ export class MyApp {
 
   CurrentUser: string;
   @ViewChild(Nav) nav: Nav;
-  rootPage: any = HomePage;
+  // rootPage: any = HomePage;
+  rootPage: any = ListPage;
 
-  constructor ( public platform: Platform, public modal: ModalController, public userService: UserServiceProvider ) {
+  constructor ( public platform: Platform, public modal: ModalController, public userService: UserService ) {
           this.initializeApp();
       }
 

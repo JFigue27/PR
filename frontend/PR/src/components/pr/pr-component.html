@@ -225,8 +225,8 @@
                     <div col-md-10 col-sm-12 class="margin-top-5">
                         <input [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" class="form-input border-bottom" (ngModelChange)="on_input_change()"
                             [(ngModel)]="baseEntity.ConvertedDateDepartmentManager">
-                        <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
-                        <mat-datepicker #myDatepicker></mat-datepicker>
+                        <mat-datepicker-toggle  [for]="myDatepicker"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi="true" #myDatepicker></mat-datepicker>
                     </div>
                 
                 </div>
@@ -248,20 +248,17 @@
                     <ion-col col-sm-12 col-xs-12 col-md-5 no-padding>
                         <approval-form-component [pr]="baseEntity" [approverKey]="getApprover()"></approval-form-component>
                     </ion-col>
+                    <ion-col col-sm-12 col-xs-12 col-md-12 no-padding>
+                        <button mat-raised-button color="primary" *ngIf="!getLockedStatus()" type="submit" class="btn-save" (click)="save()">Save</button>
+                    </ion-col>
                 </ion-row>
             </ion-grid>
 
     </ion-card-content>
 </ion-card>
-
-<div class="div-buttons">
-    <div>
-        <!-- <button type="button" (click)="print()" mat-raised-button color="primary">Print</button> -->
-        <button *ngIf="!getLockedStatus()  " 
-        type="submit" (click)="save()" mat-raised-button color="primary">Save</button>
-    </div>
-</div>
+ 
+<comments-component [ownerEntity]="baseEntity" ></comments-component>
 <!-- 
 <pre>{{ accounts | json }}</pre>-->
 
-<pre>{{ baseEntity | json }}</pre> 
+<!-- <pre>{{ baseEntity | json }}</pre>  -->

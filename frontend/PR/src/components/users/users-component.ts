@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserServiceProvider } from '../../providers/user-service';
+import { UserService } from '../../services/user.service';
 import { UserFormComponent } from '../user-form/user-form-component';
-import { ListController } from '../../services/ListController';
+import { ListController } from '../../core/ListController';
 import { MatDialog } from '@angular/material';
 
 @Component({
@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material';
 })
 export class UsersComponent extends ListController implements OnInit {
 
-  constructor ( public dialog:MatDialog, public userService: UserServiceProvider) {
+  constructor ( public dialog:MatDialog, public userService: UserService) {
             super({ 
               service: userService,
               paginate: true,

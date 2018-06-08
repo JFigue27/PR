@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
-import { ApprovalServiceProvider } from '../../providers/approval-service';
-import { PRServiceProvider } from '../../providers/pr-service';
-import { FormController } from '../../services/FormController';
-import { UserServiceProvider } from '../../providers/user-service';
+import { ApprovalService } from '../../services/approval.service';
+import { PRService } from '../../services/pr.service';
+import { FormController } from '../../core/FormController';
+import { UserService } from '../../services/user.service';
 import { MatDialog } from '@angular/material';
 import { DialogComponent } from '../dialog/dialog-component';
 
@@ -18,9 +18,9 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   @Input() approverKey: number;
   
   constructor (
-                public approvalService: ApprovalServiceProvider,
-                public PRService: PRServiceProvider,
-                public userService: UserServiceProvider,
+                public approvalService: ApprovalService,
+                public PRService: PRService,
+                public userService: UserService,
                 public dialog: MatDialog
               ) {
                   super({ service: approvalService });
@@ -35,7 +35,7 @@ export class ApprovalFormComponent extends FormController implements OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.pr && changes.pr.currentValue.AAA_EntityName) {
-      this.approvalService.getSingleWhere('PurchaseRequestKey', this.pr.PurchaseRequestKey).subscribe(oResponse => {
+      this.approvalService.getSingleWhere('PurchaseRequestKey', this.pr.PurchaseRequestKey).then(oResponse => {
         this.load(oResponse.Result);
       });
     }

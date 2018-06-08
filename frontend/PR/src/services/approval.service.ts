@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CRUDFactory } from '../services/CRUDFactory';
+import { CRUDFactory } from '../core/CRUDFactory';
 import { HttpClient } from '@angular/common/http';
-import { UtilsServiceProvider } from './utils-service/utils-service';
+import { UtilsService } from './utils-service/utils-service';
 
 @Injectable()
-export class ApprovalServiceProvider extends CRUDFactory {
+export class ApprovalService extends CRUDFactory {
     
-    constructor(public http: HttpClient, private utilsService: UtilsServiceProvider) {
+    constructor(public http: HttpClient, private utilsService: UtilsService) {
         super({ endPoint: 'Approval'});   
         this.http = http;
     }

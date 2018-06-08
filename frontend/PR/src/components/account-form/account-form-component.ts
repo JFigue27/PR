@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { AccountServiceProvider } from '../../providers/account-service';
-import { FormController } from '../../services/FormController';
-import { DepartmentServiceProvider } from '../../providers/department-service';
+import { AccountService } from '../../services/account.service';
+import { FormController } from '../../core/FormController';
+import { DepartmentService } from '../../services/department.service';
 import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
@@ -13,8 +13,8 @@ export class AccountFormComponent extends FormController implements OnInit {
   private departments = [];
   constructor (
             @Inject(MAT_DIALOG_DATA)public data:any,
-            public accountService: AccountServiceProvider,
-            private department: DepartmentServiceProvider
+            public accountService: AccountService,
+            private department: DepartmentService
           ) {
               super({ service: accountService });
           }

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams } from 'ionic-angular';
-import { FormController } from '../../services/FormController';
-import { PRServiceProvider } from '../../providers/pr-service';
-import { UserServiceProvider } from '../../providers/user-service';
-import { SupplierServiceProvider } from '../../providers/supplier-service';
-import { DepartmentServiceProvider } from '../../providers/department-service';
-import { AccountServiceProvider } from '../../providers/account-service';
+import { FormController } from '../../core/FormController';
+import { PRService } from '../../services/pr.service';
+import { UserService } from '../../services/user.service';
+import { SupplierService } from '../../services/supplier.service';
+import { DepartmentService } from '../../services/department.service';
+import { AccountService } from '../../services/account.service';
 import { MatDialog } from '@angular/material';
 import { ApprovalFormComponent } from '../approval-form/approval-form-component';
 import { ModalController } from 'ionic-angular/components/modal/modal-controller';
@@ -33,11 +33,11 @@ export class PRComponent extends FormController implements OnInit {
   constructor (
                 public dialog: MatDialog,
                 private params: NavParams,
-                public userService: UserServiceProvider,
-                public PRService: PRServiceProvider,
-                private departmentService: DepartmentServiceProvider,
-                private accountService: AccountServiceProvider,
-                private supplierService: SupplierServiceProvider,
+                public userService: UserService,
+                public PRService: PRService,
+                private departmentService: DepartmentService,
+                private accountService: AccountService,
+                private supplierService: SupplierService,
                 public modal: ModalController
               ) {
                 super({ service: PRService });
@@ -81,7 +81,7 @@ export class PRComponent extends FormController implements OnInit {
   displayStatusBar(status:string){
     switch (status) {
       case "Created":
-        return 10
+        return 10;
       case "Pending":
         return 20;
       case "DM Quote":

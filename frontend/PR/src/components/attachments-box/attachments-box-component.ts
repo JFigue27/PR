@@ -1,7 +1,7 @@
-import { Component, Input, OnChanges, SimpleChanges,ElementRef } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
-import { Config } from '../../services/config';
-import { PRServiceProvider } from '../../providers/pr-service';
+import { Config } from '../../core/config';
+import { PRService } from '../../services/pr.service';
 import alertify from 'alertifyjs';
 
 export interface IAttachment {
@@ -36,8 +36,7 @@ export class AttachmentsBoxComponent implements OnChanges {
   public uploader: FileUploader;
   
   constructor (
-    public PRService: PRServiceProvider,
-    public element: ElementRef
+    public PRService: PRService 
   ) { 
   }
   

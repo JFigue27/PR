@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { CRUDFactory } from '../services/CRUDFactory';
+import { CRUDFactory } from '../core/CRUDFactory';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class UserServiceProvider extends CRUDFactory {
+export class UserService extends CRUDFactory {
     public LoggedUser: any;
 
     constructor(public http: HttpClient) {

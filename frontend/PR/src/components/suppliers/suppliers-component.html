@@ -3,6 +3,9 @@
   <button class="button-search  primary-color" (click)="refresh();">
     <ion-icon name="ios-search" md="md-search"></ion-icon>
   </button>
+  <button mat-mini-fab (click)="addItem()" class="button-fixed secondary-color">
+    <ion-icon ios="ios-add" md="md-add"></ion-icon>
+  </button>
 </section>
 
 <section class="table-responsive-vertical shadow-z-1" ng-hide="!baseList || baseList.length == 0">
@@ -21,9 +24,4 @@
       </tr>
     </tbody>
   </table>
-</section>
-<section>
-  <button mat-mini-fab color="primary" (click)="addItem()" style="float:right;">
-    <ion-icon ios="ios-add" md="md-add"></ion-icon>
-  </button>
-</section>
+</section> 

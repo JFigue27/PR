@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import { CRUDFactory } from '../services/CRUDFactory';
+import { CRUDFactory } from '../core/CRUDFactory';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
-export class DepartmentServiceProvider extends CRUDFactory {
-
+export class SupplierService extends CRUDFactory {
+    
     constructor(public http: HttpClient) {
-        super({ endPoint: 'Department' });
+        super({ endPoint: 'Supplier'});   
         this.http = http;
     }
-
+    
     adapterIn(oEntity: any) {
     }
-
+      
     adapterOut(oEntity: any) {
         oEntity.WasAnsweredByCustomer = true;
     }

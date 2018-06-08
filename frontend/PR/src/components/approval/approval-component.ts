@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ApprovalServiceProvider } from '../../providers/approval-service';
-import { ListController } from '../../services/ListController';
+import { ApprovalService } from '../../services/approval.service';
+import { ListController } from '../../core/ListController';
 import { NavController } from 'ionic-angular';
 import { PRPage } from '../../pages/pr-page/pr-page';
-import { UserServiceProvider } from '../../providers/user-service';
+import { UserService } from '../../services/user.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -29,8 +29,8 @@ export class ApprovalComponent extends ListController implements OnInit {
 
   constructor ( 
                 public nav: NavController,
-                public approvalService: ApprovalServiceProvider,
-                public userService:UserServiceProvider,
+                public approvalService: ApprovalService,
+                public userService:UserService,
                 public spinner: NgxSpinnerService
               ) 
             {
@@ -54,11 +54,6 @@ export class ApprovalComponent extends ListController implements OnInit {
   }
 
   getStatusStyle(status: string) {
-
-    if (status == "DM Rejected" || status == "PM Rejected" ){
-      return "row-rejected";
-    }
-
     if (this.userService.LoggedUser.Roles == "User") {
       if (status == 'DM Rejected' || status == 'GM Rejected') {
         return "row-pending";

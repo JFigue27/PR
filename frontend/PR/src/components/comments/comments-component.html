@@ -1,0 +1,48 @@
+<!-- <script type="text/ng-template" id="recursiveComments">
+    <div ng-repeat="theComment in theComment.Comments">
+        <div class="media">
+            <div class="media-left">
+                <img class="media-object img-thumbnail" src=""ng-src="{{getIdenticon(theComment)}}">
+            </div>
+            <div class="media-body">
+                <h6 class="media-heading">{{theComment.User}} {{theComment.CommentDate | date:'medium'}} </h6>
+                <pre>{{theComment.CommentText}}</pre>
+                <a href="" ng-click="showReply(this);" ng-hide="theComment.IsReplying">Reply</a>
+                <form ng-show="theComment.IsReplying">
+                    <div class="form-group">
+                        <div>
+                            <textarea ng-model="replyText" rows="1"></textarea>
+                            <a href="" ng-click="theComment.IsReplying = false" >Cancel</a>
+                            <a href="" ng-click="reply(theComment);">Reply</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div ng-if="(theComment.Comments && theComment.Comments.length)">
+                <div ng-include="'recursiveComments'"></div>
+            </div>
+        </div>
+    </div>
+</script> -->
+<div class="comment-wrapper">
+
+    <div class="comments-section">
+        <p class="comment-header">Comments</p>
+        <div *ngFor="let theComment of theComment.Comments" class="single-comment" >
+            <div class="single-comment-left">
+                <img src="assets/imgs/anonymous.png" class="section-img" [src]="getIdenticon(theComment)"/>
+            </div>
+            <div class="single-comment-body">
+                <p><b>{{ theComment.User }}</b>  {{ theComment.CommentDate | date: 'MMM dd hh:mm a'}} </p>
+                <label > {{ theComment.CommentText }}</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="type-comment-section">        
+        <mat-form-field class="textarea-comment">
+            <textarea matInput color="accent" placeholder="Leave a comment"  ></textarea>
+        </mat-form-field>
+        <button mat-raised-button color="accent" class="btn-send-comment" (click)="addComment(ownerEntity);" >Add comment</button>
+    </div>
+</div>

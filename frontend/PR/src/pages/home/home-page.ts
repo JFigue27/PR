@@ -7,8 +7,8 @@ import { AccountPage } from '../account-page/account-page';
 import { ListPage } from '../list-page/list-page';
 import { ApprovalPage } from '../approval-page/approval-page';
 import { LoginComponent } from '../../components/login/login';
-import { UserServiceProvider } from '../../providers/user-service';
-import { ListController } from '../../services/ListController';
+import { UserService } from '../../services/user.service';
+import { ListController } from '../../core/ListController';
 import { EmailPage } from '../email-page/email-page';
 import { FormControl } from '@angular/forms';
 
@@ -20,7 +20,7 @@ export class HomePage extends ListController {
   private user: string;
   mode = new FormControl('over');
 
-  constructor(public nav: NavController, public modal: ModalController, public userService: UserServiceProvider) {
+  constructor(public nav: NavController, public modal: ModalController, public userService: UserService) {
     super({ service: userService });
     this.user = this.userService.LoggedUser.UserName;
   }

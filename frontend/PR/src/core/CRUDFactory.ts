@@ -69,14 +69,15 @@ export abstract class CRUDFactory {
         .catch(this.generalError);
     }
 
-    getSingleWhere(property, value): Observable<any> {
+    getSingleWhere(property, value) {
         if (property && value) {
             return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/GetSingleWhere/' + property + '/' + value
                 + '?noCache=' + Number(new Date()), this.addAuthorization())
                 .map(response => this.extractData(response), this)
-                .catch(this.generalError);
+                .catch(this.generalError)
+                .toPromise();
         } else {
-            return Observable.empty();
+            return null;
         }
     }
 

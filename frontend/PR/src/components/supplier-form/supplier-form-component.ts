@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { SupplierServiceProvider } from '../../providers/supplier-service';
-import { FormController } from '../../services/FormController';
+import { SupplierService } from '../../services/supplier.service';
+import { FormController } from '../../core/FormController';
 import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
@@ -12,7 +12,7 @@ export class SupplierFormComponent extends FormController implements OnInit {
 
   constructor (
                 @Inject(MAT_DIALOG_DATA) public data: any,
-                public supplierService: SupplierServiceProvider
+                public supplierService: SupplierService
               ) {
                 super({ service: supplierService });
               }

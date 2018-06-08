@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DepartmentServiceProvider } from '../../providers/department-service';
-import { ListController } from '../../services/ListController';
+import { DepartmentService } from '../../services/department.service';
+import { ListController } from '../../core/ListController';
 import { DepartmentFormComponent } from '../department-form/department-form-component';
 import { MatDialog } from '@angular/material';
 
@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material';
 export class DepartmentComponent extends ListController implements OnInit  {
 
   constructor (
-              public departmentSerivceProvider: DepartmentServiceProvider,
+              public departmentSerivceProvider: DepartmentService,
               public dialog:MatDialog
             ) {
                 super({ service: departmentSerivceProvider, paginate: true, limit: 20, filterName: 'DepartmentFilter' });

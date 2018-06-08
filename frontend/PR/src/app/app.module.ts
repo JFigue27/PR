@@ -26,6 +26,7 @@ import { EmailFormComponent } from '../components/email-form/email-form-componen
 
 //MODULES
 import { AttachmentsModule } from '../components/attachments.module';
+import { CommentsModule } from '../components/comments.module';
 
 //PAGES
 import { HomePage } from '../pages/home/home-page';
@@ -40,15 +41,14 @@ import { EmailPage } from '../pages/email-page/email-page';
 
 //SERVICES
 import { LoginService } from '../services/login.service';
-
-//PROVIDERS
-import { PRServiceProvider } from '../providers/pr-service';
-import { UtilsServiceProvider } from '../providers/utils-service/utils-service';
-import { UserServiceProvider } from '../providers/user-service';
-import { SupplierServiceProvider } from '../providers/supplier-service';
-import { DepartmentServiceProvider } from '../providers/department-service';
-import { AccountServiceProvider } from '../providers/account-service';
-import { ApprovalServiceProvider } from '../providers/approval-service';
+import { PRService } from '../services/pr.service';
+import { UtilsService } from '../services/utils-service/utils-service';
+import { UserService } from '../services/user.service';
+import { SupplierService } from '../services/supplier.service';
+import { DepartmentService } from '../services/department.service';
+import { AccountService } from '../services/account.service';
+import { ApprovalService } from '../services/approval.service';
+import { CommentsService } from '../services/comments.service';
 
 //Angular Material components
 import { MatNativeDateModule, MatDatepickerModule, MatRadioModule } from '@angular/material';
@@ -103,6 +103,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   ],
   imports: [
     AttachmentsModule,
+    CommentsModule,
     CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -157,14 +158,15 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   ],
   providers: [
     LoginService,
-    PRServiceProvider,
+    PRService,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    UtilsServiceProvider,
-    UserServiceProvider,
-    SupplierServiceProvider,
-    DepartmentServiceProvider,
-    AccountServiceProvider,
-    ApprovalServiceProvider
+    UtilsService,
+    UserService,
+    SupplierService,
+    DepartmentService,
+    AccountService,
+    ApprovalService,
+    CommentsService
   ]
 })
 export class AppModule {}

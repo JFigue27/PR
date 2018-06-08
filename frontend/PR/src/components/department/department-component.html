@@ -1,9 +1,10 @@
-
-
 <section class="search">
   <input type="text" class="input-search" placeholder="Search" [(ngModel)]="filterOptions.filterGeneral" (ngModelChange)="refresh();">
   <button class="button-search  primary-color" (click)="refresh();">
     <ion-icon name="ios-search" md="md-search"></ion-icon>
+  </button>
+  <button mat-mini-fab (click)="addItem()" class="button-fixed secondary-color">
+    <ion-icon ios="ios-add" md="md-add"></ion-icon>
   </button>
 </section>
 
@@ -25,9 +26,4 @@
       </tr>
     </tbody>
   </table>
-</section>
-<section>
-  <button mat-mini-fab color="primary" (click)="addItem()" style="float:right;">
-    <ion-icon ios="ios-add" md="md-add"></ion-icon>
-  </button>
 </section>

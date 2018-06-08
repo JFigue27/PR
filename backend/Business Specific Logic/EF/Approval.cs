@@ -41,6 +41,10 @@ namespace BusinessSpecificLogic.EF
         ///End:Generated:Properties<<<
 
         [NotMapped]
+        public string PONumberValue { get; set; }
+
+
+        [NotMapped]
         public string FriendlyStatus
         {
             get
@@ -48,6 +52,8 @@ namespace BusinessSpecificLogic.EF
                 var sStatus = "";
                 switch (Status)
                 {
+                    case "Created":
+                        return "Created";
                     case "Pending":
                         return "Pending";
                     case "DM Rejected":

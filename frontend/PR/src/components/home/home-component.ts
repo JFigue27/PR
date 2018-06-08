@@ -10,14 +10,14 @@ import { EmailPage } from '../../pages/email-page/email-page';
 import { LoginComponent } from '../login/login';
 import { utils } from '../../common/utils';
 import { PRPage } from '../../pages/pr-page/pr-page';
-import { UserServiceProvider } from '../../providers/user-service';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'home-component',
     templateUrl: 'home-component.html'
 })
 export class HomeComponent implements OnInit{
-    constructor(public nav: NavController, public modal:ModalController, public userService: UserServiceProvider) {  }
+    constructor(public nav: NavController, public modal:ModalController, public userService: UserService) {  }
 
     ngOnInit() {
         let PrKey = utils.getParameterByName('id', null);

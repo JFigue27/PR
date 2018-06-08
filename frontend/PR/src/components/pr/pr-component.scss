@@ -118,13 +118,17 @@ pr-component {
 	}
  
 	.div-buttons > div {
-		// display: inline;
 		float: right;
 		margin-bottom: 15px;
 		margin-top: 15px;
 		margin-right: 15px;
 	}
 
+	.btn-save {
+		float: right;
+		margin-right: 15px;
+	}
+	
 	.margin-top-5 {
 		margin-top: 5px;
 	}

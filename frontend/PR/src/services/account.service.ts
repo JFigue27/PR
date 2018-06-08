@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { CRUDFactory } from '../services/CRUDFactory';
+import { CRUDFactory } from '../core/CRUDFactory';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
-export class AccountServiceProvider extends CRUDFactory {
+export class AccountService extends CRUDFactory {
 
     constructor(public http: HttpClient) {
         super({ endPoint: 'GLAccount' });

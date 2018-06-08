@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { UserServiceProvider } from '../../providers/user-service';
-import { FormController } from '../../services/FormController';
+import { UserService } from '../../services/user.service';
+import { FormController } from '../../core/FormController';
 import { MAT_DIALOG_DATA } from '@angular/material';
-import { DepartmentServiceProvider } from '../../providers/department-service';
+import { DepartmentService } from '../../services/department.service';
 
 @Component({
   selector: 'user-form-component',
@@ -22,8 +22,8 @@ export class UserFormComponent extends FormController implements OnInit {
  
   constructor (
                 @Inject(MAT_DIALOG_DATA) public data: any,
-                public userService: UserServiceProvider,
-                public departmentService: DepartmentServiceProvider
+                public userService: UserService,
+                public departmentService: DepartmentService
               ) {
                   super({ service: userService });
               }

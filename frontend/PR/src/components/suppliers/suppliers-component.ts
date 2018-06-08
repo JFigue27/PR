@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SupplierServiceProvider } from '../../providers/supplier-service';
-import { ListController } from '../../services/ListController';
+import { SupplierService } from '../../services/supplier.service';
+import { ListController } from '../../core/ListController';
 import { SupplierFormComponent } from '../supplier-form/supplier-form-component';
 import { MatDialog } from '@angular/material';
 
@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material';
 export class SuppliersComponent extends ListController implements OnInit {
   constructor (
               public dialog:MatDialog,
-              public supplierService: SupplierServiceProvider,
+              public supplierService: SupplierService,
             ) {
     super({ service: supplierService, paginate: true, limit: 20, filterName: 'SupplierFilter' });
             }

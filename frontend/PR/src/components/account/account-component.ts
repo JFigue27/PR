@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountServiceProvider } from '../../providers/account-service';
+import { AccountService } from '../../services/account.service';
 import { AccountFormComponent } from '../account-form/account-form-component';
-import { ListController } from '../../services/ListController';
+import { ListController } from '../../core/ListController';
 import { MatDialog } from '@angular/material';
 
 @Component({
@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material';
 export class AccountComponent extends ListController implements OnInit {
   constructor (
                 public dialog:MatDialog,
-                public accountService: AccountServiceProvider
+                public accountService: AccountService
               ) {
                   super({ service: accountService, paginate: true, limit: 20, filterName: 'AccountFilter' });
               }

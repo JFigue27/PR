@@ -17,6 +17,24 @@ namespace BusinessSpecificLogic.Logic
         {
         }
 
+        protected override void AdapterOut(params Approval[] entities)
+        {
+            foreach (var item in entities)
+            {
+                if (item.PurchaseRequest != null)
+                {
+                    item.PONumberValue = item.PurchaseRequest.PONumber;
+                }
+            }
+        }
+
+        protected override bool PopulateForSearch(params Approval[] entities)
+        {
+            AdapterOut(entities);
+            return true;
+        }
+
+
         protected override IQueryable<Approval> StaticDbQueryForList(IQueryable<Approval> dbQuery)
         {
             if (LoggedUser.Role == "Department Manager")
@@ -29,18 +47,22 @@ namespace BusinessSpecificLogic.Logic
                 dbQuery = dbQuery
                     .Where(e => e.UserRequisitorKey == LoggedUser.UserID || e.UserApproverKey == LoggedUser.UserID );
             }
-            else if(LoggedUser.Role == "Finance")
-            {
-                dbQuery = dbQuery
-                    .Include(e => e.PurchaseRequest)
-                    .Include(e => e.UserApprover)
-                    .Where(e => e.PurchaseRequest.PRType == "Finance" && e.Status != "Pending" && e.UserApproverKey > 0 && (
-                            (e.Status == "GM Approved" && e.UserApprover.Role == "General Manager") 
-                            || (e.Status == "DM Approved" && e.UserApprover.Role == "Department Manager") ));
-            }
+            //else if(LoggedUser.Role == "Finance")
+            //{
+            //    dbQuery = dbQuery
+            //        .Include(e => e.PurchaseRequest)
+            //        .Include(e => e.UserApprover)
+            //        .Where(e => e.PurchaseRequest.PRType == "Finance" && e.Status != "Pending" && e.UserApproverKey > 0 && (
+            //                (e.Status == "GM Approved" && e.UserApprover.Role == "General Manager") 
+            //                || (e.Status == "DM Approved" && e.UserApprover.Role == "Department Manager") ));
+            //}
             else if (LoggedUser.Role == "Administrator")
             {
                 //We do not filter for Administrator
+            }
+            else if (LoggedUser.Role == "Finance")
+            {
+                //We do not filter for Finance
             }
             else if (LoggedUser.Role == "MRO")
             {

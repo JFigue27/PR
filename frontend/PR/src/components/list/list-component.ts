@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ListController } from '../../services/ListController';
+import { ListController } from '../../core/ListController';
 import { NavController } from 'ionic-angular';
 import { PRPage } from '../../pages/pr-page/pr-page';
-import { PRServiceProvider } from '../../providers/pr-service';
-import { UserServiceProvider } from '../../providers/user-service';
+import { PRService } from '../../services/pr.service';
+import { UserService } from '../../services/user.service';
 import { PageEvent, MatDialog } from '@angular/material';
 import { utils } from '../../common/utils';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -16,8 +16,8 @@ import { DialogComponent } from '../dialog/dialog-component';
 export class ListComponent extends ListController implements OnInit {
   messageDialog:string;
   constructor (
-                public userService:UserServiceProvider,
-                public PrService: PRServiceProvider,
+                public userService:UserService,
+                public PrService: PRService,
                 public nav: NavController,
                 public spinner:NgxSpinnerService,
                 public dialog:MatDialog

@@ -3,7 +3,7 @@ import { NavController, ModalController } from 'ionic-angular';
 import { UsersPage } from '../users/users-page';
 import { DepartmentPage } from '../department-page/department-page';
 import { LoginComponent } from '../../components/login/login';
-import { UserServiceProvider } from '../../providers/user-service';
+import { UserService } from '../../services/user.service';
 import { ListPage } from '../list-page/list-page';
 import { AccountPage } from '../account-page/account-page';
 import { ApprovalPage } from '../approval-page/approval-page';
@@ -19,7 +19,7 @@ export class SuppliersPage {
   private user: string;
   mode = new FormControl('over');
 
-  constructor ( public nav: NavController, public modal: ModalController, public userService: UserServiceProvider ) {
+  constructor ( public nav: NavController, public modal: ModalController, public userService: UserService ) {
     this.user = this.userService.LoggedUser.UserName;
   }
 

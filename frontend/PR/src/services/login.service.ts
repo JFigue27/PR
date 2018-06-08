@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Config } from '../services/config';
-import { UserServiceProvider } from '../providers/user-service';
+import { Config } from '../core/config';
+import { UserService } from '../services/user.service';
 
 
 @Injectable()
@@ -10,7 +10,7 @@ export class LoginService {
 
     constructor(
         private http: HttpClient,
-        private userService: UserServiceProvider
+        private userService: UserService
     ) {
 
     }
