@@ -175,8 +175,8 @@ Frontend Migration from Angualr 1 to Angular 4:
             ☐ Navigation Menu loaded async by User Role.
         ☐ Bottom Toolbar for Lists. (Filtering, Search, Batch Remove, Create, Pagination, Sort).
         ☐ Bottom Toolbar for Single Form. (Create, Checkout, Checkin, Finalize, Delete, Print, Reload/Refresh).
-    ☐ Spin Loading.
-      ☐ Display Spin Loading only when certain time is exceeded.
+    ✔ Spin Loading. @done(18-06-08 16:09)
+      ✔ Display Spin Loading only when certain time is exceeded. @done(18-06-08 16:09)
     ✔ Pagination. @done(18-03-23 12:59)
     ☐ Modal.
     ☐ Horizontal Lists sortable by Drag and Drop.
@@ -205,7 +205,7 @@ Frontend Migration from Angualr 1 to Angular 4:
         ✔ UPLOAD_FILES(): Function to start uploading all pending attachments. @done(18-03-30 12:10)
         ✔ REMOVE_ATTACHMENT(): Function to mark an attachment for being deleted (Attachment is actually deleted until user clicks Save). @done(18-03-30 12:10)
         ✔ CANCEL_REMOVE(): Unmarks attachment for being deleted. @done(18-03-30 12:10)
-        ☐ ADD_ATTACHMENT(): Open Browser to search for a file.
+        ✔ ADD_ATTACHMENT(): Open Browser to search for a file. @done(18-06-08 16:08)
     ☐ Buttons that do not accept double click.
     ☐ Confirm Buttons: Two actions in same space, maybe: first action just a click, second action: to slide to right.
     ✔ Alertify. @done(18-03-26 12:24)
@@ -216,7 +216,7 @@ Frontend Migration from Angualr 1 to Angular 4:
     ☐ Commenting.
     ☐ ToDos.
     ☐ Notifications.
-    ☐ Send Email.
+    ☐  . Email.
     ☐ Toggle Navigation Toolbar.
         ☐ Keep data when switching back.
     -------------------------------------
