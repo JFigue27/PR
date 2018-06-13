@@ -21,6 +21,7 @@ export class CommentsComponent implements OnChanges {
     public currentUser:any;
     public replyText:string;
     public commentProperty:string;
+    public commentToSave:string;
     public CommentsRootKey:any;
     public theComment:Object={ Comments: [] };
     public currentCommentsRoom = 'Comments_' + this.appKey + '_' + this.CommentsRootKey;
@@ -32,14 +33,21 @@ export class CommentsComponent implements OnChanges {
 
         // if (this.ownerEntity && this.ownerEntity[this.commentProperty] > 0) {
         if (this.ownerEntity && this.ownerEntity.PurchaseRequestKey) {
+            
+            this.commentProperty = this.customProperty || "CommentKey";
             this.refreshComments();
-
+            this.commentService.createInstance().subscribe(response =>{
+                console.log(response);
+                this.commentToSave = response;
+            });
+            this.currentUser = this.userService.LoggedUser;
             this.CommentsRootKey = this.ownerEntity[this.commentProperty];
 
         } else {
             this.theComment = {
                 Comments: []
-            };
+        };
+        
         }
 
     }
@@ -87,69 +95,70 @@ export class CommentsComponent implements OnChanges {
 
     refreshComments(){
         console.log('Inside refreshComments');
-        // this.commentService.getSingleWhere('PurchaseRequestKey', this.ownerEntity.PurchaseRequestKey).then(oResponse => {
-        //     console.log('2018');
-        //     console.log(oResponse.Result);
-        //     this.theComment = {
-        //         Comments: oResponse.Result
-        //     };
-        // });
-        this.theComment = { Comments: [
-{
-            "ParentKey": 23439,
-                "CommentText": "Buenas tardes este es el primer comentario que existe actualmente con el nuevo sistema",
-                    "CommentDate": "2018-05-21T16:08:32",
-                        "CommentByUser": 60,
-                            "Comments": [
-                                {
-                                    "ParentKey": 54436,
-                                    "CommentText": "hello",
-                                    "CommentDate": "2018-05-21T16:08:49",
-                                    "CommentByUser": 2,
-                                    "Comments": [
-                                        {
-                                            "ParentKey": 54437,
-                                            "CommentText": "Otro reply",
-                                            "CommentDate": "2018-05-22T13:22:01",
-                                            "CommentByUser": 2,
-                                            "Comments": [],
-                                            "User": "Alfredo Pacheco",
-                                            "Identicon64": "",
-                                            "id": 54457,
-                                            "AAA_EntityName": "Comment"
-                                        }],
-                                    "User": "Alfredo Pacheco",
-                                    "Identicon64": "",
-                                    "id": 54437,
-                                    "AAA_EntityName": "Comment"
-                                }],
-                                "User": "Erick Holguin",
-                                    "Identicon64": "",
-                                        "id": 54436,
-                                            "AAA_EntityName": "Comment"
-        },
-        {
-            "ParentKey": 23439,
-                "CommentText": "Este es el segundo comentario hecho por el usuario segundo que contesto la peticion",
-                    "CommentDate": "2018-05-21T16:08:59",
-                        "CommentByUser": 2,
-                            "Comments": [
-                                {
-                                    "ParentKey": 54438,
-                                    "CommentText": "Hi",
-                                    "CommentDate": "2018-05-21T16:09:22",
-                                    "CommentByUser": 60,
-                                    "Comments": [],
-                                    "User": "Erick Holguin",
-                                    "Identicon64": "",
-                                    "id": 54439,
-                                    "AAA_EntityName": "Comment"
-                                }],
-                                "User": "Alfredo Pacheco",
-                                    "Identicon64": "",
-                                        "id": 54438,
-                                            "AAA_EntityName": "Comment"
-        }]
-        }
+        this.commentService.loadEntity(this.ownerEntity[this.commentProperty]).subscribe(oResponse => {
+            console.log('2018');
+            console.log(oResponse);
+            console.log(oResponse.Result);
+            this.theComment = {
+                Comments: oResponse.Result
+            };
+        });
     };
 }
+        //         this.theComment = { Comments: [
+        // {
+        //             "ParentKey": 23439,
+        //                 "CommentText": "Buenas tardes este es el primer comentario que existe actualmente con el nuevo sistema",
+        //                     "CommentDate": "2018-05-21T16:08:32",
+        //                         "CommentByUser": 60,
+        //                             "Comments": [
+        //                                 {
+        //                                     "ParentKey": 54436,
+        //                                     "CommentText": "hello",
+        //                                     "CommentDate": "2018-05-21T16:08:49",
+        //                                     "CommentByUser": 2,
+        //                                     "Comments": [
+        //                                         {
+        //                                             "ParentKey": 54437,
+        //                                             "CommentText": "Otro reply",
+        //                                             "CommentDate": "2018-05-22T13:22:01",
+        //                                             "CommentByUser": 2,
+        //                                             "Comments": [],
+        //                                             "User": "Alfredo Pacheco",
+        //                                             "Identicon64": "",
+        //                                             "id": 54457,
+        //                                             "AAA_EntityName": "Comment"
+        //                                         }],
+        //                                     "User": "Alfredo Pacheco",
+        //                                     "Identicon64": "",
+        //                                     "id": 54437,
+        //                                     "AAA_EntityName": "Comment"
+        //                                 }],
+        //                                 "User": "Erick Holguin",
+        //                                     "Identicon64": "",
+        //                                         "id": 54436,
+        //                                             "AAA_EntityName": "Comment"
+        //         },
+        //         {
+        //             "ParentKey": 23439,
+        //                 "CommentText": "Este es el segundo comentario hecho por el usuario segundo que contesto la peticion",
+        //                     "CommentDate": "2018-05-21T16:08:59",
+        //                         "CommentByUser": 2,
+        //                             "Comments": [
+        //                                 {
+        //                                     "ParentKey": 54438,
+        //                                     "CommentText": "Hi",
+        //                                     "CommentDate": "2018-05-21T16:09:22",
+        //                                     "CommentByUser": 60,
+        //                                     "Comments": [],
+        //                                     "User": "Erick Holguin",
+        //                                     "Identicon64": "",
+        //                                     "id": 54439,
+        //                                     "AAA_EntityName": "Comment"
+        //                                 }],
+        //                                 "User": "Alfredo Pacheco",
+        //                                     "Identicon64": "",
+        //                                         "id": 54438,
+        //                                             "AAA_EntityName": "Comment"
+        //         }]
+        //         }

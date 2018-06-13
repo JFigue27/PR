@@ -1,0 +1,15 @@
+1.- Create Entity *
+    1.1 - Configure EF Attributes
+    1.2 - Inherit from BaseDocument / BaseEntity
+        1.2.1 - Implement all Abstract Methods
+    1.3 - Register in Context   
+2.- Create Logic, Interface and Class
+    2.1 - Create Interface (I + className + Logic) Inherit from ILogic / IReadOnlyLogic / IDocumentLogic
+    2.2 - Create Class
+    2.3 - Inherit from abstractClass Logic / ReadOnlyLogic / DocumentLogic
+3.- Create Controller in WEB API    
+4.- Configure Implementations in NinjectWebCommon
+5.- Update database
+
+
+qYAGsUUSam67VR7RciQZCIqVtJ_sH06yfucgTv6MtzpparskNtIcvlF9r0Xm6uGlI4vcZxFxWezV-NAKfWIhJax6VW0ecH20F-gw0m35V5bm6hCXND8CQDPvtWzK2AGwzFSVgXy_hYRHqT7aCxUqvQUmYYILsf43K8EpFyYQFpQZA4R6fzY-A5azgi5VmKkBYOfm-26ShrKMqkRXP14x3V3PgA6BMEAOqxKAD23DcUSgNzen49lENnMoqwyHIFsFNrUWv58JmSeVxTEMykejiiBKbIdrtUN5za7iO0OtCxQ3BoU5EtRn7aMBs0gKiA_xO8EOyPz_zv4Br75j9zhhlQ

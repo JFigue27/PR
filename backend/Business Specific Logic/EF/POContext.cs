@@ -26,7 +26,8 @@ namespace BusinessSpecificLogic.EF
 		public virtual DbSet<GLAccount> GLAccounts { get; set; }
 		public virtual DbSet<Approval> Approvals { get; set; }
 		public virtual DbSet<PurchaseRequest> PurchaseRequests { get; set; }
-		///End:Generated:DbSet<<<
+        public virtual DbSet<Comment> Comments { get; set; }
+        ///End:Generated:DbSet<<<
 
         #region From Reusable Modules
         public virtual DbSet<Track> Tracks { get; set; }

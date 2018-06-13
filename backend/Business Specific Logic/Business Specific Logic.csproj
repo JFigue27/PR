@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="Auth\AuthRepository.cs" />
     <Compile Include="Auth\AuthContext.cs" />
+    <Compile Include="EF\Comment.cs" />
     <Compile Include="EF\Email.cs" />
     <Compile Include="EF\POContext.cs" />
     <!-- Start:Generated:EF -->
@@ -90,6 +91,7 @@
     <Compile Include="EF\Approval.cs" />
     <Compile Include="EF\PurchaseRequest.cs" />
     <Compile Include="JSON Entities\Contact.cs" />
+    <Compile Include="Logic\CommentLogic.cs" />
     <!-- End:Generated:EF -->
     <Compile Include="Logic\TokenLogic.cs" />
     <Compile Include="Logic\UserLogic.cs" />

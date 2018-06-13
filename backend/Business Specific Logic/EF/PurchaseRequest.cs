@@ -27,9 +27,13 @@ namespace BusinessSpecificLogic.EF
         ///Start:Generated:Properties<<<
         public string AccountNo { get; set; }
         public string PurposeOrUse { get; set; }
+
+
         public int? RequisitorKey { get; set; }
         [ForeignKey("RequisitorKey")]
         public User Requisitor { get; set; }
+
+
         public string RequisitionName { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
         public int? DepartmentManagerKey { get; set; }
@@ -67,6 +71,10 @@ namespace BusinessSpecificLogic.EF
         public int? DepartmentKey { get; set; }
         [ForeignKey("DepartmentKey")]
         public Department DepartmentAssigned { get; set; }
+        public int? CommentKey { get; set; }
+        [ForeignKey("CommentKey")]
+        public Comment Comment { get; set; }
+
         ///End:Generated:Properties<<<
 
         public List<PRLine> PRLines { get; set; }
