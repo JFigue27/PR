@@ -89,6 +89,7 @@ namespace ReusableWebAPI.App_Start
             kernel.Bind<IGLAccountLogic>().To<GLAccountLogic>();
             kernel.Bind<IApprovalLogic>().To<ApprovalLogic>();
             kernel.Bind<IPurchaseRequestLogic>().To<PurchaseRequestLogic>();
+            kernel.Bind<ICommentLogic>().To<CommentLogic>();
             ///End:Generated:DI<<<
             #endregion
 

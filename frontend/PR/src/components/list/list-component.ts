@@ -36,7 +36,6 @@ export class ListComponent extends ListController implements OnInit {
     } else {
       this.load('filterUser=' + this.userService.LoggedUser.UserKey);
     }
-    this.spinner.hide();
   }
   
   onPageChanged(pageEvent: PageEvent){
@@ -63,6 +62,7 @@ export class ListComponent extends ListController implements OnInit {
   }
   
   afterLoad() {
+    this.spinner.hide();
   }
 
   onOpenItem(oEntity: any) {

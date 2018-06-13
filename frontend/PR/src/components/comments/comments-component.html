@@ -30,7 +30,7 @@
         <p class="comment-header">Comments</p>
         <div *ngFor="let theComment of theComment.Comments" class="single-comment" >
             <div class="single-comment-left">
-                <img src="assets/imgs/anonymous.png" class="section-img" [src]="getIdenticon(theComment)"/>
+                <!-- <img src="assets/imgs/anonymous.png" class="section-img" [src]="getIdenticon(theComment)"/> -->
             </div>
             <div class="single-comment-body">
                 <p><b>{{ theComment.User }}</b>  {{ theComment.CommentDate | date: 'MMM dd hh:mm a'}} </p>
@@ -46,3 +46,8 @@
         <button mat-raised-button color="accent" class="btn-send-comment" (click)="addComment(ownerEntity);" >Add comment</button>
     </div>
 </div>
+
+<h3>theComment/h3>
+<pre>{{ theComment | json }}</pre>
+<h3>comment to save</h3>
+<pre>{{ commentToSave | json }}</pre>

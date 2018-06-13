@@ -120,6 +120,14 @@ namespace BusinessSpecificLogic.Logic
 
                 #endregion
 
+                #region
+                var comment = new Comment();
+                comment.CommentByUserKey = LoggedUser.UserID ?? 1  ;
+                ctx.Comments.Add(comment);
+                ctx.SaveChanges();
+                entity.CommentKey = comment.CommentKey;
+                #endregion
+
                 entity.RequisitorKey = LoggedUser.UserID;
             }
 

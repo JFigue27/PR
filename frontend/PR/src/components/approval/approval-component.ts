@@ -41,7 +41,6 @@ export class ApprovalComponent extends ListController implements OnInit {
       this.spinner.show();
       this.clearFilters();
       this.load();
-      this.spinner.hide();
   }
 
   filterStatus(oEvent:any) {
@@ -81,6 +80,7 @@ export class ApprovalComponent extends ListController implements OnInit {
   }
 
   afterLoad() {
+    this.spinner.hide();
   }
 
   onOpenItem(oEntity: any) {

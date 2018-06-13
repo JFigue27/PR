@@ -77,7 +77,7 @@ export abstract class CRUDFactory {
                 .catch(this.generalError)
                 .toPromise();
         } else {
-            return null;
+            return Promise.resolve({});
         }
     }
 
@@ -97,8 +97,8 @@ export abstract class CRUDFactory {
         return Observable.empty();
     }
 
-    removeEntity(userId) {
-        return this.http.delete<ICommonResponse>(this.baseUrl + this.config.endPoint + "/" + userId, this.addAuthorization())
+    removeEntity(id) {
+        return this.http.delete<ICommonResponse>(this.baseUrl + this.config.endPoint + "/" + id, this.addAuthorization())
             .map(response => this.extractData(response), this)
             .catch(this.generalError);
     }
