@@ -17,7 +17,10 @@ namespace BusinessSpecificLogic.EF
         [Key]
         public int CommentKey { get; set; }
 
-        public long? ParentKey { get; set; }
+        public int? ParentKey { get; set; }
+        [ForeignKey("ParentKey")]
+        public Comment ParentComment { get; set; }
+
         public string CommentText { get; set; }
         public DateTimeOffset? CommentDate { get; set; }
         public int CommentByUserKey { get; set; }

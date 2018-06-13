@@ -21,7 +21,7 @@ export class CommentsComponent implements OnChanges {
     public currentUser:any;
     public replyText:string;
     public commentProperty:string;
-    public commentToSave:string;
+    public commentToSave:string = {CommentText: ''};
     public CommentsRootKey:any;
     public theComment:Object={ Comments: [] };
     public currentCommentsRoom = 'Comments_' + this.appKey + '_' + this.CommentsRootKey;
@@ -56,8 +56,24 @@ export class CommentsComponent implements OnChanges {
         if (currentComment.Comments == null) {
             currentComment.Comments = [];
         }
-        // this.currentUser = this.retrieveCurrentUser();
         this.currentUser = this.userService.LoggedUser;
+        this.commentToSave.id = 0;
+        this.commentToSave.ParentKey = currentComment[this.commentProperty];
+        this.save(this.commentToSave, this.theComment);
+    }
+
+    save(commentToSave, parentComment) {
+        console.log('save')
+        this.commentService.save(commentToSave).then(response => {
+            console.log(response);
+
+            parentComment.Comments.push(response);
+            parentComment.IsReplying = false;
+            this.commentService.createInstance().subscribe(response =>{
+                this.commentToSave = response;
+            });
+
+        });
     }
 
 
@@ -86,8 +102,7 @@ export class CommentsComponent implements OnChanges {
 
     }
 
-    save(commentToSave, parentComment) {
-    }
+    
 
     showReply(that){
         that.theComment.IsReplying = true;
@@ -99,9 +114,7 @@ export class CommentsComponent implements OnChanges {
             console.log('2018');
             console.log(oResponse);
             console.log(oResponse.Result);
-            this.theComment = {
-                Comments: oResponse.Result
-            };
+            this.theComment = oResponse.Result;
         });
     };
 }
