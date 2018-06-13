@@ -28,8 +28,8 @@ Frontend Migration from Angualr 1 to Angular 4:
         ✔ save(oEntity, qParams)                                        Inserts or Updates a single Entity. @done(18-03-21 11:36)
         ☐ setProperty(oEntity, sProp, value, qParams)                   Update a single property of Entity.  
         ☐ remove(oEntityOrId, qParams)                                  Remove single Entity either by Entity object or Entity ID.
-        ☐ customGet(sCustomMethod)                                      HTTP GET to Custom Endpoint.
-        ☐ customPost(sCustomMethod, oData)                              HTTP POST to Custom Endpoint.
+        ✔ customGet(sCustomMethod)                                      HTTP GET to Custom Endpoint. @done (18-06-13 11:31)
+        ✔ customPost(sCustomMethod, oData)                              HTTP POST to Custom Endpoint. @done (18-06-13 11:31)
         ☐ updateBatch(oArrayEntities)                                   Updates an array of entities in a single round to backend.
         ☐ insertBatch(oArrayEntities)                                   Insert an array of entities in a single round to backend.
         ☐ removeBatch(oArrayEntitiesOrIds)                              Removes array of Entities or IDs in a single round to backend.
@@ -38,7 +38,7 @@ Frontend Migration from Angualr 1 to Angular 4:
         ☐ assign(oEntity, oUser)                                        Sets a User responsible for and Entity.
         Local Operations:
             ☐ getById()
-            ☐ getAll()
+            ☐ getl()Al
             ☐ getRecursiveBySeedId()
             ☐ getRawAll()
             ☐ setRawAll()
@@ -101,13 +101,13 @@ Frontend Migration from Angualr 1 to Angular 4:
 
     ☐ listController.
         Methods:
-            ☐ Accept in constructor a settings object.
+            ✔ Accept in constructor a settings object. @done (18-06-13 11:34)
                 ✔ service (CRUDFactory instance). @done (18-01-05 12:26)
                 ✔ paginate (enable/disable pagination). @done (18-01-05 12:28)
                 ✔ perPage (how many entries per page). @done(18-03-22 16:36)
                     -Update: rename perPage to limit.
                 ✔ filters (object with key,values to filter at backend) @done (18-01-05 12:34)
-            ☐ Should handle filterStorageName per (endpoint and page)
+            ✔ Should handle filterStorageName per (endpoint and page) @done (18-06-13 11:34)
                 ✔ Should store filter settings. @done(18-03-22 16:37)
             ✔ removeItem(oEntity). @done (18-01-11 12:37)
                 ✔ service.remove(oEntity, baseList). @done (18-01-11 12:37)
@@ -179,8 +179,26 @@ Frontend Migration from Angualr 1 to Angular 4:
       ✔ Display Spin Loading only when certain time is exceeded. @done(18-06-08 16:09)
     ✔ Pagination. @done(18-03-23 12:59)
     ☐ Modal.
+        ☐ Parameters (@Inputs):
+            ☐ ok-label
+            ☐ delete-label
+            ☐ cancel-label
+            ☐ show-print
+            ☐ title
+            ☐ modal-id
+            ☐ max-width
+            ☐ max-height
+        ☐ Transclude: Resarch Transclude in Angular ^2
+            ☐ modal-header
+                A place to insert components in header
+            ☐ modal-body
+                A place to insert component to display in modal
+            ☐ modal-actions
+                A place to insert additional buttons
     ☐ Horizontal Lists sortable by Drag and Drop.
+        ☐ Learn Dragula https://valor-software.com/ng2-dragula/
     ☐ Selectize. (Single and Multiple selection).
+        ☐ persons-chips
     ☐ Attachments.
         ✔ Search best existing component for angular ^2. @done(18-03-30 12:04)
         ☐ Parameters:
@@ -214,6 +232,22 @@ Frontend Migration from Angualr 1 to Angular 4:
     ☐ Selection from List.
       ☐ Responsible.
     ☐ Commenting.
+        ☐ CommentProvider
+        ☐ Parameters:
+            ☐ ownerEntity
+            ☐ customProperty
+        ☐ save(commentToSave, parentComment) (single comment)
+        ☐ addComment(commentToAdd)
+        Low Priority:-----------------------------
+        ☐ reply
+        ☐ showReply
+        ☐ refreshComments
+        ☐ retrieveCurrentUser
+            ☐ Handle Anonymous users
+        ☐ getIdenticon
+        ☐ RealTime
+            ☐ JoinComments
+            ☐ LeaveComments
     ☐ ToDos.
     ☐ Notifications.
     ☐  . Email.

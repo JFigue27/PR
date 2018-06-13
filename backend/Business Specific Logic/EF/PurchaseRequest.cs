@@ -25,6 +25,7 @@ namespace BusinessSpecificLogic.EF
         public override int id { get { return PurchaseRequestKey; } }
 
         ///Start:Generated:Properties<<<
+        public string AccountNo { get; set; }
         public string PurposeOrUse { get; set; }
         public int? RequisitorKey { get; set; }
         [ForeignKey("RequisitorKey")]
@@ -39,7 +40,7 @@ namespace BusinessSpecificLogic.EF
         public User GeneralManager { get; set; }
         public int? GLAccountKey { get; set; }
         [ForeignKey("GLAccountKey")]
-        public GLAccount AccountNo { get; set; }
+        public GLAccount GLAccountNo { get; set; }
         public string FriendlyIdentifier { get; set; }
         public DateTimeOffset? DateDepartmentManager { get; set; }
         public DateTimeOffset? DateGeneralManager { get; set; }
