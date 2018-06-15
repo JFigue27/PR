@@ -2,7 +2,8 @@ comments-component {
     .comment-wrapper {
         background: white;
         border: 1px solid #ececec;
-        margin: 1%;
+        width:70%;
+        margin: auto;
         margin-top: 2%;
         margin-bottom: 2%;
         box-shadow: 1px 2px 3px #ececec;
@@ -17,6 +18,17 @@ comments-component {
         font-weight: 600;
     }
 
+    .single-comment {
+        border-top: 1px solid #e7e7e7;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        margin-bottom: 5px;
+    }
+
+    .single-comment-user {
+        margin-bottom: 6px;
+    }
+
     .single-comment-left {
         display: inline-block;
         width: 6%;
@@ -25,6 +37,7 @@ comments-component {
     .single-comment-body {
         display: inline-block;
         width: 93%;
+        vertical-align: top;
     }
 
     .section-img {
@@ -33,7 +46,7 @@ comments-component {
     }
 
     .textarea-comment {
-        width: 90%;
+        width: 85%;
         margin: auto;
     }
 

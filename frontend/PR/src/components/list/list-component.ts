@@ -26,7 +26,6 @@ export class ListComponent extends ListController implements OnInit {
               }
 
   ngOnInit() {
-    this.spinner.show();
     let PrKey = utils.getParameterByName('id', null);
     if (PrKey) {
       window.history.replaceState({}, document.title, "/PR/Main");
@@ -62,7 +61,6 @@ export class ListComponent extends ListController implements OnInit {
   }
   
   afterLoad() {
-    this.spinner.hide();
   }
 
   onOpenItem(oEntity: any) {

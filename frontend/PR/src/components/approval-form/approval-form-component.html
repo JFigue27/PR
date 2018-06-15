@@ -1,4 +1,4 @@
-<div class="box-pr-form approval-comments">
+<!-- <div class="box-pr-form approval-comments">
   <div class="header primary-color">
     <p>Approval</p>
   </div>
@@ -13,7 +13,7 @@
       (getCurrentRole() != 'Department Manager' && getCurrentRole() != 'General Manager')">
     </mat-form-field>
   </div>
-</div>
+</div> -->
 <div class="div-buttons">
   
   <div *ngIf="getCurrentRole() == 'User' && (baseEntity.Status == 'Created' || baseEntity.Status == 'Pending' 
@@ -32,7 +32,7 @@
     <button mat-raised-button color="accent" (click)="saveApproval('Pending')"
     *ngIf="getCurrentUser().UserKey != baseEntity.UserApproverKey && 
     (baseEntity.Status == 'Created' || baseEntity.Status == 'Pending' || baseEntity.Status == 'GM Rejected') ">Request to Manager</button>
-    <button mat-raised-button color="accent" (click)="saveApproval('DM Quote')"
+    <button mat-raised-button color="basic" (click)="saveApproval('DM Quote')"
     *ngIf="pr.InfoTrack?.User_CreatedByKey != getCurrentUser().UserKey && 
     (baseEntity.Status == 'Created' || baseEntity.Status == 'Pending' || baseEntity.Status == 'DM Rejected') ">Send to MRO</button>
     <button mat-raised-button color="basic" (click)="saveApproval('DM Approved','MRP')"

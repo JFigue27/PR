@@ -235,7 +235,7 @@
             <!-- ================= notes ================= -->
             <ion-grid>
                 <ion-row>
-                    <ion-col col-xs-12 col-sm-12 col-md-5 col-lg-5 no-padding>
+                    <ion-col col-xs-12 col-sm-12 col-md-5 no-padding>
                         <div class="box-pr-form notes">
                             <div>
                                 <p>Notes</p>
@@ -247,10 +247,8 @@
                     <ion-col col-sm-12 col-xs-12 col-md-2 no-padding></ion-col>
                     <ion-col col-sm-12 col-xs-12 col-md-5 no-padding>
                         <approval-form-component [pr]="baseEntity" [approverKey]="getApprover()"></approval-form-component>
-                    </ion-col>
-                    <ion-col col-sm-12 col-xs-12 col-md-12 no-padding>
                         <button mat-raised-button color="primary" *ngIf="!getLockedStatus()" type="submit" class="btn-save" (click)="save()">Save</button>
-                    </ion-col>
+                    </ion-col> 
                 </ion-row>
             </ion-grid>
 

@@ -7,21 +7,24 @@
                 <img src="assets/imgs/anonymous.png" class="section-img" [src]="getIdenticon(theComment)"/>
             </div>
             <div class="single-comment-body">
-                <p><b>{{ theComment.CommentByUser?.Value }}</b>  {{ theComment.CommentDate | date: 'MMM dd hh:mm a'}} </p>
-                <label > {{ theComment.CommentText }}</label>
+                <div class="single-comment-user">
+                    <b>{{ theComment.CommentByUser?.Value }}</b>  {{ theComment.CommentDate | date: 'MMM dd hh:mm a'}}
+                </div>
+                <label> {{ theComment.CommentText }}</label>
             </div>
         </div>
     </div>
 
     <div class="type-comment-section">        
         <mat-form-field class="textarea-comment">
-            <textarea matInput color="accent" [(ngModel)]="commentToSave.CommentText" placeholder="Leave a comment"  ></textarea>
+            <textarea matInput color="accent" matTextareaAutosize matAutosizeMaxRows="10" matAutosizeMinRows="2"
+             [(ngModel)]="commentToSave.CommentText" placeholder="Leave a comment"  ></textarea>
         </mat-form-field>
         <button mat-raised-button color="accent" class="btn-send-comment" (click)="addComment(theComment);" >Add comment</button>
     </div>
 </div>
-
-<h3>theComment/h3>
+<!-- 
+<h3>theComment</h3>
 <pre>{{ theComment | json }}</pre>
 <h3>comment to save</h3>
-<pre>{{ commentToSave | json }}</pre>
+<pre>{{ commentToSave | json }}</pre> -->
