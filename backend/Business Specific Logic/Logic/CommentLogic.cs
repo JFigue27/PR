@@ -20,7 +20,8 @@ namespace BusinessSpecificLogic.Logic
         {
             return dbQuery
                 .Include(e => e.Comments)
-                .Include(e => e.CommentByUser);
+                .Include(e => e.CommentByUser)
+                .Include("Comments.CommentByUser");
         }
 
         protected override void OnGetSingle(Comment entity)

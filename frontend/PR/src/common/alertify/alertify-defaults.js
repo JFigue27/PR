@@ -21,8 +21,8 @@ alertify.defaults = {
 
   // notifier defaults
   notifier: {
-    delay: 50,
-    position: 'bottom-left',
+    delay: 2000,
+    position: 'top-left',
     closeButton: false
   },
 

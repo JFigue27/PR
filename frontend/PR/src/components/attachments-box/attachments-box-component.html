@@ -1,5 +1,4 @@
 <div class="attachment-wrapper" (dblclick)="openFileBrowser()">
-  <p>Attachments</p>
   <div>
     <input type="file" id="file" class="btn-file primary-color"  ng2FileSelect [uploader]="uploader" multiple>
     <div class="no-files" *ngIf="ownerEntity[attachmentsListName]?.length==0">

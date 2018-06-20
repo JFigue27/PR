@@ -87,10 +87,14 @@ export abstract class CRUDFactory {
         .catch(this.generalError);
     }
 
-    loadEntity(id) {
-        return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/' + id, this.addAuthorization())
+    loadEntity(id): Observable<any> {
+        if (id){ 
+            return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/' + id, this.addAuthorization())
             .map(response => this.extractData(response), this)
             .catch(this.generalError);
+        } else {
+            return Observable.empty();
+        }
     }
 
     remove(): Observable<any> {

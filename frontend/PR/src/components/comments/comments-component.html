@@ -12,6 +12,9 @@
                 </div>
                 <label> {{ theComment.CommentText }}</label>
             </div>
+            <div *ngIf="theComment.Comment">
+                asdsa
+            </div>
         </div>
     </div>
 
@@ -23,8 +26,7 @@
         <button mat-raised-button color="accent" class="btn-send-comment" (click)="addComment(theComment);" >Add comment</button>
     </div>
 </div>
-<!-- 
-<h3>theComment</h3>
+<!-- <h3>theComment</h3>
 <pre>{{ theComment | json }}</pre>
 <h3>comment to save</h3>
 <pre>{{ commentToSave | json }}</pre> -->

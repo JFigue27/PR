@@ -2,10 +2,6 @@ comments-component {
     .comment-wrapper {
         background: white;
         border: 1px solid #ececec;
-        width:70%;
-        margin: auto;
-        margin-top: 2%;
-        margin-bottom: 2%;
         box-shadow: 1px 2px 3px #ececec;
     }
 
@@ -46,11 +42,11 @@ comments-component {
     }
 
     .textarea-comment {
-        width: 85%;
+        width: 80%;
         margin: auto;
     }
 
     .btn-send-comment {
-        margin-left: 10px;
+        margin-left: 3%;
     }
 }

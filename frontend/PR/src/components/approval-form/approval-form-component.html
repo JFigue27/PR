@@ -1,19 +1,3 @@
-<!-- <div class="box-pr-form approval-comments">
-  <div class="header primary-color">
-    <p>Approval</p>
-  </div>
-  <div class="body">
-    <mat-form-field class="input">
-      <input matInput placeholder="User Request" [(ngModel)]="baseEntity.RequestDescription" [readonly]=" (getCurrentRole() == 'MRO' || getCurrentRole() == 'Purchasing Manager') 
-      || getCurrentUser().UserKey == baseEntity.UserApproverKey  && getCurrentRole() != 'User'">
-    </mat-form-field>
-    <br>
-    <mat-form-field class="input">
-      <input matInput placeholder="Manager Response" [(ngModel)]="baseEntity.ResponseDescription" [readonly]="(getCurrentUser().UserKey == pr.Requisitor?.UserKey) ||
-      (getCurrentRole() != 'Department Manager' && getCurrentRole() != 'General Manager')">
-    </mat-form-field>
-  </div>
-</div> -->
 <div class="div-buttons">
   
   <div *ngIf="getCurrentRole() == 'User' && (baseEntity.Status == 'Created' || baseEntity.Status == 'Pending' 

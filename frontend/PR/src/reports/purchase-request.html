@@ -20,11 +20,7 @@
     @page {
         size: landscape;
     }
-
-    #main {
-        width: 1200px;
-        max-width: 1200px;
-    }
+ 
 
     th {
         border-bottom: 1px solid #ddd;
@@ -50,17 +46,14 @@
         margin: 0;
     }
     /*END Specific current form styles*/
-
     </style>
-    <div id="main" class="container-fluid" style="display:none;">
-        <div class="hidden-print">
-            <br>
-            <button type="button" class="btn btn-info" onclick="onPrint();">Print</button>
-        </div>
+
+    <div id="main" class="container-fluid" style="display:none;"> 
         <div class="row" style="height: 100px;text-align: center;padding-top: 50px;">
             <img src="images/cap-auto.png" height="40px" alt="Capsonic">
         </div>
     </div>
+    <button type="button" class="btn btn-info btn-print" onclick="onPrint();">Print</button>
     <script src="jquery-1.11.3.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
@@ -75,46 +68,9 @@
         });
         //End Attachments
         
-        //Date Picker
-        $('button.md-datepicker-triangle-button').remove();
+        //Date Picker 
         //End DatePicker
-
-        $('.col-sm-1').removeClass('col-sm-1').addClass('col-xs-1');
-        $('.col-sm-2').removeClass('col-sm-2').addClass('col-xs-2');
-        $('.col-sm-3').removeClass('col-sm-3').addClass('col-xs-3');
-        $('.col-sm-4').removeClass('col-sm-4').addClass('col-xs-4');
-        $('.col-sm-5').removeClass('col-sm-5').addClass('col-xs-5');
-        $('.col-sm-6').removeClass('col-sm-6').addClass('col-xs-6');
-        $('.col-sm-7').removeClass('col-sm-7').addClass('col-xs-7');
-        $('.col-sm-8').removeClass('col-sm-8').addClass('col-xs-8');
-        $('.col-sm-9').removeClass('col-sm-9').addClass('col-xs-9');
-        $('.col-sm-10').removeClass('col-sm-10').addClass('col-xs-10');
-        $('.col-sm-11').removeClass('col-sm-11').addClass('col-xs-11');
-        $('.col-sm-12').removeClass('col-sm-12').addClass('col-xs-12');
-
-        $('.form-control').removeClass('form-control');
-        $('.control-label').removeClass('control-label');
-        $('td').css('width', '');
-        $('th').css('width', '');
-        $('.container').removeClass('container').addClass('container-fluid');
-
-
-        $('.hidden').remove();
-
-        $('input, input[type="text"], input[type="number"], input[type="email"]').each(function() {
-            $(this).replaceWith('<div style="width:100%;text-align:left;min-height:10px;padding-left: 6px;">' + this.value + '</div>');
-        });
-
-        $('.hidden-print:not(:first)').each(function() {
-            $(this).css('display', 'none');
-        });
-
-        $('.select2-container').next().hide();
-        $('select').prop('disabled', 'true');
-        $('input[type="checkbox"]').prop('disabled', 'true')
-
-        $('.hidden-xs').removeClass('hidden-xs');
-        $('.visible-xs').removeClass('visible-xs');
+       
 
         $('textarea').each(function() {
             $(this).replaceWith('<pre style="width:100%;text-align:left;min-height:10px;">' + this.value + '</pre>');

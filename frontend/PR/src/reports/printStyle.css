@@ -3,20 +3,25 @@ body {
     overflow-y: auto;
 }
 
-body,
-span {
-    font-size: 11px;
+body, span {
+    font-size: 14px;
 }
 
-#main {
-    width: 700px;
-    max-width: 700px;
+.btn-print {
+    float: right;
+    margin-right: 10%;
+    margin-top: 2%;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 20px;
 }
 
-h3 {
-    font-size: 17px;
+.mat-icon-button,
+.td-select>button,
+.add-supplier
+{
+    display: none;
 }
-
 .form-control-static {
     font-size: 11px !important;
     padding: 0 !important;
@@ -29,17 +34,49 @@ h3 {
 .table-bordered>tbody>tr>td,
 .table-bordered>tfoot>tr>td {
     border: 1px solid #ddd;
-    padding: 3px;
+    /* padding: 3px; */
+}
+#main {
+    width: 1200px;
+    max-width: 1200px;
+    border: 1px solid #b6b6b6;
+    margin: auto;
+    margin-top: 5%;
+    padding: 3%;
+}
+
+ul {
+    padding-left: 25px;
+}
+
+.table>tbody>tr>td {
+    border-bottom: 1px solid #ddd;
+    padding: 1px;
+    text-align: right;
+    vertical-align: middle;
+    font-size: 11px;
+    padding: 2px;
+}
+
+table input {
+    border: none !important;
+}
+
+p {
+    min-height: 20px !important;
+    vertical-align: middle;
+}
+tr:nth-last-child(2){
+    display: none;
+}
+.print-total{
+    font-size: 20px !important;
 }
 
 @media print {
     body,
     span {
         font-size: 11px;
-    }
-    #main {
-        width: 700px;
-        max-width: 700px;
     }
     h3 {
         font-size: 17px;
@@ -60,27 +97,8 @@ h3 {
     .breakPage {
         page-break-before: always;
     }
+    .btn-print {
+        display: none;
+    }
 }
 
-ul {
-    padding-left: 25px;
-}
-
-.table>tbody>tr>td {
-
-    border-bottom: 1px solid #ddd;
-    padding: 1px;
-    text-align: right;
-    vertical-align: middle;
-    font-size: 11px;
-    padding: 2px;
-}
-
-table input {
-    border: none !important;
-}
-
-p {
-    min-height: 20px !important;
-    vertical-align: middle;
-}
