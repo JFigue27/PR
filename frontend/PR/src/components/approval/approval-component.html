@@ -2,7 +2,7 @@
 
 <section class="search">
   <input type="text" class="input-search" placeholder="Search" [(ngModel)]="filterOptions.filterGeneral" (ngModelChange)="refresh();">
-  <button class="button-search  primary-color" (click)="refresh();">
+  <button class="button-search primary-color" (click)="refresh();">
     <ion-icon name="ios-search" md="md-search"></ion-icon>
   </button>
   <mat-form-field  class="select-filter">
@@ -27,7 +27,6 @@
         <th class="width-15">Status description</th>
         <th class="width-10">User</th>
         <th>Identifier</th>
-        <th>Manager Response</th>
         <th class="width-10">Date Requested</th>
         <th class="width-7">PO Number</th>
       </tr>
@@ -54,12 +53,16 @@
             remove_circle_outline
           </i>
 
+          <i class="material-icons icon-status"
+          *ngIf="!item.Status || item.Status == 'Created'">
+            remove
+          </i>
+
         </td>
         <td class="width-7" data-title="Status"> {{ item.Status }}</td>
         <td class="width-15" data-title="Status Description"> {{item.FriendlyStatus}}</td>
         <td class="width-10" data-title="Requested By">{{ item.InfoTrack?.User_CreatedBy.Value }}</td>
         <td data-title="Description">{{ item.PurchaseRequest.FriendlyIdentifier }}</td>
-        <td data-title="Date Requested">{{ item.ResponseDescription }}</td>
         <td class="width-10" data-title="Date Requested">{{ item.InfoTrack?.Date_CreatedOn | date: 'MMM dd hh:mm a'}}</td>
         <td class="width-7" data-title="Status"> {{ item.PurchaseRequest.PONumber }}</td>
       </tr>

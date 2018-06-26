@@ -10,13 +10,12 @@
                 <div class="single-comment-user">
                     <b>{{ theComment.CommentByUser?.Value }}</b>  {{ theComment.CommentDate | date: 'MMM dd hh:mm a'}}
                 </div>
-                <label> {{ theComment.CommentText }}</label>
-            </div>
-            <div *ngIf="theComment.Comment">
-                asdsa
+                <span> {{ theComment.CommentText }}</span>
             </div>
         </div>
-    </div>
+        <div *ngIf="theComment.Comments.length == 0">
+            <h4 class="comments-empty">There are no comments yet</h4>
+        </div>
 
     <div class="type-comment-section">        
         <mat-form-field class="textarea-comment">

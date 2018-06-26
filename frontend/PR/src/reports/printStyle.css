@@ -1,104 +1,78 @@
-body {
+body{
     position: relative;
     overflow-y: auto;
 }
 
-body, span {
+body, span{
     font-size: 14px;
 }
 
-.btn-print {
-    float: right;
-    margin-right: 10%;
-    margin-top: 2%;
-    padding-left: 15px;
-    padding-right: 15px;
+.btn-print{
+    margin-left: 2%;
     font-size: 20px;
 }
 
 .mat-icon-button,
 .td-select>button,
-.add-supplier
-{
+.add-supplier{
     display: none;
 }
-.form-control-static {
-    font-size: 11px !important;
-    padding: 0 !important;
-}
 
-.table-bordered>thead>tr>th,
-.table-bordered>tbody>tr>th,
-.table-bordered>tfoot>tr>th,
-.table-bordered>thead>tr>td,
-.table-bordered>tbody>tr>td,
-.table-bordered>tfoot>tr>td {
-    border: 1px solid #ddd;
-    /* padding: 3px; */
-}
-#main {
-    width: 1200px;
-    max-width: 1200px;
+#main{
     border: 1px solid #b6b6b6;
-    margin: auto;
-    margin-top: 5%;
-    padding: 3%;
+    margin: 2%; 
+    margin-top: 2%;
+    border-radius: 3px;
+    padding: 2%;
 }
 
-ul {
+ul{
     padding-left: 25px;
 }
 
-.table>tbody>tr>td {
-    border-bottom: 1px solid #ddd;
-    padding: 1px;
-    text-align: right;
-    vertical-align: middle;
-    font-size: 11px;
-    padding: 2px;
+.blank-td{
+    border-top: 1px solid white;
 }
 
-table input {
-    border: none !important;
-}
-
-p {
-    min-height: 20px !important;
-    vertical-align: middle;
-}
-tr:nth-last-child(2){
+/* tr:nth-last-child(2){
     display: none;
+} */
+table>thead>tr,
+table>thead>th>td,
+table>tbody>tr,
+table>tbody>tr>td{
+    border: 1px solid #b6b6b6;
 }
+
+th{
+    margin-bottom: 20px;
+}
+
 .print-total{
-    font-size: 20px !important;
+    text-align: center;
+}
+
+.print-total>td{
+    font-size: 18px !important;
+}
+
+.form {
+    display: flex;
+    margin-top: 40px;
+}
+
+.form-description{
+    width: 60%;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.form-value {
+    margin-bottom: 20px;
 }
 
 @media print {
-    body,
-    span {
-        font-size: 11px;
-    }
-    h3 {
-        font-size: 17px;
-    }
-    .form-control-static {
-        font-size: 11px !important;
-        padding: 0 !important;
-    }
-    .table-bordered>thead>tr>th,
-    .table-bordered>tbody>tr>th,
-    .table-bordered>tfoot>tr>th,
-    .table-bordered>thead>tr>td,
-    .table-bordered>tbody>tr>td,
-    .table-bordered>tfoot>tr>td {
-        border: 1px solid #ddd;
-        padding: 3px;
-    }
-    .breakPage {
-        page-break-before: always;
-    }
     .btn-print {
         display: none;
     }
 }
-

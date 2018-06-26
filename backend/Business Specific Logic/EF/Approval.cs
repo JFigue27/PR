@@ -74,6 +74,11 @@ namespace BusinessSpecificLogic.EF
                     case "DM Quote Approved":
                     case "GM Quote Approved":
                         return "Approved";
+                    case "DM Approved":
+                    case "GM Approved":
+                        return "Request appproved for purchase";
+                    case "Finalized":
+                        return "Finalized";
                     default:
                         break;
                 }

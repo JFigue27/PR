@@ -11,29 +11,29 @@ mat-dialog-container {
     margin: auto;
 }
 
-//search
-.input-search {
-        width: 30%;
-        padding: 10px;
-        font-size: 16px !important;
-        border: 1px solid rgb(216, 216, 216);
-    }
+// ------------------------------- Search -------------------------------
+.input-search{
+    width: 30%;
+    padding: 10px;
+    font-size: 16px !important;
+    border: 1px solid rgb(216, 216, 216);
+}
 
-    .button-search {
-        padding: 11px;
-        color: white;
-        font-size: 14px !important;
-        border: 1px solid grey;
-        cursor: pointer;
-    }
+.button-search{
+    padding: 11px;
+    color: white;
+    font-size: 14px !important;
+    border: 1px solid grey;
+    cursor: pointer;
+}
 
-    .search {
-        margin-bottom: 1%;
-	}
+.search {
+    margin-bottom: 1%;
+}
 
 
-// reusable buttons
-.input-personalized { 
+// ------------------------------- reusable buttons -------------------------------
+.input-personalized{
 	background-color: rgba(238, 238, 238, 0.02);
 	border: none;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.36);
@@ -41,32 +41,32 @@ mat-dialog-container {
 	box-shadow:none; 
 }
 
-.button-fixed {
+.button-fixed{
     font-size: 25px;
     float: right;
-    height: 50px !important;
-    width: 50px !important;
+    height: 45px !important;
+    width: 45px !important;
 }
 
 //Paginator related
-.mat-paginator-container {
+.mat-paginator-container{
     height: 50px !important;
     min-height: 50px !important;
 	background-color: #dadada;
 }
 
-.mat-paginator-page-size-label, .mat-paginator-page-size-select, .mat-paginator-range-label {
+.mat-paginator-page-size-label, .mat-paginator-page-size-select, .mat-paginator-range-label{
 	font-size: 17px;
-color: rgb(99, 99, 99);
+    color: rgb(99, 99, 99);
 }
 
 // Table
-.table-condensed > tbody > tr:hover {
-        background: rgb(241, 241, 241);
-        transition: 0.5s;
+.table-condensed>tbody>tr:hover{
+    background: rgb(241, 241, 241);
+    transition: 0.5s;
 }
 
-@media (min-width:800px) {
+@media (min-width:800px){
         .width-4 {
             width:4%;
         }

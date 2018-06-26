@@ -11,8 +11,6 @@ import { ApprovalFormComponent } from '../approval-form/approval-form-component'
 import { ModalController } from 'ionic-angular/components/modal/modal-controller';
 import { SupplierFormComponent } from '../supplier-form/supplier-form-component';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'pr-component',
@@ -69,14 +67,7 @@ export class PRComponent extends FormController implements OnInit {
       } else {
         PurchaseRequestKey = this.params.get('oEntityOrId').id;
       }
-    // this.suppliers = this.myControl.valueChanges.pipe(
-    //     startWith(''), map(val => this.filter(val))
-    //   );
     }
-  // filter(val: string): string[] {
-  //   return this.suppliers.filter(option =>
-  //     option.toLowerCase().includes(val.toLowerCase()));
-  // }
    
   displayStatusBar(status:string){
     switch (status) {

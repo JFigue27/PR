@@ -11,45 +11,13 @@
     <link rel="stylesheet" href="bootstrap.min.css" />
     <link rel="stylesheet" href="../build/main.css">
     <link rel="stylesheet" href="printStyle.css" />
+    <link rel="stylesheet" href="specificStyle.css" />
 </head>
 
 <body>
-    <style type="text/css">
-    /*Specific current form styles*/
-
-    @page {
-        size: landscape;
-    }
- 
-
-    th {
-        border-bottom: 1px solid #ddd;
-        vertical-align: middle !important;
-    }
-
-    input {
-        border: none;
-        min-height: 20px;
-        padding: 2px !important;
-    }
-
-    pre {
-        font-family: inherit;
-        font-size: inherit;
-        border-radius: 0;
-        border: none;
-        height: 100%;
-        line-height: 20px;
-        background: transparent;
-        vertical-align: top;
-        padding: 0 0;
-        margin: 0;
-    }
-    /*END Specific current form styles*/
-    </style>
 
     <div id="main" class="container-fluid" style="display:none;"> 
-        <div class="row" style="height: 100px;text-align: center;padding-top: 50px;">
+        <div class="row" style="height: 100px;text-align: center;">
             <img src="images/cap-auto.png" height="40px" alt="Capsonic">
         </div>
     </div>
@@ -60,66 +28,11 @@
         var source = opener.$('.printableZone').clone();
         $('#main').append(source);
 
-        //Attachments
-        $('attachments-box').each(function() {
-            var eAttachments = $(this).find('a').get();
-            $(this).html(eAttachments);
-            $(this).find('a').after('<br />');
-        });
-        //End Attachments
-        
-        //Date Picker 
-        //End DatePicker
-       
-
         $('textarea').each(function() {
             $(this).replaceWith('<pre style="width:100%;text-align:left;min-height:10px;">' + this.value + '</pre>');
         });
 
-        //[Specific for Current Report] Form specific adjustments------------------------------------------------------
-        var mainTable = $('table').eq(0);
-        mainTable.find('th:contains("Item Number")')
-            .width(200)
-            .css('text-align', 'left');
-        mainTable.find('th:contains("Description")')
-            .css('text-align', 'left');
-        mainTable.find('th:contains("U/M")')
-            .width(100)
-            .css('text-align', 'center');
-        mainTable.find('th:contains("Qty.")')
-            .width(100)
-            .css('text-align', 'right');
-        mainTable.find('th:contains("Price Each")')
-            .width(100)
-            .css('text-align', 'right');
-        mainTable.find('th:contains("Total")')
-            .width(100)
-            .css('text-align', 'right');
-
-        mainTable.find('tr th:nth-child(' + 1 + ')')
-            .hide();
-        mainTable.find('tr td:nth-child(' + 1 + ')')
-            .hide();
-        mainTable.find('tr td:nth-child(' + 1 + ') div')
-            .css('text-align', 'center');
-        mainTable.find('tr td:nth-child(' + 2 + ') div')
-            .css('text-align', 'left');
-        mainTable.find('tr td:nth-child(' + 3 + ') div')
-            .css('text-align', 'left');
-        mainTable.find('tr td:nth-child(' + 4 + ') div')
-            .css('text-align', 'center');
-        mainTable.find('tr td:nth-child(' + 5 + ') div')
-            .css('text-align', 'right');
-        mainTable.find('tr td:nth-child(' + 6 + ') div')
-            .css('text-align', 'right');
-
-
-        //End [Specific for Current Report] Form specific adjustments--------------------------------------------------
-
-
         $('#main').show();
-
-        // onPrint();
 
     });
 

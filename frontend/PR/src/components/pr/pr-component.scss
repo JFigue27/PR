@@ -1,37 +1,42 @@
 pr-component {
-	.ion-card{
-        box-shadow: 1px 2px 3px #ececec !important;
-	}
-	.scroll-content {
-		overflow-y: hidden;
-	}
 
-	.div-progress {
-		width: 40%;
-		display: inline-block;
-		margin-left: 15%;
+	.pr-section, .action-section {
+		background: white;
+		margin:15px;
+		padding: 1%;
+        border: 1px solid #e4e4e4;
+        box-shadow: 1px 2px 3px #ececec;
 	}
 	
-	.progress-bar {
-		height: 10px;
-	}
-
-	.col-input {
-		font-weight: 600;
-	}
-
 	.form-input {
 		background-color: rgba(238, 238, 238, 0.02);
 		border: none;
 		-webkit-appearance: none;
 		box-shadow:none;
 	}
-
+	
 	.border-bottom {
 		width: 80%;
 		border-bottom: 1px solid rgba(0, 0, 0, 0.36);
 	}
-	
+	/* ==================== TABLE SECTION ================= */
+	.pr-header {
+		display: flex;
+		margin-bottom: 2%;
+	}
+	.pr-header-number {
+		width: 30%;
+		font-size: 20px;
+	}
+	.pr-header-bar {
+		width: 40%;
+		font-size: 24px;
+	}
+	.pr-header-po-number{
+		width: 20%;
+		font-size: 15px;
+		margin-left: 15%;
+	}
 	.table-pr {
 		width: 100%;
 		text-align: center;
@@ -42,11 +47,13 @@ pr-component {
 	}
 
 	.currencies {
-		width: 29%;
+		width: 20%;
+		font-size: 14px;
 	}
 	
 	.select-suppliers {
-		width: 49%;
+		width: 59%;
+		font-size: 14px;
 	}
 
 	.add-supplier {
@@ -58,10 +65,15 @@ pr-component {
 		border: none;
 	}
 
+	.SupplierSelected {
+		background-color:#63b963;
+	}
+
 	th {
 		background-color: rgb(235, 235, 235); 
 		border: 1px solid rgba(185, 185, 185, 0.45);
 		font-weight: 500;
+		text-align: center;
 	}
 
 	td {
@@ -76,6 +88,10 @@ pr-component {
 		border-left: 1px solid white;
 		border-bottom: 1px solid white;
 	}
+	.blank-td{
+		border: 1px solid white;
+		border-top: 1px solid rgb(70, 70, 70);
+	}
 	.td-select > button {
 		background-color: white;
 		border-radius: 3px;
@@ -83,75 +99,60 @@ pr-component {
 		font-weight: 500;
 	}
 
+	.p-user {
+			border-bottom: 1px solid #a0a0a0;
+			width: 80%;
+		}
+	/* ==================== FORM SECTION ================= */
 	.form {
 		margin-top: 2%;
-	}
-
-	.p-user {
-		border-bottom: 1px solid #a0a0a0;
-    	width: 80%;
-	}
-	
-	.SupplierSelected {
-		background-color:#63b963;
-	}
-	
-	.bottom-section {
-		display: flex;
-		border: 1px solid #e4e4e4;
-    	-webkit-box-shadow: 1px 1px 3px #ececec;
-		box-shadow: 1px 1px 3px #ececec;
-		background: white;
-		margin: 10px;
-		margin-top: 40px;
-		padding: 1em;
-        box-shadow: 1px 2px 3px #ececec;
-	}
-
-	.attachment-section {
-		width: 50%;
-		margin-right: 3%;
-	}
-
-	.actions {
 		margin-bottom: 2%;
-		border-bottom: 1px solid #c2c2c2;
-		font-size: 20px;
-		font-weight: 500;
-		text-align: center;
 	}
-
-	.buttons-section {
-		width: 45%;
+	.form-description {
+		font-size: 14px;
+		font-weight: 600;
+	}
+	.form-child>div{
+		margin-bottom: 10px;
 	}
 
 	.save-section {
-		float: right;
-		margin-bottom: 1%;
-		margin-right: 10%;
+		margin-left: 87%;
+    	margin-bottom: 1%;
+	}
+	/* ==================== ACTION SECTION ================= */
+	.action-section {
+		width: 98%;
+	}
+	.action-title {
+		font-size: 18px;
+		font-weight: 500;
+		text-align: center;
+		border-bottom: 1px solid rgb(206, 206, 206);
+		margin-top: -3px;
+		margin-bottom: 10px;	
+		color: rgb(102, 102, 102);
+	}
+	.approval-actions{
+		margin-top: 6%;
 	}
 
-	.optional-wrapper {
-		display: flex;
-		margin-top: 40px;
-		margin-bottom: 2%;
+	/* ==================== OPTIONAL SECTION ================= */
+	.optional-section{
+		margin-top: 15px;
+		margin-left: -1%;
+		width: 101%;
 	}
-
-	.comment-section {
-		width: 60%;
-		margin-left: 1%;
-		min-height: 220px;
+	.optional-section{
+		margin-bottom: 30px;
 	}
-
 	.notes-section {
 		background-color:#ffffff;
-		width: 36%;
-		margin-left: 2%;
         border: 1px solid #e4e4e4;
         box-shadow: 1px 2px 3px #ececec;
 		height: 220px;
 	}
-	
+	 
 	.notes-section > div {
 		text-align: center;
 		font-size: 18px;
@@ -159,14 +160,12 @@ pr-component {
 		background: #f1ce6e;
     	padding: 10px;
     	color: #454545;
-		border-bottom: 1px solid #929292;
+		width: 107%;
+    	margin-left: -3.5%;
 	}
 
 	.notes-section > textarea {
-		margin-left: 10px;
+		border-bottom: none;
 	}
-  
-	.margin-top-5 {
-		margin-top: 5px;
-	}
+
 }

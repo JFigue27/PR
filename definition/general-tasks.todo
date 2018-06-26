@@ -38,7 +38,7 @@ Frontend Migration from Angualr 1 to Angular 4:
         ☐ assign(oEntity, oUser)                                        Sets a User responsible for and Entity.
         Local Operations:
             ☐ getById()
-            ☐ getl()Al
+            ☐ getAll()
             ☐ getRecursiveBySeedId()
             ☐ getRawAll()
             ☐ setRawAll()

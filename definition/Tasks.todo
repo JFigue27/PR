@@ -125,13 +125,13 @@ STATUS
   - Pending                - DM/GM    - Pending
   - DM Quote Rejected      - User     - Rejected
   - GM Quote Rejected      - User     - Rejected
-  - DM Quote Approved      - MRO      - In procces
-  - GM Quote Approved      - MRO      - In procces
-  - MRO Quoted             - PM       - In process
-  - PM Rejected            - MRO      - In process
-  - PM Approved            - DM/GM    - In process
-  - DM Rejected            - PM       - In process
-  - GM Rejected            - PM       - In process
+  - DM Quote Approved      - MRO      - In proccess
+  - GM Quote Approved      - MRO      - In proccess
+  - MRO Quoted             - PM       - In processs
+  - PM Rejected            - MRO      - In processs
+  - PM Approved            - DM/GM    - In processs
+  - DM Rejected            - PM       - In processs
+  - GM Rejected            - PM       - In processs
   - DM Approved            - MRO      - Approved
   - GM Approved            - MRO      - Approved
   - Finalized              - User     - Completed

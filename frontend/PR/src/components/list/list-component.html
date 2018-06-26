@@ -17,6 +17,7 @@
       <tr>
         <th class="width-10">PR Number</th>
         <th>Description</th>
+        <th class="width-15">Date requested</th>
         <td class="width-7">Delete</td>
       </tr>
     </thead>
@@ -24,10 +25,11 @@
       <tr *ngFor="let item of baseList">
         <td class="width-10" data-title="Account" (click)="openItem(item)">{{ item.PRNumber.GeneratedNumber }}</td>
         <td data-title="Description" (click)="openItem(item)">{{ item.FriendlyIdentifier }}</td>
+        <td class="width-15" data-title="Date Requested" (click)="openItem(item)">{{ item.DateDepartmentManager | date: 'MMM dd hh:mm a'}}</td>
         <td class="width-7" (click)="removeItem(item)">
           <ion-icon class="trash" name="ios-trash" md="md-trash"></ion-icon>
         </td>
       </tr>
     </tbody>
   </table>
-</section> 
+</section>

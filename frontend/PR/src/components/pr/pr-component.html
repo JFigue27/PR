@@ -1,261 +1,238 @@
-<ion-card>
-    <ion-card-header>
-        <ion-grid>
-            <ion-row class="resumen">
-                <ion-col col-10 col-sm-10 col-md-10 col-lg-10>
-                    <h1>
-                        <b>Purchase Request -</b> {{ baseEntity.PRNumber?.GeneratedNumber }}
-                        <div class="div-progress">
-                            <div>
-                                <label class="bar-status pending">{{ baseEntity.ApprovalStatus }}</label>
-                            </div>
-                            <mat-progress-bar class="progress-bar" mode="determinate" [value]="displayStatusBar(baseEntity.ApprovalStatus)"></mat-progress-bar>
-                        </div>
-                    </h1>
-                </ion-col>
-                <ion-col col-2 col-sm-2 col-md-2 col-lg-2>
-                    <b>PO Number:</b>&nbsp;&nbsp;
-                    <input type="text" class="form-input border-bottom" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.PONumber"
-                        style="width:55%;" [disabled]="getCurrentRole() != 'MRO' ">
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-        <div style="margin-left:14px;margin-top:10px;">
-            <mat-form-field style="width:40%;">
-                <input matInput [(ngModel)]="baseEntity.FriendlyIdentifier" [disabled]="baseEntity.ApprovalStatus == 'Approved' " placeholder="Fiendly Identifier"
-                    (ngModelChange)="on_input_change();">
-            </mat-form-field>
+<!-- ==================== PR SECTION ================= -->
+<section class="pr-section">
+    <div class="pr-header">
+        <div class="pr-header-number">
+            <b>Purchase Request -</b> {{ baseEntity.PRNumber?.GeneratedNumber }}
         </div>
-    </ion-card-header>
-
-    <ion-card-content>
-        <fieldset [disabled]="getLockedStatus()" class="printableZone" style="border:none;">
-
-            <!-- ================= Dynamic table ================= -->
-            <div class="table-responsive form-grid">
-                <table class="table-pr">
-                    <thead>
-                        <tr>
-                            <th colspan="4"></th>
-                            <th colspan="2" [ngClass]="getSupplier1Style()">
-                                <mat-select placeholder="$" class="currencies" [(ngModel)]="baseEntity.SupplierCurrency1" (ngModelChange)="on_input_change(item);">
-                                    <mat-option *ngFor="let currency of currencies" [value]="currency">
-                                        {{ currency }}
-                                    </mat-option>
-                                </mat-select>
-                                <mat-select class="select-suppliers" [(ngModel)]="baseEntity.Supplier1Key" (ngModelChange)="on_input_change(item);on_supplier_select();">
-                                    <mat-option *ngFor="let supplier of suppliers" [value]="supplier.SupplierKey">
-                                        {{ supplier.Value }}
-                                    </mat-option>
-                                </mat-select>
-                                <button (click)="newSupplier()" class="add-supplier" [ngClass]="getSupplier1Style()">+</button>
-                            </th>
-
-                            <th colspan="2" [ngClass]="getSupplier2Style()">
-                                <mat-select placeholder="$" class="currencies" [(ngModel)]="baseEntity.SupplierCurrency2" (ngModelChange)="on_input_change(item);">
-                                    <mat-option *ngFor="let currency of currencies" [value]="currency">
-                                        {{ currency }}
-                                    </mat-option>
-                                </mat-select>
-                                <mat-select class="select-suppliers" [(ngModel)]="baseEntity.Supplier2Key" (ngModelChange)="on_input_change(item);on_supplier_select();">
-                                    <mat-option *ngFor="let supplier of suppliers" [value]="supplier.SupplierKey">
-                                        {{ supplier.Value }}
-                                    </mat-option>
-                                </mat-select>
-                                <button (click)="newSupplier()" class="add-supplier" [ngClass]="getSupplier2Style()">+</button>
-                            </th>
-
-                            <th colspan="2" [ngClass]="getSupplier3Style()">
-                                <mat-select placeholder="$" class="currencies" [(ngModel)]="baseEntity.SupplierCurrency3" (ngModelChange)="on_input_change(item);">
-                                    <mat-option *ngFor="let currency of currencies" [value]="currency">
-                                        {{ currency }}
-                                    </mat-option>
-                                </mat-select>
-                                <mat-select class="select-suppliers" [(ngModel)]="baseEntity.Supplier3Key" (ngModelChange)="on_input_change(item);on_supplier_select();">
-                                    <mat-option *ngFor="let supplier of suppliers" [value]="supplier.SupplierKey">
-                                        {{ supplier.Value }}
-                                    </mat-option>
-                                </mat-select>
-                                <button (click)="newSupplier()" class="add-supplier" [ngClass]="getSupplier3Style()">+</button>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th width="4%">Number</th>
-                            <th width="35%">Description</th>
-                            <th width="5%">Units</th>
-                            <th width="4%">Quantity</th>
-                            <th width="7%">Price Each</th>
-                            <th width="7%">Total</th>
-                            <th width="7%">Price Each</th>
-                            <th width="7%">Total</th>
-                            <th width="7%">Price Each</th>
-                            <th width="7%">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of baseEntity.PRLines; let i = index;" class="grid-tr">
-                            <td width="6%">
-                                <input [(ngModel)]="item.ItemNumber" class="form-input" style="width:99%;" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
-                            </td>
-
-                            <td width="35%">
-                                <textarea matInput class="form-input" style="width:99%;" [(ngModel)]="item.Description" matTextareaAutosize matAutosizeMaxRows="10"
-                                    (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)"> </textarea>
-                            </td>
-
-                            <td width="5%">
-                                <input class="form-input" [(ngModel)]="item.UM" style="width:99%;" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
-                            </td>
-
-                            <td width="5%">
-                                <input class="form-input" [(ngModel)]="item.Qty" style="width:99%;" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
-                            </td>
-
-                            <td width="7%">
-                                <input class="form-input" [(ngModel)]="item.PriceEach" style="width:99%;" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
-                            </td>
-
-                            <td width="7%">
-                                <p style="text-align: center;font-weight: bold;">{{item.PriceEach * item.Qty | currency}}</p>
-                            </td>
-
-                            <td width="5%">
-                                <input class="form-input" style="width:99%;" [(ngModel)]="item.PriceEach2" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
-                            </td>
-
-                            <td width="5%">
-                                <p style="text-align: center;font-weight: bold;">{{item.PriceEach2 * item.Qty | currency}}</p>
-                            </td>
-                            <td width="7%">
-                                <input class="form-input" style="width:99%;" [(ngModel)]="item.PriceEach3" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
-                            </td>
-
-                            <td width="7%">
-                                <p style="text-align: center;font-weight: bold;">{{item.PriceEach3 * item.Qty | currency}}</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" style="border: 1px solid white; border-top: 1px solid rgb(70, 70, 70);"></td>
-                            <td class="td-select">
-                                <button (click)="selectSupplier1()">Select</button>
-                            </td>
-                            <td>
-                                <span class="print-total">
-                                    <b>{{ getSupplier1Sum() | currency }}</b>
-                                </span>
-                            </td>
-                            <td class="td-select">
-                                <button (click)="selectSupplier2()">Select</button>
-                            </td>
-                            <td>
-                                <span class="print-total">
-                                    <b>{{ getSupplier2Sum() | currency }}</b>
-                                </span>
-                            </td>
-                            <td class="td-select">
-                                <button (click)="selectSupplier3()">Select</button>
-                            </td>
-                            <td>
-                                <span class="print-total">
-                                    <b>{{ getSupplier3Sum() | currency }}</b>
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- ================= Form ================= -->
-            <div ion-row no-padding class="form">
-                <div col-md-6 col-sm-12 ion-row>
-
-                    <div col-md-2 col-sm-12>
-                        <b>Use</b>
-                    </div>
-                    <div col-md-10 col-sm-12>
-                        <input type="text" class="form-input border-bottom" [(ngModel)]="baseEntity.PurposeOrUse" />
-                    </div>
-
-                    <div col-md-2 col-sm-12>
-                        <b>Requisitor</b>
-                    </div>
-                    <div col-md-10 col-sm-12>
-                        <p class="p-user">{{ baseEntity.Requisitor?.Value }}</p>
-                    </div>
-
-                    <div col-md-2 col-sm-12>
-                        <b>Department</b>
-                    </div>
-                    <div col-md-10 col-sm-12>
-                        <p class="p-user">{{ baseEntity.DepartmentAssigned?.Value }}</p>
-                    </div>
-                </div>
-
-                <div col-md-6 col-sm-12 ion-row>
-
-                    <div col-md-2 col-sm-12>
-                        <b>Approver</b>
-                    </div>
-                    <div col-md-10 col-sm-12>
-                        <mat-select placeholder="Select..." [(ngModel)]="baseEntity.DepartmentManagerKey" class="border-bottom" style="width:80%;margin-bottom:5px;"
-                            (ngModelChange)="on_input_change(item);">
-                            <mat-option *ngFor="let user of users" [value]="user.id">
-                                {{ user.Value }}
-                            </mat-option>
-                        </mat-select>
-                    </div>
-
-                    <div col-md-2 col-sm-12>
-                        <b>Account</b>
-                    </div>
-                    <div col-md-10 col-sm-12>
-                        <mat-select placeholder="Select..." [(ngModel)]="baseEntity.GLAccountKey" class="border-bottom" style="width:80%;" (ngModelChange)="on_input_change(item);">
-                            <mat-option *ngFor="let account of accounts" [value]="account.id">
-                                {{ account.Value }} &nbsp;&nbsp; {{ account.Description }}
-                            </mat-option>
-                        </mat-select>
-                    </div>
-
-                    <div col-md-2 col-sm-12 class="margin-top-5">
-                        <b>Date</b>
-                    </div>
-                    <div col-md-10 col-sm-12 class="margin-top-5">
-                        <input [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" class="form-input border-bottom" (ngModelChange)="on_input_change()"
-                            [(ngModel)]="baseEntity.ConvertedDateDepartmentManager">
-                        <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
-                        <mat-datepicker touchUi="true" #myDatepicker></mat-datepicker>
-                    </div>
-                </div>
-            </div>
-            <!-- ================================ Attac hments ================================ -->
-        </fieldset>
-        <div class="save-section">
-            <button mat-raised-button color="accent" *ngIf="!getLockedStatus()" class="btn-save" (click)="save()">Save</button>
-            <button mat-raised-button color="accent" class="btn-save" (click)="print()"><i class="material-icons">print</i></button>
+        <div class="pr-header-bar">
+            <span class="bar-status pending">{{ baseEntity.ApprovalStatus }}</span>
+            <mat-progress-bar class="progress-bar"  mode="determinate" [value]="displayStatusBar(baseEntity.ApprovalStatus)"></mat-progress-bar> 
         </div>
-    </ion-card-content>
-</ion-card>
-    <section class="bottom-section">
-        <section class="attachment-section">        
-            <h3 class="actions">Attachments</h3>
-            <attachments-box-component [readonly]="getLockedStatus()" [ownerEntity]="baseEntity" kind="PR_Attachments"></attachments-box-component>
-        </section>
-        <section class="buttons-section">
-            <h3 class="actions">Actions</h3>
+        <div class="pr-header-po-number">
+            <b>PO Number:</b>&nbsp;&nbsp;
+            <input type="text" class="form-input border-bottom" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.PONumber"
+                style="width:55%;" [disabled]="getCurrentRole() != 'MRO' ">
+        </div>
+    </div>
+    <div class="pr-identifier">
+        <mat-form-field style="width:40%;">
+            <input matInput [(ngModel)]="baseEntity.FriendlyIdentifier" [disabled]="baseEntity.ApprovalStatus == 'Approved' " placeholder="Fiendly Identifier"
+                (ngModelChange)="on_input_change();">
+        </mat-form-field>
+    </div>
+
+    <fieldset [disabled]="getLockedStatus()" class="printableZone" style="border:none;">
+    <!-- ================= Dynamic table ================= -->
+        <div class="table-responsive form-grid">
+            <table class="table-pr">
+                <thead>
+                    <tr>
+                        <th colspan="4"></th>
+                        <th colspan="2" [ngClass]="getSupplier1Style()">
+                            <mat-select placeholder="$" class="currencies" [(ngModel)]="baseEntity.SupplierCurrency1" (ngModelChange)="on_input_change(item);">
+                                <mat-option *ngFor="let currency of currencies" [value]="currency">
+                                    {{ currency }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-select class="select-suppliers" [(ngModel)]="baseEntity.Supplier1Key" (ngModelChange)="on_input_change(item);on_supplier_select();">
+                                <mat-option *ngFor="let supplier of suppliers" [value]="supplier.SupplierKey">
+                                    {{ supplier.Value }}
+                                </mat-option>
+                            </mat-select>
+                            <button (click)="newSupplier()" class="add-supplier" [ngClass]="getSupplier1Style()">+</button>
+                        </th>
+
+                        <th colspan="2" [ngClass]="getSupplier2Style()">
+                            <mat-select placeholder="$" class="currencies" [(ngModel)]="baseEntity.SupplierCurrency2" (ngModelChange)="on_input_change(item);">
+                                <mat-option *ngFor="let currency of currencies" [value]="currency">
+                                    {{ currency }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-select class="select-suppliers" [(ngModel)]="baseEntity.Supplier2Key" (ngModelChange)="on_input_change(item);on_supplier_select();">
+                                <mat-option *ngFor="let supplier of suppliers" [value]="supplier.SupplierKey">
+                                    {{ supplier.Value }}
+                                </mat-option>
+                            </mat-select>
+                            <button (click)="newSupplier()" class="add-supplier" [ngClass]="getSupplier2Style()">+</button>
+                        </th>
+
+                        <th colspan="2" [ngClass]="getSupplier3Style()">
+                            <mat-select placeholder="$" class="currencies" [(ngModel)]="baseEntity.SupplierCurrency3" (ngModelChange)="on_input_change(item);">
+                                <mat-option *ngFor="let currency of currencies" [value]="currency">
+                                    {{ currency }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-select class="select-suppliers" [(ngModel)]="baseEntity.Supplier3Key" (ngModelChange)="on_input_change(item);on_supplier_select();">
+                                <mat-option *ngFor="let supplier of suppliers" [value]="supplier.SupplierKey">
+                                    {{ supplier.Value }}
+                                </mat-option>
+                            </mat-select>
+                            <button (click)="newSupplier()" class="add-supplier" [ngClass]="getSupplier3Style()">+</button>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th width="4%">Number</th>
+                        <th width="35%">Description</th>
+                        <th width="5%">U/M</th>
+                        <th width="4%">Quantity</th>
+                        <th width="7%">Price Each</th>
+                        <th width="7%">Total</th>
+                        <th width="7%">Price Each</th>
+                        <th width="7%">Total</th>
+                        <th width="7%">Price Each</th>
+                        <th width="7%">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of baseEntity.PRLines; let i = index;">
+                        <td width="6%">
+                            <input [(ngModel)]="item.ItemNumber" class="form-input" style="width:99%;" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
+                        </td>
+                        <td width="35%">
+                            <textarea matInput class="form-input" style="width:99%;" [(ngModel)]="item.Description" matTextareaAutosize matAutosizeMinRows="1"
+                            matAutosizeMaxRows="5" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)"> </textarea>
+                        </td>
+
+                        <td width="5%">
+                            <input class="form-input" [(ngModel)]="item.UM" style="width:99%;" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
+                        </td>
+
+                        <td width="5%">
+                            <input class="form-input" [(ngModel)]="item.Qty" style="width:99%;" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
+                        </td>
+
+                        <td width="7%">
+                            <input class="form-input" [(ngModel)]="item.PriceEach" style="width:99%;" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
+                        </td>
+
+                        <td width="7%" class="total-price1">
+                            <p style="text-align: center;font-weight: bold;">{{item.PriceEach * item.Qty | currency}}</p>
+                        </td>
+
+                        <td width="5%">
+                            <input class="form-input" style="width:99%;" [(ngModel)]="item.PriceEach2" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
+                        </td>
+
+                        <td width="5%">
+                            <p style="text-align: center;font-weight: bold;">{{item.PriceEach2 * item.Qty | currency}}</p>
+                        </td>
+                        <td width="7%">
+                            <input class="form-input" style="width:99%;" [(ngModel)]="item.PriceEach3" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)">
+                        </td>
+
+                        <td width="7%">
+                            <p style="text-align: center;font-weight: bold;">{{item.PriceEach3 * item.Qty | currency}}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="blank-td"></td>
+                        <td class="td-select">
+                            <button (click)="selectSupplier1()">Select</button>
+                        </td>
+                        <td class="print-total">
+                            <span>
+                                <b>{{ getSupplier1Sum() | currency }}</b>
+                            </span>
+                        </td>
+                        <td class="td-select">
+                            <button (click)="selectSupplier2()">Select</button>
+                        </td>
+                        <td class="print-total">
+                            <span>
+                                <b>{{ getSupplier2Sum() | currency }}</b>
+                            </span>
+                        </td>
+                        <td class="td-select">
+                            <button (click)="selectSupplier3()">Select</button>
+                        </td>
+                        <td class="print-total">
+                            <span>
+                                <b>{{ getSupplier3Sum() | currency }}</b>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    <!-- ================= Form ================= -->
+    <div class="form">
+
+        <div class="col-md-6 col-sm-12 form-child">
+            <div class="col-md-2 col-sm-12 form-description">Use</div>
+            <div class="col-md-10 col-sm-12 form-value">
+                <input type="text" class="form-input border-bottom" [(ngModel)]="baseEntity.PurposeOrUse" />
+            </div>
+            <div class="col-md-2 col-sm-12 form-description">Requisitor</div>
+            <div class="col-md-10 col-sm-12 form-value">
+                <p class="p-user">{{ baseEntity.Requisitor?.Value }}</p>
+            </div>
+            <div class="col-md-2 col-sm-12 form-description">Department</div>
+            <div class="col-md-10 col-sm-12 form-value">
+                <p class="p-user">{{ baseEntity.DepartmentAssigned?.Value }}</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 form-child">
+            <div class="col-md-2 col-sm-12 form-description">Approver</div>
+            <div class="col-md-10 col-sm-12 form-value">
+                <mat-select placeholder="Select..." [(ngModel)]="baseEntity.DepartmentManagerKey" class="border-bottom" style="width:80%;margin-bottom:5px;"
+                    (ngModelChange)="on_input_change(item);">
+                    <mat-option *ngFor="let user of users" [value]="user.id">
+                        {{ user.Value }}
+                    </mat-option>
+                </mat-select>
+            </div>
+            <div class="col-md-2  col-sm-12 form-description">Account</div>
+            <div class="col-md-10  col-sm-12 form-value">
+                <mat-select placeholder="Select..." [(ngModel)]="baseEntity.GLAccountKey" class="border-bottom" style="width:80%;" (ngModelChange)="on_input_change(item);">
+                    <mat-option *ngFor="let account of accounts" [value]="account.id">
+                        {{ account.Value }} &nbsp;&nbsp; {{ account.Description }}
+                    </mat-option>
+                </mat-select>
+            </div>
+            <div class="col-md-2  col-sm-12 form-description">Date</div>
+            <div class="col-md-10  col-sm-12 form-value">
+                <input [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" class="form-input border-bottom" (ngModelChange)="on_input_change()"
+                [(ngModel)]="baseEntity.ConvertedDateDepartmentManager">
+                <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
+                <mat-datepicker touchUi="true" #myDatepicker></mat-datepicker>
+            </div>
+        </div>
+         
+    </div> 
+    </fieldset>
+
+    <div class="save-section">
+        <button mat-raised-button color="accent" *ngIf="!getLockedStatus()" class="btn-save" (click)="save()">Save</button>
+        <button mat-raised-button color="accent" class="btn-save" (click)="print()"><i class="material-icons">print</i></button>
+    </div>
+</section>
+
+<!-- ==================== ACTION SECTION ================= -->
+<section class="col-md-12 action-section">
+    <div class="col-md-6 col-sm-12 attachments">
+        <h3 class="action-title">Attachments</h3>
+        <attachments-box-component [readonly]="getLockedStatus()" [ownerEntity]="baseEntity" kind="PR_Attachments"></attachments-box-component>
+    </div>
+    <div class="col-md-6 col-sm-12 actions">
+        <h3 class="action-title">Actions</h3>
+        <div class="approval-actions">
             <approval-form-component [pr]="baseEntity" [approverKey]="getApprover()"></approval-form-component>
-        </section>
-    </section>
-<div class="optional-wrapper">
-    <div class="comment-section">
+        </div>
+    </div>
+</section>
+
+<!-- ==================== OPTIONAL SECTION ================= -->
+<section class="col-md-12 optional-section">
+    <div class="col-md-8 col-sm-12 comment-section">
         <comments-component [ownerEntity]="baseEntity"></comments-component>
     </div>
-    <div class="notes-section">
-        <div>Notes</div>
-        <textarea [disabled]="getLockedStatus()" matInput [(ngModel)]="baseEntity.Notes" matAutosizeMinRows="10" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)"
+    <div class="col-md-4 col-sm-12 notes-section">
+        <div class="col-md-12">Notes</div>
+        <textarea [disabled]="getLockedStatus()" matInput [(ngModel)]="baseEntity.Notes" matAutosizeMinRows="8" (ngModelChange)="on_input_change(item);handleDynamicRows(baseEntity.PRLines)"
         matTextareaAutosize class="form-input border-bottom" style="width:98%"> </textarea>
-    </div>
-    
-</div>
+    </div>  
+</section>
 <!-- 
 <pre>{{ accounts | json }}</pre>-->
 
