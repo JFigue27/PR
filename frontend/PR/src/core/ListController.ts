@@ -8,7 +8,8 @@ interface IConfigListController {
     paginate?: boolean;
     limit?: number;
     filters?: string;
-    filterName?:string;
+    filterName?: string;
+    sortName?: string;
 }
 
 export abstract class ListController {
@@ -16,7 +17,9 @@ export abstract class ListController {
     protected baseList: Array<any>;
     protected staticQueryParams: string='';
     protected filterOptions:any;
+    protected sortOptions: any;
     private filterStorageKey:string;
+    private sortStorageKey: string;
 
     constructor(public config: IConfigListController ) {
         this.config.paginate = config.paginate == undefined ? true: this.config.paginate;
@@ -26,6 +29,7 @@ export abstract class ListController {
             this.config.limit = 0;
         }
         this.filterStorageKey = config.filterName || 'myFilter';
+        this.sortStorageKey = config.sortName || 'mySort';
 
     }
 
@@ -37,6 +41,12 @@ export abstract class ListController {
             itemsCount: 0
         }
         this.persistFilter();
+    }
+
+    clearSorts() {
+        this.sortOptions = {
+        }
+        this.persistSort();
     }
 
     checkItem() {
@@ -61,6 +71,7 @@ export abstract class ListController {
         alertify.closeAll();
         this.staticQueryParams = staticQueryParams;
         this.setFilterOptions();
+        this.setSortOptions();
         this.updateList();   
     }
 
@@ -70,6 +81,12 @@ export abstract class ListController {
         for(let prop in this.filterOptions){
             if(this.filterOptions.hasOwnProperty(prop)){
                 result += prop + '=' + this.filterOptions[prop] + '&';
+            }
+        }
+
+        for (let prop in this.sortOptions) {
+            if (this.sortOptions.hasOwnProperty(prop)) {
+                result += 'sort-'+ prop + '=' + this.sortOptions[prop] + '&';
             }
         }
         result += this.staticQueryParams || '';
@@ -94,10 +111,14 @@ export abstract class ListController {
         localStorage.setItem(this.filterStorageKey, JSON.stringify(this.filterOptions));
     }
 
+    persistSort() {
+        localStorage.setItem(this.sortStorageKey, JSON.stringify(this.sortOptions));
+    }
+
     //   *
     refresh() {
         if( !this.filterOptions || this.filterOptions.limit == undefined) {
-            this.clearFilters();
+            this.clearFilters();            
         } else {
             this.updateList();
         }
@@ -138,6 +159,16 @@ export abstract class ListController {
             this.filterOptions = JSON.parse(this.filterOptions);
         }
     }
+    
+    setSortOptions() {
+        this.sortOptions = localStorage.getItem(this.sortStorageKey);
+
+        if (!this.sortOptions || this.sortOptions == 'undefined') {
+            this.clearSorts();
+        } else {
+            this.sortOptions = JSON.parse(this.sortOptions);
+        }
+    }
 
     saveItem(item) {
         this.config.service.save(item).then(oEntity => {
@@ -170,6 +201,7 @@ export abstract class ListController {
             this.filterOptions.itemsCount = oResult.AdditionalData.total_filtered_items;
             this.filterOptions.totalItems = oResult.AdditionalData.total_items;
             this.persistFilter();
+            this.persistSort();
 
             for (let i = 0; i < this.baseList.length; i++) {
                 let element = this.baseList[i];

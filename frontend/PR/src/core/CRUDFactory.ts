@@ -32,7 +32,7 @@ export abstract class CRUDFactory {
         return { headers: headers };
     }
 
-    createEntity(oEntity) {
+    createEntity(oEntity):Promise<any> {
         this.adapterOut(oEntity);
         return this.http.post<ICommonResponse>(this.baseUrl + this.config.endPoint, '=' + encodeURIComponent(JSON.stringify(oEntity)), this.addAuthorization())
             .map(response => this.extractData(response), this)

@@ -1,6 +1,5 @@
 import { CRUDFactory } from './CRUDFactory';
 // import { IEntity } from './IEntity';
-import { Observable } from 'rxjs/RX';
 import alertify from 'alertifyjs';
 
 interface IConfigFormController {
@@ -64,7 +63,7 @@ export abstract class FormController {
 
 	save() {	
 		this.beforeSave();
-		return this.config.service.save(this.baseEntity).then(oEntity => {
+		return this.config.service.save(this.baseEntity).then(() => {
 			this.afterSave();
 			alertify.success('SUCCESFULLY SAVED');
 			this.baseEntity.editMode = false;

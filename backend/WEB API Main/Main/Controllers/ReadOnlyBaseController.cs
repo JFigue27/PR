@@ -233,6 +233,8 @@ namespace ReusableWebAPI.Controllers
 
 
                         PropertyInfo oProp = typeof(Entity).GetProperty(sPropertyName);
+                        if (oProp == null) continue; //Ignore non-existing properties, they could be just different query parameters.
+
                         Type tProp = oProp.PropertyType;
                         //Nullable properties have to be treated differently, since we 
                         //  use their underlying property to set the value in the object

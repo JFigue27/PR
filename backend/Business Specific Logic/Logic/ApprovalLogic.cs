@@ -4,6 +4,7 @@ using Reusable.Email;
 using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Web;
 
 namespace BusinessSpecificLogic.Logic
 {
@@ -47,15 +48,6 @@ namespace BusinessSpecificLogic.Logic
                 dbQuery = dbQuery
                     .Where(e => e.UserRequisitorKey == LoggedUser.UserID || e.UserApproverKey == LoggedUser.UserID );
             }
-            //else if(LoggedUser.Role == "Finance")
-            //{
-            //    dbQuery = dbQuery
-            //        .Include(e => e.PurchaseRequest)
-            //        .Include(e => e.UserApprover)
-            //        .Where(e => e.PurchaseRequest.PRType == "Finance" && e.Status != "Pending" && e.UserApproverKey > 0 && (
-            //                (e.Status == "GM Approved" && e.UserApprover.Role == "General Manager") 
-            //                || (e.Status == "DM Approved" && e.UserApprover.Role == "Department Manager") ));
-            //}
             else if (LoggedUser.Role == "Administrator")
             {
                 //We do not filter for Administrator
@@ -88,13 +80,148 @@ namespace BusinessSpecificLogic.Logic
                 dbQuery = dbQuery.Where(e => e.UserRequisitorKey == LoggedUser.UserID);
             }
 
+            #region Sorting
+
+            var dbQueryOrdered = dbQuery.OrderBy(e => 0);
+            var sortStatus = HttpContext.Current.Request["sort-Status"];
+            if (sortStatus != null)
+            {
+                dbQueryOrdered = OrderBy(dbQueryOrdered, new SortData { Value="Status", AscDesc=sortStatus});
+            }
+                
+            dbQuery = dbQueryOrdered;
+
+            #endregion
+
+
+
             return dbQuery
                 .Include(e => e.InfoTrack)
                 .Include(e => e.PurchaseRequest)
-                .Include(e => e.InfoTrack.User_CreatedBy)
-                .OrderByDescending(e => e.InfoTrack.Date_EditedOn)
-                .ThenBy(e => e.Status);
+                .Include(e => e.InfoTrack.User_CreatedBy);
         }
+
+        private IOrderedQueryable<Approval> OrderBy(IOrderedQueryable<Approval> dbQuery, SortData sort)
+        {
+            switch (sort.Value)
+            {
+                case "Status":
+                    if (sort.AscDesc.ToUpper() == "DESC")
+                    {
+                        dbQuery = dbQuery.ThenByDescending(e => e.Status.ToString());
+                    }
+                    else
+                    {
+                        dbQuery = dbQuery.ThenBy(e => e.Status.ToString());
+                    }
+                    break;
+                //case "Created By":
+                //    if (sort.AscDesc == "DESC")
+                //    {
+                //        dbQuery = dbQuery.ThenByDescending(e => e.UserCreatedBy.Value);
+                //    }
+                //    else
+                //    {
+                //        dbQuery = dbQuery.ThenBy(e => e.UserCreatedBy.Value);
+                //    }
+                //    break;
+                //case "Assigned To":
+                //    if (sort.AscDesc == "DESC")
+                //    {
+                //        dbQuery = dbQuery.ThenByDescending(e => e.UserAssignedTo.Value);
+                //    }
+                //    else
+                //    {
+                //        dbQuery = dbQuery.ThenBy(e => e.UserAssignedTo.Value);
+                //    }
+                //    break;
+                //case "Priority":
+                //    if (sort.AscDesc == "DESC")
+                //    {
+                //        dbQuery = dbQuery.ThenByDescending(e => e.Priority.ToString());
+                //    }
+                //    else
+                //    {
+                //        dbQuery = dbQuery.ThenBy(e => e.Priority.ToString());
+                //    }
+                //    break;
+                //case "Category":
+                //    if (sort.AscDesc == "DESC")
+                //    {
+                //        dbQuery = dbQuery.ThenByDescending(e => e.Category);
+                //    }
+                //    else
+                //    {
+                //        dbQuery = dbQuery.ThenBy(e => e.Category);
+                //    }
+                //    break;
+                //case "Title":
+                //    if (sort.AscDesc == "DESC")
+                //    {
+                //        dbQuery = dbQuery.ThenByDescending(e => e.Title);
+                //    }
+                //    else
+                //    {
+                //        dbQuery = dbQuery.ThenBy(e => e.Title);
+                //    }
+                //    break;
+                //case "Description":
+                //    if (sort.AscDesc == "DESC")
+                //    {
+                //        dbQuery = dbQuery.ThenByDescending(e => e.Description);
+                //    }
+                //    else
+                //    {
+                //        dbQuery = dbQuery.ThenBy(e => e.Description);
+                //    }
+                //    break;
+                //case "Completed By":
+                //    if (sort.AscDesc == "DESC")
+                //    {
+                //        dbQuery = dbQuery.ThenByDescending(e => e.UserCompletedBy.Value);
+                //    }
+                //    else
+                //    {
+                //        dbQuery = dbQuery.ThenBy(e => e.UserCompletedBy.Value);
+                //    }
+                //    break;
+                //case "Date Created At":
+                //    if (sort.AscDesc == "DESC")
+                //    {
+                //        dbQuery = dbQuery.ThenByDescending(e => e.DateCreatedAt);
+                //    }
+                //    else
+                //    {
+                //        dbQuery = dbQuery.ThenBy(e => e.DateCreatedAt);
+                //    }
+                //    break;
+                //case "Date Due Date":
+                //    if (sort.AscDesc == "DESC")
+                //    {
+                //        dbQuery = dbQuery.ThenByDescending(e => e.DateDue);
+                //    }
+                //    else
+                //    {
+                //        dbQuery = dbQuery.ThenBy(e => e.DateDue);
+                //    }
+                //    break;
+                //case "Date Closed":
+                //    if (sort.AscDesc == "DESC")
+                //    {
+                //        dbQuery = dbQuery.ThenByDescending(e => e.DateClosed);
+                //    }
+                //    else
+                //    {
+                //        dbQuery = dbQuery.ThenBy(e => e.DateClosed);
+                //    }
+                //    break;
+                default:
+                    break;
+            }
+
+            return dbQuery;
+        }
+
 
         protected override void OnCreateInstance(Approval entity)
         {
@@ -146,10 +273,7 @@ namespace BusinessSpecificLogic.Logic
                     Password = currentUser.EmailPassword,
                     From = currentUser.Email,
                     Subject = "PR - " + pr.PRNumber.GeneratedNumber + " [" +  entity.Status + "] " + entity.Title,
-
-
-
-
+                    
 
                     Body = @"<div style='width: 90%;margin: auto;box-shadow: 1px 1px 8px #c3c3c3;border: 1px solid #d4d4d4;'>
     <div style='background: #006064;text-align: center;color: white;padding: 10px;'>
@@ -194,15 +318,6 @@ namespace BusinessSpecificLogic.Logic
         </div>
     </div>
 </div>"
-
-
-
-
-
-
-                    //Body = "PR - " + pr.PRNumber.GeneratedNumber + ". " + " [" + entity.Status + "] " + entity.Title
-                    //        + "<br><b>Description</b><br>" + entity.RequestDescription
-                    //        + @"<br><br>Open document here: <a href=""" + hyperlink + @""">" + pr.PRNumber.GeneratedNumber + "</a>"
 
                 };
 

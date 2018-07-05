@@ -8,11 +8,7 @@ import { UserService } from '../services/user.service';
 export class LoginService {
     url = Config.API_URL;
 
-    constructor(
-        private http: HttpClient,
-        private userService: UserService
-    ) {
-
+    constructor( private http: HttpClient, private userService: UserService) {
     }
 
     getToken(body): Promise<any> {

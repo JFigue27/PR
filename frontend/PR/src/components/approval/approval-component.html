@@ -12,6 +12,13 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <mat-form-field class="select-filter">
+    <mat-select placeholder="sort by status" (selectionChange)="sortStatus($event)">
+      <mat-option *ngFor="let status of statuses" [value]="status.value">
+        {{ status.viewValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
 </section>
 
@@ -19,16 +26,16 @@
   <mat-paginator #paginator [pageSize]="filterOptions?.limit" [length]="filterOptions?.itemsCount" [pageIndex]="filterOptions?.page -1"
     [pageSizeOptions]="[5, 10, 20, 50, 100]" (page)="pageChanged($event.pageIndex + 1, $event.pageSize)">
   </mat-paginator>
-  <table class="table table-condensed" style="table-layout: fixed;">
+  <table class="table table-condensed" style="table-layout: fixed;" matSort (matSortChange)="sortData($event)">
     <thead>
       <tr>
         <th class="width-4"><ion-icon ios="ios-create" md="md-create" class="icon-status"></ion-icon></th>
-        <th class="width-7">Status</th>
+        <th mat-sort-header="Status" class="width-7">Status</th>
         <th class="width-15">Status description</th>
-        <th class="width-10">User</th>
-        <th>Identifier</th>
-        <th class="width-10">Date Requested</th>
-        <th class="width-7">PO Number</th>
+        <th mat-sort-header="User" class="width-10">User</th>
+        <th mat-sort-header="Identifier">Identifier</th>
+        <th mat-sort-header="DateRequested" class="width-10">Date Requested</th>
+        <th mat-sort-header="PONumber" class="width-7">PO Number</th>
       </tr>
     </thead>
     <tbody>
@@ -71,5 +78,4 @@
 </section>
 <ngx-spinner style="z-index: 5000;" bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#ffffff" type="timer"></ngx-spinner>
 
-<!-- <pre>{{ filterOptions | json }}</pre>
-<pre>{{ baseList | json }}</pre> -->
+<pre>{{ baseList | json }}</pre>

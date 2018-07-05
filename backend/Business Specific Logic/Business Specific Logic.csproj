@@ -91,6 +91,7 @@
     <Compile Include="EF\Approval.cs" />
     <Compile Include="EF\PurchaseRequest.cs" />
     <Compile Include="JSON Entities\Contact.cs" />
+    <Compile Include="Logic\AdvancedSortLogic.cs" />
     <Compile Include="Logic\CommentLogic.cs" />
     <!-- End:Generated:EF -->
     <Compile Include="Logic\TokenLogic.cs" />

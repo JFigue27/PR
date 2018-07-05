@@ -5,6 +5,7 @@ import { NavController } from 'ionic-angular';
 import { PRPage } from '../../pages/pr-page/pr-page';
 import { UserService } from '../../services/user.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Sort } from '@angular/material';
 
 @Component({
   selector: 'approval-component',
@@ -25,22 +26,22 @@ export class ApprovalComponent extends ListController implements OnInit {
     { value: 'GM Approved', viewValue: 'GM Approved' },
     { value: 'Finalized', viewValue: 'Finalized' }
   ];
+  
+  constructor ( public nav: NavController, public approvalService: ApprovalService, public userService:UserService, public spinner: NgxSpinnerService) 
+  {
+    super({ service: approvalService, paginate: true, limit: 20, filterName: 'AprovalFilter' });
+  }
 
-
-  constructor ( 
-                public nav: NavController,
-                public approvalService: ApprovalService,
-                public userService:UserService,
-                public spinner: NgxSpinnerService
-              ) 
-            {
-              super({ service: approvalService, paginate: true, limit: 20, filterName: 'AprovalFilter' });
-            }
-
+  
   ngOnInit() {
       this.spinner.show();
       this.clearFilters();
       this.load();
+  }
+  sortData(sort: Sort) {
+    console.log(sort);
+    this.sortOptions[sort.active] = sort.direction;
+    this.refresh();
   }
 
   filterStatus(oEvent:any) {

@@ -18,31 +18,25 @@ export class PRService extends CRUDFactory {
         }
         
         oEntity.ConvertedDateDepartmentManager = this.utilsService.toJsDate(oEntity.DateDepartmentManager);
-        oEntity.ConvertedDateGeneralManager = this.utilsService.toJsDate(oEntity.DateGeneralManager);   
+        oEntity.ConvertedDateGeneralManager = this.utilsService.toJsDate(oEntity.DateGeneralManager);
+        oEntity.ConvertedDateInvoice = this.utilsService.toJsDate(oEntity.DateInvoice);   
     }
       
     adapterOut(oEntity: any) {
         oEntity.DateDepartmentManager = this.utilsService.toServerDate(oEntity.ConvertedDateDepartmentManager);
         oEntity.DateGeneralManager = this.utilsService.toServerDate(oEntity.ConvertedDateGeneralManager);
+        oEntity.DateInvoice = this.utilsService.toServerDate(oEntity.ConvertedDateInvoice);
 
         if(oEntity.PRLines){
             for (let i = oEntity.PRLines.length -1; i >=0 ; i--) {
                 const element = oEntity.PRLines[i];
-                if(
-                    element.ItemNumber ||
-                    element.Description ||
-                    element.UM ||
-                    element.Qty ||
-                    element.PriceEach ||
-                    element.PriceEach2 ||
-                    element.PriceEach3
-                ){
-
-                } else {
+                if( element.ItemNumber || element.Description || element.UM || element.Qty 
+                    || element.PriceEach || element.PriceEach2 || element.PriceEach3 ){
+                    }
+                else {
                     oEntity.PRLines.splice(i, 1);
                 }
             }
         }
     }
-    
 }

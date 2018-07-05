@@ -95,7 +95,6 @@ export class PRComponent extends FormController implements OnInit {
     }
   }
 
-
   getSupplier1Sum() {
     if (this.baseEntity && this.baseEntity.PRLines) {
       return this.baseEntity.PRLines.reduce(function (currentValue, item) {
@@ -168,6 +167,9 @@ export class PRComponent extends FormController implements OnInit {
         break;
       case "Project Manager":
         if (status == "DM Approved" || status == "Project Manager Rejected") return false;
+        break;
+      case "Finance":
+        if (status == "Finalized" || status == "DM Quote Approved" || status == 'GM Quote Approved') return false;
         break;
       case "Administrator":
         return false;

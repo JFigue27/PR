@@ -36,6 +36,9 @@ namespace BusinessSpecificLogic.EF
         public virtual DbSet<Step> Steps { get; set; }
         public virtual DbSet<StepOperation> StepOperations { get; set; }
         public virtual DbSet<Token> Tokens { get; set; }
+        public virtual DbSet<AdvancedSort> AdvancedSortings { get; set; }
+        public virtual DbSet<FilterData> FilterDatas { get; set; }
+        public virtual DbSet<SortData> SortDatas { get; set; }
         #endregion
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

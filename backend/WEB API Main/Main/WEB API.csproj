@@ -197,6 +197,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Auth\SimpleAuthorizationServerProvider.cs" />
+    <Compile Include="Controllers\AdvancedsortController.cs" />
     <Compile Include="Controllers\AttachmentController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />

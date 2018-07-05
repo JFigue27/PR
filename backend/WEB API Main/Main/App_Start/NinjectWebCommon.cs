@@ -99,6 +99,7 @@ namespace ReusableWebAPI.App_Start
             kernel.Bind<IStepOperationLogic>().To<StepOperationLogic>();
             kernel.Bind<ITrackLogic>().To<TrackLogic>();
             kernel.Bind<ITokenLogic>().To<TokenLogic>();
+            kernel.Bind<IAdvancedSortLogic>().To<AdvancedSortLogic>();
             kernel.Bind(typeof(BaseController<>)).ToSelf().InRequestScope();
             kernel.Bind(typeof(ReadOnlyBaseController<>)).ToSelf().InRequestScope();
             kernel.Bind(typeof(DocumentController<>)).ToSelf().InRequestScope();

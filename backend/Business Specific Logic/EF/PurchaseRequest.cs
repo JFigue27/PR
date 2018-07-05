@@ -48,6 +48,7 @@ namespace BusinessSpecificLogic.EF
         public string FriendlyIdentifier { get; set; }
         public DateTimeOffset? DateDepartmentManager { get; set; }
         public DateTimeOffset? DateGeneralManager { get; set; }
+        public DateTimeOffset? DateInvoice { get; set; }
         public int? Supplier1Key { get; set; }
         [ForeignKey("Supplier1Key")]
         public Supplier Supplier1 { get; set; }

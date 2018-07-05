@@ -59,7 +59,7 @@ Frontend Migration from Angualr 1 to Angular 4:
     ☐ RFactory.
     ☐ HotKeys.
     ☐ RealTime.
-    ☐ Exceptions.js.
+    ☐ Exceptions.js
 
   Controllers:
     ☐ formController.
@@ -231,19 +231,19 @@ Frontend Migration from Angualr 1 to Angular 4:
       ✔ Login should not redirect to home. @done(18-03-26 12:24)
     ☐ Selection from List.
       ☐ Responsible.
-    ☐ Commenting.
-        ☐ CommentProvider
-        ☐ Parameters:
-            ☐ ownerEntity
-            ☐ customProperty
-        ☐ save(commentToSave, parentComment) (single comment)
-        ☐ addComment(commentToAdd)
+    ✔ Commenting. @done(18-06-28 11:15)
+        ✔ CommentProvider @done(18-06-28 11:15)
+        ✔ Parameters: @done(18-06-28 11:15)
+            ✔ ownerEntity @done(18-06-28 11:15)
+            ✔ customProperty @done(18-06-28 11:15)
+        ✔ save(commentToSave, parentComment) (single comment) @done(18-06-28 11:15)
+        ✔ addComment(commentToAdd) @done(18-06-28 11:15)
         Low Priority:-----------------------------
-        ☐ reply
-        ☐ showReply
-        ☐ refreshComments
-        ☐ retrieveCurrentUser
-            ☐ Handle Anonymous users
+        ✔ reply @done(18-06-28 11:15)
+        ✔ showReply @done(18-06-28 11:15)
+        ✔ refreshComments @done(18-06-28 11:15)
+        ✔ retrieveCurrentUser @done(18-06-28 11:15)
+            ✔ Handle Anonymous users @done(18-06-28 11:15)
         ☐ getIdenticon
         ☐ RealTime
             ☐ JoinComments

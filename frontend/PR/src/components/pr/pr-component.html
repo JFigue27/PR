@@ -12,6 +12,13 @@
             <b>PO Number:</b>&nbsp;&nbsp;
             <input type="text" class="form-input border-bottom" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.PONumber"
                 style="width:55%;" [disabled]="getCurrentRole() != 'MRO' ">
+            <div *ngIf="getCurrentRole() == 'Finance' "  style="margin-top:3px;">
+                <b>Invoice date</b>&nbsp;&nbsp;
+                <input [matDatepicker]="myDatepicker2" (click)="myDatepicker2.open()" class="form-input border-bottom" style="width:50%;"  (ngModelChange)="on_input_change()"
+                [(ngModel)]="baseEntity.ConvertedDateInvoice">
+                    <mat-datepicker-toggle [for]="myDatepicker2"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi="true" #myDatepicker2></mat-datepicker>
+                </div>
         </div>
     </div>
     <div class="pr-identifier">
