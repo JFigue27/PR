@@ -84,11 +84,28 @@ namespace BusinessSpecificLogic.Logic
 
             var dbQueryOrdered = dbQuery.OrderBy(e => 0);
             var sortStatus = HttpContext.Current.Request["sort-Status"];
-            if (sortStatus != null)
+            var sortUser = HttpContext.Current.Request["sort-User"];
+            var sortIdentifier = HttpContext.Current.Request["sort-Identifier"];
+            var sortDateRequested = HttpContext.Current.Request["sort-DateRequested"];
+
+
+            if (!string.IsNullOrWhiteSpace(sortStatus))
             {
-                dbQueryOrdered = OrderBy(dbQueryOrdered, new SortData { Value="Status", AscDesc=sortStatus});
+                dbQueryOrdered = OrderBy(dbQueryOrdered, new SortData { Value = "Status", AscDesc = sortStatus });
             }
-                
+            else if (!string.IsNullOrWhiteSpace(sortUser))
+            {
+                dbQueryOrdered = OrderBy(dbQueryOrdered, new SortData { Value = "User", AscDesc = sortUser });
+            }
+            else if (!string.IsNullOrWhiteSpace(sortIdentifier))
+            {
+                dbQueryOrdered = OrderBy(dbQueryOrdered, new SortData { Value = "Identifier", AscDesc = sortIdentifier });
+            }
+            else if (!string.IsNullOrWhiteSpace(sortDateRequested))
+            {
+                dbQueryOrdered = OrderBy(dbQueryOrdered, new SortData { Value = "DateRequested", AscDesc = sortDateRequested });
+            }
+
             dbQuery = dbQueryOrdered;
 
             #endregion
@@ -115,106 +132,36 @@ namespace BusinessSpecificLogic.Logic
                         dbQuery = dbQuery.ThenBy(e => e.Status.ToString());
                     }
                     break;
-                //case "Created By":
-                //    if (sort.AscDesc == "DESC")
-                //    {
-                //        dbQuery = dbQuery.ThenByDescending(e => e.UserCreatedBy.Value);
-                //    }
-                //    else
-                //    {
-                //        dbQuery = dbQuery.ThenBy(e => e.UserCreatedBy.Value);
-                //    }
-                //    break;
-                //case "Assigned To":
-                //    if (sort.AscDesc == "DESC")
-                //    {
-                //        dbQuery = dbQuery.ThenByDescending(e => e.UserAssignedTo.Value);
-                //    }
-                //    else
-                //    {
-                //        dbQuery = dbQuery.ThenBy(e => e.UserAssignedTo.Value);
-                //    }
-                //    break;
-                //case "Priority":
-                //    if (sort.AscDesc == "DESC")
-                //    {
-                //        dbQuery = dbQuery.ThenByDescending(e => e.Priority.ToString());
-                //    }
-                //    else
-                //    {
-                //        dbQuery = dbQuery.ThenBy(e => e.Priority.ToString());
-                //    }
-                //    break;
-                //case "Category":
-                //    if (sort.AscDesc == "DESC")
-                //    {
-                //        dbQuery = dbQuery.ThenByDescending(e => e.Category);
-                //    }
-                //    else
-                //    {
-                //        dbQuery = dbQuery.ThenBy(e => e.Category);
-                //    }
-                //    break;
-                //case "Title":
-                //    if (sort.AscDesc == "DESC")
-                //    {
-                //        dbQuery = dbQuery.ThenByDescending(e => e.Title);
-                //    }
-                //    else
-                //    {
-                //        dbQuery = dbQuery.ThenBy(e => e.Title);
-                //    }
-                //    break;
-                //case "Description":
-                //    if (sort.AscDesc == "DESC")
-                //    {
-                //        dbQuery = dbQuery.ThenByDescending(e => e.Description);
-                //    }
-                //    else
-                //    {
-                //        dbQuery = dbQuery.ThenBy(e => e.Description);
-                //    }
-                //    break;
-                //case "Completed By":
-                //    if (sort.AscDesc == "DESC")
-                //    {
-                //        dbQuery = dbQuery.ThenByDescending(e => e.UserCompletedBy.Value);
-                //    }
-                //    else
-                //    {
-                //        dbQuery = dbQuery.ThenBy(e => e.UserCompletedBy.Value);
-                //    }
-                //    break;
-                //case "Date Created At":
-                //    if (sort.AscDesc == "DESC")
-                //    {
-                //        dbQuery = dbQuery.ThenByDescending(e => e.DateCreatedAt);
-                //    }
-                //    else
-                //    {
-                //        dbQuery = dbQuery.ThenBy(e => e.DateCreatedAt);
-                //    }
-                //    break;
-                //case "Date Due Date":
-                //    if (sort.AscDesc == "DESC")
-                //    {
-                //        dbQuery = dbQuery.ThenByDescending(e => e.DateDue);
-                //    }
-                //    else
-                //    {
-                //        dbQuery = dbQuery.ThenBy(e => e.DateDue);
-                //    }
-                //    break;
-                //case "Date Closed":
-                //    if (sort.AscDesc == "DESC")
-                //    {
-                //        dbQuery = dbQuery.ThenByDescending(e => e.DateClosed);
-                //    }
-                //    else
-                //    {
-                //        dbQuery = dbQuery.ThenBy(e => e.DateClosed);
-                //    }
-                //    break;
+                case "User":
+                    if (sort.AscDesc.ToUpper() == "DESC")
+                    {
+                        dbQuery = dbQuery.ThenByDescending(e => e.UserRequisitor.Value.ToString());
+                    }
+                    else
+                    {
+                        dbQuery = dbQuery.ThenBy(e => e.UserRequisitor.Value.ToString());
+                    }
+                    break;
+                case "Identifier":
+                    if (sort.AscDesc.ToUpper() == "DESC")
+                    {
+                        dbQuery = dbQuery.ThenByDescending(e => e.PurchaseRequest.FriendlyIdentifier.ToString());
+                    }
+                    else
+                    {
+                        dbQuery = dbQuery.ThenBy(e => e.PurchaseRequest.FriendlyIdentifier.ToString());
+                    }
+                    break;
+                case "DateRequested":
+                    if (sort.AscDesc.ToUpper() == "DESC")
+                    {
+                        dbQuery = dbQuery.ThenByDescending(e => e.InfoTrack.Date_CreatedOn.ToString());
+                    }
+                    else
+                    {
+                        dbQuery = dbQuery.ThenBy(e => e.InfoTrack.Date_CreatedOn.ToString());
+                    }
+                    break;
                 default:
                     break;
             }
