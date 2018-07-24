@@ -73,7 +73,7 @@ namespace BusinessSpecificLogic.Logic
             {
                 dbQuery = dbQuery.Include(e => e.PurchaseRequest)
                     .Where(e => e.PurchaseRequest.PRType == "MRP" &&
-                    (e.Status == "DM Approved" || e.Status == "Project Manager Rejected" || e.Status == "Finalized"));
+                    (e.Status == "DM Approved" || e.Status == "Project Manager Rejected" || e.Status == "Finalized" || e.Status == "DM Quote"));
             }
             else //User
             {
@@ -88,6 +88,7 @@ namespace BusinessSpecificLogic.Logic
             var sortIdentifier = HttpContext.Current.Request["sort-Identifier"];
             var sortDateRequested = HttpContext.Current.Request["sort-DateRequested"];
 
+            //switch(value)
 
             if (!string.IsNullOrWhiteSpace(sortStatus))
             {
@@ -105,6 +106,10 @@ namespace BusinessSpecificLogic.Logic
             {
                 dbQueryOrdered = OrderBy(dbQueryOrdered, new SortData { Value = "DateRequested", AscDesc = sortDateRequested });
             }
+            sortStatus = string.Empty;
+            sortUser = string.Empty;
+            sortIdentifier = string.Empty;
+            sortDateRequested = string.Empty;
 
             dbQuery = dbQueryOrdered;
 

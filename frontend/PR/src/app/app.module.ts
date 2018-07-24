@@ -23,7 +23,7 @@ import { DepartmentFormComponent } from '../components/department-form/departmen
 import { AccountFormComponent } from '../components/account-form/account-form-component';
 import { ApprovalFormComponent } from '../components/approval-form/approval-form-component';
 import { EmailFormComponent } from '../components/email-form/email-form-component';
-import { SortFormComponent } from '../components/sort-form/sort-form-component';
+import { SupplierInfoComponent } from '../components/supplier-info/supplier-info.component';
 
 //MODULES
 import { AttachmentsModule } from '../components/attachments.module';
@@ -92,7 +92,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ApprovalComponent,
     ApprovalFormComponent,
     EmailFormComponent,
-    SortFormComponent,
+    SupplierInfoComponent,
     //Pages
     HomePage,
     ListPage,
@@ -149,7 +149,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ApprovalComponent,
     ApprovalFormComponent,
     EmailFormComponent,
-    SortFormComponent,
+    SupplierInfoComponent,
     // //Pages
     HomePage,
     ListPage,

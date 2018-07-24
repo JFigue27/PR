@@ -16,12 +16,15 @@
     <button mat-raised-button color="accent" (click)="saveApproval('Pending')"
     *ngIf="getCurrentUser().UserKey != baseEntity.UserApproverKey && 
     (baseEntity.Status == 'Created'  || baseEntity.Status == 'GM Rejected' || baseEntity.Status == 'DM Rejected') ">Request to Manager</button>
+    
     <button mat-raised-button color="basic" (click)="saveApproval('DM Quote')"
     *ngIf="pr.InfoTrack?.User_CreatedByKey != getCurrentUser().UserKey && 
     (baseEntity.Status == 'Created' || baseEntity.Status == 'Pending' || baseEntity.Status == 'DM Rejected') ">Send to MRO</button>
+    
     <button mat-raised-button color="basic" (click)="saveApproval('DM Approved','MRP')"
     *ngIf="pr.InfoTrack?.User_CreatedByKey != getCurrentUser().UserKey && 
     (baseEntity.Status == 'Created' || baseEntity.Status == 'Pending' || baseEntity.Status == 'DM Rejected') ">Send to Project Manager</button>
+    
     <button mat-raised-button color="warn" (click)="saveApproval('DM Rejected')"
     *ngIf="pr.InfoTrack?.User_CreatedByKey != getCurrentUser().UserKey  &&
     ( baseEntity.Status == 'Pending' || baseEntity.Status == 'MRO Quote' || baseEntity.Status == 'DM Quote') ">Reject</button>

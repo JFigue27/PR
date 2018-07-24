@@ -49,6 +49,7 @@ namespace BusinessSpecificLogic.EF
         public DateTimeOffset? DateDepartmentManager { get; set; }
         public DateTimeOffset? DateGeneralManager { get; set; }
         public DateTimeOffset? DateInvoice { get; set; }
+        public string InvoiceNumber { get; set; }
         public int? Supplier1Key { get; set; }
         [ForeignKey("Supplier1Key")]
         public Supplier Supplier1 { get; set; }
@@ -61,10 +62,14 @@ namespace BusinessSpecificLogic.EF
         public string SupplierCurrency1 { get; set; }
         public string SupplierCurrency2 { get; set; }
         public string SupplierCurrency3 { get; set; }
+        public string SupplierContact1 { get; set; }
+        public string SupplierContact2 { get; set; }
+        public string SupplierContact3 { get; set; }
         public string Notes { get; set; }
         public int? SupplierSelectedKey { get; set; }
         [ForeignKey("SupplierSelectedKey")]
         public Supplier SupplierSelected { get; set; }
+        public int SelectedOption { get; set; }
         public string PONumber { get; set; }
         public int PRNumberKey { get; set; }
         [ForeignKey("PRNumberKey")]

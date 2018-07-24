@@ -9,23 +9,32 @@
             <mat-progress-bar class="progress-bar"  mode="determinate" [value]="displayStatusBar(baseEntity.ApprovalStatus)"></mat-progress-bar> 
         </div>
         <div class="pr-header-po-number">
-            <b>PO Number:</b>&nbsp;&nbsp;
-            <input type="text" class="form-input border-bottom" (ngModelChange)="on_input_change()" [(ngModel)]="baseEntity.PONumber"
-                style="width:55%;" [disabled]="getCurrentRole() != 'MRO' ">
-            <div *ngIf="getCurrentRole() == 'Finance' "  style="margin-top:3px;">
-                <b>Invoice date</b>&nbsp;&nbsp;
-                <input [matDatepicker]="myDatepicker2" (click)="myDatepicker2.open()" class="form-input border-bottom" style="width:50%;"  (ngModelChange)="on_input_change()"
-                [(ngModel)]="baseEntity.ConvertedDateInvoice">
-                    <mat-datepicker-toggle [for]="myDatepicker2"></mat-datepicker-toggle>
-                    <mat-datepicker touchUi="true" #myDatepicker2></mat-datepicker>
-                </div>
+                <input type="text" class="form-input border-bottom" (ngModelChange)="on_input_change()" 
+                placeholder="PO Number" [(ngModel)]="baseEntity.PONumber" [disabled]="getCurrentRole() != 'MRO' ">
+
+                <input type="text" class="form-input border-bottom" (ngModelChange)="on_input_change();"
+                placeholder="Invoice Number" [(ngModel)]="baseEntity.InvoiceNumber" [disabled]="getCurrentRole() != 'Finance' ">
+            </div>
         </div>
-    </div>
-    <div class="pr-identifier">
-        <mat-form-field style="width:40%;">
-            <input matInput [(ngModel)]="baseEntity.FriendlyIdentifier" [disabled]="baseEntity.ApprovalStatus == 'Approved' " placeholder="Fiendly Identifier"
-                (ngModelChange)="on_input_change();">
+    <div class="identifier-section">
+        <mat-form-field class="identifier">
+            <input matInput [(ngModel)]="baseEntity.FriendlyIdentifier" [disabled]="baseEntity.ApprovalStatus == 'Approved' "
+            placeholder="Fiendly Identifier" (ngModelChange)="on_input_change();">
         </mat-form-field>
+        <div class="identifier-buttons">
+            <mat-form-field class="contact">
+                <input matInput [(ngModel)]="baseEntity.SupplierContact1" [disabled]="baseEntity.ApprovalStatus == 'Approved' " placeholder="Contact"
+                    (ngModelChange)="on_input_change();">
+            </mat-form-field>
+            <mat-form-field class="contact">
+                <input matInput [(ngModel)]="baseEntity.SupplierContact2" [disabled]="baseEntity.ApprovalStatus == 'Approved' " placeholder="Contact"
+                    (ngModelChange)="on_input_change();">
+            </mat-form-field>
+            <mat-form-field class="contact">
+                <input matInput [(ngModel)]="baseEntity.SupplierContact3" [disabled]="baseEntity.ApprovalStatus == 'Approved' " placeholder="Contact"
+                    (ngModelChange)="on_input_change();">
+            </mat-form-field>
+        </div>
     </div>
 
     <fieldset [disabled]="getLockedStatus()" class="printableZone" style="border:none;">
@@ -35,7 +44,7 @@
                 <thead>
                     <tr>
                         <th colspan="4"></th>
-                        <th colspan="2" [ngClass]="getSupplier1Style()">
+                        <th colspan="2" [ngClass]="getSupplierStyle(1)">
                             <mat-select placeholder="$" class="currencies" [(ngModel)]="baseEntity.SupplierCurrency1" (ngModelChange)="on_input_change(item);">
                                 <mat-option *ngFor="let currency of currencies" [value]="currency">
                                     {{ currency }}
@@ -46,10 +55,10 @@
                                     {{ supplier.Value }}
                                 </mat-option>
                             </mat-select>
-                            <button (click)="newSupplier()" class="add-supplier" [ngClass]="getSupplier1Style()">+</button>
+                            <button (click)="newSupplier()" class="add-supplier" [ngClass]="getSupplierStyle(1)">+</button>
                         </th>
 
-                        <th colspan="2" [ngClass]="getSupplier2Style()">
+                        <th colspan="2" [ngClass]="getSupplierStyle(2)">
                             <mat-select placeholder="$" class="currencies" [(ngModel)]="baseEntity.SupplierCurrency2" (ngModelChange)="on_input_change(item);">
                                 <mat-option *ngFor="let currency of currencies" [value]="currency">
                                     {{ currency }}
@@ -60,10 +69,10 @@
                                     {{ supplier.Value }}
                                 </mat-option>
                             </mat-select>
-                            <button (click)="newSupplier()" class="add-supplier" [ngClass]="getSupplier2Style()">+</button>
+                            <button (click)="newSupplier()" class="add-supplier" [ngClass]="getSupplierStyle(2)">+</button>
                         </th>
 
-                        <th colspan="2" [ngClass]="getSupplier3Style()">
+                        <th colspan="2" [ngClass]="getSupplierStyle(3)">
                             <mat-select placeholder="$" class="currencies" [(ngModel)]="baseEntity.SupplierCurrency3" (ngModelChange)="on_input_change(item);">
                                 <mat-option *ngFor="let currency of currencies" [value]="currency">
                                     {{ currency }}
@@ -74,7 +83,7 @@
                                     {{ supplier.Value }}
                                 </mat-option>
                             </mat-select>
-                            <button (click)="newSupplier()" class="add-supplier" [ngClass]="getSupplier3Style()">+</button>
+                            <button (click)="newSupplier()" class="add-supplier" [ngClass]="getSupplierStyle(3)">+</button>
                         </th>
                     </tr>
                     <tr>
@@ -134,7 +143,7 @@
                     <tr>
                         <td colspan="4" class="blank-td"></td>
                         <td class="td-select">
-                            <button (click)="selectSupplier1()">Select</button>
+                            <button (click)="selectSupplier(1)">Select</button>
                         </td>
                         <td class="print-total">
                             <span>
@@ -142,7 +151,7 @@
                             </span>
                         </td>
                         <td class="td-select">
-                            <button (click)="selectSupplier2()">Select</button>
+                            <button (click)="selectSupplier(2)">Select</button>
                         </td>
                         <td class="print-total">
                             <span>
@@ -150,7 +159,7 @@
                             </span>
                         </td>
                         <td class="td-select">
-                            <button (click)="selectSupplier3()">Select</button>
+                            <button (click)="selectSupplier(3)">Select</button>
                         </td>
                         <td class="print-total">
                             <span>

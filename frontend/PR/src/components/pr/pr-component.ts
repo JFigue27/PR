@@ -11,6 +11,7 @@ import { ApprovalFormComponent } from '../approval-form/approval-form-component'
 import { ModalController } from 'ionic-angular/components/modal/modal-controller';
 import { SupplierFormComponent } from '../supplier-form/supplier-form-component';
 import { FormControl } from '@angular/forms';
+import { SupplierInfoComponent } from '../supplier-info/supplier-info.component';
 
 @Component({
   selector: 'pr-component',
@@ -169,31 +170,19 @@ export class PRComponent extends FormController implements OnInit {
         if (status == "DM Approved" || status == "Project Manager Rejected") return false;
         break;
       case "Finance":
-        if (status == "Finalized" || status == "DM Quote Approved" || status == 'GM Quote Approved') return false;
-        break;
+        return false;
       case "Administrator":
         return false;
       }  
     return true;
   }
   
-  getSupplier1Style() {
-    if (this.baseEntity.SupplierSelectedKey && this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier1Key) {
+  getSupplierStyle(option:number) {
+    if ( this.baseEntity.SelectedOption == option){
       return 'SupplierSelected';
     }
   }
 
-  getSupplier2Style() {
-    if (this.baseEntity.SupplierSelectedKey && this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier2Key) {
-      return 'SupplierSelected';
-    }
-  }
-
-  getSupplier3Style() {
-    if (this.baseEntity.SupplierSelectedKey && this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier3Key) {
-      return 'SupplierSelected';
-    }
-  }
 
   handleDynamicRows(arrRows: Array<any>) {
     if (arrRows.length > 0) {
@@ -226,6 +215,16 @@ export class PRComponent extends FormController implements OnInit {
     let department = this.departments.find(d => d.id == this.baseEntity.DepartmentKey);
     this.baseEntity.DepartmentManagerKey = department.ManagerKey;
     this.baseEntity.DepartmentKey = department.id;
+  }
+
+  openContact(supplier:any){
+    console.log('PROVEEDOR ');
+    console.log(supplier);
+    this.dialog.open(SupplierInfoComponent, {
+      data: {
+        oEntityOrId: supplier
+      }, width: '400px'
+    });
   }
 
   openModal() {
@@ -306,19 +305,9 @@ export class PRComponent extends FormController implements OnInit {
     this.baseEntity.PRLines.splice(index, 1);
   }
 
-  selectSupplier1() {
+  selectSupplier(option:number) {
     this.baseEntity.editMode = true;
-    this.baseEntity.SupplierSelectedKey = this.baseEntity.Supplier1Key;
-  }
-
-  selectSupplier2() {
-    this.baseEntity.editMode = true;
-    this.baseEntity.SupplierSelectedKey = this.baseEntity.Supplier2Key;
-  }
-
-  selectSupplier3() {
-    this.baseEntity.editMode = true;
-    this.baseEntity.SupplierSelectedKey = this.baseEntity.Supplier3Key;
+    this.baseEntity.SelectedOption = option;
   }
 
   afterLoad() {

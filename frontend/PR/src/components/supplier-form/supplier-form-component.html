@@ -8,6 +8,15 @@
       <mat-form-field class="example-full-width">
         <input matInput [(ngModel)]="baseEntity.Value" placeholder="Value" (ngModelChange)="on_input_change();">
       </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput [(ngModel)]="baseEntity.Contact" placeholder="Contact" (ngModelChange)="on_input_change();">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput [(ngModel)]="baseEntity.Phone" placeholder="Phone" (ngModelChange)="on_input_change();">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput [(ngModel)]="baseEntity.email" placeholder="email" (ngModelChange)="on_input_change();">
+      </mat-form-field>
       <button mat-raised-button mat-dialog-close color="accent" (click)="save()">Save</button>
       <button mat-raised-button mat-dialog-close color="basic">Close</button>
       <button mat-button color="basic" (click)="undo(baseEntity.id)">Undo</button>

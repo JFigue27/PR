@@ -11,6 +11,9 @@ mat-dialog-container {
     margin: auto;
 }
 
+.scroll-content{
+    overflow-y: auto;
+}
 // ------------------------------- Search -------------------------------
 .input-search{
     width: 30%;

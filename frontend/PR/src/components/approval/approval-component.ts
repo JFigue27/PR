@@ -42,6 +42,7 @@ export class ApprovalComponent extends ListController implements OnInit {
     console.log(sort);
     this.sortOptions[sort.active] = sort.direction;
     this.refresh();
+    this.clearSorts();
   }
 
   filterStatus(oEvent:any) {
