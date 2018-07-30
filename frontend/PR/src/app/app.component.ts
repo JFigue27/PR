@@ -1,20 +1,17 @@
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, ModalController } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { ModalController } from 'ionic-angular';
 import { LoginComponent } from '../components/login/login';
 import { UserService } from '../services/user.service';
-import { ListPage } from '../pages/list-page/list-page';
+import { FormControl } from '@angular/forms';
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app-component.html'
 })
 export class MyApp {
-
   CurrentUser: string;
-  @ViewChild(Nav) nav: Nav;
-  // rootPage: any = HomePage;
-  rootPage: any = ListPage;
+  mode = new FormControl('over');
 
-  constructor ( public platform: Platform, public modal: ModalController, public userService: UserService ) {
+  constructor ( public modal: ModalController, public userService: UserService ) {
           this.initializeApp();
       }
 
@@ -27,6 +24,19 @@ export class MyApp {
       profileModal.present();
       this.CurrentUser = user.DisplayName;
     }
+  }
+  logout() {
+    localStorage.clear();
+    let profileModal = this.modal.create(LoginComponent, null, { showBackdrop: true, enableBackdropDismiss: false });
+    profileModal.present();
+  }
+
+  getUserName() {
+    return this.userService.LoggedUser.UserName;
+  }
+
+  getUserRole() {
+    return this.userService.LoggedUser.Roles;
   }
  
 }

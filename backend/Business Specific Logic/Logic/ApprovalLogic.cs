@@ -72,7 +72,7 @@ namespace BusinessSpecificLogic.Logic
             else if (LoggedUser.Role == "Project Manager")
             {
                 dbQuery = dbQuery.Include(e => e.PurchaseRequest)
-                    .Where(e => e.PurchaseRequest.PRType == "MRP" &&
+                    .Where(e => e.PRType == "MRP" &&
                     (e.Status == "DM Approved" || e.Status == "Project Manager Rejected" || e.Status == "Finalized" || e.Status == "DM Quote"));
             }
             else //User
@@ -266,6 +266,10 @@ namespace BusinessSpecificLogic.Logic
         <div style='font-size: 16px;margin-bottom: 10px;padding:10px;margin-left: 10px; color:#0075ed;border: none;border-radius: 5px;font-family: sans-serif;'>
             <a href=' " + hyperlink + @" ' style='text-decoration: none;font-size: 22px;'>
                 Open document here
+            </a>
+            <br>
+            <a href='http://apps.capsonic.com/PR/Main/pr/'" + entity.PurchaseRequestKey +@"' style='text-decoration: none;font-size: 22px;'>
+                Alternative link
             </a>
         </div>
     </div>

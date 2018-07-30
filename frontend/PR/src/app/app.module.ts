@@ -5,6 +5,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FileUploadModule } from 'ng2-file-upload';
 
+//ROUTING
+import { AppRoutingModule } from './routes';
+
 //COMPONENTS
 import { MyApp } from './app.component';
 import { HomeComponent } from '../components/home/home-component';
@@ -23,22 +26,11 @@ import { DepartmentFormComponent } from '../components/department-form/departmen
 import { AccountFormComponent } from '../components/account-form/account-form-component';
 import { ApprovalFormComponent } from '../components/approval-form/approval-form-component';
 import { EmailFormComponent } from '../components/email-form/email-form-component';
-import { SupplierInfoComponent } from '../components/supplier-info/supplier-info.component';
 
 //MODULES
 import { AttachmentsModule } from '../components/attachments.module';
 import { CommentsModule } from '../components/comments.module';
 
-//PAGES
-import { HomePage } from '../pages/home/home-page';
-import { ListPage } from '../pages/list-page/list-page';
-import { PRPage } from '../pages/pr-page/pr-page';
-import { UsersPage } from '../pages/users/users-page';
-import { SuppliersPage } from '../pages/suppliers/suppliers-page';
-import { AccountPage } from '../pages/account-page/account-page';
-import { DepartmentPage } from '../pages/department-page/department-page';
-import { ApprovalPage } from '../pages/approval-page/approval-page';
-import { EmailPage } from '../pages/email-page/email-page';
 
 //SERVICES
 import { LoginService } from '../services/login.service';
@@ -92,19 +84,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ApprovalComponent,
     ApprovalFormComponent,
     EmailFormComponent,
-    SupplierInfoComponent,
-    //Pages
-    HomePage,
-    ListPage,
-    PRPage,
-    UsersPage,
-    DepartmentPage,
-    AccountPage,
-    SuppliersPage,
-    ApprovalPage,
-    EmailPage,
   ],
   imports: [
+    AppRoutingModule,
     AttachmentsModule,
     CommentsModule,
     CommonModule,
@@ -149,17 +131,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ApprovalComponent,
     ApprovalFormComponent,
     EmailFormComponent,
-    SupplierInfoComponent,
-    // //Pages
-    HomePage,
-    ListPage,
-    PRPage,
-    UsersPage,
-    SuppliersPage,
-    DepartmentPage,
-    AccountPage,
-    ApprovalPage,
-    EmailPage
   ],
   providers: [
     LoginService,

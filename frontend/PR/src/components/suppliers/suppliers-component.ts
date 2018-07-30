@@ -9,12 +9,10 @@ import { MatDialog } from '@angular/material';
   templateUrl: 'suppliers-component.html'
 })
 export class SuppliersComponent extends ListController implements OnInit {
-  constructor (
-              public dialog:MatDialog,
-              public supplierService: SupplierService,
-            ) {
-    super({ service: supplierService, paginate: true, limit: 20, filterName: 'SupplierFilter' });
-            }
+  constructor ( public dialog:MatDialog, public supplierService: SupplierService ) 
+      {
+          super({ service: supplierService, paginate: true, limit: 20, filterName: 'SupplierFilter' });
+      }
 
   ngOnInit() {
     this.load();

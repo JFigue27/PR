@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams } from 'ionic-angular';
 import { FormController } from '../../core/FormController';
 import { PRService } from '../../services/pr.service';
 import { UserService } from '../../services/user.service';
@@ -11,7 +10,7 @@ import { ApprovalFormComponent } from '../approval-form/approval-form-component'
 import { ModalController } from 'ionic-angular/components/modal/modal-controller';
 import { SupplierFormComponent } from '../supplier-form/supplier-form-component';
 import { FormControl } from '@angular/forms';
-import { SupplierInfoComponent } from '../supplier-info/supplier-info.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'pr-component',
@@ -30,8 +29,8 @@ export class PRComponent extends FormController implements OnInit {
   myControl: FormControl = new FormControl();
 
   constructor (
+                private route: ActivatedRoute,
                 public dialog: MatDialog,
-                private params: NavParams,
                 public userService: UserService,
                 public PRService: PRService,
                 private departmentService: DepartmentService,
@@ -43,8 +42,9 @@ export class PRComponent extends FormController implements OnInit {
             }
 
   ngOnInit() {
-    
-    this.load(this.params.get('oEntityOrId'));
+    console.log('2018');
+    console.log(this.route.snapshot.paramMap.get('id'));
+    this.load(this.route.snapshot.paramMap.get('id'));
   
     this.departmentService.loadEntities().subscribe(oResult => {
       this.departments = oResult.Result;
@@ -63,11 +63,11 @@ export class PRComponent extends FormController implements OnInit {
     });
 
     let PurchaseRequestKey: number;
-      if (this.params.get('oEntityOrId') > 0) {
-        PurchaseRequestKey = this.params.get('oEntityOrId');
-      } else {
-        PurchaseRequestKey = this.params.get('oEntityOrId').id;
-      }
+      // if (this.params.get('oEntityOrId') > 0) {
+      //   PurchaseRequestKey = this.params.get('oEntityOrId');
+      // } else {
+      //   PurchaseRequestKey = this.params.get('oEntityOrId').id;
+      // }
     }
    
   displayStatusBar(status:string){
@@ -183,7 +183,6 @@ export class PRComponent extends FormController implements OnInit {
     }
   }
 
-
   handleDynamicRows(arrRows: Array<any>) {
     if (arrRows.length > 0) {
       let atLeastOneCellFilled = false;
@@ -215,16 +214,6 @@ export class PRComponent extends FormController implements OnInit {
     let department = this.departments.find(d => d.id == this.baseEntity.DepartmentKey);
     this.baseEntity.DepartmentManagerKey = department.ManagerKey;
     this.baseEntity.DepartmentKey = department.id;
-  }
-
-  openContact(supplier:any){
-    console.log('PROVEEDOR ');
-    console.log(supplier);
-    this.dialog.open(SupplierInfoComponent, {
-      data: {
-        oEntityOrId: supplier
-      }, width: '400px'
-    });
   }
 
   openModal() {
@@ -330,8 +319,7 @@ export class PRComponent extends FormController implements OnInit {
   afterRemove() {
   }
 
-  beforeSave(){
-    
+  beforeSave(){    
   }
 
   afterSave() {
@@ -344,6 +332,4 @@ export class PRComponent extends FormController implements OnInit {
       });
   }
 
-
 }
-

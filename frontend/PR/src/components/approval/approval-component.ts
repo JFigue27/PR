@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApprovalService } from '../../services/approval.service';
 import { ListController } from '../../core/ListController';
-import { NavController } from 'ionic-angular';
-import { PRPage } from '../../pages/pr-page/pr-page';
 import { UserService } from '../../services/user.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Sort } from '@angular/material';
@@ -27,7 +25,7 @@ export class ApprovalComponent extends ListController implements OnInit {
     { value: 'Finalized', viewValue: 'Finalized' }
   ];
   
-  constructor ( public nav: NavController, public approvalService: ApprovalService, public userService:UserService, public spinner: NgxSpinnerService) 
+  constructor ( public approvalService: ApprovalService, public userService:UserService, public spinner: NgxSpinnerService) 
   {
     super({ service: approvalService, paginate: true, limit: 20, filterName: 'AprovalFilter' });
   }
@@ -67,6 +65,12 @@ export class ApprovalComponent extends ListController implements OnInit {
       }
     }
     
+    if (this.userService.LoggedUser.Roles == "Project Manager") {
+      if (status == "DM Approved") {
+        return "row-pending";
+      }
+    }
+
     if (this.userService.LoggedUser.Roles == "Department Manager" || this.userService.LoggedUser.Roles == "General Manager" ){
       if (status == 'Pending' || status == "PM Approved") {
         return "row-pending";
@@ -86,7 +90,7 @@ export class ApprovalComponent extends ListController implements OnInit {
   }
 
   onOpenItem(oEntity: any) {
-    this.nav.push(PRPage, { oEntityOrId: oEntity.PurchaseRequestKey });
+    // this.nav.push(PRPage, { oEntityOrId: oEntity.PurchaseRequestKey });
   } 
 
   afterRemove() {

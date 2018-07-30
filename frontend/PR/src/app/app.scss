@@ -4,11 +4,14 @@
 @import "./common/table";
 
 .content {
-    background-color: #ebebeb;
+    background-color: #f8f8f8;
 }
 
 mat-dialog-container {
     margin: auto;
+}
+ng-component {
+    overflow: auto;
 }
 
 .scroll-content{

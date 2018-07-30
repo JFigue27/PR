@@ -38,6 +38,7 @@ namespace BusinessSpecificLogic.EF
         public User UserApprover { get; set; }
         public string Hyperlink { get; set; }
         public string Title { get; set; }
+        public string PRType { get; set; }
         ///End:Generated:Properties<<<
 
         [NotMapped]

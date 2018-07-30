@@ -32,7 +32,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of baseList" (click)="openItem(item)" class="tr-content" [ngClass]="getStatusStyle(item.Status)">
+      <tr *ngFor="let item of baseList" routerLink="/pr/{{item.PurchaseRequestKey}}" class="tr-content" [ngClass]="getStatusStyle(item.Status)">
         <td class="width-4">
           <i class="material-icons icon-status icon-ok"
             *ngIf=" item.Status == 'DM Quote' || item.Status == 'GM Quote' || item.Status == 'PM Approved' ">
