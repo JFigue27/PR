@@ -62,7 +62,7 @@ export class PRComponent extends FormController implements OnInit {
       this.suppliers = oResult.Result;
     });
 
-    let PurchaseRequestKey: number;
+    // let PurchaseRequestKey: number;
       // if (this.params.get('oEntityOrId') > 0) {
       //   PurchaseRequestKey = this.params.get('oEntityOrId');
       // } else {
@@ -216,35 +216,35 @@ export class PRComponent extends FormController implements OnInit {
     this.baseEntity.DepartmentKey = department.id;
   }
 
-  openModal() {
-    let currentDepartment = this.departments.find(d => d.id == this.baseEntity.DepartmentKey);
-    let price = 0;
-    if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier1Key) {
-      price = this.getSupplier1Sum();
-    } else if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier2Key) {
-      price = this.getSupplier2Sum();
-    } else if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier3Key) {
-      price = this.getSupplier3Sum();
-    }
+  // openModal() {
+  //   let currentDepartment = this.departments.find(d => d.id == this.baseEntity.DepartmentKey);
+  //   let price = 0;
+  //   if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier1Key) {
+  //     price = this.getSupplier1Sum();
+  //   } else if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier2Key) {
+  //     price = this.getSupplier2Sum();
+  //   } else if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier3Key) {
+  //     price = this.getSupplier3Sum();
+  //   }
 
-    if (currentDepartment && currentDepartment.Budget && currentDepartment.Budget >= price) {
-      this.dialog.open(ApprovalFormComponent, {
-        data: {
-          oEntityOrId: this.approval ? this.approval.id : { PurchaseRequestKey: this.baseEntity.id },
-          PurchaseRequestKey: this.baseEntity.id,
-          ManagerAssigned: this.baseEntity.DepartmentManagerKey
-        }, width: '700px'
-      });
-    } else {
-      this.dialog.open(ApprovalFormComponent, {
-        data: {
-          oEntityOrId: this.approval ? this.approval.id : { PurchaseRequestKey: this.baseEntity.id },
-          PurchaseRequestKey: this.baseEntity.id,
-          ManagerAssigned: this.baseEntity.GeneralManagerKey
-        }
-      });
-    }
-  }
+  //   if (currentDepartment && currentDepartment.Budget && currentDepartment.Budget >= price) {
+  //     this.dialog.open(ApprovalFormComponent, {
+  //       data: {
+  //         oEntityOrId: this.approval ? this.approval.id : { PurchaseRequestKey: this.baseEntity.id },
+  //         PurchaseRequestKey: this.baseEntity.id,
+  //         ManagerAssigned: this.baseEntity.DepartmentManagerKey
+  //       }, width: '700px'
+  //     });
+  //   } else {
+  //     this.dialog.open(ApprovalFormComponent, {
+  //       data: {
+  //         oEntityOrId: this.approval ? this.approval.id : { PurchaseRequestKey: this.baseEntity.id },
+  //         PurchaseRequestKey: this.baseEntity.id,
+  //         ManagerAssigned: this.baseEntity.GeneralManagerKey
+  //       }
+  //     });
+  //   }
+  // }
 
   getApprover() {
     let currentDepartment = this.departments.find(d => d.id == this.baseEntity.DepartmentKey);
