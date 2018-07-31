@@ -208,20 +208,12 @@ namespace Reusable
             DbSet<T> dbSet = context.Set<T>();
             //foreach (T item in items)
             //{
-            //    context.Entry(item).State = EntityState.Added;
-            //    //dbSet.Attach(item);
+            //    dbSet.Attach(item);
             //}
 
             //foreach (DbEntityEntry<BaseDocument> entry in context.ChangeTracker.Entries<BaseDocument>())
             //{
-            //    try
-            //    {
-            //        context.Entry(entry.Entity).State = EntityState.Unchanged;
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        //Trying to set unchanged state to a repeted entity
-            //    }
+            //    context.Entry(entry.Entity).State = EntityState.Unchanged;
             //}
 
             foreach (T item in items)

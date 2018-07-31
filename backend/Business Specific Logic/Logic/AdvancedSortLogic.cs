@@ -1,4 +1,4 @@
-﻿using Reusable;
+using Reusable;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -87,7 +87,7 @@ namespace BusinessSpecificLogic.Logic
 
         protected override void onAfterSaving(DbContext context, AdvancedSort entity, BaseEntity parent = null, OPERATION_MODE mode = OPERATION_MODE.NONE)
         {
-            //var ctx = context as CQAContext;
+            //var ctx = context as POContext;
 
             //foreach (var item in entity.Sorting)
             //{

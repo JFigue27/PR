@@ -89,7 +89,7 @@ namespace ReusableWebAPI.Controllers
                 //entity = jsonSerializer.Deserialize<Entity>(value);
                 entity = JsonConvert.DeserializeObject<Entity>(value);
 
-                return logic.Update(entity);
+                return logic.UpdateTransaction(entity);
             }
             catch (Exception e)
             {

@@ -19,7 +19,7 @@ namespace BusinessSpecificLogic.EF
         [Key]
         public int PRLineKey { get; set; }
 
-        public override int id { get { return PRLineKey; } }
+        public override int id { get => PRLineKey; set => PRLineKey = value; }
 
         ///Start:Generated:Properties<<<
         public string ItemNumber { get; set; }

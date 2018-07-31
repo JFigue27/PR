@@ -30,6 +30,6 @@ namespace BusinessSpecificLogic.EF
         public List<Comment> Comments { get; set; }
         public string Identicon64 { get; set; }
 
-        public override int id => CommentKey;
+        public override int id { get => CommentKey; set => CommentKey = value; }
     }
 }

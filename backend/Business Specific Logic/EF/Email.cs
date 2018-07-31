@@ -1,4 +1,4 @@
-﻿using BusinessSpecificLogic.JSON_Entities;
+using BusinessSpecificLogic.JSON_Entities;
 using Newtonsoft.Json;
 using Reusable;
 using Reusable.Attachments;
@@ -24,7 +24,7 @@ namespace BusinessSpecificLogic.EF
         [Key]
         public int EmailKey { get; set; }
 
-        public override int id { get { return EmailKey; } }
+        public override int id { get { return EmailKey; } set { EmailKey = value; } }
 
         ///Start:Generated:Properties<<<
         public string Destinataries { get; set; }

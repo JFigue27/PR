@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Reusable.Workflows
 {
     [Table("WorkflowStep")]
-    public partial class Step : BaseEntity, IRecursiveEntity
+    public partial class Step : BaseEntity, IRecursiveEntity<Step>
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Step()
@@ -15,7 +15,7 @@ namespace Reusable.Workflows
 
         [Key]
         public int StepKey { get; set; }
-        public override int id { get { return StepKey; } }
+        public override int id { get { return StepKey; } set { StepKey = value; } }
 
         [Required]
         [StringLength(150)]
@@ -32,6 +32,6 @@ namespace Reusable.Workflows
         public List<Step> Steps { get; set; }
 
         [NotMapped]
-        public List<IRecursiveEntity> nodes { get; set; }
+        public List<Step> nodes { get; set; }
     }
 }

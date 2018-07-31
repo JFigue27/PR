@@ -5,7 +5,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Reusable;
 using Reusable.Auth;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Drawing;
 using System.IO;
@@ -13,19 +12,27 @@ using System.Linq;
 
 namespace BusinessSpecificLogic.Logic
 {
-    public interface IUserLogic : ILogic<User>
+    public interface IUserLogic : IDocumentLogic<User>
     {
     }
 
-    public class UserLogic : Logic<User>, IUserLogic
+    public class UserLogic : DocumentLogic<User>, IUserLogic
     {
-        public UserLogic(DbContext context, IRepository<User> repository, LoggedUser LoggedUser) : base(context, repository, LoggedUser)
+        public UserLogic(DbContext context, IDocumentRepository<User> repository, LoggedUser LoggedUser) : base(context, repository, LoggedUser)
         {
         }
 
-        protected override void OnCreateInstance(User entity)
+        protected override User OnCreateInstance(User entity)
         {
             entity.Role = "User";
+            return entity;
+        }
+
+        protected override IQueryable<User> StaticDbQueryForList(IQueryable<User> dbQuery)
+        {
+            return dbQuery.Where(e => e.Role != "Administrator")
+                .OrderBy(e => e.Role)
+                .ThenBy(e => e.Value);
         }
 
         protected override void onBeforeSaving(User entity, BaseEntity parent = null, OPERATION_MODE mode = OPERATION_MODE.NONE)
@@ -93,6 +100,8 @@ namespace BusinessSpecificLogic.Logic
             //Creating..
             else
             {
+                entity.CreatedAt = DateTimeOffset.Now;
+
                 using (var authContext = new AuthContext())
                 {
                     UserManager<IdentityUser> _userManager;
@@ -109,7 +118,7 @@ namespace BusinessSpecificLogic.Logic
                         string sError = result.Errors.First();
                         if (sError.EndsWith("is already taken."))
                         {
-                            throw new KnownError("Usuario is already taken.");
+                            throw new KnownError("User is already taken.");
                         }
                         else
                         {
@@ -178,6 +187,7 @@ namespace BusinessSpecificLogic.Logic
             try
             {
                 User entity = repository.GetSingle(null, e => e.UserName == sName);
+                AdapterOut(entity);
                 return response.Success(entity);
 
             }

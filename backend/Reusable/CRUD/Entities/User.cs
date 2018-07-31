@@ -11,12 +11,6 @@ namespace Reusable
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            Sorts = new HashSet<Sort>();
-            Tracks = new HashSet<Track>();
-            Tracks1 = new HashSet<Track>();
-            Tracks2 = new HashSet<Track>();
-            Tracks3 = new HashSet<Track>();
-            Tracks4 = new HashSet<Track>();
             sys_active = true;
         }
 
@@ -51,25 +45,7 @@ namespace Reusable
 
         public string Identicon64 { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sort> Sorts { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Track> Tracks { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Track> Tracks1 { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Track> Tracks2 { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Track> Tracks3 { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Track> Tracks4 { get; set; }
-
-        public override int id { get { return UserKey; } }
+        public override int id { get { return UserKey; } set { UserKey = value; } }
 
         [NotMapped]
         public string Password { get; set; }
@@ -86,7 +62,6 @@ namespace Reusable
         public string EmailServer { get; set; }
 
         public string EmailPort { get; set; }
-
 
         public int? DepartmentKey { get; set; }
     }

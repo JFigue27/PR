@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,7 +16,7 @@ namespace Reusable
         [Key]
         public int AdvancedSortKey { get; set; }
 
-        public override int id { get { return AdvancedSortKey; } }
+        public override int id { get { return AdvancedSortKey; } set { AdvancedSortKey = value; } }
 
         public string Name { get; set; }
         public List<SortData> Sorting { get; set; }

@@ -13,7 +13,7 @@ namespace Reusable
 
         CommonResponse Remove(Entity id);
         CommonResponse Remove(int id);
-        CommonResponse Update(Entity entity);
+        CommonResponse UpdateTransaction(Entity entity);
         CommonResponse AddToParent<ParentType>(int parentID, Entity entity) where ParentType : BaseEntity;
         CommonResponse RemoveFromParent<Parent>(int parentID, Entity entity) where Parent : BaseEntity;
         CommonResponse SetPropertyValue(Entity entity, string sProperty, string value);
@@ -99,8 +99,6 @@ namespace Reusable
 
         public virtual void Add(Entity entity)
         {
-            //repository.ByUserId = LoggedUser.UserID;
-
             onBeforeSaving(entity, null, OPERATION_MODE.ADD);
 
             repository.Add(entity);
@@ -186,7 +184,16 @@ namespace Reusable
             return response.Success(id, repository.EntityName + " removed successfully.");
         }
 
-        public virtual CommonResponse Update(Entity entity)
+        public virtual void Update(Entity entity)
+        {
+            onBeforeSaving(entity, null, OPERATION_MODE.UPDATE);
+
+            repository.Update(entity);
+
+            onAfterSaving(context, entity, null, OPERATION_MODE.UPDATE);
+        }
+
+        public virtual CommonResponse UpdateTransaction(Entity entity)
         {
             CommonResponse response = new CommonResponse();
             try
@@ -195,12 +202,7 @@ namespace Reusable
                 {
                     try
                     {
-                        //repository.ByUserId = LoggedUser.UserID;
-
-                        onBeforeSaving(entity, null, OPERATION_MODE.UPDATE);
-
-                        repository.Update(entity);
-                        onAfterSaving(context, entity, null, OPERATION_MODE.UPDATE);
+                        Update(entity);
 
                         transaction.Commit();
 

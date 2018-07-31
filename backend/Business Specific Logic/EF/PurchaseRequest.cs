@@ -22,7 +22,7 @@ namespace BusinessSpecificLogic.EF
         [Key]
         public int PurchaseRequestKey { get; set; }
 
-        public override int id { get { return PurchaseRequestKey; } }
+        public override int id { get => PurchaseRequestKey; set => PurchaseRequestKey = value; }
 
         ///Start:Generated:Properties<<<
         public string AccountNo { get; set; }

@@ -1,4 +1,4 @@
-﻿namespace BusinessSpecificLogic.JSON_Entities
+namespace BusinessSpecificLogic.JSON_Entities
 {
     public class Contact
     {

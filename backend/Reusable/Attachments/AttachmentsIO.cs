@@ -2,6 +2,7 @@ using Reusable.Utils;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Drawing;
 using System.IO;
 
 namespace Reusable.Attachments
@@ -22,6 +23,40 @@ namespace Reusable.Attachments
                         Attachment attachment = new Attachment();
                         attachment.FileName = file.Name;
                         attachment.Directory = folderName;
+                        attachmentsList.Add(attachment);
+                    }
+                }
+            }
+            return attachmentsList;
+        }
+
+        public static List<Avatar> getAvatarsFromFolder(string folderName, string attachmentKind)
+        {
+            List<Avatar> attachmentsList = new List<Avatar>();
+            if (!string.IsNullOrWhiteSpace(folderName))
+            {
+                string baseAttachmentsPath = ConfigurationManager.AppSettings[attachmentKind];
+                if (folderName != "" && Directory.Exists(baseAttachmentsPath + folderName.Trim()))
+                {
+                    DirectoryInfo directory = new DirectoryInfo(baseAttachmentsPath + folderName);
+
+                    ImageConverter converter = new ImageConverter();
+
+                    foreach (FileInfo file in directory.GetFiles())
+                    {
+                        Avatar attachment = new Avatar();
+                        attachment.FileName = file.Name;
+                        attachment.Directory = folderName;
+
+                        try
+                        {
+                            attachment.ImageBase64 = Convert.ToBase64String(File.ReadAllBytes(baseAttachmentsPath + folderName + "\\" + file.Name));
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new KnownError("Ha ocurrido un error al intentar crear el usuario");
+                        }
+
                         attachmentsList.Add(attachment);
                     }
                 }

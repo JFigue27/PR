@@ -6,7 +6,7 @@ namespace Reusable
     public abstract class BaseEntity : IEntity
     {
         [NotMapped]
-        public abstract int id { get; }
+        public abstract int id { get; set; }
 
         [NotMapped]
         public string AAA_EntityName { get { return GetType().Name; } }

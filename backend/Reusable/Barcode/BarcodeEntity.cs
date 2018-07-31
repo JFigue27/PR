@@ -4,13 +4,7 @@ namespace Reusable.Barcode
     {
         public int BarcodeKey { get; set; }
 
-        public override int id
-        {
-            get
-            {
-                return BarcodeKey;
-            }
-        }
+        public override int id { get { return BarcodeKey; } set { BarcodeKey = value; } }
 
         public string Label { get; set; }
         public string BarcodeImage { get; set; }
