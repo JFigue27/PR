@@ -52,8 +52,8 @@ export class ListComponent extends ListController implements OnInit {
         this.PrService.createInstance().subscribe(oInstance => {
           oInstance.DepartmentAssigned.Manager = null;
           this.PrService.createEntity(oInstance).then(oEntity => {
-            this.router.navigate(['/PR/' + oEntity ]);
-            // this.nav.push(PRPage, { oEntityOrId: oEntity });
+            console.log("oEntity "+ oEntity.id );
+            this.router.navigate(['/pr/' + oEntity.id ]);
           });
         });
       }
