@@ -10,10 +10,7 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 export class SupplierFormComponent extends FormController implements OnInit { 
   errorMessage: string;
 
-  constructor (
-                @Inject(MAT_DIALOG_DATA) public data: any,
-                public supplierService: SupplierService
-              ) {
+  constructor ( @Inject(MAT_DIALOG_DATA) public data: any, public supplierService: SupplierService ) {
                 super({ service: supplierService });
               }
 

@@ -1,7 +1,7 @@
 <!-- ==================== PR SECTION ================= -->
 <section class="pr-section">
     <div class="pr-header">
-        <div class="pr-header-number">
+        <div class="pr-header-number printableZone">
             <b>Purchase Request -</b> {{ baseEntity.PRNumber?.GeneratedNumber }}
         </div>
         <div class="pr-header-bar">
@@ -9,7 +9,7 @@
             <mat-progress-bar class="progress-bar"  mode="determinate" [value]="displayStatusBar(baseEntity.ApprovalStatus)"></mat-progress-bar> 
         </div>
         <div class="pr-header-po-number">
-                <input type="text" class="form-input border-bottom" (ngModelChange)="on_input_change()" 
+                <input type="text" class="form-input border-bottom ponumber printableZone" (ngModelChange)="on_input_change()" 
                 placeholder="PO Number" [(ngModel)]="baseEntity.PONumber" [disabled]="getCurrentRole() != 'MRO' ">
 
                 <input type="text" class="form-input border-bottom" (ngModelChange)="on_input_change();"

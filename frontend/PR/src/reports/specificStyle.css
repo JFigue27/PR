@@ -16,7 +16,9 @@
         min-height: 20px;
         padding: 2px !important;
     }
-
+    .ponumber{
+        font-weight: 900;
+    }
     pre{
         font-family: inherit;
         font-size: inherit;

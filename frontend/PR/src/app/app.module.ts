@@ -61,6 +61,7 @@ import { MatSortModule } from '@angular/material/sort';
 
 //Plugins
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { RedirectOldLinks } from './redirectOldLinks';
 
 
 
@@ -136,6 +137,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     LoginService,
     PRService,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    RedirectOldLinks,
     UtilsService,
     UserService,
     SupplierService,

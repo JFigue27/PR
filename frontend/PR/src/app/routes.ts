@@ -8,18 +8,20 @@ import { ListComponent } from '../components/list/list-component';
 import { ApprovalComponent } from '../components/approval/approval-component';
 import { EmailFormComponent } from '../components/email-form/email-form-component';
 import { PRComponent } from '../components/pr/pr-component';
+import { RedirectOldLinks } from './redirectOldLinks';
  
-
-const routes: Routes = [
+const routes: Routes = [ 
     { path: 'suppliers', component: SuppliersComponent },
-    { path: 'accounts', component: AccountComponent },
+    { path: '', component: ListComponent },
     { path: 'approvals', component: ApprovalComponent },
+    { path: 'accounts', component: AccountComponent },
     { path: 'users', component: UsersComponent },
     { path: 'departments', component: DepartmentComponent },
     { path: 'pr-list', component: ListComponent },
     { path: 'profile', component: EmailFormComponent },
     { path: 'pr/:id', component: PRComponent },
-    { path: '', redirectTo: 'pr-list', pathMatch: 'full' },
+    { path: 'PR/:id', redirectTo: 'pr/:id' },
+    { path: '**', redirectTo: '' , canActivate: [RedirectOldLinks] }
     
 ];
 
