@@ -5,17 +5,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Reusable.Workflows
 {
     [Table("WorkflowStepOperation")]
-    public partial class StepOperation : BaseEntity, IRecursiveEntity
+    public partial class StepOperation : BaseEntity, IRecursiveEntity<StepOperation>
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public StepOperation()
         {
-            nodes = new List<IRecursiveEntity>();
+            nodes = new List<StepOperation>();
         }
 
         [Key]
         public int StepKey { get; set; }
-        public override int id { get { return StepKey; } }
+        public override int id { get { return StepKey; } set { StepKey = value; } }
 
         [Required]
         [StringLength(150)]
@@ -37,7 +37,7 @@ namespace Reusable.Workflows
         public List<StepOperation> StepOperations { get; set; }
 
         [NotMapped]
-        public List<IRecursiveEntity> nodes { get; set; }
+        public List<StepOperation> nodes { get; set; }
 
         [NotMapped]
         public bool IsDoneQueried { get; set; }

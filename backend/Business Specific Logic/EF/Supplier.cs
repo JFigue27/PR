@@ -12,14 +12,14 @@ namespace BusinessSpecificLogic.EF
         public Supplier()
         {
             ///Start:Generated:Constructor<<<
-			///End:Generated:Constructor<<<
+            ///End:Generated:Constructor<<<
             
         }
 
         [Key]
         public int SupplierKey { get; set; }
 
-        public override int id { get { return SupplierKey; } }
+        public override int id { get => SupplierKey; set => SupplierKey = value; }
 
         ///Start:Generated:Properties<<<
         public string Value { get; set; }

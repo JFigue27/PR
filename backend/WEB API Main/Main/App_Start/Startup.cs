@@ -1,12 +1,12 @@
 using ReusableWebAPI.App_Start;
-using ReusableWebAPI.Auth;
 using Microsoft.Owin;
-using Microsoft.Owin.Security.OAuth;
 using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi.OwinHost;
 using Owin;
-using System;
 using System.Web.Http;
+using System.IdentityModel.Tokens;
+using System.Collections.Generic;
+using IdentityServer3.AccessTokenValidation;
 
 [assembly: OwinStartup(typeof(ReusableWebAPI.Startup))]
 
@@ -22,7 +22,8 @@ namespace ReusableWebAPI
 
             //config.EnableSystemDiagnosticsTracing().MinimumLevel = System.Web.Http.Tracing.TraceLevel.Info;
 
-            ConfigureOAuth(app);
+            //ConfigureOAuth(app);
+            ConfigureIdentityServer(app);
 
             WebApiConfig.Register(config);
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
@@ -31,20 +32,36 @@ namespace ReusableWebAPI
             app.UseNinjectMiddleware(NinjectWebCommon.CreateKernel).UseNinjectWebApi(config);
         }
 
-        public void ConfigureOAuth(IAppBuilder app)
+        //public void ConfigureOAuth(IAppBuilder app)
+        //{
+        //    OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
+        //    {
+        //        AllowInsecureHttp = true,
+        //        TokenEndpointPath = new PathString("/api/token"),
+        //        AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
+        //        Provider = new SimpleAuthorizationServerProvider()
+        //    };
+
+        //    //Token Generation
+        //    app.UseOAuthAuthorizationServer(OAuthServerOptions);
+        //    app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
+
+        //}
+
+        public void ConfigureIdentityServer(IAppBuilder app)
         {
-            OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
+            JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
+
+            app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
             {
-                AllowInsecureHttp = true,
-                TokenEndpointPath = new PathString("/api/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(30),
-                Provider = new SimpleAuthorizationServerProvider()
-            };
+                Authority = "https://apps.capsonic.com/IdentityServer",
 
-            //Token Generation
-            app.UseOAuthAuthorizationServer(OAuthServerOptions);
-            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
+                ClientId = "api",
+                ClientSecret = "api-secret",
 
+                RequiredScopes = new[] { "api" }
+
+            });
         }
     }
 }

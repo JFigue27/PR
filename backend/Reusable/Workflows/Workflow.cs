@@ -19,7 +19,7 @@ namespace Reusable.Workflows
         [StringLength(150)]
         public string Name { get; set; }
 
-        public override int id { get { return WorkflowKey; } }
+        public override int id { get { return WorkflowKey; } set { WorkflowKey = value; } }
 
         public List<Step> Steps { get; set; }
     }

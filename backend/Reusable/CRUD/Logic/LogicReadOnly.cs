@@ -16,7 +16,8 @@ namespace Reusable
         CommonResponse GetListWhere(Expression<Func<Entity, object>> orderby, params Expression<Func<Entity, bool>>[] wheres);
         CommonResponse GetAllByParent<ParentType>(int parentID) where ParentType : BaseEntity;
         CommonResponse CreateInstance(Entity entity = null);
-        void FillRecursively<Parent>(IRecursiveEntity entity) where Parent : BaseEntity;
+        void FillRecursively<R>(R entity) where R: class, Entity, IRecursiveEntity<R>;
+        void FillRecursively<R>(R entity, string customProperty, params Expression<Func<Entity, object>>[] navigationProperties) where R : class, Entity, IRecursiveEntity<R>;
     }
 
     public abstract class ReadOnlyLogic<Entity> : IReadOnlyLogic<Entity> where Entity : class, new()
@@ -45,11 +46,12 @@ namespace Reusable
 
 
         //Hooks:
-        protected virtual void OnCreateInstance(Entity entity) { }
+        protected virtual Entity OnCreateInstance(Entity entity) { return entity; }
         protected virtual IQueryable<Entity> StaticDbQueryForList(IQueryable<Entity> dbQuery) { return dbQuery; }
         protected virtual void OnGetSingle(Entity entity) { }
         protected virtual void AdapterOut(params Entity[] entities) { }
         protected virtual bool PopulateForSearch(params Entity[] entities) { return false; } // return true to avoid calling AdapterOut when getPage because they are the same.
+        protected virtual void AfterReadChildren(Entity entity) { }
 
 
         public virtual CommonResponse GetAll()
@@ -78,10 +80,7 @@ namespace Reusable
                 Entity entity = repository.GetByID(ID);
                 if (entity != null)
                 {
-                    //repository.ByUserId = LoggedUser.UserID;
-                    OnGetSingle(entity);
-                    AdapterOut(entity);
-                    return response.Success(entity);
+                    return response.Success(_GetByID(ID));
                 }
                 else
                 {
@@ -92,6 +91,21 @@ namespace Reusable
             {
                 return response.Error("ERROR: " + e.ToString());
             }
+        }
+
+        public virtual Entity _GetByID(int ID)
+        {
+            Entity entity = repository.GetByID(ID);
+            if (entity != null)
+            {
+                OnGetSingle(entity);
+                AdapterOut(entity);
+            }
+            else
+            {
+                throw new KnownError("Entity not found.");
+            }
+            return entity;
         }
 
         protected class FilterResponse
@@ -121,9 +135,12 @@ namespace Reusable
                 //Applying Non-Database Wheres
 
                 resultset = entities.AsQueryable();
-                foreach (var where in wheres)
+                if (wheres != null)
                 {
-                    resultset = resultset.Where(where);
+                    foreach (var where in wheres)
+                    {
+                        resultset = resultset.Where(where);
+                    }
                 }
 
                 filterResponse.total_items = resultset.Count();
@@ -293,48 +310,83 @@ namespace Reusable
             CommonResponse response = new CommonResponse();
             try
             {
-                if (entity == null)
-                {
-                    entity = new Entity();
-                }
-                OnCreateInstance(entity);
+                entity = _CreateInstance(entity);
             }
             catch (KnownError ke)
             {
                 return response.Error(ke);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return response.Error("ERROR: " + e.ToString());
+                return response.Error(ex.ToString());
             }
 
             return response.Success(entity);
         }
 
-        public void FillRecursively<Parent>(IRecursiveEntity entity) where Parent : BaseEntity
+        public Entity _CreateInstance(Entity entity = null)
+        {
+            if (entity == null)
+            {
+                entity = new Entity();
+            }
+            return OnCreateInstance(entity);
+        }
+
+        public void FillRecursively<R>(R entity) where R: class, Entity, IRecursiveEntity<R>
         {
             if (entity != null)
             {
-                IEnumerable<Entity> entities = repository.GetListByParent<Parent>(entity.id);
-                entity.nodes = new List<IRecursiveEntity>();
-                foreach (IRecursiveEntity item in entities)
+                IEnumerable<Entity> entities = repository.GetListByParent<Entity>(entity.id);
+                entity.nodes = new List<R>();
+                foreach (R item in entities)
                 {
                     entity.nodes.Add(item);
-                    FillRecursively<Parent>(item);
+                    FillRecursively(item);
                 }
             }
         }
 
-        public List<Entity> NestedToSingleList(IRecursiveEntity entity, List<Entity> result)
+        public void FillRecursively<R>(R entity, string customProperty, params Expression<Func<Entity, object>>[] navigationProperties) where R: class, Entity, IRecursiveEntity<R>
+        {
+            if (entity != null)
+            {
+                IEnumerable<Entity> entities = repository.GetListByParent<R>(entity.id, customProperty, navigationProperties);
+                entity.nodes = new List<R>();
+                foreach (R item in entities)
+                {
+                    entity.nodes.Add(item);
+                    FillRecursively(item, customProperty, navigationProperties);
+                }
+                AfterReadChildren(entity);
+            }
+        }
+
+        public List<Entity> NestedToSingleList<R>(R entity, List<Entity> result) where R : class, Entity, IRecursiveEntity<R>
         {
             //repository.ByUserId = LoggedUser.UserID;
             if (result == null) { result = new List<Entity>(); }
             if (entity != null)
             {
-                result.Add((Entity)entity);
+                result.Add(entity);
                 foreach (var item in entity.nodes)
                 {
                     NestedToSingleList(item, result);
+                }
+            }
+            return result;
+        }
+
+        public List<Entity> NestedToSingleList<R>(List<R> entities, List<Entity> result) where R : class, Entity, IRecursiveEntity<R>
+        {
+            //repository.ByUserId = LoggedUser.UserID;
+            if (result == null) { result = new List<Entity>(); }
+            if (entities != null)
+            {
+                foreach (var item in entities)
+                {
+                    result.Add(item);
+                    NestedToSingleList(item.nodes, result);
                 }
             }
             return result;

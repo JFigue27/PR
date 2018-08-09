@@ -178,7 +178,7 @@ namespace BusinessSpecificLogic.Logic
 
         }
 
-        protected override void OnCreateInstance(PurchaseRequest entity)
+        protected override PurchaseRequest OnCreateInstance(PurchaseRequest entity)
         {
             var ctx = context as POContext;
             var user = ctx.Users.AsNoTracking().FirstOrDefault(u => u.Role == "General Manager");
@@ -216,6 +216,8 @@ namespace BusinessSpecificLogic.Logic
             entity.DepartmentKey = department.id;
             entity.DepartmentAssigned = department;
             entity.DepartmentManagerKey = department.Manager.id;
+
+            return entity;
         }
     }
 }

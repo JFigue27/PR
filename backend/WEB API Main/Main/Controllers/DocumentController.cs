@@ -1,7 +1,6 @@
 using Newtonsoft.Json;
 using Reusable;
 using System;
-using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -47,6 +46,64 @@ namespace ReusableWebAPI.Controllers
             catch (Exception e)
             {
                 return response.Error("ERROR: " + e.ToString());
+            }
+        }
+
+        [HttpPost, Route("MakeRevision")]
+        public CommonResponse MakeRevision([FromBody]string value)
+        {
+            var response = new CommonResponse();
+            try
+            {
+                var entity = JsonConvert.DeserializeObject<Document>(value);
+                return logic.MakeRevision(entity);
+            }
+            catch (Exception ex)
+            {
+                return response.Error(ex.Message);
+            }
+        }
+
+        [HttpPost, Route("Checkout/{id}")]
+        public CommonResponse Checkout(int id)
+        {
+            var response = new CommonResponse();
+            try
+            {
+                return logic.Checkout(id);
+            }
+            catch (Exception ex)
+            {
+                return response.Error(ex.Message);
+            }
+        }
+
+        [HttpPost, Route("CancelCheckout/{id}")]
+        public CommonResponse CanelCheckout(int id)
+        {
+            var response = new CommonResponse();
+            try
+            {
+                return logic.CancelCheckout(id);
+            }
+            catch (Exception ex)
+            {
+                return response.Error(ex.Message);
+            }
+        }
+
+        [HttpPost, Route("Checkin")]
+        public CommonResponse Checkin([FromBody]string value)
+        {
+            var response = new CommonResponse();
+            try
+            {
+                var entity = JsonConvert.DeserializeObject<Document>(value);
+                return logic.Checkin(entity);
+            }
+            catch (Exception ex)
+            {
+                return response.Error(ex.Message);
             }
         }
     }

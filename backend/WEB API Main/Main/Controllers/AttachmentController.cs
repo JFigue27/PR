@@ -86,6 +86,71 @@ namespace ReusableWebAPI.Controllers
             return response;
         }
 
+        [HttpPost, Route("api/avatar")]
+        public object avatar()
+        {
+            CommonResponse response = new CommonResponse();
+            try
+            {
+                if (HttpContext.Current.Request.Files.AllKeys.Any())
+                {
+                    var postedFile = HttpContext.Current.Request.Files["file"];
+                    if (postedFile != null)
+                    {
+                        string fileName = postedFile.FileName;
+
+                        string baseAttachmentsPath = ConfigurationManager.AppSettings["Avatar"];
+
+                        string currentPathAttachments;
+                        string folderName = HttpContext.Current.Request["targetFolder"];
+                        if (folderName != null && folderName.Trim() != "")
+                        {
+                            currentPathAttachments = baseAttachmentsPath + folderName + @"\";
+                            if (!Directory.Exists(currentPathAttachments))
+                            {
+                                Directory.CreateDirectory(currentPathAttachments);
+                            }
+                            else
+                            {
+                                AttachmentsIO.ClearDirectory(currentPathAttachments);
+                            }
+                        }
+                        else
+                        {
+                            do
+                            {
+                                DateTime date = DateTime.Now;
+                                folderName = date.ToString("yy") + date.Month.ToString("d2") +
+                                                date.Day.ToString("d2") + "_" + MD5HashGenerator.GenerateKey(date);
+                                currentPathAttachments = baseAttachmentsPath + folderName;
+                            } while (Directory.Exists(currentPathAttachments));
+                            Directory.CreateDirectory(currentPathAttachments);
+                            currentPathAttachments += @"\";
+                        }
+
+                        if (postedFile.ContentLength > 0)
+                        {
+                            postedFile.SaveAs(currentPathAttachments + Path.GetFileName(postedFile.FileName));
+                        }
+
+                        List<Avatar> attachmentsResult = AttachmentsIO.getAvatarsFromFolder(folderName, "Avatar");
+
+                        response.ErrorThrown = false;
+                        response.ResponseDescription = folderName;
+                        response.Result = attachmentsResult;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                response.ErrorThrown = true;
+                response.ResponseDescription = "ERROR: " + e.Message;
+                response.Result = e;
+            }
+
+            return response;
+        }
+
         [HttpGet, Route("api/attachment_download")]
         public HttpResponseMessage downloadAttachment()
         {

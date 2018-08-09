@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Reusable
 {
-    public interface IRecursiveEntity : IEntity
+    public interface IRecursiveEntity<T> : IEntity where T : IEntity
     {
         [NotMapped]
-        List<IRecursiveEntity> nodes { get; set; }
+        List<T> nodes { get; set; }
     }
 }

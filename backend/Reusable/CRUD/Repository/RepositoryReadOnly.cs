@@ -18,6 +18,7 @@ namespace Reusable
         T GetSingle(Expression<Func<T, object>>[] navigationProperties, params Expression<Func<T, bool>>[] wheres);
 
         IEnumerable<T> GetListByParent<P>(int parentID, params Expression<Func<T, object>>[] navigationProperties) where P : class;
+        IList<T> GetListByParent<P>(int parentID, string customProperty, params Expression<Func<T, object>>[] navigationProperties) where P : class;
         T GetSingleByParent<P>(int parentID, params Expression<Func<T, object>>[] navigationProperties) where P : class;
     }
 
@@ -58,9 +59,12 @@ namespace Reusable
             //Wheres:
             var predicate = PredicateBuilder.New<T>(true);
 
-            foreach (var where in wheres)
+            if (wheres != null)
             {
-                predicate = predicate.And(where);
+                foreach (var where in wheres)
+                {
+                    predicate = predicate.And(where);
+                }
             }
 
             //Order By:
@@ -203,5 +207,83 @@ namespace Reusable
             return dbQuery.FirstOrDefault();
         }
 
+        public IList<T> GetListByParent<P>(int parentID, string customProperty, params Expression<Func<T, object>>[] navigationProperties) where P : class
+        {
+            List<T> list = new List<T>();
+
+            DbSet<P> setParent = context.Set<P>();
+
+            P parent = setParent.Find(parentID);
+
+            if (parent == null)
+            {
+                //throw new Exception("Parent non-existent.");
+                return list;
+            }
+
+            if (parent is BaseDocument)
+            {
+                if ((parent as BaseDocument).sys_active == false)
+                {
+                    //Parent non-existent
+                    return list;
+                }
+            }
+
+            IQueryable<T> dbQuery = context.Entry(parent).Collection<T>(customProperty)
+                .Query().AsExpandable();
+
+            if (navigationProperties != null)
+            {
+                //Eager Loading:
+                foreach (var navigationProperty in navigationProperties)
+                {
+                    dbQuery = dbQuery.Include(navigationProperty);
+                }
+            }
+
+            list = dbQuery.AsNoTracking().ToList();
+
+            /*DOCUMENT*/
+            if (typeof(T).IsSubclassOf(typeof(BaseDocument)))
+            {
+                list = list.Where(d => (d as BaseDocument).sys_active == true).ToList();
+
+                foreach (T item in list)
+                {
+                    var document = item as BaseDocument;
+
+                    document.InfoTrack = context.Set<Track>()
+                                        .AsNoTracking()
+                                        .FirstOrDefault(t => t.Entity_ID == document.id && t.Entity_Kind == document.AAA_EntityName);
+
+                }
+            }
+
+            //Removing Recurivity
+            /*string navigationPropertyName = typeof(P).Name;
+            foreach (T item in list)
+            {
+                //PropertyInfo prop = item.GetType().GetProperty(navigationPropertyName, BindingFlags.Public | BindingFlags.Instance);
+                //if (null != prop && prop.CanWrite)
+                //{
+                //    prop.SetValue(item, new List<P>());
+                //}
+
+                try
+                {
+                    //Trying for collection
+                    context.Entry(item).Collection<P>(navigationPropertyName + "s").CurrentValue.Clear();
+                }
+                catch (Exception)
+                {
+                    //Trying for reference
+                    //context.Entry(item).Reference<P>(navigationPropertyName).CurrentValue.
+                }
+
+            }*/
+
+            return list;
+        }
     }
 }

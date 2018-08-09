@@ -19,7 +19,7 @@ namespace BusinessSpecificLogic.EF
         [Key]
         public int GLAccountKey { get; set; }
 
-        public override int id { get { return GLAccountKey; } }
+        public override int id { get => GLAccountKey; set => GLAccountKey = value; }
 
         ///Start:Generated:Properties<<<
         public string Value { get; set; }

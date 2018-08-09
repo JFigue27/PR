@@ -19,7 +19,7 @@ namespace BusinessSpecificLogic.EF
         [Key]
         public int ApprovalKey { get; set; }
 
-        public override int id { get { return ApprovalKey; } }
+        public override int id { get { return ApprovalKey; } set { ApprovalKey = value; } }
 
         ///Start:Generated:Properties<<<
         public DateTimeOffset? DateRequested { get; set; }

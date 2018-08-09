@@ -175,10 +175,11 @@ namespace BusinessSpecificLogic.Logic
         }
 
 
-        protected override void OnCreateInstance(Approval entity)
+        protected override Approval OnCreateInstance(Approval entity)
         {
             entity.Hyperlink = "http://apps.capsonic.com/PR/Main/#/pr/" + entity.PurchaseRequestKey;
             entity.UserRequisitorKey = (int) LoggedUser.UserID;
+            return entity;
         }
 
         protected override void onBeforeSaving(Approval entity, BaseEntity parent = null, OPERATION_MODE mode = OPERATION_MODE.NONE)

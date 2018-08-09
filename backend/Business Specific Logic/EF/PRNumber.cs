@@ -12,14 +12,14 @@ namespace BusinessSpecificLogic.EF
         public PRNumber()
         {
             ///Start:Generated:Constructor<<<
-			///End:Generated:Constructor<<<
+            ///End:Generated:Constructor<<<
             
         }
 
         [Key]
         public int PRNumberKey { get; set; }
 
-        public override int id { get { return PRNumberKey; } }
+        public override int id { get => PRNumberKey; set => PRNumberKey = value; }
 
         ///Start:Generated:Properties<<<
         public DateTimeOffset CreatedAt { get; set; }

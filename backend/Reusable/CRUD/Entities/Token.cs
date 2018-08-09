@@ -21,7 +21,7 @@ namespace BusinessSpecificLogic.EF
         [Key]
         public int TokenKey { get; set; }
 
-        public override int id { get { return TokenKey; } }
+        public override int id { get { return TokenKey; } set { TokenKey = value; } }
 
         ///Start:Generated:Properties<<<
         public string Value { get; set; }
