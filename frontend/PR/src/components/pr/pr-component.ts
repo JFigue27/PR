@@ -6,7 +6,6 @@ import { SupplierService } from '../../services/supplier.service';
 import { DepartmentService } from '../../services/department.service';
 import { AccountService } from '../../services/account.service';
 import { MatDialog } from '@angular/material';
-import { ApprovalFormComponent } from '../approval-form/approval-form-component';
 import { ModalController } from 'ionic-angular/components/modal/modal-controller';
 import { SupplierFormComponent } from '../supplier-form/supplier-form-component';
 import { FormControl } from '@angular/forms';
@@ -21,7 +20,6 @@ export class PRComponent extends FormController implements OnInit {
   private departments = [];
   private suppliers:any=[]; 
   private users = [];
-  private approval: any;
   public progress: 20;
   public userRole: string;
   public itemsSource: any;
@@ -46,19 +44,19 @@ export class PRComponent extends FormController implements OnInit {
     console.log(this.route.snapshot.paramMap.get('id'));
     this.load(this.route.snapshot.paramMap.get('id'));
   
-    this.departmentService.loadEntities().subscribe(oResult => {
+    this.departmentService.loadEntities().then(oResult => {
       this.departments = oResult.Result;
     });
 
-    this.accountService.loadEntities().subscribe(oResult => {
+    this.accountService.loadEntities().then(oResult => {
       this.accounts = oResult.Result;
     });
 
-    this.userService.getPage(0, 1,'?Role=Department Manager&Role=General Manager').subscribe(oResult => {
+    this.userService.getPage(0, 1,'?Role=Department Manager&Role=General Manager').then(oResult => {
       this.users = oResult.Result;
     });
 
-    this.supplierService.loadEntities().subscribe(oResult => {
+    this.supplierService.loadEntities().then(oResult => {
       this.suppliers = oResult.Result;
     });
 
@@ -280,7 +278,7 @@ export class PRComponent extends FormController implements OnInit {
     });
 
     dialog.afterClosed().subscribe(result => {
-      this.supplierService.loadEntities().subscribe(oResult => {
+      this.supplierService.loadEntities().then(oResult => {
         this.suppliers = oResult.Result;
       });
     });

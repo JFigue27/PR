@@ -41,35 +41,38 @@ export abstract class CRUDFactory {
             .toPromise();
     }
 
-    createInstance(oEntity = null): Observable<any> {
+    createInstance(oEntity = null):Promise<any>  {
         return this.http.post<ICommonResponse>(this.baseUrl + this.config.endPoint + '/Create', '=' + encodeURIComponent(JSON.stringify(oEntity)), this.addAuthorization())
-            .map(response => this.extractData(response), this)
-            .map(d => d.Result)
+            .toPromise()
+            .then(response => this.extractData(response))
+            .then(d => d.Result)
             .catch(this.generalError);
     }
 
-    customGet(customMethod: string): Observable<any>{
+    customGet(customMethod: string):Promise<any> {
         return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/' + customMethod, this.addAuthorization())
-            .map(response => this.extractData(response), this)
-            .map(d => d.Result)
+            .toPromise()
+            .then(response => this.extractData(response))
+            .then(d => d.Result)
             .catch(this.generalError);
     }
 
-    customPost(customMethod: string, oEntity: any = null): Observable<any> {
+    customPost(customMethod: string, oEntity: any = null):Promise<any>  {
         return this.http.post<ICommonResponse>(this.baseUrl + this.config.endPoint + '/' + customMethod,  '=' + encodeURIComponent(JSON.stringify(oEntity)), this.addAuthorization())
-            .map(response => this.extractData(response), this)
-            .map(d => d.Result)
+            .toPromise()
+            .then(response => this.extractData(response))
+            .then(d => d.Result)
             .catch(this.generalError);
     }
     
-    getPage(limit, pageNumber, params='?') {
+    getPage(limit, pageNumber, params = '?'):Promise<any> {
         return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/getPage/' + limit +
-            '/' + pageNumber + params + '&noCache='+Number(new Date()), this.addAuthorization())
-        .map(response => this.extractData(response), this)
+            '/' + pageNumber + params + '&noCache='+Number(new Date()), this.addAuthorization()).toPromise()
+        .then(response => this.extractData(response))
         .catch(this.generalError);
     }
 
-    getSingleWhere(property, value) {
+    getSingleWhere(property, value): Promise<any> {
         if (property && value) {
             return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/GetSingleWhere/' + property + '/' + value
                 + '?noCache=' + Number(new Date()), this.addAuthorization())
@@ -81,29 +84,31 @@ export abstract class CRUDFactory {
         }
     }
 
-    loadEntities(params?) { 
-        return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint, this.addAuthorization())
-        .map(response => this.extractData(response), this)
+    loadEntities(params?): Promise<any> { 
+        return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint, this.addAuthorization()).toPromise()
+        .then(response => this.extractData(response))
         .catch(this.generalError);
     }
 
-    loadEntity(id): Observable<any> {
+    loadEntity(id): Promise<any>  {
         if (id){ 
             return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/' + id, this.addAuthorization())
-            .map(response => this.extractData(response), this)
+            .toPromise()
+            .then(response => this.extractData(response))
             .catch(this.generalError);
         } else {
-            return Observable.empty();
+            return Promise.reject();
         }
     }
 
-    remove(): Observable<any> {
-        return Observable.empty();
+    remove(): Promise<any>  {
+        return Promise.reject();
     }
 
-    removeEntity(id) {
+    removeEntity(id): Promise<any>  {
         return this.http.delete<ICommonResponse>(this.baseUrl + this.config.endPoint + "/" + id, this.addAuthorization())
-            .map(response => this.extractData(response), this)
+            .toPromise()
+            .then(response => this.extractData(response))
             .catch(this.generalError);
     }
 
@@ -117,12 +122,13 @@ export abstract class CRUDFactory {
         }
     }
 
-    SendTestEmail(oEntity): Observable<any> {
+    SendTestEmail(oEntity): Promise<any> {
         console.log('2018 send test email');
         console.log(this.baseUrl + this.config.endPoint + 'SendTestEmail');
         return this.http.post<ICommonResponse>(this.baseUrl + this.config.endPoint + '/SendTestEmail', '=' + encodeURIComponent(JSON.stringify(oEntity)), this.addAuthorization())
-            .map(response => this.extractData(response), this)
-            .map(d => d.Result)
+            .toPromise()
+            .then(response => this.extractData(response))
+            .then(d => d.Result)
             .catch(this.generalError);
     }
 
@@ -153,22 +159,22 @@ export abstract class CRUDFactory {
         return backendResponse;
     }
 
-    generalError(error: any) {
+    generalError(error: any): Promise<any>  {
         if (error.ErrorThrown) {
             switch (error.ErrorType) {
                 case "MESSAGE":
                     alertify.alert(error.ResponseDescription);
             }
-            return Observable.empty();
+            return Promise.resolve();
         } else {
             switch (error.status) {
                 case 401:
                     //TODO: Open Login Form.
                     alertify.confirm('Your session has expired. Log in again');
-                    return Observable.empty();
+                    return Promise.reject('Your session has expired. Log in again');
             }
         }
-        return Observable.throw(error.statusText);
+        return Promise.reject(error.statusText);
     }
 
     // LOCAL OPERATIONS

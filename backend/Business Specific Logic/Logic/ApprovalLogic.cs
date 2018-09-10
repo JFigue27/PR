@@ -73,7 +73,7 @@ namespace BusinessSpecificLogic.Logic
             {
                 dbQuery = dbQuery.Include(e => e.PurchaseRequest)
                     .Where(e => e.PRType == "MRP" &&
-                    (e.Status == "DM Approved" || e.Status == "Project Manager Rejected" || e.Status == "Finalized" || e.Status == "DM Quote"));
+                    (e.Status == "DM Approved" || e.Status == "Project Manager Rejected" || e.Status == "Finalized" || e.Status == "DM Quote" || e.Status == "GM Quote"));
             }
             else //User
             {

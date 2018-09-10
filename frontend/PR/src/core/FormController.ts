@@ -15,7 +15,7 @@ export abstract class FormController {
  
 	//Start Form Methods
 	createInstance(oEntity?) {
-		return this.config.service.createInstance(oEntity).subscribe(oInstance => {
+		return this.config.service.createInstance(oEntity).then(oInstance => {
 			this.baseEntity = oInstance;
 			this.afterCreate();
 			return this.baseEntity;
@@ -32,7 +32,7 @@ export abstract class FormController {
 			//Open by ID
 			case oEntityOrID > 0:
 				this.config.service.loadEntity(oEntityOrID)
-					.subscribe(oResult => {
+					.then(oResult => {
 						this.baseEntity = oResult.Result;
 						this.baseEntity.editMode = false;
 						this.afterLoad();
@@ -58,7 +58,7 @@ export abstract class FormController {
 	}
 
 	remove() {
-		this.config.service.remove().subscribe(this.afterRemove);
+		this.config.service.remove().then(this.afterRemove);
 	}
 
 	save() {	
@@ -71,7 +71,7 @@ export abstract class FormController {
 	}
 
 	undo(id:any) {
-		this.config.service.loadEntity(id).subscribe(oResult =>{
+		this.config.service.loadEntity(id).then(oResult =>{
 			this.baseEntity = oResult.Result;
 		});
 	}

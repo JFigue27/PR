@@ -54,7 +54,7 @@ export abstract class ListController {
 
     createInstance() {
         let theArguments = Array.prototype.slice.call(arguments);
-        this.config.service.createInstance().subscribe( oNewEntity => {
+        this.config.service.createInstance().then( oNewEntity => {
             theArguments.unshift(oNewEntity);
             this.afterCreate.apply(this, theArguments);
         });
@@ -66,13 +66,13 @@ export abstract class ListController {
     getSelectedCount() {
     }
 
-    load(staticQueryParams?) {
+    load(staticQueryParams?):Promise<any> {
         this.isLoading = true;
         alertify.closeAll();
         this.staticQueryParams = staticQueryParams;
         this.setFilterOptions();
         this.setSortOptions();
-        this.updateList();   
+        return this.updateList();
     }
 
     makeQueryParameters() {
@@ -129,7 +129,7 @@ export abstract class ListController {
         alertify.confirm('Are you sure you want to delete this item ?',
             function () {
                 console.log('here')
-                self.config.service.removeEntity(user.id).subscribe(results => {
+                self.config.service.removeEntity(user.id).then(results => {
                     alertify.success('Succesfully deleted');
                     self.afterRemove();
                     self.updateList();
@@ -184,7 +184,7 @@ export abstract class ListController {
     }
 
     // *
-    updateList() {
+    updateList():Promise<any> {
         this.isLoading = true;
         
         if (!this.config.paginate) {
@@ -195,7 +195,7 @@ export abstract class ListController {
         let limit = this.filterOptions.limit;
         let queryParameters = this.makeQueryParameters();
 
-        return this.config.service.getPage(limit, page, queryParameters ).subscribe(oResult => {
+        return this.config.service.getPage(limit, page, queryParameters ).then(oResult => {
             this.baseList = oResult.Result;
 
             this.filterOptions.itemsCount = oResult.AdditionalData.total_filtered_items;
@@ -209,6 +209,10 @@ export abstract class ListController {
             }
 
             this.afterLoad();
+            this.isLoading = false;
+        })
+        .catch( oError => {
+            this.baseList = [];
             this.isLoading = false;
         });
         

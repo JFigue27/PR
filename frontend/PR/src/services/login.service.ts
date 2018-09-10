@@ -15,7 +15,7 @@ export class LoginService {
         let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let options = { headers: headers };
-        let self = this
+        let self = this;
         return new Promise(function (resolve, reject) {
             self.http.post(self.url + 'token', body, options).toPromise()
                 .then(r => {

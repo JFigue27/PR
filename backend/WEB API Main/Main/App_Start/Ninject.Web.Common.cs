@@ -120,6 +120,7 @@ namespace ReusableWebAPI.App_Start
             kernel.Bind<IGLAccountLogic>().To<GLAccountLogic>();
             kernel.Bind<IPurchaseRequestLogic>().To<PurchaseRequestLogic>();
             kernel.Bind<IApprovalLogic>().To<ApprovalLogic>();
+            kernel.Bind<ICommentLogic>().To<CommentLogic>();
             ///End:Generated:DI<<<
             #endregion
 
@@ -129,7 +130,6 @@ namespace ReusableWebAPI.App_Start
             kernel.Bind<IStepOperationLogic>().To<StepOperationLogic>();
             kernel.Bind<ITrackLogic>().To<TrackLogic>();
             kernel.Bind<ITokenLogic>().To<TokenLogic>();
-            kernel.Bind<IApprovalLogic>().To<ApprovalLogic>();
             kernel.Bind<IAdvancedSortLogic>().To<AdvancedSortLogic>();
             kernel.Bind<ITaskLogic>().To<TaskLogic>();
             kernel.Bind(typeof(BaseController<>)).ToSelf().InRequestScope();

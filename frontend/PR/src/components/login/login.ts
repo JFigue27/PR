@@ -25,6 +25,7 @@ export class LoginComponent {
         })
         .catch( response => {
           this.errorMessage = response;
+          this.spinner.hide();
         })
         .then( response => {
           this.spinner.hide();

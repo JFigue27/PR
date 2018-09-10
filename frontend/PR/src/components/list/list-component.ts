@@ -4,7 +4,6 @@ import { PRService } from '../../services/pr.service';
 import { UserService } from '../../services/user.service';
 import { PageEvent, MatDialog } from '@angular/material';
 import { utils } from '../../common/utils';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { DialogComponent } from '../dialog/dialog-component';
 import { Router } from '@angular/router';
 
@@ -14,11 +13,9 @@ import { Router } from '@angular/router';
 })
 export class ListComponent extends ListController implements OnInit {
   messageDialog:string;
-  constructor (
-                private router: Router,
+  constructor ( private router: Router,
                 public userService:UserService,
                 public PrService: PRService,
-                public spinner:NgxSpinnerService,
                 public dialog:MatDialog
               ) {
                   super({ service: PrService, paginate: true, limit: 20, filterName: 'prFilter' });
@@ -28,7 +25,6 @@ export class ListComponent extends ListController implements OnInit {
     let PrKey = utils.getParameterByName('id', null);
     if (PrKey) {
       window.history.replaceState({}, document.title, "/PR/Main");
-      // this.nav.push(PRPage, { oEntityOrId: PrKey });
     } else if (this.userService.LoggedUser.Roles == "Administrator") {
       this.load();
     } else {
@@ -49,7 +45,7 @@ export class ListComponent extends ListController implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result && result == true) { 
-        this.PrService.createInstance().subscribe(oInstance => {
+        this.PrService.createInstance().then(oInstance => {
           oInstance.DepartmentAssigned.Manager = null;
           this.PrService.createEntity(oInstance).then(oEntity => {
             console.log("oEntity "+ oEntity.id );

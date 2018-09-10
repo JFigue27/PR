@@ -27,7 +27,7 @@ export class ApprovalFormComponent extends FormController implements OnInit {
             }
 
   ngOnInit() {
-    this.userService.loadEntities().subscribe(oResult => {
+    this.userService.loadEntities().then(oResult => {
       this.users = oResult.Result;
     });
 

@@ -34,7 +34,9 @@ export class ApprovalComponent extends ListController implements OnInit {
   ngOnInit() {
       this.spinner.show();
       this.clearFilters();
-      this.load();
+      this.load().catch( error => {
+        this.spinner.hide();
+      });
   }
   sortData(sort: Sort) {
     console.log(sort);
