@@ -42,6 +42,7 @@ import { DepartmentService } from '../services/department.service';
 import { AccountService } from '../services/account.service';
 import { ApprovalService } from '../services/approval.service';
 import { CommentsService } from '../services/comments.service';
+import { OidcService } from '../core/oidc.service';
 
 //Angular Material components
 import { MatNativeDateModule, MatDatepickerModule, MatRadioModule } from '@angular/material';
@@ -144,7 +145,8 @@ import { RedirectOldLinks } from './redirectOldLinks';
     DepartmentService,
     AccountService,
     ApprovalService,
-    CommentsService
+    CommentsService,
+    OidcService
   ]
 })
 export class AppModule {}

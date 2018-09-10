@@ -21,7 +21,7 @@ export class AccountFormComponent extends FormController implements OnInit {
 
   ngOnInit() {
     this.load(this.data.oEntityOrId);
-    this.department.loadEntities().subscribe( oResult => {
+    this.department.loadEntities().then( oResult => {
       this.departments = oResult.Result;
     })
   }

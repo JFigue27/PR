@@ -19,7 +19,7 @@ export class UserService extends CRUDFactory {
         oEntity.WasAnsweredByCustomer = true;
     }
 
-    SendTestEmail(oEntity: any): Observable<any> {
+    SendTestEmail(oEntity: any): Promise<any> {
         return this.customPost('SendTestEmail', oEntity);
     }
 

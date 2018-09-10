@@ -31,7 +31,7 @@ export class UserFormComponent extends FormController implements OnInit {
   ngOnInit() {
     this.load(this.data.oEntityOrId);
 
-    this.departmentService.loadEntities().subscribe(oResult => {
+    this.departmentService.loadEntities().then(oResult => {
       this.departments = oResult.Result;
     });
 

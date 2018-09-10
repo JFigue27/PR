@@ -16,6 +16,13 @@ export class UsersComponent extends ListController implements OnInit {
               paginate: true,
               limit: 20,
               filterName: 'UserFilter' });
+
+    // service: CRUDFactory;
+    // paginate ?: boolean;
+    // limit ?: number;
+    // filters ?: string;
+    // filterName ?: string;
+    // sortName ?: string;
           }
 
   ngOnInit() {  

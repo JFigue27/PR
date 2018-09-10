@@ -36,7 +36,7 @@ export class CommentsComponent implements OnChanges {
             
             this.commentProperty = this.customProperty || "CommentKey"; 
             this.refreshComments();
-            this.commentService.createInstance().subscribe(response => {
+            this.commentService.createInstance().then(response => {
                 console.log(response);
                 this.commentToSave = response;
             });
@@ -69,7 +69,7 @@ export class CommentsComponent implements OnChanges {
 
             parentComment.Comments.push(response);
             parentComment.IsReplying = false;
-            this.commentService.createInstance().subscribe(response =>{
+            this.commentService.createInstance().then(response =>{
                 this.commentToSave = response;
             });
 
@@ -109,7 +109,7 @@ export class CommentsComponent implements OnChanges {
     }
 
     refreshComments(){
-        this.commentService.loadEntity(this.ownerEntity[this.commentProperty]).subscribe(oResponse => {
+        this.commentService.loadEntity(this.ownerEntity[this.commentProperty]).then(oResponse => {
             this.theComment = oResponse.Result;
         });
     };

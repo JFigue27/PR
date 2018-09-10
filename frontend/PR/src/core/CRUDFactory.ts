@@ -97,12 +97,12 @@ export abstract class CRUDFactory {
             .then(response => this.extractData(response))
             .catch(this.generalError);
         } else {
-            return Promise.reject();
+            return Promise.reject('Id not found');
         }
     }
 
     remove(): Promise<any>  {
-        return Promise.reject();
+        return Promise.reject('not implemented');
     }
 
     removeEntity(id): Promise<any>  {

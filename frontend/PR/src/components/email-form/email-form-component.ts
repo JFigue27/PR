@@ -24,7 +24,7 @@ export class EmailFormComponent extends FormController implements OnInit {
   }
 
   testEmail() {
-    this.userService.SendTestEmail(this.baseEntity).subscribe( r => 
+    this.userService.SendTestEmail(this.baseEntity).then( r => 
       alertify.success('EMAIL SENT')
     );
   }

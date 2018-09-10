@@ -6,6 +6,10 @@ module.exports = {
     src: ['{{SRC}}/common/**/*'],
     dest: '{{WWW}}/common'
   },
+  copyOidcFiles: {
+    src: ['{{SRC}}/auth_redirect.html','{{SRC}}/silent-renew.html'],
+    dest: '{{WWW}}'
+  },
   copyReports: {
     src: ['{{SRC}}/reports/**/*'],
     dest: '{{WWW}}/reports'

@@ -7,6 +7,9 @@ using System.Web.Http;
 using System.IdentityModel.Tokens;
 using System.Collections.Generic;
 using IdentityServer3.AccessTokenValidation;
+using Microsoft.Owin.Security.OAuth;
+using System;
+using ReusableWebAPI.Auth;
 
 [assembly: OwinStartup(typeof(ReusableWebAPI.Startup))]
 
@@ -32,21 +35,21 @@ namespace ReusableWebAPI
             app.UseNinjectMiddleware(NinjectWebCommon.CreateKernel).UseNinjectWebApi(config);
         }
 
-        //public void ConfigureOAuth(IAppBuilder app)
-        //{
-        //    OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
-        //    {
-        //        AllowInsecureHttp = true,
-        //        TokenEndpointPath = new PathString("/api/token"),
-        //        AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
-        //        Provider = new SimpleAuthorizationServerProvider()
-        //    };
+        public void ConfigureOAuth(IAppBuilder app)
+        {
+            OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
+            {
+                AllowInsecureHttp = true,
+                TokenEndpointPath = new PathString("/api/token"),
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
+                Provider = new SimpleAuthorizationServerProvider()
+            };
 
-        //    //Token Generation
-        //    app.UseOAuthAuthorizationServer(OAuthServerOptions);
-        //    app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
+            //Token Generation
+            app.UseOAuthAuthorizationServer(OAuthServerOptions);
+            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
 
-        //}
+        }
 
         public void ConfigureIdentityServer(IAppBuilder app)
         {
