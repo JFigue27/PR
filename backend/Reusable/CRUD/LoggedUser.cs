@@ -101,11 +101,11 @@ namespace Reusable
                     {
                         IdentityProvider = claimIdentityProvider.Value?.ToLower().Trim();
                     }
-                    Claim claimDepartment = claims.First(c => c.Type == "DepartmentKey");
-                    if (claimDepartment != null && claimDepartment.Value != null && !string.IsNullOrWhiteSpace(claimDepartment.Value))
-                    {
-                        DeparmentKey = int.Parse(claimDepartment.Value);
-                    }
+                    //Claim claimDepartment = claims.First(c => c.Type == "DepartmentKey");
+                    //if (claimDepartment != null && claimDepartment.Value != null && !string.IsNullOrWhiteSpace(claimDepartment.Value))
+                    //{
+                    //    DeparmentKey = int.Parse(claimDepartment.Value);
+                    //}
                 }
             }
             FillValue();
@@ -117,7 +117,7 @@ namespace Reusable
         public string Email { get; set; }
         public string Value { get; set; }
         public string IdentityProvider { get; set; }
-        public int DeparmentKey { get; set; }
+        //public int DeparmentKey { get; set; }
         
         public User LocalUser { get; set; }
 

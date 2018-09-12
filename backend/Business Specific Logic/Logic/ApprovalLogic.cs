@@ -38,38 +38,38 @@ namespace BusinessSpecificLogic.Logic
 
         protected override IQueryable<Approval> StaticDbQueryForList(IQueryable<Approval> dbQuery)
         {
-            if (LoggedUser.Role == "Department Manager")
+            if (LoggedUser.LocalUser.Role == "Department Manager")
             {
                 dbQuery = dbQuery
-                    .Where(e => (e.UserApproverKey == LoggedUser.UserID || e.UserRequisitorKey == LoggedUser.UserID));
+                    .Where(e => (e.UserApproverKey == LoggedUser.LocalUser.UserKey || e.UserRequisitorKey == LoggedUser.LocalUser.UserKey));
             }
-            else if (LoggedUser.Role == "General Manager")
+            else if (LoggedUser.LocalUser.Role == "General Manager")
             {
                 dbQuery = dbQuery
-                    .Where(e => e.UserRequisitorKey == LoggedUser.UserID || e.UserApproverKey == LoggedUser.UserID );
+                    .Where(e => e.UserRequisitorKey == LoggedUser.LocalUser.UserKey || e.UserApproverKey == LoggedUser.LocalUser.UserKey );
             }
-            else if (LoggedUser.Role == "Administrator")
+            else if (LoggedUser.LocalUser.Role == "Administrator")
             {
                 //We do not filter for Administrator
             }
-            else if (LoggedUser.Role == "Finance")
+            else if (LoggedUser.LocalUser.Role == "Finance")
             {
                 //We do not filter for Finance
             }
-            else if (LoggedUser.Role == "MRO")
+            else if (LoggedUser.LocalUser.Role == "MRO")
             {
                 dbQuery = dbQuery.Include(e => e.PurchaseRequest)
                     .Where(e => e.PurchaseRequest.PRType == "MRO" 
                                              && e.Status != "Pending" 
                                              && e.Status != "DM Rejected");
             }
-            else if (LoggedUser.Role == "Purchasing Manager")
+            else if (LoggedUser.LocalUser.Role == "Purchasing Manager")
             {
                 dbQuery = dbQuery.Include(e => e.PurchaseRequest)
                     .Where(e => e.PurchaseRequest.PRType == "MRO" && e.Status != "Pending" &&
                     (  e.Status != "DM Rejected" || e.Status != "MRO Quote" ));
             }
-            else if (LoggedUser.Role == "Project Manager")
+            else if (LoggedUser.LocalUser.Role == "Project Manager")
             {
                 dbQuery = dbQuery.Include(e => e.PurchaseRequest)
                     .Where(e => e.PRType == "MRP" &&
@@ -77,7 +77,7 @@ namespace BusinessSpecificLogic.Logic
             }
             else //User
             {
-                dbQuery = dbQuery.Where(e => e.UserRequisitorKey == LoggedUser.UserID);
+                dbQuery = dbQuery.Where(e => e.UserRequisitorKey == LoggedUser.LocalUser.UserKey);
             }
 
             #region Sorting
@@ -178,7 +178,7 @@ namespace BusinessSpecificLogic.Logic
         protected override Approval OnCreateInstance(Approval entity)
         {
             entity.Hyperlink = "http://apps.capsonic.com/PR/Main/#/pr/" + entity.PurchaseRequestKey;
-            entity.UserRequisitorKey = (int) LoggedUser.UserID;
+            entity.UserRequisitorKey = LoggedUser.LocalUser.UserKey;
             return entity;
         }
 
@@ -190,7 +190,7 @@ namespace BusinessSpecificLogic.Logic
 
 
             #region Validations
-            User currentUser = ctx.Users.AsNoTracking().FirstOrDefault(u => u.UserKey == LoggedUser.UserID);
+            User currentUser = ctx.Users.AsNoTracking().FirstOrDefault(u => u.UserKey == LoggedUser.LocalUser.UserKey);
             if (currentUser == null)
             {
                 throw new KnownError("Logged User not found or session expired.");

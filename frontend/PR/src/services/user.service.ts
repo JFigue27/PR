@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { CRUDFactory } from '../core/CRUDFactory';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { OidcService } from '../core/oidc.service';
 
 @Injectable()
 export class UserService extends CRUDFactory {
     public LoggedUser: any;
 
-    constructor(public http: HttpClient) {
-        super({ endPoint: 'User'});   
+    constructor(public http: HttpClient, oidc: OidcService) {
+        super({ endPoint: 'User'}, oidc);
         this.http = http;
     }
     

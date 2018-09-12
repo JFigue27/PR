@@ -12,42 +12,32 @@ export class MyApp {
   CurrentUser: string;
   mode = new FormControl('over');
 
-  constructor ( public modal: ModalController, public userService: UserService, private oidc:OidcService ) {
-          this.initializeApp();
-      }
+  constructor(public modal: ModalController, public userService: UserService, private oidc: OidcService) {
+    this.oidc.getUser()
+      .then(response => {
+        console.log(response);
 
-  initializeApp() {
-    this.oidc.getUser().then(response => {
-      console.log(response);
-
-       if (!response) {
-         this.oidc.login();
-        // this.oidc.login();
-       }
-    });
-
-    // let user = JSON.parse(localStorage.getItem('user')) || {};
-    this.userService.LoggedUser = {UserName: 'apacheco', 'Roles': 'Administrator'};
-    // if (!user.access_token) {
-    //   let profileModal = this.modal.create(LoginComponent, null, { enableBackdropDismiss: true });
-    //   profileModal.dismiss(false);
-    //   profileModal.present();
-    //   this.CurrentUser = user.DisplayName;
-    // }
+        if (!response) {
+          this.oidc.login();
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      });
   }
+
   logout() {
-    localStorage.clear();
-    let profileModal = this.modal.create(LoginComponent, null, { showBackdrop: true, enableBackdropDismiss: false });
-    profileModal.present();
+    this.oidc.logout();
   }
 
   getUserName() {
-    return this.userService.LoggedUser.UserName;
+    return this.oidc.authentication.Value;
   }
 
   getUserRole() {
-    return this.userService.LoggedUser.Roles;
+    console.log(this.oidc.authentication);
+    // return this.userService.LoggedUser.Roles;
   }
- 
+
 }
 

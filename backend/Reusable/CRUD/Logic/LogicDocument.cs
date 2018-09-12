@@ -44,10 +44,9 @@ namespace Reusable
             //Validate User is Adminsitrator or the one did Checkout
             if (originalDocument.CheckedoutByKey > 0)
             {
-                if (LoggedUser.Role != "Administrator")
+                if (LoggedUser.LocalUser.Role != "Administrator")
                 {
-                    if (LoggedUser.UserID == null
-                        || LoggedUser.UserID != originalDocument.CheckedoutByKey)
+                    if (LoggedUser.LocalUser.UserKey != originalDocument.CheckedoutByKey)
                     {
                         throw new KnownError("Only User who Checked Out can Check In.");
                     }
@@ -78,7 +77,7 @@ namespace Reusable
                 {
                     try
                     {
-                        //repository.ByUserId = LoggedUser.UserID;
+                        //repository.ByUserId = LoggedUser.LocalUser.UserKey;
                         repository.Activate(id);
 
                         transaction.Commit();
@@ -107,7 +106,7 @@ namespace Reusable
                 {
                     try
                     {
-                        //repository.ByUserId = LoggedUser.UserID;
+                        //repository.ByUserId = LoggedUser.LocalUser.UserKey;
                         repository.Lock(id);
 
                         transaction.Commit();
@@ -145,7 +144,7 @@ namespace Reusable
                 {
                     try
                     {
-                        //repository.ByUserId = LoggedUser.UserID;
+                        //repository.ByUserId = LoggedUser.LocalUser.UserKey;
                         repository.Lock(entity);
 
                         transaction.Commit();
@@ -183,7 +182,7 @@ namespace Reusable
                 {
                     try
                     {
-                        //repository.ByUserId = LoggedUser.UserID;
+                        //repository.ByUserId = LoggedUser.LocalUser.UserKey;
                         repository.Unlock(id);
 
                         transaction.Commit();
@@ -221,7 +220,7 @@ namespace Reusable
                 {
                     try
                     {
-                        //repository.ByUserId = LoggedUser.UserID;
+                        //repository.ByUserId = LoggedUser.LocalUser.UserKey;
                         repository.Unlock(entity);
 
                         transaction.Commit();
@@ -259,7 +258,7 @@ namespace Reusable
                 {
                     try
                     {
-                        //repository.ByUserId = LoggedUser.UserID;
+                        //repository.ByUserId = LoggedUser.LocalUser.UserKey;
 
                         onFinalize(entity);
 
@@ -300,7 +299,7 @@ namespace Reusable
                 {
                     try
                     {
-                        //repository.ByUserId = LoggedUser.UserID;
+                        //repository.ByUserId = LoggedUser.LocalUser.UserKey;
 
                         onUnfinalize(entity);
 
@@ -387,10 +386,10 @@ namespace Reusable
 
                 if (document.CheckedoutByKey == null)
                 {
-                    document.CheckedoutByKey = LoggedUser.UserID;
+                    document.CheckedoutByKey = LoggedUser.LocalUser.UserKey;
                     context.SaveChanges();
                 }
-                else if (document.CheckedoutByKey > 0 && LoggedUser.UserID != document.CheckedoutByKey)
+                else if (document.CheckedoutByKey > 0 && LoggedUser.LocalUser.UserKey != document.CheckedoutByKey)
                 {
                     document.CheckedoutBy = context.Set<User>().FirstOrDefault(u => u.UserKey == document.CheckedoutByKey);
                     throw new KnownError("Error: This document is already Checked Out by: " + document.CheckedoutBy?.Value);
@@ -415,7 +414,7 @@ namespace Reusable
             {
                 Document document = repository.GetByID(id);
 
-                if (document.CheckedoutByKey > 0 && LoggedUser.UserID != document.CheckedoutByKey && LoggedUser.Role != "Administrator")
+                if (document.CheckedoutByKey > 0 && LoggedUser.LocalUser.UserKey != document.CheckedoutByKey && LoggedUser.LocalUser.Role != "Administrator")
                 {
                     document.CheckedoutBy = context.Set<User>().FirstOrDefault(u => u.UserKey == document.CheckedoutByKey);
                     throw new KnownError(@"Error: Only User who Checked Out can ""Cancel Checked Out"": "

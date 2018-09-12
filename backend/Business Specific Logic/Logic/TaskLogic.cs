@@ -52,7 +52,7 @@ namespace BusinessSpecificLogic.Logic
                         ForeignType = approval.AAA_EntityName,
                         //ForeignURLKey = approval.CQAHeaderKey,
                         ForeignURLType = "CQAHeader",
-                        UserCreatedByKey = LoggedUser.UserID,
+                        UserCreatedByKey = LoggedUser.LocalUser.UserKey,
                         Description = approval.RequestDescription
                     };
                     return taskFromApproval;
@@ -74,7 +74,7 @@ namespace BusinessSpecificLogic.Logic
                     {
                         task.DateClosed = DateTimeOffset.Now;
                         task.Status = Task.TaskStatus.COMPLETED;
-                        task.UserCompletedByKey = LoggedUser.UserID;
+                        task.UserCompletedByKey = LoggedUser.LocalUser.UserKey;
                     }
                     else if (approval.Status != "Rejected" && approval.Status != "Approved")
                     {
@@ -225,7 +225,7 @@ namespace BusinessSpecificLogic.Logic
                 var advancedSort = ctx.AdvancedSortings
                     .Include(e => e.Filtering)
                     .Include(e => e.Sorting)
-                    .FirstOrDefault(e => e.UserKey == LoggedUser.UserID && e.Name == sAdvancedSortName);
+                    .FirstOrDefault(e => e.UserKey == LoggedUser.LocalUser.UserKey && e.Name == sAdvancedSortName);
 
                 if (advancedSort != null)
                 {
@@ -238,7 +238,7 @@ namespace BusinessSpecificLogic.Logic
                     //        if (catalogList.Count > 0)
                     //        {
                     //            dbQuery = dbQuery.Where(e => ctx.AdvancedSortings
-                    //                        .Where(advSort => advSort.UserKey == LoggedUser.UserID && advSort.Name == sAdvancedSortName)
+                    //                        .Where(advSort => advSort.UserKey == LoggedUser.LocalUser.UserKey && advSort.Name == sAdvancedSortName)
                     //                        .Join(ctx.FilterDatas, a => a.AdvancedSortKey, f => f.AdvancedSortKey, (a, f) => f)
                     //                        .Any(f => (f.Key == filter.Key && f.Value.Contains(e.Status.ToString()))));
                     //        }
@@ -254,7 +254,7 @@ namespace BusinessSpecificLogic.Logic
                         if (list.Count > 0)
                         {
                             dbQuery = dbQuery.Where(e => ctx.AdvancedSortings
-                                                                .Where(advSort => advSort.UserKey == LoggedUser.UserID && advSort.Name == sAdvancedSortName)
+                                                                .Where(advSort => advSort.UserKey == LoggedUser.LocalUser.UserKey && advSort.Name == sAdvancedSortName)
                                                                 .Join(ctx.FilterDatas, a => a.AdvancedSortKey, f => f.AdvancedSortKey, (a, f) => f)
                                                                 .Any(f => (f.Key == "Status" && f.Value.Contains(e.Status.ToString()))));
                         }
@@ -268,7 +268,7 @@ namespace BusinessSpecificLogic.Logic
                         if (list.Count > 0)
                         {
                             dbQuery = dbQuery.Where(e => ctx.AdvancedSortings
-                                                                .Where(advSort => advSort.UserKey == LoggedUser.UserID && advSort.Name == sAdvancedSortName)
+                                                                .Where(advSort => advSort.UserKey == LoggedUser.LocalUser.UserKey && advSort.Name == sAdvancedSortName)
                                                                 .Join(ctx.FilterDatas, a => a.AdvancedSortKey, f => f.AdvancedSortKey, (a, f) => f)
                                                                 .Any(f => (f.Key == "Category" && f.Value.Contains(e.Category))));
                         }
@@ -282,7 +282,7 @@ namespace BusinessSpecificLogic.Logic
                         if (list.Count > 0)
                         {
                             dbQuery = dbQuery.Where(e => ctx.AdvancedSortings
-                                                                .Where(advSort => advSort.UserKey == LoggedUser.UserID && advSort.Name == sAdvancedSortName)
+                                                                .Where(advSort => advSort.UserKey == LoggedUser.LocalUser.UserKey && advSort.Name == sAdvancedSortName)
                                                                 .Join(ctx.FilterDatas, a => a.AdvancedSortKey, f => f.AdvancedSortKey, (a, f) => f)
                                                                 .Any(f => (f.Key == "Priority" && f.Value.Contains(e.Priority.ToString()))));
                         }
@@ -296,7 +296,7 @@ namespace BusinessSpecificLogic.Logic
                         if (list.Count > 0)
                         {
                             dbQuery = dbQuery.Where(e => ctx.AdvancedSortings
-                                                                .Where(advSort => advSort.UserKey == LoggedUser.UserID && advSort.Name == sAdvancedSortName)
+                                                                .Where(advSort => advSort.UserKey == LoggedUser.LocalUser.UserKey && advSort.Name == sAdvancedSortName)
                                                                 .Join(ctx.FilterDatas, a => a.AdvancedSortKey, f => f.AdvancedSortKey, (a, f) => f)
                                                                 .Any(f => (f.Key == "CreatedBy" && f.Value.Contains("\"id\":" + e.UserCreatedBy.UserKey + ","))));
                         }
@@ -310,7 +310,7 @@ namespace BusinessSpecificLogic.Logic
                         if (list.Count > 0)
                         {
                             dbQuery = dbQuery.Where(e => ctx.AdvancedSortings
-                                                                .Where(advSort => advSort.UserKey == LoggedUser.UserID && advSort.Name == sAdvancedSortName)
+                                                                .Where(advSort => advSort.UserKey == LoggedUser.LocalUser.UserKey && advSort.Name == sAdvancedSortName)
                                                                 .Join(ctx.FilterDatas, a => a.AdvancedSortKey, f => f.AdvancedSortKey, (a, f) => f)
                                                                 .Any(f => (f.Key == "AssignedTo" && f.Value.Contains("\"id\":" + e.UserAssignedTo.UserKey + ","))));
                         }
@@ -324,7 +324,7 @@ namespace BusinessSpecificLogic.Logic
                         if (list.Count > 0)
                         {
                             dbQuery = dbQuery.Where(e => ctx.AdvancedSortings
-                                                                .Where(advSort => advSort.UserKey == LoggedUser.UserID && advSort.Name == sAdvancedSortName)
+                                                                .Where(advSort => advSort.UserKey == LoggedUser.LocalUser.UserKey && advSort.Name == sAdvancedSortName)
                                                                 .Join(ctx.FilterDatas, a => a.AdvancedSortKey, f => f.AdvancedSortKey, (a, f) => f)
                                                                 .Any(f => (f.Key == "CompletedBy" && f.Value.Contains("\"id\":" + e.UserCompletedBy.UserKey + ","))));
                         }

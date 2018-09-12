@@ -27,7 +27,7 @@ namespace BusinessSpecificLogic.Logic
         {
             //if (LoggedUser.Role != "Administrator")
             //{
-            //    dbQuery = dbQuery.Where(e => e.RequisitorKey == LoggedUser.UserID);
+            //    dbQuery = dbQuery.Where(e => e.RequisitorKey == LoggedUser.LocalUser.UserKey);
             //}
 
             return dbQuery.Include(e => e.PRLines)
@@ -122,13 +122,13 @@ namespace BusinessSpecificLogic.Logic
 
                 #region
                 var comment = new Comment();
-                comment.CommentByUserKey = LoggedUser.UserID ?? 1  ;
+                comment.CommentByUserKey = LoggedUser.LocalUser.UserKey;
                 ctx.Comments.Add(comment);
                 ctx.SaveChanges();
                 entity.CommentKey = comment.CommentKey;
                 #endregion
 
-                entity.RequisitorKey = LoggedUser.UserID;
+                entity.RequisitorKey = LoggedUser.LocalUser.UserKey;
             }
 
 
@@ -190,7 +190,7 @@ namespace BusinessSpecificLogic.Logic
             entity.GeneralManagerKey = user.id;
             entity.GeneralManager = user;
 
-            var requisitor = ctx.Users.AsNoTracking().FirstOrDefault(u => u.UserKey == LoggedUser.UserID);
+            var requisitor = ctx.Users.AsNoTracking().FirstOrDefault(u => u.UserKey == LoggedUser.LocalUser.UserKey);
             if (requisitor == null)
             {
                 throw new KnownError("Logged user not found");
@@ -198,7 +198,7 @@ namespace BusinessSpecificLogic.Logic
             entity.Requisitor = requisitor;
             entity.RequisitorKey = requisitor.id;
 
-            //var manager = ctx.Users.AsNoTracking().FirstOrDefault(u => u.UserKey == LoggedUser.UserID);
+            //var manager = ctx.Users.AsNoTracking().FirstOrDefault(u => u.UserKey == LoggedUser.LocalUser.UserKey);
             //if (requisitor == null)
             //{
             //    throw new KnownError("Logged user not found");
@@ -207,7 +207,7 @@ namespace BusinessSpecificLogic.Logic
 
             var department = ctx.Departments.AsNoTracking()
                 .Include(d => d.Manager)
-                .FirstOrDefault(d => d.DepartmentKey == LoggedUser.DeparmentKey);
+                .FirstOrDefault(d => d.DepartmentKey == LoggedUser.LocalUser.DepartmentKey);
             if (department == null)
             {
                 throw new KnownError("Department not found or not set for current user");

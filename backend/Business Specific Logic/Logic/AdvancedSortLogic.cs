@@ -42,7 +42,7 @@ namespace BusinessSpecificLogic.Logic
         {
             var ctx = context as POContext;
 
-            entity.UserKey = LoggedUser.UserID;
+            entity.UserKey = LoggedUser.LocalUser.UserKey;
 
             foreach (var item in entity.Sorting)
             {
@@ -107,7 +107,7 @@ namespace BusinessSpecificLogic.Logic
         public override CommonResponse GetSingleWhere(params Expression<Func<AdvancedSort, bool>>[] wheres)
         {
             var wheresList = wheres.ToList();
-            wheresList.Add(e => e.UserKey == LoggedUser.UserID);
+            wheresList.Add(e => e.UserKey == LoggedUser.LocalUser.UserKey);
 
             return base.GetSingleWhere(wheresList.ToArray());
         }

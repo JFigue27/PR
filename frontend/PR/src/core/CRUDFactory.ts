@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs/RX';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Config } from './config';
+import { OidcService } from './oidc.service';
 import alertify from 'alertifyjs';
 
 export interface IConfig {
@@ -20,12 +21,14 @@ export abstract class CRUDFactory {
     protected http: HttpClient;
     public arrAllRecords:Array<any>=[];
     public catalogs;
-    constructor(private config: IConfig) {
+    constructor(private config: IConfig, private oidc: OidcService) {
     }
 
     addAuthorization() {
         let headers: HttpHeaders = new HttpHeaders();
-        let user = JSON.parse(localStorage.getItem('user')) || {};
+        // let user = JSON.parse(localStorage.getItem('user')) || {};
+        let user = this.oidc.authentication;
+        console.log(user)
 
         headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
         headers = headers.append('Authorization', 'bearer ' + user.access_token);
@@ -170,7 +173,7 @@ export abstract class CRUDFactory {
             switch (error.status) {
                 case 401:
                     //TODO: Open Login Form.
-                    alertify.confirm('Your session has expired. Log in again');
+                    this.oidc.login();
                     return Promise.reject('Your session has expired. Log in again');
             }
         }

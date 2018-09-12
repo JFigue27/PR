@@ -38,10 +38,10 @@ namespace BusinessSpecificLogic.Logic
             {
                 if (entity.CommentByUser == null)
                 {
-                    var user = ctx.Users.FirstOrDefault(u => u.UserKey == LoggedUser.UserID && u.sys_active == true);
+                    var user = ctx.Users.FirstOrDefault(u => u.UserKey == LoggedUser.LocalUser.UserKey && u.sys_active == true);
                     entity.CommentByUser = user ?? throw new KnownError("User does not exist anymore.");
                 }
-                entity.CommentByUserKey = LoggedUser.UserID ?? 0;
+                entity.CommentByUserKey = LoggedUser.LocalUser.UserKey;
                 entity.CommentDate = DateTimeOffset.Now;
             }
         }
