@@ -21,7 +21,7 @@ export abstract class ListController {
     private filterStorageKey:string;
     private sortStorageKey: string;
 
-    constructor(public config: IConfigListController ) {
+    constructor(public config: IConfigListController) {
         this.config.paginate = config.paginate == undefined ? true: this.config.paginate;
         this.config.limit = config.limit || 20;
         this.config.filters = config.filters || '';

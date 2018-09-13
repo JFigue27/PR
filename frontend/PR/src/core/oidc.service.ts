@@ -21,10 +21,12 @@ export class OidcService {
   private manager = new UserManager(this.settings);
   private appFirstTimeLoaded = true;
 
+  //Hook
+  onAuthenticationChange(auth) { }
 
   constructor() {
     this.manager.events.addUserLoaded((authResponse) => {
-      this.fillAuthentication(authResponse)
+      this.fillAuthentication(authResponse);
       if (this.appFirstTimeLoaded) {
         this.appFirstTimeLoaded = false;
         //Broadcast on_login
@@ -78,6 +80,7 @@ export class OidcService {
 
   removeAuthentication() {
     this.authentication = null;
+    this.onAuthenticationChange(this.authentication);
   }
 
   fillAuthentication(authResponse) {
@@ -87,6 +90,7 @@ export class OidcService {
       this.authentication.id = authResponse.profile.sub;
       this.authentication.UserKey = authResponse.profile.sub;
       this.authentication.Email = authResponse.profile.email;
+      this.onAuthenticationChange(this.authentication);
     } else {
       this.removeAuthentication();
     }

@@ -10,6 +10,7 @@ import { ModalController } from 'ionic-angular/components/modal/modal-controller
 import { SupplierFormComponent } from '../supplier-form/supplier-form-component';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { OidcService } from '../../core/oidc.service';
 
 @Component({
   selector: 'pr-component',
@@ -18,7 +19,7 @@ import { ActivatedRoute } from '@angular/router';
 export class PRComponent extends FormController implements OnInit {
   private accounts = [];
   private departments = [];
-  private suppliers:any=[]; 
+  private suppliers: any = [];
   private users = [];
   public progress: 20;
   public userRole: string;
@@ -26,49 +27,63 @@ export class PRComponent extends FormController implements OnInit {
   public currencies = ['Dlls', 'Mxn'];
   myControl: FormControl = new FormControl();
 
-  constructor (
-                private route: ActivatedRoute,
-                public dialog: MatDialog,
-                public userService: UserService,
-                public PRService: PRService,
-                private departmentService: DepartmentService,
-                private accountService: AccountService,
-                private supplierService: SupplierService,
-                public modal: ModalController
-              ) {
-                super({ service: PRService });
-            }
+  constructor(
+    private route: ActivatedRoute,
+    public dialog: MatDialog,
+    public userService: UserService,
+    public PRService: PRService,
+    private departmentService: DepartmentService,
+    private accountService: AccountService,
+    private supplierService: SupplierService,
+    public modal: ModalController,
+    private oidc: OidcService
+  ) {
+    super({ service: PRService });
+
+    this.oidc.onAuthenticationChange = (auth) => {
+      if (auth) {
+        this.userService.getByUserName(auth.Value).then(oResponse => {
+          this.userService.LoggedUser = oResponse.Result;
+          this.ngOnInit();
+        });
+      } else {
+        this.userService.LoggedUser = {};
+      }
+    }
+
+  }
 
   ngOnInit() {
-    console.log('2018');
-    console.log(this.route.snapshot.paramMap.get('id'));
-    this.load(this.route.snapshot.paramMap.get('id'));
-  
-    this.departmentService.loadEntities().then(oResult => {
-      this.departments = oResult.Result;
-    });
+    if (this.userService.LoggedUser.UserKey) {
+      console.log('2018');
+      console.log(this.route.snapshot.paramMap.get('id'));
+      this.load(this.route.snapshot.paramMap.get('id'));
 
-    this.accountService.loadEntities().then(oResult => {
-      this.accounts = oResult.Result;
-    });
+      this.departmentService.loadEntities().then(oResult => {
+        this.departments = oResult.Result;
+      });
 
-    this.userService.getPage(0, 1,'?Role=Department Manager&Role=General Manager').then(oResult => {
-      this.users = oResult.Result;
-    });
+      this.accountService.loadEntities().then(oResult => {
+        this.accounts = oResult.Result;
+      });
 
-    this.supplierService.loadEntities().then(oResult => {
-      this.suppliers = oResult.Result;
-    });
+      this.userService.getPage(0, 1, '?Role=Department Manager&Role=General Manager').then(oResult => {
+        this.users = oResult.Result;
+      });
 
-    // let PurchaseRequestKey: number;
-      // if (this.params.get('oEntityOrId') > 0) {
-      //   PurchaseRequestKey = this.params.get('oEntityOrId');
-      // } else {
-      //   PurchaseRequestKey = this.params.get('oEntityOrId').id;
-      // }
+      this.supplierService.loadEntities().then(oResult => {
+        this.suppliers = oResult.Result;
+      });
     }
-   
-  displayStatusBar(status:string){
+    // let PurchaseRequestKey: number;
+    // if (this.params.get('oEntityOrId') > 0) {
+    //   PurchaseRequestKey = this.params.get('oEntityOrId');
+    // } else {
+    //   PurchaseRequestKey = this.params.get('oEntityOrId').id;
+    // }
+  }
+
+  displayStatusBar(status: string) {
     switch (status) {
       case "Created":
         return 10;
@@ -96,7 +111,7 @@ export class PRComponent extends FormController implements OnInit {
 
   getSupplier1Sum() {
     if (this.baseEntity && this.baseEntity.PRLines) {
-      return this.baseEntity.PRLines.reduce(function (currentValue, item) {
+      return this.baseEntity.PRLines.reduce(function(currentValue, item) {
         if (item.PriceEach && item.Qty) {
           return currentValue + (item.PriceEach * item.Qty);
         } else {
@@ -110,7 +125,7 @@ export class PRComponent extends FormController implements OnInit {
 
   getSupplier2Sum() {
     if (this.baseEntity && this.baseEntity.PRLines) {
-      return this.baseEntity.PRLines.reduce(function (currentValue, item) {
+      return this.baseEntity.PRLines.reduce(function(currentValue, item) {
         if (item.PriceEach2 && item.Qty) {
           return currentValue + (item.PriceEach2 * item.Qty);
         } else {
@@ -124,7 +139,7 @@ export class PRComponent extends FormController implements OnInit {
 
   getSupplier3Sum() {
     if (this.baseEntity && this.baseEntity.PRLines) {
-      return this.baseEntity.PRLines.reduce(function (currentValue, item) {
+      return this.baseEntity.PRLines.reduce(function(currentValue, item) {
         if (item.PriceEach3 && item.Qty) {
           return currentValue + (item.PriceEach3 * item.Qty);
         } else {
@@ -137,23 +152,23 @@ export class PRComponent extends FormController implements OnInit {
   }
 
   getCurrentRole() {
-    return this.userService.LoggedUser.Roles;
+    return this.userService.LoggedUser.Role;
   }
 
   getLockedStatus() {
-    
+
     let status = this.baseEntity.ApprovalStatus;
-    let role = this.userService.LoggedUser.Roles;
+    let role = this.userService.LoggedUser.Role;
     if (status == "Created" || status == "Pending" || status == "Rejected") return false;
-    
-    switch(role) {
+
+    switch (role) {
       // User takes validation above
       case "User":
-        if (status == "Created" || status == "Pending" || status == "DM Rejected" || status == "GM Rejected" ) return false;
+        if (status == "Created" || status == "Pending" || status == "DM Rejected" || status == "GM Rejected") return false;
         break;
       case "MRO":
         if (status == "MRO Quote" || status == "PM Rejected" || status == "DM Quote"
-         || status == "GM Quote" || status == "DM Quote Approved" || status == "GM Quote Approved") return false;
+          || status == "GM Quote" || status == "DM Quote Approved" || status == "GM Quote Approved") return false;
         break;
       case "Purchasing Manager":
         if (status == "MRO Quoted" || status == "PM Approved" || status == "DM Quote Rejected" || status == "GM Quote Rejected") return false;
@@ -171,12 +186,12 @@ export class PRComponent extends FormController implements OnInit {
         return false;
       case "Administrator":
         return false;
-      }  
+    }
     return true;
   }
-  
-  getSupplierStyle(option:number) {
-    if ( this.baseEntity.SelectedOption == option){
+
+  getSupplierStyle(option: number) {
+    if (this.baseEntity.SelectedOption == option) {
       return 'SupplierSelected';
     }
   }
@@ -246,12 +261,12 @@ export class PRComponent extends FormController implements OnInit {
 
   getApprover() {
     let currentDepartment = this.departments.find(d => d.id == this.baseEntity.DepartmentKey);
-    let price = 0; 
+    let price = 0;
 
-    if ( this.baseEntity.Requisitor && this.baseEntity.Requisitor.Role && this.baseEntity.Requisitor.Role == "Department Manager"){
-        return this.baseEntity.GeneralManagerKey;
+    if (this.baseEntity.Requisitor && this.baseEntity.Requisitor.Role && this.baseEntity.Requisitor.Role == "Department Manager") {
+      return this.baseEntity.GeneralManagerKey;
     }
- 
+
 
     if (this.baseEntity.SupplierSelectedKey == this.baseEntity.Supplier1Key) {
       price = this.getSupplier1Sum();
@@ -268,7 +283,7 @@ export class PRComponent extends FormController implements OnInit {
     }
   }
 
-  getApproverByKey(id:number){
+  getApproverByKey(id: number) {
     return this.users.find(u => u.UserKey == id);
   }
 
@@ -288,11 +303,11 @@ export class PRComponent extends FormController implements OnInit {
     window.open("reports/purchase-request.html");
   }
 
-  removeItemLocally = function (index) {
+  removeItemLocally = function(index) {
     this.baseEntity.PRLines.splice(index, 1);
   }
 
-  selectSupplier(option:number) {
+  selectSupplier(option: number) {
     this.baseEntity.editMode = true;
     this.baseEntity.SelectedOption = option;
   }
@@ -301,7 +316,7 @@ export class PRComponent extends FormController implements OnInit {
     if (this.baseEntity) {
       this.handleDynamicRows(this.baseEntity.PRLines);
     }
-    if (!this.baseEntity.ConvertedDateDepartmentManager){
+    if (!this.baseEntity.ConvertedDateDepartmentManager) {
       this.baseEntity.ConvertedDateDepartmentManager = new Date();
     }
   }
@@ -317,7 +332,7 @@ export class PRComponent extends FormController implements OnInit {
   afterRemove() {
   }
 
-  beforeSave(){    
+  beforeSave() {
   }
 
   afterSave() {
@@ -325,9 +340,9 @@ export class PRComponent extends FormController implements OnInit {
   }
 
   save() {
-      return this.baseEntity.api_attachments.uploadFiles().then(response => {
-        return super.save();
-      });
+    return this.baseEntity.api_attachments.uploadFiles().then(response => {
+      return super.save();
+    });
   }
 
 }

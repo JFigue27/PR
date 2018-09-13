@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { CRUDFactory } from '../core/CRUDFactory';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
 import { OidcService } from '../core/oidc.service';
 
 @Injectable()
 export class UserService extends CRUDFactory {
-    public LoggedUser: any;
+    public LoggedUser: any = {};
 
     constructor(public http: HttpClient, oidc: OidcService) {
         super({ endPoint: 'User'}, oidc);
@@ -22,6 +21,10 @@ export class UserService extends CRUDFactory {
 
     SendTestEmail(oEntity: any): Promise<any> {
         return this.customPost('SendTestEmail', oEntity);
+    }
+
+    getByUserName(userName: string) {
+        return this.customGet('getByUserName/' + userName);
     }
 
 }

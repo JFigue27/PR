@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit{
         if (PrKey) {
             window.history.replaceState({}, document.title, "/PR/Main");
             // this.nav.push(PRPage, { oEntityOrId: PrKey });
-        } else if (this.userService.LoggedUser.Roles == "Administrator") {
+        } else if (this.userService.LoggedUser.Role == "Administrator") {
             console.log('A');
         } else {
             console.log('B');

@@ -12,25 +12,27 @@ import { DialogComponent } from '../dialog/dialog-component';
 })
 
 export class ApprovalFormComponent extends FormController implements OnInit {
-  private users = [];
+  // private users = [];
   private response: string;
   @Input() pr: any;
   @Input() approverKey: number;
-  
-  constructor (
-                public approvalService: ApprovalService,
-                public PRService: PRService,
-                public userService: UserService,
-                public dialog: MatDialog
-              ) {
-                  super({ service: approvalService });
-            }
+
+  constructor(
+    public approvalService: ApprovalService,
+    public PRService: PRService,
+    public userService: UserService,
+    public dialog: MatDialog
+  ) {
+    super({ service: approvalService });
+
+  }
 
   ngOnInit() {
-    this.userService.loadEntities().then(oResult => {
-      this.users = oResult.Result;
-    });
-
+    // if (this.userService.LoggedUser.UserKey) {
+    //   this.userService.loadEntities().then(oResult => {
+    //     this.users = oResult.Result;
+    //   });
+    // }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -45,12 +47,12 @@ export class ApprovalFormComponent extends FormController implements OnInit {
     this.baseEntity.ConvertedDateRequested = new Date();
   }
 
-  saveApproval(status, type?:any) {
+  saveApproval(status, type?: any) {
 
     let dialogRef = this.dialog.open(DialogComponent, {
       width: '550px',
       height: '250px',
-      data: { messageDialog: 'Identifier', optional1: this.pr.FriendlyIdentifier}
+      data: { messageDialog: 'Identifier', optional1: this.pr.FriendlyIdentifier }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -71,7 +73,7 @@ export class ApprovalFormComponent extends FormController implements OnInit {
   }
 
   getCurrentRole() {
-    return this.userService.LoggedUser.Roles;
+    return this.userService.LoggedUser.Role;
   }
 
   getCurrentUser() {
@@ -84,7 +86,7 @@ export class ApprovalFormComponent extends FormController implements OnInit {
 
   showButtons() {
     let status = this.baseEntity.Status;
-    let role = this.userService.LoggedUser.Roles;
+    let role = this.userService.LoggedUser.Role;
     switch (role) {
       case "User":
         if (!status || status == "Pending" || status == "Rejected") return true;

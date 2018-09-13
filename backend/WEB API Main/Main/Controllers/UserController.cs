@@ -12,6 +12,21 @@ namespace ReusableWebAPI.Controllers
     {
         public UserController(IUserLogic logic) : base(logic) { }
 
+        [HttpGet, Route("getByUserName/{userName}")]
+        public CommonResponse getByUserName(string userName)
+        {
+            CommonResponse response = new CommonResponse();
+            try
+            {
+                response.Success(logic.GetSingleWhere(u => u.UserName == userName));
+            }
+            catch (Exception ex)
+            {
+                return response.Error(ex.ToString());
+            }
+            return response;
+        }
+
         [HttpGet, Route("getByRole/{role}")]
         public CommonResponse getByRole(string role)
         {

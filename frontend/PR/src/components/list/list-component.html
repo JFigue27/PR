@@ -3,7 +3,7 @@
   <button class="button-search  primary-color" (click)="refresh();">
     <ion-icon name="ios-search" md="md-search"></ion-icon>
   </button>
-  <button mat-mini-fab *ngIf="userService.LoggedUser.Roles != 'Administrator'" (click)="addItem()" class="button-fixed secondary-color">
+  <button mat-mini-fab *ngIf="userService.LoggedUser.Role != 'Administrator'" (click)="addItem()" class="button-fixed secondary-color">
     <ion-icon ios="ios-add" md="md-add"></ion-icon>
   </button>
 </section>

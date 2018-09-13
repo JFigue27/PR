@@ -19,7 +19,7 @@ export interface ICommonResponse {
 export abstract class CRUDFactory {
     baseUrl: string = Config.API_URL;
     protected http: HttpClient;
-    public arrAllRecords:Array<any>=[];
+    public arrAllRecords: Array<any> = [];
     public catalogs;
     constructor(private config: IConfig, private oidc: OidcService) {
     }
@@ -28,14 +28,16 @@ export abstract class CRUDFactory {
         let headers: HttpHeaders = new HttpHeaders();
         // let user = JSON.parse(localStorage.getItem('user')) || {};
         let user = this.oidc.authentication;
-        console.log(user)
-
-        headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        headers = headers.append('Authorization', 'bearer ' + user.access_token);
-        return { headers: headers };
+        if (user) {
+            headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
+            headers = headers.append('Authorization', 'bearer ' + user.access_token);
+            return { headers: headers };
+        } else {
+            this.oidc.login();
+        }
     }
 
-    createEntity(oEntity):Promise<any> {
+    createEntity(oEntity): Promise<any> {
         this.adapterOut(oEntity);
         return this.http.post<ICommonResponse>(this.baseUrl + this.config.endPoint, '=' + encodeURIComponent(JSON.stringify(oEntity)), this.addAuthorization())
             .map(response => this.extractData(response), this)
@@ -44,7 +46,7 @@ export abstract class CRUDFactory {
             .toPromise();
     }
 
-    createInstance(oEntity = null):Promise<any>  {
+    createInstance(oEntity = null): Promise<any> {
         return this.http.post<ICommonResponse>(this.baseUrl + this.config.endPoint + '/Create', '=' + encodeURIComponent(JSON.stringify(oEntity)), this.addAuthorization())
             .toPromise()
             .then(response => this.extractData(response))
@@ -52,7 +54,7 @@ export abstract class CRUDFactory {
             .catch(this.generalError);
     }
 
-    customGet(customMethod: string):Promise<any> {
+    customGet(customMethod: string): Promise<any> {
         return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/' + customMethod, this.addAuthorization())
             .toPromise()
             .then(response => this.extractData(response))
@@ -60,19 +62,19 @@ export abstract class CRUDFactory {
             .catch(this.generalError);
     }
 
-    customPost(customMethod: string, oEntity: any = null):Promise<any>  {
-        return this.http.post<ICommonResponse>(this.baseUrl + this.config.endPoint + '/' + customMethod,  '=' + encodeURIComponent(JSON.stringify(oEntity)), this.addAuthorization())
+    customPost(customMethod: string, oEntity: any = null): Promise<any> {
+        return this.http.post<ICommonResponse>(this.baseUrl + this.config.endPoint + '/' + customMethod, '=' + encodeURIComponent(JSON.stringify(oEntity)), this.addAuthorization())
             .toPromise()
             .then(response => this.extractData(response))
             .then(d => d.Result)
             .catch(this.generalError);
     }
-    
-    getPage(limit, pageNumber, params = '?'):Promise<any> {
+
+    getPage(limit, pageNumber, params = '?'): Promise<any> {
         return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/getPage/' + limit +
-            '/' + pageNumber + params + '&noCache='+Number(new Date()), this.addAuthorization()).toPromise()
-        .then(response => this.extractData(response))
-        .catch(this.generalError);
+            '/' + pageNumber + params + '&noCache=' + Number(new Date()), this.addAuthorization()).toPromise()
+            .then(response => this.extractData(response))
+            .catch(this.generalError);
     }
 
     getSingleWhere(property, value): Promise<any> {
@@ -87,28 +89,28 @@ export abstract class CRUDFactory {
         }
     }
 
-    loadEntities(params?): Promise<any> { 
+    loadEntities(params?): Promise<any> {
         return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint, this.addAuthorization()).toPromise()
-        .then(response => this.extractData(response))
-        .catch(this.generalError);
-    }
-
-    loadEntity(id): Promise<any>  {
-        if (id){ 
-            return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/' + id, this.addAuthorization())
-            .toPromise()
             .then(response => this.extractData(response))
             .catch(this.generalError);
+    }
+
+    loadEntity(id): Promise<any> {
+        if (id) {
+            return this.http.get<ICommonResponse>(this.baseUrl + this.config.endPoint + '/' + id, this.addAuthorization())
+                .toPromise()
+                .then(response => this.extractData(response))
+                .catch(this.generalError);
         } else {
             return Promise.reject('Id not found');
         }
     }
 
-    remove(): Promise<any>  {
+    remove(): Promise<any> {
         return Promise.reject('not implemented');
     }
 
-    removeEntity(id): Promise<any>  {
+    removeEntity(id): Promise<any> {
         return this.http.delete<ICommonResponse>(this.baseUrl + this.config.endPoint + "/" + id, this.addAuthorization())
             .toPromise()
             .then(response => this.extractData(response))
@@ -137,7 +139,7 @@ export abstract class CRUDFactory {
 
     setProperty(oEntity, sProperty, Value, qParams) {
     }
-    
+
     updateEntity(oEntity) {
         this.adapterOut(oEntity);
         return this.http.put<ICommonResponse>(this.baseUrl + this.config.endPoint + '/' + oEntity.id, '=' + encodeURIComponent(JSON.stringify(oEntity)), this.addAuthorization())
@@ -154,15 +156,15 @@ export abstract class CRUDFactory {
             throw backendResponse;
         }
         //all incoming responses go through adapterIn hook
-        if( Array.isArray(backendResponse.Result )) {
-            backendResponse.Result.forEach( oEntity => this.adapterIn(oEntity))
-        } else if (typeof(backendResponse.Result) === 'object') {
-            this.adapterIn(backendResponse.Result) 
+        if (Array.isArray(backendResponse.Result)) {
+            backendResponse.Result.forEach(oEntity => this.adapterIn(oEntity))
+        } else if (typeof (backendResponse.Result) === 'object') {
+            this.adapterIn(backendResponse.Result)
         }
         return backendResponse;
     }
 
-    generalError(error: any): Promise<any>  {
+    generalError(error: any): Promise<any> {
         if (error.ErrorThrown) {
             switch (error.ErrorType) {
                 case "MESSAGE":
@@ -173,7 +175,9 @@ export abstract class CRUDFactory {
             switch (error.status) {
                 case 401:
                     //TODO: Open Login Form.
-                    this.oidc.login();
+                    if (this && this.oidc) {
+                        this.oidc.login();
+                    }
                     return Promise.reject('Your session has expired. Log in again');
             }
         }
@@ -197,7 +201,7 @@ export abstract class CRUDFactory {
         return this.arrAllRecords;
     }
 
-    getRecursiveBySeedId(){
+    getRecursiveBySeedId() {
 
     }
 
@@ -205,22 +209,22 @@ export abstract class CRUDFactory {
         return this.arrAllRecords;
     }
 
-    setRawAll(arr:any) {
+    setRawAll(arr: any) {
         this.arrAllRecords = arr;
     }
 
     populateCatalogValues(oEntity) {
         for (let catalog in this.catalogs) {
             if (this.catalogs.hasOwnProperty(catalog)) {
-                oEntity[''+ catalog] = this.catalogs[catalog].getById(oEntity['' + catalog + 'Key']);
+                oEntity['' + catalog] = this.catalogs[catalog].getById(oEntity['' + catalog + 'Key']);
             }
-            
+
         }
     }
 
 
-    abstract adapterIn(oEntity:any);
+    abstract adapterIn(oEntity: any);
 
-    abstract adapterOut(oEntity:any);
+    abstract adapterOut(oEntity: any);
 
 }
